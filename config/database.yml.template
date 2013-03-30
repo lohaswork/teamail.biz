@@ -16,7 +16,7 @@ development:
   host: localhost
   adapter: postgresql
   encoding: unicode
-  database: LohasWork.com_development
+  database: LohasWorkCome_development
   pool: 5
   username: change_to_your_name
   password:
@@ -43,7 +43,7 @@ test:
   host: localhost
   adapter: postgresql
   encoding: unicode
-  database: LohasWork.com_test
+  database: LohasWorkCome_test
   pool: 5
   username: change_to_your_name
   password:
@@ -52,7 +52,7 @@ production:
   host: localhost
   adapter: postgresql
   encoding: unicode
-  database: LohasWork.com_production
+  database: LohasWorkCome_production
   pool: 5
   username: change_to_your_name
   password:
