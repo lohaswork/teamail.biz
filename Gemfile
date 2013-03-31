@@ -21,9 +21,13 @@ group :assets do
 end
 
 gem 'jquery-rails'
-gem 'tailor'
-gem 'reek'
 
+group :test, :development do
+  gem 'tailor'
+  gem 'reek'
+  gem 'rspec-rails'
+  gem 'capybara'
+end
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
