@@ -1,5 +1,8 @@
 LohasWorkCom::Application.routes.draw do
   root :to => 'users#new'
+  controller :users do
+    get '/signup-success'                        => :signup_success,              :as => :signup_success
+  end
   resources :users
   # The priority is based upon order of creation:
   # first created -> highest priority.

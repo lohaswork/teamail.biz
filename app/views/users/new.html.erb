@@ -1,14 +1,14 @@
-<div class="center">
+<div class="center sign-up">
   <%= form_tag '/users', :method => "post", :class=>"sign-up form-horizontal" do %>
     <div class="control-group">
-      <input type="text" class="input-large" id="email" placeholder="邮箱">
+      <%= text_field_tag :email, nil, :class=>"input-large", :placeholder=>"邮箱"%>
     </div>
     <div class="control-group">
-      <input type="password" class="input-large" id="passwrod" placeholder="密码">
+      <%= password_field_tag :password, nil, :class=>"input-large", :placeholder=>"密码"%>
     </div>
     <div class="control-group">
-      <input type="text" class="input-large" id="organization-name" placeholder="公司或团体名称">
+      <%= text_field_tag :organization_name, nil, :class=>"input-large", :placeholder=>"公司或团体名称"%>
     </div>
-      <button type="submit" class="btn">注册</button>
+      <%= submit_tag "注册", :class=>"btn"%>
   <% end %>
 </div>

@@ -27,6 +27,7 @@ group :test, :development do
   gem 'reek'
   gem 'rspec-rails'
   gem 'capybara'
+  gem 'debugger'
 end
 
 gem 'bootstrap-sass'
