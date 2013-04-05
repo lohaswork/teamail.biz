@@ -1,6 +1,14 @@
-<%= form_tag '/users', :method => "post", :class=>"sign-up" do %>
-  <input type="text" class="input-large" id="email" placeholder="邮箱">
-  <input type="password" class="input-large" id="passwrod" placeholder="密码">
-  <input type="text" class="input-large" id="organization-name" placeholder="公司或团体名称">
-  <button type="submit" class="btn">注册</button>
-<% end %>
+<div class="center">
+  <%= form_tag '/users', :method => "post", :class=>"sign-up form-horizontal" do %>
+    <div class="control-group">
+      <input type="text" class="input-large" id="email" placeholder="邮箱">
+    </div>
+    <div class="control-group">
+      <input type="password" class="input-large" id="passwrod" placeholder="密码">
+    </div>
+    <div class="control-group">
+      <input type="text" class="input-large" id="organization-name" placeholder="公司或团体名称">
+    </div>
+      <button type="submit" class="btn">注册</button>
+  <% end %>
+</div>
