@@ -10,4 +10,31 @@ class UsersController < ApplicationController
   def signup_success
 
   end
+
+  def confirm
+
+  end
+
+  def login
+
+  end
+
+  def do_login
+    @email = params[:email]
+    @user = User.find_by_email(@email)
+    if @user && @user.password = params[:password]
+      render :nothing => true
+    else
+      render :nothing => true
+    end
+  end
+
+  def forgot
+
+  end
+
+  def do_forgot
+    @email = params[:email]
+    @user = User.find_by_email(@email)
+  end
 end

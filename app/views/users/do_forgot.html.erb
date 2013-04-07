@@ -1,0 +1,20 @@
+<div>
+  <%- if @user%>
+    <div class="center">重置密码的邮件已发送至您的邮箱。</div>
+    <div class="center">
+      <%= @email%>
+    </div>
+    <div class="center">请按照邮件内容指引重置您的密码。</div>
+    <div class="center">
+      <a class="btn" href="/login">返回登陆</a>
+    </div>
+  <%else%>
+    <div class="center">没有这个用户：</div>
+    <div class="center">
+      <%= @email%>
+    </div>
+    <div class="center">
+      <a class="btn" href="/forgot">重新设置</a>
+    </div>
+  <%end%>
+</div>
