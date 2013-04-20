@@ -31,6 +31,8 @@ group :test, :development do
 end
 
 gem 'bootstrap-sass'
+gem 'rest-client'
+gem 'multimap'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
