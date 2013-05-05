@@ -1,7 +1,7 @@
-def AppConfig
+class AppConfig
   def initialize(config_file="#{Rails.root}/config/config.rb")
     hash=eval(File.read config_file)
-    @config = Config.new(( hash[:default] || {}).deep_merge(hash[:Rails.env.to_sym] || {}) )
+    @config = Config.new(( hash[:default] || {}).deep_merge(hash[Rails.env.to_sym] || {}) )
   end
 
   class Config
@@ -10,7 +10,7 @@ def AppConfig
         self.define_singleton_method(k) do
           self.instance_variable_get("@#{k}")
         end
-        self.define_singleton_method("#{k}=".to_sym) do
+        self.define_singleton_method("#{k}=".to_sym) do |value|
           self.instance_variable_set("@#{k}", value)
         end
         if v && v.is_a?(Hash)
