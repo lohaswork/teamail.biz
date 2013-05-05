@@ -24,7 +24,7 @@ class UsersController < ApplicationController
   def do_login
     @email = params[:email]
     @user = User.find_by_email(@email)
-    if @user && @user.password = params[:password]
+    if @user && @user.password == params[:password]
       render :nothing => true
     else
       render :nothing => true
