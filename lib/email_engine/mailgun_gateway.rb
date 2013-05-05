@@ -5,9 +5,7 @@ module EmailEngine
           from: default_sender,
           to: delivery_filter(options[:to]),
           subject: options[:subject],
-          html: options[:body],
-          :"h:Reply-To" => options[:reply_to],
-          :"recipient-variables" => options[:recipient_variables]
+          html: options[:body]
           )
     end
 
@@ -22,7 +20,7 @@ module EmailEngine
     end
 
     def messaging_api_end_point
-      @messaging_api_end_piont ||= "https://api:#{api_key}@api.mailgun.net/v2/messaging.gotealeaf.com/messages"
+      @messaging_api_end_piont ||= "https://api:#{api_key}@api.mailgun.net/v2/charleschu.mailgun.org/messages"
     end
 
     def delivery_filter(emails)
