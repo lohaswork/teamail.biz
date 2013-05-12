@@ -9,7 +9,7 @@ module EmailEngine
       @gateway = gateway
     end
 
-    def sign_up_success_notfication
+    def sign_up_success_notification
       gateway.send_batch_message(
         to: user.email,
         subject: "注册成功",
