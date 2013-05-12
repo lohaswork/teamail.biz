@@ -1,6 +1,7 @@
 # encoding: utf-8
 class User < ActiveRecord::Base
-  attr_accessible :active_status, :authority, :email, :name, :online_status, :organization_id, :password, :remember_token
+  attr_accessible :active_status, :authority, :email, :name, :online_status,\
+                 :organization_id, :password, :remember_token
   belongs_to :organization
   validates_uniqueness_of :email
   validate :check_email
@@ -8,10 +9,15 @@ class User < ActiveRecord::Base
 
   def self.create_with_organization(email, pwd, organization_name)
     user = User.new(:email => email, :password => pwd)
-    organ = Organization.create(:name => organization_name)
-    user.organization_id = organ.id
-    user.save
-    user
+    if user.valid?
+      organ = Organization.create!(:name => organization_name)
+      user.organization_id = organ.id
+      user.save!
+      user
+    else
+      #TODO: need a exception type and validate need modulize
+      raise "user not valid"
+    end
   end
 
   protected
