@@ -8,7 +8,7 @@ LohasWorkCom::Application.routes.draw do
     get '/forgot'                                => :forgot,                      :as => :forgot
     post '/forgot'                               => :do_forgot,                   :as => :do_forgot
   end
-  resources :users
+  resources :users, :only =>[:new, :create]
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

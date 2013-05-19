@@ -24,7 +24,7 @@ module EmailEngine
     end
 
     def delivery_filter(emails)
-      Rails.env.production? ? emails : "test@lohaswork.com"
+      Rails.env.production? ? emails : $config.recieve_test_email
     end
   end
 end
