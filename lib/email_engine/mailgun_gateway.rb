@@ -6,7 +6,7 @@ module EmailEngine
           to: delivery_filter(options[:to]),
           subject: options[:subject],
           html: options[:body]
-          )
+          ) if !Rails.env.test?
     end
 
     private
