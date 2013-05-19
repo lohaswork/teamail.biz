@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
 
   belongs_to :organization
   before_validation(:on=>:create) { |user| user.email = email.downcase }
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, uniqueness: true
   validate :check_email
   validates :password, presence: true, length: { minimum: 6 }
@@ -25,10 +26,9 @@ class User < ActiveRecord::Base
   protected
 
   def check_email
-    email_validator = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
     if email.blank?
       errors[:email] = "请输入邮件地址"
-    elsif email !~ email_validator
+    elsif email !~ VALID_EMAIL_REGEX
       errors[:email] = "邮件地址不合法"
     end
   end
