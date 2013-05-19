@@ -1,11 +1,11 @@
 # encoding: utf-8
 class User < ActiveRecord::Base
-  attr_accessible :active_status, :authority, :email, :name, :online_status,\
+  attr_accessible :active_status, :authority_type, :email, :name, :online_status,\
                  :organization_id, :password, :remember_token
   belongs_to :organization
   validates_uniqueness_of :email
   validate :check_email
-  validates_presence_of :password
+  validates :password, presence: true, length: { minimum: 6 }
 
   def self.create_with_organization(email, pwd, organization_name)
     user = User.new(:email => email, :password => pwd)
@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
   protected
 
   def check_email
-    email_validator = /^\b[A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,4}\b$/i
+    email_validator = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
     if email.blank?
       errors[:email] = "请输入邮件地址"
     elsif email !~ email_validator
