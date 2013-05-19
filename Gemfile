@@ -27,9 +27,12 @@ group :test, :development do
   gem 'reek'
   gem 'rspec-rails'
   gem 'capybara'
+  gem 'debugger'
 end
 
 gem 'bootstrap-sass'
+gem 'rest-client'
+gem 'multimap'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

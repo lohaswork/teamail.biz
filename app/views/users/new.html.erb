@@ -1,6 +1,16 @@
-<%= form_tag '/users', :method => "post", :class=>"sign-up" do %>
-  <input type="text" class="input-large" id="email" placeholder="邮箱">
-  <input type="password" class="input-large" id="passwrod" placeholder="密码">
-  <input type="text" class="input-large" id="organization-name" placeholder="公司或团体名称">
-  <button type="submit" class="btn">注册</button>
-<% end %>
+<div class="sign-up">
+  <%= form_tag '/users', :method => "post", :class=>"form-horizontal" do %>
+    <div class="center control-group">
+      <%= text_field_tag :'user[email]', nil, :class=>"input-large", :placeholder=>"邮箱"%>
+    </div>
+    <div class="center control-group">
+      <%= password_field_tag :'user[password]', nil, :class=>"input-large", :placeholder=>"密码"%>
+    </div>
+    <div class="center control-group">
+      <%= text_field_tag :organization_name, nil, :class=>"input-large", :placeholder=>"公司或团体名称"%>
+    </div>
+    <div class="center">
+      <%= submit_tag "注册", :class=>"btn"%>
+    </div>
+  <% end %>
+</div>

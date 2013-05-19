@@ -1,0 +1,13 @@
+<div class="login">
+  <%= form_tag '/login', :method => "post", :class=>"form-horizontal" do %>
+    <div class="center control-group">
+      <%= text_field_tag :email, nil, :class=>"input-large", :placeholder=>"邮箱"%>
+    </div>
+    <div class="center control-group">
+      <%= password_field_tag :password, nil, :class=>"input-large", :placeholder=>"密码"%>
+    </div>
+    <div class="center">
+      <%= submit_tag "登陆", :class=>"btn"%>
+    </div>
+  <% end %>
+</div>
