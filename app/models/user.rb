@@ -7,8 +7,8 @@ class User < ActiveRecord::Base
   validate :check_email
   validates :password, presence: true, length: { minimum: 6 }
 
-  def self.create_with_organization(email, pwd, organization_name)
-    user = User.new(:email => email, :password => pwd)
+  def self.create_with_organization(user, organization_name)
+    user = User.new(:email => user[:email], :password => user[:password])
     if user.valid?
       organ = Organization.create!(:name => organization_name)
       user.organization_id = organ.id
