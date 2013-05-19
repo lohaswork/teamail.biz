@@ -2,8 +2,10 @@
 class User < ActiveRecord::Base
   attr_accessible :active_status, :authority_type, :email, :name, :online_status,\
                  :organization_id, :password, :remember_token
+
   belongs_to :organization
-  validates_uniqueness_of :email
+  before_validation(:on=>:create) { |user| user.email = email.downcase }
+  validates :email, uniqueness: true
   validate :check_email
   validates :password, presence: true, length: { minimum: 6 }
 
