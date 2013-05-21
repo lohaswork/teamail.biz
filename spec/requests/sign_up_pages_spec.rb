@@ -15,7 +15,6 @@ describe "SignUpPages" do
     fill_in 'user[password]', :with => 'password'
     fill_in 'organization_name', :with => 'company'
     click_button '注册'
-    save_and_open_page
     page.should have_content '您已成功注册并创建了您的公司或团体'
   end
 end
