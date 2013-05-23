@@ -12,11 +12,9 @@ guard 'spork', :rspec_env => { 'RAILS_ENV' => 'test' }, :test_unit => false do
 end
 
 guard 'rspec', :version => 2, :all_after_pass => false, :cli => '--drb' do
-    watch('spec/spec_helper.rb')                        { ["spec/spec_helper", "spec"] }
-    watch('config/routes.rb')
-    watch(%r{^spec/.+_spec\.rb$})
-    watch(%r{^app/(.+)\.rb$})
-    watch(%r{^lib/(.+)\.rb$})
-    watch(%r{^app/controllers/(.+)_controller\.rb$})
-    # watch(%r{^lib/config/.+\.rb$})
+    watch('spec/spec_helper.rb')                        { ["spec"] }
+    watch(%r{^config/(.+)\.rb$})                        { ["spec"] }
+    watch(%r{^spec/.+_spec\.rb$})                       { ["spec"] }
+    watch(%r{^app/(.+)\.rb$})                           { ["spec"] }
+    watch(%r{^lib/(.+)\.rb$})                           { ["spec"] }
 end
