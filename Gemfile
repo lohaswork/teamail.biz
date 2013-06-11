@@ -28,6 +28,9 @@ group :test, :development do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'debugger'
+  gem 'spork'
+  gem 'guard-spork'
+  gem 'guard-rspec'
 end
 
 gem 'bootstrap-sass'
