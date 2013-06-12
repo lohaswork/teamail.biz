@@ -6,8 +6,7 @@ class User < ActiveRecord::Base
   belongs_to :organization
   before_validation(:on=>:create) { |user| user.email = email.downcase }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :email, uniqueness: true
-  validate :check_email
+  validates :email, uniqueness: true, presence: true, :format => {:with => VALID_EMAIL_REGEX}
   validates :password, presence: true, length: { minimum: 6 }
 
   def self.create_with_organization(user, organization_name)
@@ -18,19 +17,7 @@ class User < ActiveRecord::Base
       user.save!
       user
     else
-      #TODO: need a exception type and validate need modulize
-      raise "user not valid"
+      raise ActiveRecord::RecordInvalid, user
     end
   end
-
-  protected
-
-  def check_email
-    if email.blank?
-      errors[:email] = "请输入邮件地址"
-    elsif email !~ VALID_EMAIL_REGEX
-      errors[:email] = "邮件地址不合法"
-    end
-  end
-
 end
