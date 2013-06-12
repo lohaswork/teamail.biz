@@ -1,4 +1,4 @@
-bundle install
+bundle install --deployment
 bundle exec rake db:migrate
 bundle exec rake spec
 #reek -n app

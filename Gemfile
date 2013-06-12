@@ -36,6 +36,7 @@ end
 gem 'bootstrap-sass'
 gem 'rest-client'
 gem 'multimap'
+gem 'metric_fu'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
