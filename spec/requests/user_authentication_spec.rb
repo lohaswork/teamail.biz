@@ -27,6 +27,25 @@ describe "user authentaction action" do
         expect { click_button '注册' }.to change(User, :count).by(1)
       end
     end
+
+    describe "user signup fail" do
+      describe "uer fill in email not correct" do
+        it "should ask for email address when not fill in" do
+          fill_in 'user[password]', :with => 'password'
+          fill_in 'organization_name', :with => 'company'
+          click_button '注册'
+          page.should have_content '请输入邮件地址'
+        end
+
+        it "should say not valid when email address invalid" do
+          fill_in 'user[email]', :with => 'not@correct'
+          fill_in 'user[password]', :with => 'password'
+          fill_in 'organization_name', :with => 'company'
+          click_button '注册'
+          page.should have_content '邮件地址不正确'
+        end
+      end
+    end
   end
 
   describe "user login" do
