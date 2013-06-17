@@ -1,13 +1,32 @@
-$('form[data-remote], a[data-remote]')
-  .live('ajax:before', function (e) {
+//TODO: Have noe use CoffeeScript temporarily, translate this to coffee later
+$(document)
+  .on( 'ajax:before', 'form[data-remote], a[data-remote]',function (e) {
 
   })
-  .live('ajax:success', function (e, data, status, xhr) {
+  .on('ajax:success', 'form[data-remote], a[data-remote]', function (e, data, status, xhr) {
+    var me = $(this);
+    if ($.isPlainObject(data)) {
+      if (data.update) {
+        //TODO: add the partial refresh feture
+      }
+      else if (data.reload) {
+        window.location.reload(true);
+      }
+      else if (data.redirect) {
+        if (window.location.href.substr(-1 * data.redirect.length) == data.redirect) {
+          window.location.reload(true);
+        } else {
+          window.location = data.redirect;
+          if (window.location.pathname == data.redirect.replace(/#.*$/, "")) {
+            window.location.reload(true);
+          }
+        }
+      }
+    }
+  })
+  .on( 'ajax:complete', 'form[data-remote], a[data-remote]',function (e, xhr) {
 
   })
-  .live('ajax:complete', function (e, xhr) {
-
-  })
-  .live('ajax:failure', function (e, xhr, status, error) {
+  .on( 'ajax:failure', 'form[data-remote], a[data-remote]',function (e, xhr, status, error) {
 
   });

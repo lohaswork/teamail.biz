@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   def create
     @user = User.create_with_organization(params[:user], params[:organization_name])
     EmailEngine::SignupNotifier.new(@user).sign_up_success_notification
-    redirect_to signup_success_path
+    render :json => {:status => "success", :redirect => signup_success_path}
   end
 
   def signup_success

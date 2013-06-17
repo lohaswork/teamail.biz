@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   before_validation(:on=>:create) { |user| user.email = email.downcase }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, uniqueness: true, presence: true, :format => {:with => VALID_EMAIL_REGEX}
-  validates :password, presence: true, length: { minimum: 6 }
+  validates :password, length: { minimum: 6 }
 
   def self.create_with_organization(user, organization_name)
     user = User.new(:email => user[:email], :password => user[:password])
