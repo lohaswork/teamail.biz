@@ -16,10 +16,10 @@ development:
   host: localhost
   adapter: postgresql
   encoding: unicode
-  database: LohasWorkCome_development
+  database: lohaswork_development
   pool: 5
-  username: change_to_your_name
-  password:
+  username: lohaswork
+  password: lohaswork
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
@@ -43,16 +43,16 @@ test:
   host: localhost
   adapter: postgresql
   encoding: unicode
-  database: LohasWorkCome_test
+  database: lohaswork_test
   pool: 5
-  username: change_to_your_name
-  password:
+  username: lohaswork
+  password: lohaswork
 
 production:
   host: localhost
   adapter: postgresql
   encoding: unicode
-  database: LohasWorkCome_production
+  database: lohaswork_production
   pool: 5
-  username: change_to_your_name
-  password:
+  username: lohaswork
+  password: lohaswork
