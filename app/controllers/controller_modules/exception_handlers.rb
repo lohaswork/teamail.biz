@@ -1,3 +1,4 @@
+require "active_record/validations.rb"
 module ControllerModules::ExceptionHandlers
   extend ActiveSupport::Concern
   #TODO： error message mapping and logs
