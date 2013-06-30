@@ -18,31 +18,29 @@ describe "user authentaction action" do
         fill_in 'organization_name', :with => 'company'
       end
 
-      it "should on the success page" do
-        click_button '注册'
-        page.should have_content '您已成功注册并创建了您的公司或团体'
-      end
-
-      it "should add one more user" do
-        expect { click_button '注册' }.to change(User, :count).by(1)
+      it "should add one more user", :js => true do
+        expect {
+          click_button '注册'
+          page.should have_content '您已成功注册并创建了您的公司或团体'
+        }.to change(User, :count).by(1)
       end
     end
 
     describe "user signup fail" do
       describe "uer fill in email not correct" do
-        it "should ask for email address when not fill in" do
+        it "should ask for email address when not fill in", :js => true do
           fill_in 'user[password]', :with => 'password'
           fill_in 'organization_name', :with => 'company'
           click_button '注册'
           page.should have_content '请输入邮件地址'
         end
 
-        it "should say not valid when email address invalid" do
+        it "should say not valid when email address invalid", :js => true do
           fill_in 'user[email]', :with => 'not@correct'
           fill_in 'user[password]', :with => 'password'
           fill_in 'organization_name', :with => 'company'
           click_button '注册'
-          page.should have_content '邮件地址不正确'
+          page.should have_content '邮件地址不合法'
         end
       end
     end
