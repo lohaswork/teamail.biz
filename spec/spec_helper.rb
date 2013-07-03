@@ -41,8 +41,16 @@ def setup_spec_helper
     #     --seed 1234
     config.order = "random"
 
-    #clean DB after every test case
+    #Make the default JS driver is webkit, need not dispale the real browser to
+    #support test, if you want to see the real window of test in your own evn,
+    #you can run "DIEVER=selenium rspec" or "DIEVER=selenium guard"
+    if ENV['DRIVER'] == 'selenium'
+      Capybara.javascript_driver = :selenium
+    else
+      Capybara.javascript_driver = :webkit
+    end
 
+    #clean DB after every test case
     config.before :each do
       if Capybara.current_driver == :rack_test
         DatabaseCleaner.strategy = :transaction
