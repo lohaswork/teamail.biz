@@ -2,7 +2,7 @@ LohasWorkCom::Application.routes.draw do
   root :to => 'users#new'
   controller :users do
     get '/signup-success'                        => :signup_success,              :as => :signup_success
-    get '/confirm'                               => :confirm,                     :as => :confirm
+    get '/active'                                => :active,                      :as => :active
     get '/login'                                 => :login,                       :as => :login
     post '/login'                                => :do_login,                    :as => :do_login
     get '/forgot'                                => :forgot,                      :as => :forgot

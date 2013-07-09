@@ -5,6 +5,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.create_with_organization(params[:user], params[:organization_name])
+    @user.create_active_code
     EmailEngine::SignupNotifier.new(@user).sign_up_success_notification
     render :json => {:status => "success", :redirect => signup_success_path}
   end
@@ -13,8 +14,17 @@ class UsersController < ApplicationController
 
   end
 
-  def confirm
-
+  def active
+    @user = User.find_by_email(params[:email])
+    if @user && @user.active_status != 1 && params[:active_code] == @user.active_code.code
+      @user.update_attribute(:active_status, 1)
+    elsif @user && @user.active_status == 1
+      flash[:notice] = "您的账户已经处于激活状态，请勿重复激活!"
+      redirect_to root_path
+    else
+      flash[:notice] = "激活失败，您的激活链接错误或不完整。"
+      redirect_to root_path
+    end
   end
 
   def login

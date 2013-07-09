@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
                  :organization_id, :password, :remember_token
 
   belongs_to :organization
+  has_one :active_code
+  
   before_validation(:on=>:create) { |user| user.email = email.downcase }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, uniqueness: true, presence: true, :format => {:with => VALID_EMAIL_REGEX}
@@ -20,4 +22,13 @@ class User < ActiveRecord::Base
       raise ActiveRecord::RecordInvalid, user
     end
   end
+  
+  def create_active_code
+    active_code = ActiveCode.new
+    active_code.user_id = self.id
+    active_code.code ||= Digest::MD5.hexdigest(rand(Time.now.to_i).to_s)
+    active_code.save!
+    active_code
+  end
+  
 end

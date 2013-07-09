@@ -23,10 +23,12 @@ module EmailEngine
     def signup_notification_text
       <<-EMAIL
       <HTML><body>
-      你好：#{user.organization.name}
-
-      <br/>
+      你好：#{user.email} 
       <p>您已成功注册 LohasWork!</p>
+      <br/>
+      请点击下面的链接激活您的账号
+      <a href='http://0.0.0.0:3000/active?email=#{user.email}&active_code=#{user.active_code.code}'>
+      http://0.0.0.0:3000/active?email=#{user.email}&active_code=#{user.active_code.code}</a>
       </body></html>
       EMAIL
     end
