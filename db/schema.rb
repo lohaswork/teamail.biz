@@ -13,13 +13,6 @@
 
 ActiveRecord::Schema.define(:version => 20130710125906) do
 
-  create_table "active_codes", :force => true do |t|
-    t.integer  "user_id"
-    t.text     "code"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "organizations", :force => true do |t|
     t.string   "name",       :null => false
     t.string   "email"
@@ -32,12 +25,12 @@ ActiveRecord::Schema.define(:version => 20130710125906) do
     t.string   "email",           :null => false
     t.string   "password"
     t.string   "remember_token"
-    t.integer  "organization_id"
     t.integer  "online_status"
     t.integer  "active_status"
     t.integer  "authority_type"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.integer  "organization_id"
     t.string   "active_code"
   end
 
