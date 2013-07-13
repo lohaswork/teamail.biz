@@ -15,11 +15,13 @@ class UsersController < ApplicationController
 
   def active
     user = User.find_by_active_code(params[:active_code])
-    if user && user.active_status != 1 && params[:active_code] == user.active_code
-      user.update_attribute(:active_status, 1)
-    elsif user && user.active_status == 1
-      flash[:notice] = "您的账户已经处于激活状态，请勿重复激活!"
-      redirect_to root_path
+    if user
+      if user.active_status == 1
+        flash[:notice] = "您的账户已经处于激活状态，请勿重复激活!"
+        redirect_to root_path
+      else
+        user.update_attribute(:active_status, 1)
+      end
     else
       flash[:notice] = "激活失败，您的激活链接错误或不完整。"
       redirect_to root_path

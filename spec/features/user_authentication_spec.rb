@@ -49,24 +49,24 @@ describe "user authentaction action" do
   describe "user active" do
 
     context "with valid active link and never activate before" do
-      before {@user1 = User.create(email: "user1@example.com", password: "123456", active_code: SecureRandom.base64 ) }
-      
+
       it "should see active succsess info" do
-        visit "/active?active_code=#{@user1.active_code}"
+        user = create(:non_activate_user)
+        visit "/active?active_code=#{user.active_code}"
         page.should have_content '您的电子邮箱已通过验证。'
       end
     end
     
     context "with valid active link yet activated before" do
-      before {@user2 = User.create(email: "user2@example.com", password: "123456", active_code: SecureRandom.base64, active_status: 1)}
       
       it "should see active failure info" do
-        visit "/active?active_code=#{@user2.active_code}"
+        user = create(:already_activate_user)
+        visit "/active?active_code=#{user.active_code}"
         page.should have_content '您的账户已经处于激活状态，请勿重复激活!'
       end
     end
     
-    describe "with invalid active link" do
+    context "with invalid active link" do
       
       it "should not see active failure info" do
         visit "/active?active_code=invalidinfo"

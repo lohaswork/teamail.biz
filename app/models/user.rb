@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 6 }
 
   def self.create_with_organization(user, organization_name)
-    user = User.new(:email => user[:email], :password => user[:password], :active_code => SecureRandom.base64)
+    user = User.new(:email => user[:email], :password => user[:password], :active_code => SecureRandom.urlsafe_base64)
     if user.valid?
       organ = Organization.create!(:name => organization_name)
       user.organization_id = organ.id
