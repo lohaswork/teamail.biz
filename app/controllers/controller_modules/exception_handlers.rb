@@ -13,16 +13,9 @@ module ControllerModules::ExceptionHandlers
       Rails.logger.warn exception.backtrace.join("\n")
       Rails.logger.warn exception
     end
-    error_messages = error_mapping(exception.message)
+    error_messages = exception.message
     error_messages = "unexpected error" if error_messages.blank?
     render :json => {:status => "error", :message => "Validation failed", :code => 422, :errors => error_messages }, :status => 422
-  end
-
-  def error_mapping(message)
-    #This is hard code for test
-    return '请输入邮件地址' if message =~ /Email can't be blank/
-    return '邮件地址不合法' if message =~ /Email is invalid/
-    message
   end
 
 end

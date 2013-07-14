@@ -8,8 +8,8 @@ class User < ActiveRecord::Base
 
   before_validation(:on=>:create) { |user| user.email = email.downcase }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :email, uniqueness: true, presence: true, :format => {:with => VALID_EMAIL_REGEX}
-  validates :password, length: { minimum: 6 }
+  validates :email, :uniqueness =>{:message=>'邮件地址已使用'}, :presence => {:message=>'请输入邮件地址'}, :format => {:with => VALID_EMAIL_REGEX, :message=>'邮件地址不合法'}
+  validates :password, :length => { :minimum =>6, :message => '密码至少需要六位' }
 
   def self.create_with_organization(user, organization_name)
     user = User.new(:email => user[:email], :password => user[:password])
