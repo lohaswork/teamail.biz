@@ -17,7 +17,7 @@ class UsersController < ApplicationController
     user = User.find_by_active_code(params[:active_code])
     if user
       if user.active_status?
-        flash[:notice] = "您的账户已经处于激活状态，请勿重复激活!"
+        flash[:notice] = "您的账户已经处于激活状态!"
         redirect_to root_path
       else
         user.update_attribute(:active_status, true)

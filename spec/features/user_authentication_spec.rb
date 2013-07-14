@@ -62,7 +62,7 @@ describe "user authentaction action" do
       it "should see active failure info" do
         user = create(:already_activate_user)
         visit "/active?active_code=#{user.active_code}"
-        page.should have_content '您的账户已经处于激活状态，请勿重复激活!'
+        page.should have_content '您的账户已经处于激活状态!'
       end
     end
 
