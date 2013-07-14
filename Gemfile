@@ -26,6 +26,7 @@ group :test, :development do
   gem 'selenium-webdriver'
   gem 'capybara-webkit'
   gem 'database_cleaner'
+  gem 'factory_girl_rails'
   gem 'tailor'
   gem 'reek'
   gem 'rspec-rails'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130512111150) do
+ActiveRecord::Schema.define(:version => 20130710125906) do
 
   create_table "organizations", :force => true do |t|
     t.string   "name",       :null => false
@@ -25,12 +25,13 @@ ActiveRecord::Schema.define(:version => 20130512111150) do
     t.string   "email",           :null => false
     t.string   "password"
     t.string   "remember_token"
-    t.integer  "organization_id"
     t.integer  "online_status"
     t.integer  "active_status"
     t.integer  "authority_type"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.integer  "organization_id"
+    t.string   "active_code"
   end
 
 end

@@ -1,9 +1,11 @@
 # encoding: utf-8
 class User < ActiveRecord::Base
   attr_accessible :active_status, :authority_type, :email, :name, :online_status,\
-                 :organization_id, :password, :remember_token
+                 :organization_id, :password, :remember_token, :active_code
 
   belongs_to :organization
+  before_create :add_active_code
+
   before_validation(:on=>:create) { |user| user.email = email.downcase }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, uniqueness: true, presence: true, :format => {:with => VALID_EMAIL_REGEX}
@@ -20,4 +22,10 @@ class User < ActiveRecord::Base
       raise ActiveRecord::RecordInvalid, user
     end
   end
+
+  private
+  def add_active_code
+    self.active_code = SecureRandom.urlsafe_base64
+  end
+
 end
