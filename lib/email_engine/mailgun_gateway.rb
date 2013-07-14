@@ -1,5 +1,10 @@
 module EmailEngine
   class MailgunGateway
+
+    def host_name
+      Rails.env.production? ? "lohasWork.com" : "0.0.0.0:3000"
+    end
+
     def send_batch_message(options={})
       RestClient.post(messaging_api_end_point,
           from: default_sender,
