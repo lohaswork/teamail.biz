@@ -56,25 +56,25 @@ describe "user authentaction action" do
         page.should have_content '您的电子邮箱已通过验证。'
       end
     end
-    
+
     context "with valid active link yet activated before" do
-      
+
       it "should see active failure info" do
         user = create(:already_activate_user)
         visit "/active?active_code=#{user.active_code}"
         page.should have_content '您的账户已经处于激活状态，请勿重复激活!'
       end
     end
-    
+
     context "with invalid active link" do
-      
+
       it "should not see active failure info" do
         visit "/active?active_code=invalidinfo"
         page.should have_content '激活失败，您的激活链接错误或不完整。'
       end
     end
   end
-  
+
   describe "user login" do
     before { visit '/login' }
 
