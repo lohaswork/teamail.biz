@@ -26,7 +26,8 @@ module EmailEngine
       <p>您已成功注册 LohasWork!</p>
       <br/>
       请点击下面的链接激活您的账号
-      <a href='http://#{@gateway.host_name}/active?active_code=#{user.active_code}'>
+      <a href='http://#{@gateway.host_name}/active?
+          active_code=#{user.active_code}'>
       http://#{@gateway.host_name}/active?active_code=#{user.active_code}</a>
       </body></html>
       EMAIL

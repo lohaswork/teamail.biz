@@ -15,7 +15,8 @@ module ControllerModules::ExceptionHandlers
     end
     error_messages = exception.message
     error_messages = "unexpected error" if error_messages.blank?
-    render :json => {:status => "error", :message => "Validation failed", :code => 422, :errors => error_messages }, :status => 422
+    render :json => {:status => "error", :message => "Validation failed", \
+      :code => 422, :errors => error_messages }, :status => 422
   end
 
 end

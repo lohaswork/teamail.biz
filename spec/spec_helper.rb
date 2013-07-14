@@ -16,7 +16,8 @@ def setup_spec_helper
   RSpec.configure do |config|
     # ## Mock Framework
     #
-    # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
+    # If you prefer to use mocha, flexmock or RR,
+    # uncomment the appropriate line:
     #
     # config.mock_with :mocha
     # config.mock_with :flexmock
@@ -24,7 +25,7 @@ def setup_spec_helper
 
     # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
     # config.fixture_path = "#{::Rails.root}/spec/fixtures"
-    
+
     # including factory_girl syntax in rspec
     config.include FactoryGirl::Syntax::Methods
 

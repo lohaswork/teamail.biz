@@ -1,7 +1,8 @@
 class AppConfig
   def initialize(config_file="#{Rails.root}/config/config.rb")
     hash=eval(File.read config_file)
-    @config = Config.new(( hash[:default] || {}).deep_merge(hash[Rails.env.to_sym] || {}) )
+    @config = Config.new(( hash[:default] || {}).\
+              deep_merge(hash[Rails.env.to_sym] || {}) )
   end
 
   class Config
