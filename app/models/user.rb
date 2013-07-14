@@ -1,14 +1,15 @@
 # encoding: utf-8
 class User < ActiveRecord::Base
   attr_accessible :active_status, :authority_type, :email, :name, :online_status,\
-                 :organization_id, :password, :remember_token
+                 :organization_id, :password, :remember_token, :active_code
 
   belongs_to :organization
+  before_create :add_active_code
+
   before_validation(:on=>:create) { |user| user.email = email.downcase }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :email, uniqueness: true
-  validate :check_email
-  validates :password, presence: true, length: { minimum: 6 }
+  validates :email, :uniqueness =>{:message=>'邮件地址已使用'}, :presence => {:message=>'请输入邮件地址'}, :format => {:with => VALID_EMAIL_REGEX, :message=>'邮件地址不合法'}
+  validates :password, :length => { :minimum =>6, :message => '密码至少需要六位' }
 
   def self.create_with_organization(user, organization_name)
     user = User.new(:email => user[:email], :password => user[:password])
@@ -18,19 +19,13 @@ class User < ActiveRecord::Base
       user.save!
       user
     else
-      #TODO: need a exception type and validate need modulize
-      raise "user not valid"
+      raise ActiveRecord::RecordInvalid, user
     end
   end
 
-  protected
-
-  def check_email
-    if email.blank?
-      errors[:email] = "请输入邮件地址"
-    elsif email !~ VALID_EMAIL_REGEX
-      errors[:email] = "邮件地址不合法"
-    end
+  private
+  def add_active_code
+    self.active_code = SecureRandom.urlsafe_base64
   end
 
 end
