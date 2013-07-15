@@ -1,9 +1,9 @@
 # encoding: utf-8
 class User < ActiveRecord::Base
   attr_accessible :active_status, :authority_type, :email, :name, :online_status,\
-                 :organization_id, :password, :remember_token, :active_code
+                 :password, :remember_token, :active_code
 
-  belongs_to :organization
+  has_and_belongs_to_many :organizations
   before_create :add_active_code
 
   before_validation(:on=>:create) { |user| user.email = email.downcase }
@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
     user = User.new(:email => user[:email], :password => user[:password])
     if user.valid?
       organ = Organization.create!(:name => organization_name)
-      user.organization_id = organ.id
+      user.organizations << organ
       user.save!
       user
     else
