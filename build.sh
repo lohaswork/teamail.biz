@@ -14,13 +14,14 @@ fi
 echo 'bundle install success.'
 
 bundle exec rake db:migrate
+bundle exec rake db:test:prepare
 if [ $? -ne 0 ]; then
   echo 'bundle exec rake db:migrate error!'
   exit 1
 fi
 echo 'bundle exec rake db:migrate success.'
 
-bundle exec rake spec
+HEADLESS=true bundle exec rake spec
 if [ $? -ne 0 ]; then
   echo 'bundle exec rake spec error!'
   exit 1
