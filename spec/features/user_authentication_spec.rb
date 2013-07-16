@@ -43,6 +43,36 @@ describe "user authentaction action" do
           page.should have_content '邮件地址不合法'
         end
       end
+
+      describe "fill in already used info" do
+        before do
+          fill_in 'user[email]', :with => 'user@example.com'
+          fill_in 'user[password]', :with => 'password'
+          fill_in 'organization_name', :with => 'company'
+          click_button '注册'
+          visit '/'
+        end
+
+        describe "user fill in used email, not casesensitve", :js => true do
+          it "should say email already used" do
+            fill_in 'user[email]', :with => 'User@Example.com'
+            fill_in 'user[password]', :with => 'password'
+            fill_in 'organization_name', :with => 'company-test'
+            click_button '注册'
+            page.should have_content '邮件地址已使用'
+          end
+        end
+
+        describe "user fill in used campany name, not casesensitve", :js => true do
+          it "should say organization name already used" do
+            fill_in 'user[email]', :with => 'user-test@example.com'
+            fill_in 'user[password]', :with => 'password'
+            fill_in 'organization_name', :with => 'Company'
+            click_button '注册'
+            page.should have_content '组织名已使用'
+          end
+        end
+      end
     end
   end
 
