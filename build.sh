@@ -35,4 +35,4 @@ else
   echo 'tailor check has passed.'
 fi
 
-metric_fu -r
+rake metrics:all
