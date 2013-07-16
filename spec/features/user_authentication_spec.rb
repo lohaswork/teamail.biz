@@ -2,73 +2,61 @@
 require 'spec_helper'
 
 describe "user authentaction action" do
-  describe "user signup" do
-    before { visit '/' }
+  #the helper method for test
+  def sign_up_with(email, password, organization)
+    visit root_path
+    fill_in 'user[email]', with: email
+    fill_in 'user[password]', with: password
+    fill_in 'organization_name', :with => organization
+    click_button '注册'
+  end
 
+
+  describe "user signup" do
     describe "user visit signup page" do
       it "see signup page" do
+        visit root_path
         page.should have_button('注册')
       end
     end
 
     describe "user signup success" do
-      before do
-        fill_in 'user[email]', :with => 'user@example.com'
-        fill_in 'user[password]', :with => 'password'
-        fill_in 'organization_name', :with => 'company'
-      end
-
       it "should add one more user", :js => true do
+        sign_up_with('user@example.com', 'password', 'company')
         expect {
-          click_button '注册'
           page.should have_content '您已成功注册并创建了您的公司或团体'
         }.to change(User, :count).by(1)
       end
     end
 
     describe "user signup fail" do
-      describe "uer fill in email not correct" do
+      context "uer fill in email not correct" do
         it "should ask for email address when not fill in", :js => true do
-          fill_in 'user[password]', :with => 'password'
-          fill_in 'organization_name', :with => 'company'
-          click_button '注册'
+          sign_up_with(nil, 'password', 'company')
           page.should have_content '请输入邮件地址'
         end
 
         it "should say not valid when email address invalid", :js => true do
-          fill_in 'user[email]', :with => 'not@correct'
-          fill_in 'user[password]', :with => 'password'
-          fill_in 'organization_name', :with => 'company'
-          click_button '注册'
+          sign_up_with('not@correct', 'password', 'company')
           page.should have_content '邮件地址不合法'
         end
       end
 
       describe "fill in already used info" do
         before do
-          fill_in 'user[email]', :with => 'user@example.com'
-          fill_in 'user[password]', :with => 'password'
-          fill_in 'organization_name', :with => 'company'
-          click_button '注册'
-          visit '/'
+          sign_up_with('user@example.com', 'password', 'company')
         end
 
-        describe "user fill in used email, not casesensitve", :js => true do
+        context "user fill in used email, not casesensitve", :js => true do
           it "should say email already used" do
-            fill_in 'user[email]', :with => 'User@Example.com'
-            fill_in 'user[password]', :with => 'password'
-            fill_in 'organization_name', :with => 'company-test'
-            click_button '注册'
+            sign_up_with('USER@example.com', 'password', 'company-test')
             page.should have_content '邮件地址已使用'
           end
         end
 
-        describe "user fill in used campany name, not casesensitve", :js => true do
+        context "user fill in used campany name, not casesensitve", :js => true do
           it "should say organization name already used" do
-            fill_in 'user[email]', :with => 'user-test@example.com'
-            fill_in 'user[password]', :with => 'password'
-            fill_in 'organization_name', :with => 'Company'
-            click_button '注册'
+            sign_up_with('user-test@example.com', 'password', 'COMPANY')
             page.should have_content '组织名已使用'
           end
         end
