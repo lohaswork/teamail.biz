@@ -6,7 +6,7 @@ else
   cp config/database.yml.template config/database.yml
 fi
 
-bundle update --deployment
+bundle update
 if [ $? -ne 0 ]; then
   echo 'bundle update error!'
   exit 1
