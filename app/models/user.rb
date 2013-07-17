@@ -3,7 +3,8 @@ class User < ActiveRecord::Base
   attr_accessible :active_status, :authority_type, :email, :name, :online_status,\
                  :password, :remember_token, :active_code
 
-  has_and_belongs_to_many :organizations
+  has_many :organization_memberships
+  has_many :organizations, :through => :organization_memberships
   before_create :add_active_code
 
   before_validation(:on=>:create) { |user| user.email = email.downcase }
