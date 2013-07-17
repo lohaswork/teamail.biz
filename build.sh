@@ -20,7 +20,7 @@ if [ $? -ne 0 ]; then
 fi
 echo 'bundle exec rake db:migrate success.'
 
-bundle exec rake spec
+HEADLESS=true bundle exec rake spec
 if [ $? -ne 0 ]; then
   echo 'bundle exec rake spec error!'
   exit 1
