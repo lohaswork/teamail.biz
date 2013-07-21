@@ -12,22 +12,31 @@ class User < ActiveRecord::Base
   validates :email, :uniqueness =>{:message=>'邮件地址已使用'}, :presence => {:message=>'请输入邮件地址'}, :format => {:with => VALID_EMAIL_REGEX, :message=>'邮件地址不合法'}
   validates :password, :length => { :minimum =>6, :message => '密码至少需要六位' }
 
-  def self.create_with_organization(user, organization_name)
-    user = User.new(:email => user[:email], :password => user[:password])
-    if user.valid?
-      organ = Organization.create!(:name => organization_name)
-      user.organizations << organ
-      user.save!
-      user
-    else
-      raise ActiveRecord::RecordInvalid, user
+  class << self
+    def create_with_organization(user, organization_name)
+      user = User.new(:email => user[:email], :password => user[:password])
+      if user.valid?
+        organ = Organization.create!(:name => organization_name)
+        user.organizations << organ
+        user.save!
+        user
+      else
+        raise ActiveRecord::RecordInvalid, user
+      end
     end
-  end
 
-  def self.authentication(email, password)
-    user = email && self.find_by_email(email)
-    raise ValidationError.new("信息不正确") unless user && user.password == password
-    user
+    def authentication(email, password)
+      user = email && self.find_by_email(email)
+      raise ValidationError.new("信息不正确") unless user && user.password == password
+      user
+    end
+
+    def reset_password(reset_token, password, password_confirmation)
+      user = self.find(reset_token)
+      raise ValidationError.new("密码不匹配") unless password == password_confirmation
+      user.password = password
+      user.save!
+    end
   end
 
   private

@@ -1,0 +1,13 @@
+<div class="forgot">
+  <%= form_tag reset_path(@reset_token), :method => "post", :class=>"form-horizontal", :remote => true do %>
+    <div class="center control-group">
+      <%= password_field_tag :password, nil, :class=>"input-large", :placeholder=>"密码"%>
+    </div>
+    <div class="center control-group">
+      <%= password_field_tag :password_confirmation, nil, :class=>"input-large", :placeholder=>"确认密码"%>
+    </div>
+    <div class="center">
+      <%= submit_tag "重置密码", :class=>"btn"%>
+    </div>
+  <% end %>
+</div>

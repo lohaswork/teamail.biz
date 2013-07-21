@@ -8,6 +8,8 @@ LohasWorkCom::Application.routes.draw do
     get '/forgot'                                => :forgot,                      :as => :forgot
     post '/forgot'                               => :do_forgot,                   :as => :forgot
     get '/welcome'                               => :welcome,                     :as => :welcome
+    get  '/reset/:reset_token'                   => :reset,                       :as => :reset
+    post '/reset/:reset_token'                   => :do_reset,                    :as => :reset
   end
   resources :users, :only =>[:new, :create]
   resources :sessions, :only => [:new, :create, :destroy]

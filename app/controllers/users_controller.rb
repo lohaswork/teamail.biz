@@ -10,10 +10,6 @@ class UsersController < ApplicationController
     render :json => {:status => "success", :redirect => signup_success_path}
   end
 
-  def signup_success
-
-  end
-
   def active
     user = User.find_by_active_code(params[:active_code])
     if user
@@ -29,12 +25,20 @@ class UsersController < ApplicationController
     end
   end
 
-  def forgot
-
-  end
 
   def do_forgot
     @email = params[:email]
     @user = User.find_by_email(@email)
+    EmailEngine::ResetPasswordNotifier.new(@user).reset_password_notification if @user
+  end
+
+  def reset
+    @reset_token = params[:reset_token]
+    @user = @reset_token && User.find(@reset_token)
+  end
+
+  def do_reset
+    User.reset_password(params[:reset_token], params[:password], params[:password_confirmation])
+    render :json => {:status => "success", :redirect => login_path}
   end
 end
