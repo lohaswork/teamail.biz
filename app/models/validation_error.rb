@@ -23,7 +23,7 @@ class ValidationError < StandardError
 
   def load_from_ar_errors(ar_error)
     #TODO: handle the active recode error message here
-    errs = ar_error.try(:message) rescue {}
+    errs = ar_error.try(:message) || {}
     add(msg)
     message
   end
