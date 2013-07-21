@@ -195,10 +195,10 @@ describe "user authentaction action" do
       end
     end
 
-    describe "forgot password when no such user" do
+    describe "forgot password when no such user", :js => true do
       it "have not fill in user email" do
         click_button '发送邮件重置密码'
-        page.should have_content '没有这个用户'
+        page.should have_content '您的邮件地址不正确'
       end
     end
   end

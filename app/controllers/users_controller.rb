@@ -28,13 +28,13 @@ class UsersController < ApplicationController
 
   def do_forgot
     @email = params[:email]
-    @user = User.find_by_email(@email)
-    EmailEngine::ResetPasswordNotifier.new(@user).reset_password_notification if @user
+    User.forgot_password(@email)
+    render :json => {:status => "success", :redirect => forgot_success_path}
   end
 
   def reset
     @reset_token = params[:reset_token]
-    @user = @reset_token && User.find(@reset_token)
+    @user = @reset_token && User.find_by_reset_token(@reset_token)
   end
 
   def do_reset

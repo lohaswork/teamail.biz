@@ -27,8 +27,8 @@ module EmailEngine
       <p>请点击下面的链接完成操作。</p>
       <br/>
       请点击下面的链接激活您的账号
-      <a href='http://#{@gateway.host_name}/reset/#{user.id}'>
-      http://#{@gateway.host_name}/reset/#{user.id}</a>
+      <a href='http://#{@gateway.host_name}/reset/#{user.reset_token}'>
+      http://#{@gateway.host_name}/reset/#{user.reset_token}</a>
       </body></html>
       EMAIL
     end

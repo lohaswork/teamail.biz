@@ -1,7 +1,7 @@
 # encoding: utf-8
 class User < ActiveRecord::Base
   attr_accessible :active_status, :authority_type, :email, :name, :online_status,\
-                 :password, :remember_token, :active_code
+                 :password, :remember_token, :active_code, :reset_token
 
   has_many :organization_memberships
   has_many :organizations, :through => :organization_memberships
@@ -31,11 +31,24 @@ class User < ActiveRecord::Base
       user
     end
 
+    def forgot_password(email)
+      user = self.find_by_email(email) if !email.blank?
+      raise ValidationError.new('您的邮件地址不正确') if !user
+      user.generate_reset_token
+      EmailEngine::ResetPasswordNotifier.new(user).reset_password_notification
+    end
+
     def reset_password(reset_token, password)
-      user = self.find(reset_token)
+      user = self.find_by_reset_token(reset_token)
       user.password = password
       user.save!
+      user.update_attribute(:reset_token, nil)
     end
+  end
+
+  def generate_reset_token
+    generate_token(:reset_token)
+    save
   end
 
   private
