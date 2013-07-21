@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
 
   has_many :organization_memberships
   has_many :organizations, :through => :organization_memberships
-  before_create :add_active_code
+  before_create :add_active_code, :create_remember_token
 
   before_validation(:on=>:create) { |user| user.email = email.downcase }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -52,6 +52,10 @@ class User < ActiveRecord::Base
   end
 
   private
+  def create_remember_token
+    generate_token(:remember_token)
+  end
+
   def add_active_code
     generate_token(:active_code)
   end

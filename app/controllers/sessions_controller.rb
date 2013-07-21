@@ -8,9 +8,9 @@ class SessionsController < ApplicationController
   def create
     user = User.authentication(params[:email], params[:password])
     if params[:remember_me]
-      cookies.permanent.signed[:remember_me] = user.id
+      cookies.permanent[:remember_me] = user.remember_token
     else
-      cookies.signed[:remember_me] = user.id
+      cookies[:remember_me]= user.remember_token
     end
     render :json => {:status => "success", :redirect => root_path}
   end
