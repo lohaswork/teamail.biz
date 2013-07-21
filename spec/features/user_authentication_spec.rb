@@ -76,7 +76,7 @@ describe "user authentaction action" do
 
       it "should see active succsess info" do
         user = create(:non_activate_user)
-        visit "/active?active_code=#{user.active_code}"
+        visit "/active/#{user.active_code}"
         page.should have_content '您的电子邮箱已通过验证。'
       end
     end
@@ -85,7 +85,7 @@ describe "user authentaction action" do
 
       it "should see active failure info" do
         user = create(:already_activate_user)
-        visit "/active?active_code=#{user.active_code}"
+        visit "/active/#{user.active_code}"
         page.should have_content '您的账户已经处于激活状态!'
       end
     end
@@ -93,7 +93,7 @@ describe "user authentaction action" do
     context "with invalid active link" do
 
       it "should not see active failure info" do
-        visit "/active?active_code=invalidinfo"
+        visit "/active/invalidinfo"
         page.should have_content '激活失败，您的激活链接错误或不完整。'
       end
     end
@@ -187,7 +187,7 @@ describe "user authentaction action" do
   end
 
   describe "user forgot password" do
-    before { visit '/forgot' }
+    before { visit forgot_path }
 
     describe "user visit forgot password page" do
       it "should see forgot page" do

@@ -4,7 +4,7 @@ LohasWorkCom::Application.routes.draw do
   root :to => 'users#new'
   controller :users do
     get '/signup-success'                        => :signup_success,              :as => :signup_success
-    get '/active'                                => :active,                      :as => :active
+    get '/active/:active_code'                   => :active,                      :as => :active
     get '/forgot'                                => :forgot,                      :as => :forgot
     post '/forgot'                               => :do_forgot,                   :as => :forgot
     get '/forgot_success'                        => :forgot_success,              :as => :forgot_success
