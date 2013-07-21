@@ -38,7 +38,7 @@ class UsersController < ApplicationController
   end
 
   def do_reset
-    User.reset_password(params[:reset_token], params[:password], params[:password_confirmation])
-    render :json => {:status => "success", :redirect => login_path}
+    User.reset_password(params[:reset_token], params[:password])
+    render :json => {:status => "success", :redirect => reset_success_path}
   end
 end

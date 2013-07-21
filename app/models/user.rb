@@ -31,9 +31,8 @@ class User < ActiveRecord::Base
       user
     end
 
-    def reset_password(reset_token, password, password_confirmation)
+    def reset_password(reset_token, password)
       user = self.find(reset_token)
-      raise ValidationError.new("密码不匹配") unless password == password_confirmation
       user.password = password
       user.save!
     end
