@@ -5,12 +5,18 @@ describe "user authentaction action" do
   #the helper method for test
   def sign_up_with(email, password, organization)
     visit root_path
-    fill_in 'user[email]', with: email
-    fill_in 'user[password]', with: password
+    fill_in 'user[email]', :with => email
+    fill_in 'user[password]', :with => password
     fill_in 'organization_name', :with => organization
     click_button '注册'
   end
 
+  def login_with(email, password)
+    visit login_path
+    fill_in 'email', :with => email
+    fill_in 'password', :with => password
+    click_button '登录'
+  end
 
   describe "user signup" do
     describe "user visit signup page" do
@@ -94,11 +100,79 @@ describe "user authentaction action" do
   end
 
   describe "user login" do
-    before { visit '/login' }
 
-    describe "user visit login page" do
+    context "user click the login link" do
+      it "should on the login page" do
+        visit root_path
+        click_on "登录"
+        current_path.should == '/login'
+      end
+    end
+
+    context "user visit login page" do
       it "should see login page" do
+        visit login_path
         page.should have_button('登录')
+      end
+    end
+
+    context "user login succsess", :js => true do
+      before {sign_up_with('user@example.com', 'password', 'company')}
+      it "should see user message" do
+        login_with("user@example.com", "password")
+        page.should have_content '欢迎您：user@example.com'
+      end
+    end
+
+    context "user visit pages after login succsess" do
+      before do
+        sign_up_with('user@example.com', 'password', 'company')
+        login_with("user@example.com", "password")
+      end
+      it "should redirect to welcome page visit root path" do
+        visit root_path
+        current_path.should == '/welcome'
+        page.should have_content('user@example.com')
+      end
+
+      it "should redirect to welcome page visit login path" do
+        visit login_path
+        current_path.should == '/welcome'
+        page.should have_content('user@example.com')
+      end
+
+      it "should go to root path after logout" do
+        visit root_path
+        click_on("登出")
+        current_path.should == "/"
+        page.should_not have_content('user@example.com')
+      end
+    end
+
+    describe "user login failed" do
+      before {sign_up_with('user@example.com', 'password', 'company')}
+
+      context "user miss email or password", :js => true do
+        it "should see error message" do
+          login_with(nil, "password")
+          page.should have_content '信息不正确'
+        end
+
+        it "should see error message" do
+          login_with(nil, nil)
+          page.should have_content '信息不正确'
+        end
+      end
+      context "user enter error message", :js => true do
+        it "should see error message" do
+          login_with("error@email.com", "password")
+          page.should have_content '信息不正确'
+        end
+
+        it "should see error message" do
+          login_with("error@email.com", "wrongpassword")
+          page.should have_content '信息不正确'
+        end
       end
     end
   end

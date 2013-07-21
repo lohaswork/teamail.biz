@@ -24,9 +24,20 @@ class User < ActiveRecord::Base
     end
   end
 
-  private
-  def add_active_code
-    self.active_code = SecureRandom.urlsafe_base64
+  def self.authentication(email, password)
+    user = email && self.find_by_email(email)
+    raise ValidationError.new("信息不正确") unless user && user.password == password
+    user
   end
 
+  private
+  def add_active_code
+    generate_token(:active_code)
+  end
+
+  def generate_token(column)
+    begin
+      self[column] = SecureRandom.urlsafe_base64
+    end while User.exists?(column => self[column])
+  end
 end

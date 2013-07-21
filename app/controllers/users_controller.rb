@@ -1,6 +1,7 @@
 # encoding: utf-8
 class UsersController < ApplicationController
   def new
+    redirect_to welcome_path if current_user
   end
 
   def create
@@ -25,20 +26,6 @@ class UsersController < ApplicationController
     else
       flash[:notice] = "激活失败，您的激活链接错误或不完整。"
       redirect_to root_path
-    end
-  end
-
-  def login
-
-  end
-
-  def do_login
-    @email = params[:email]
-    @user = User.find_by_email(@email)
-    if @user && @user.password == params[:password]
-      render :nothing => true
-    else
-      render :nothing => true
     end
   end
 
