@@ -175,6 +175,15 @@ describe "user authentaction action" do
         end
       end
     end
+
+
+    context "user click the forgot password" do
+      it "should go to forget password page" do
+        visit login_path
+        click_on "忘记密码"
+        current_path.should == "/forgot"
+      end
+    end
   end
 
   describe "user forgot password" do

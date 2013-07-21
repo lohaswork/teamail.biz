@@ -11,5 +11,8 @@
       <%= check_box_tag :remember_me, "remember", false, :class=>"checkbox span1"%>
       <%= submit_tag "登录", :class=>"btn"%>
     </div>
+    <div class="center control-group">
+      <%= link_to("忘记密码", forgot_path)%>
+    </div>
   <% end %>
 </div>

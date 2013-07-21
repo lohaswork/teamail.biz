@@ -6,7 +6,7 @@ LohasWorkCom::Application.routes.draw do
     get '/signup-success'                        => :signup_success,              :as => :signup_success
     get '/active'                                => :active,                      :as => :active
     get '/forgot'                                => :forgot,                      :as => :forgot
-    post '/forgot'                               => :do_forgot,                   :as => :do_forgot
+    post '/forgot'                               => :do_forgot,                   :as => :forgot
     get '/welcome'                               => :welcome,                     :as => :welcome
   end
   resources :users, :only =>[:new, :create]
