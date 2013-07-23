@@ -44,11 +44,16 @@ class User < ActiveRecord::Base
       user.save!
       user.update_attribute(:reset_token, nil)
     end
+
   end
 
   def generate_reset_token
     generate_token(:reset_token)
     save
+  end
+
+  def activate!
+   active_status? ? false : update_attribute(:active_status, true)
   end
 
   private
