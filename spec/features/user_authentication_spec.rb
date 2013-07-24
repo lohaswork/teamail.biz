@@ -117,61 +117,69 @@ describe "user authentaction action" do
     end
 
     context "user login succsess", :js => true do
-      before {sign_up_with('user@example.com', 'password', 'company')}
+      before {@user = create(:already_activate_user)}
       it "should see user message" do
-        login_with("user@example.com", "password")
-        page.should have_content '欢迎您：user@example.com'
+        login_with(@user.email, @user.password)
+        page.should have_content "欢迎您：#{@user.email}"
       end
     end
 
     context "user visit pages after login succsess" do
       before do
-        sign_up_with('user@example.com', 'password', 'company')
-        login_with("user@example.com", "password")
+        @user = create(:already_activate_user)
+        login_with(@user.email, @user.password)
       end
       it "should redirect to welcome page visit root path" do
         visit root_path
         current_path.should == '/welcome'
-        page.should have_content('user@example.com')
+        page.should have_content(@user.email)
       end
 
       it "should redirect to welcome page visit login path" do
         visit login_path
         current_path.should == '/welcome'
-        page.should have_content('user@example.com')
+        page.should have_content(@user.email)
       end
 
       it "should go to root path after logout" do
         visit root_path
         click_on("登出")
         current_path.should == "/"
-        page.should_not have_content('user@example.com')
+        page.should_not have_content(@user.email)
       end
     end
 
     describe "user login failed" do
-      before {sign_up_with('user@example.com', 'password', 'company')}
+      before {@user = create(:already_activate_user)}
 
       context "user miss email or password", :js => true do
         it "should see error message" do
           login_with(nil, "password")
-          page.should have_content '信息不正确'
+          page.should have_content '没有这个用户'
         end
 
         it "should see error message" do
           login_with(nil, nil)
-          page.should have_content '信息不正确'
+          page.should have_content '没有这个用户'
         end
       end
       context "user enter error message", :js => true do
         it "should see error message" do
           login_with("error@email.com", "password")
-          page.should have_content '信息不正确'
+          page.should have_content '没有这个用户'
         end
 
+        it "should see error message", :js => true do
+          login_with(@user.email, "wrongpassword")
+          page.should have_content '密码或邮件地址不正确'
+        end
+      end
+
+      context "an not active user login", :js => true do
         it "should see error message" do
-          login_with("error@email.com", "wrongpassword")
-          page.should have_content '信息不正确'
+          user = create(:non_activate_user)
+          login_with(user.email, user.password)
+          page.should have_content '您的账户尚未激活'
         end
       end
     end

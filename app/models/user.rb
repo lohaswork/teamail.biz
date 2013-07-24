@@ -27,7 +27,9 @@ class User < ActiveRecord::Base
 
     def authentication(email, password)
       user = email && self.find_by_email(email)
-      raise ValidationError.new("信息不正确") unless user && user.password == password
+      raise ValidationError.new("没有这个用户") if !user
+      raise ValidationError.new("您的账户尚未激活") if !user.active_status?
+      raise ValidationError.new("密码或邮件地址不正确") if user.password != password
       user
     end
 
