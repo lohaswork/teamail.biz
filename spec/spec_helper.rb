@@ -46,9 +46,9 @@ def setup_spec_helper
     config.order = "random"
 
     #Make the default JS driver is webkit
-    #Capybara.register_driver :poltergeist do |app|
-      #Capybara::Poltergeist::Driver.new(app, options = {:js_errors => false })
-    #end
+    Capybara.register_driver :poltergeist do |app|
+      Capybara::Poltergeist::Driver.new(app, options = {:js_errors => false })
+    end
 
     if ENV['HEADLESS'] == 'true'
       Capybara.javascript_driver = :poltergeist
