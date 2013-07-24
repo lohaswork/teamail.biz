@@ -7,6 +7,7 @@ def setup_spec_helper
 
   require 'capybara/rspec'
   require 'capybara/rails'
+  require 'capybara/poltergeist'
 
   # Requires supporting ruby files with custom matchers and macros, etc,
   # in spec/support/ and its subdirectories.
@@ -44,11 +45,9 @@ def setup_spec_helper
     #     --seed 1234
     config.order = "random"
 
-    #Make the default JS driver is webkit, need not dispale the real browser to
-    #support test, if you want to see the real window of test in your own evn,
-    #you can run "DIEVER=selenium rspec" or "DIEVER=selenium guard"
-    if ENV['DRIVER'] == 'selenium'
-      Capybara.javascript_driver = :selenium
+    #Make the default JS driver is webkit
+    if ENV['HEADLESS'] == 'true'
+      Capybara.javascript_driver = :poltergeist
     else
       Capybara.javascript_driver = :webkit
     end

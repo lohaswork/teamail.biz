@@ -23,8 +23,9 @@ end
 gem 'jquery-rails'
 
 group :test, :development do
-  gem 'selenium-webdriver'
-  gem 'capybara-webkit'
+  #gem 'selenium-webdriver'
+  #gem 'capybara-webkit'
+  gem 'poltergeist'
   gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'tailor'
