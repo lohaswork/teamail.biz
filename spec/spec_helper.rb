@@ -45,17 +45,19 @@ def setup_spec_helper
     #     --seed 1234
     config.order = "random"
 
-    #Make the default JS driver is webkit, need not dispale the real browser to
-    #support test, if you want to see the real window of test in your own evn,
-    #you can run "DIEVER=selenium rspec" or "DIEVER=selenium guard"
-    Capybara.register_driver :poltergeist do |app|
-      Capybara::Poltergeist::Driver.new(app, options = {:js_errors => false })
-    end
+    #Make the default JS driver is poltergeist, need not dispale the real
+    #browser to support test, if you want to see the real window of test in your
+    #own evn, you can run "DIEVER=selenium rspec" or "DIEVER=selenium guard"
 
     if ENV['DRIVER'] == 'selenium'
       Capybara.javascript_driver = :selenium
     else
       Capybara.javascript_driver = :poltergeist
+    end
+
+    #TODO: ignore the js error for now
+    Capybara.register_driver :poltergeist do |app|
+      Capybara::Poltergeist::Driver.new(app, options = {:js_errors => false })
     end
 
     #clean DB after every test case
