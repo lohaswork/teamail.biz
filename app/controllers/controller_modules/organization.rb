@@ -6,7 +6,7 @@ module ControllerModules::Organization
   end
 
   protected
-    def current_organization = (organization)
+    def current_organization=(organization)
       @current_organization = organization
       session[:organization] = organization.id
     end
