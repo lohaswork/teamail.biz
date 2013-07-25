@@ -24,7 +24,6 @@ gem 'jquery-rails'
 
 group :test, :development do
   gem 'selenium-webdriver'
-  gem 'capybara-webkit'
   gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'tailor'
@@ -36,6 +35,7 @@ group :test, :development do
   gem 'guard-spork'
   gem 'guard-rspec'
   gem 'metric_fu'
+  gem 'poltergeist'
 end
 
 gem 'bootstrap-sass'
