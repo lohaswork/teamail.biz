@@ -5,5 +5,5 @@ class Topic < ActiveRecord::Base
   belongs_to :organization
   has_many :user_topics
   has_many :users, :through => :user_topics
-  validates :name, presence: true
+  validates :title, presence: true
 end
