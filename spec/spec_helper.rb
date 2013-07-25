@@ -7,6 +7,7 @@ def setup_spec_helper
 
   require 'capybara/rspec'
   require 'capybara/rails'
+  require 'capybara/poltergeist'
 
   # Requires supporting ruby files with custom matchers and macros, etc,
   # in spec/support/ and its subdirectories.
@@ -24,7 +25,7 @@ def setup_spec_helper
 
     # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
     # config.fixture_path = "#{::Rails.root}/spec/fixtures"
-    
+
     # including factory_girl syntax in rspec
     config.include FactoryGirl::Syntax::Methods
 
@@ -44,13 +45,19 @@ def setup_spec_helper
     #     --seed 1234
     config.order = "random"
 
-    #Make the default JS driver is webkit, need not dispale the real browser to
-    #support test, if you want to see the real window of test in your own evn,
-    #you can run "DIEVER=selenium rspec" or "DIEVER=selenium guard"
+    #Make the default JS driver is poltergeist, need not dispale the real
+    #browser to support test, if you want to see the real window of test in your
+    #own evn, you can run "DIEVER=selenium rspec" or "DIEVER=selenium guard"
+
     if ENV['DRIVER'] == 'selenium'
       Capybara.javascript_driver = :selenium
     else
-      Capybara.javascript_driver = :webkit
+      Capybara.javascript_driver = :poltergeist
+    end
+
+    #TODO: ignore the js error for now
+    Capybara.register_driver :poltergeist do |app|
+      Capybara::Poltergeist::Driver.new(app, options = {:js_errors => false })
     end
 
     #clean DB after every test case
