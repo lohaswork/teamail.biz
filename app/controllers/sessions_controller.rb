@@ -2,7 +2,7 @@
 class SessionsController < ApplicationController
 
   def new
-    redirect_to welcome_path if current_user
+    redirect_to welcome_path if authenticated?
   end
 
   def create
