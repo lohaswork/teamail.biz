@@ -1,0 +1,8 @@
+<div>
+  您的话题有：
+  <%- @topics.try(:each) do |topic|%>
+    <div>
+      <%= topic.title%>
+    </div>
+  <% end %>
+<div>
