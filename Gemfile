@@ -35,6 +35,7 @@ group :test, :development do
   gem 'spork'
   gem 'guard-spork'
   gem 'guard-rspec'
+  gem 'poltergeist'
 end
 
 gem 'bootstrap-sass'
