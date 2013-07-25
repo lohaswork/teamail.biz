@@ -38,6 +38,7 @@ class User < ActiveRecord::Base
       raise ValidationError.new('您的邮件地址不正确') if !user
       user.generate_reset_token
       EmailEngine::ResetPasswordNotifier.new(user).reset_password_notification
+      user
     end
 
     def reset_password(reset_token, password)
