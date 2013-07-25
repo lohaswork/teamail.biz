@@ -35,4 +35,8 @@ class UsersController < ApplicationController
     User.reset_password(params[:reset_token], params[:password])
     render :json => {:status => "success", :redirect => reset_success_path}
   end
+
+  def welcome
+    redirect_to login_path  if !authenticated?
+  end
 end
