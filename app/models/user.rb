@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
 
   has_many :organization_memberships
   has_many :organizations, :through => :organization_memberships
+  has_many :user_topics
+  has_many :topics, :through => :user_topics
   before_create :add_active_code, :create_remember_token
 
   before_validation(:on=>:create) { |user| user.email = email.downcase }
