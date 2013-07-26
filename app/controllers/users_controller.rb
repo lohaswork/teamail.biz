@@ -22,8 +22,8 @@ class UsersController < ApplicationController
 
   def do_forgot
     @email = params[:email]
-    User.forgot_password(@email)
-    render :json => {:status => "success", :redirect => forgot_success_path}
+    user = User.forgot_password(@email)
+    render :json => {:status => "success", :redirect => forgot_success_path(user.remember_token)}
   end
 
   def reset
@@ -34,5 +34,17 @@ class UsersController < ApplicationController
   def do_reset
     User.reset_password(params[:reset_token], params[:password])
     render :json => {:status => "success", :redirect => reset_success_path}
+  end
+
+  def welcome
+    redirect_to login_path  if !authenticated?
+  end
+
+  def forgot_success
+    @user = params[:token] && User.find_by_remember_token(params[:token])
+    if !@user
+      flash[:notice] = "链接有误"
+      redirect_to forgot_path
+    end
   end
 end

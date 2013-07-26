@@ -7,7 +7,7 @@ LohasWorkCom::Application.routes.draw do
     get '/active/:active_code'                   => :active,                      :as => :active
     get '/forgot'                                => :forgot,                      :as => :forgot
     post '/forgot'                               => :do_forgot,                   :as => :forgot
-    get '/forgot_success'                        => :forgot_success,              :as => :forgot_success
+    get '/forgot_success/:token'                 => :forgot_success,              :as => :forgot_success
     get '/welcome'                               => :welcome,                     :as => :welcome
     get  '/reset/:reset_token'                   => :reset,                       :as => :reset
     post '/reset/:reset_token'                   => :do_reset,                    :as => :reset
