@@ -6,4 +6,5 @@ class Organization < ActiveRecord::Base
   has_many :topics
   validates :name, presence: true, :uniqueness => {:case_sensitive => false, :message => "组织名已使用"}
 
+  scope :for_user, lambda { |user| joins(:users).where("user_id = ?", user.id)}
 end

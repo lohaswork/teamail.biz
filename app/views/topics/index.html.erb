@@ -1,8 +1,29 @@
 <div>
-  您的话题有：
+  <div>
+    您的话题有：
+  </div>
+  <div class='row'>
+    <div class='span2'>
+      创建者：
+    </div>
+    <div class='span3'>
+      标题：
+    </div>
+    <div class='span3'>
+      创建时间：
+    </div>
+  </div>
   <%- @topics.try(:each) do |topic|%>
-    <div>
-      <%= topic.title%>
+    <div class='row'>
+      <div class='span2'>
+        <%= topic.users.first.email%>
+      </div>
+      <div class='span3'>
+        <%= topic.title%>
+      </div>
+      <div class='span3'>
+        <%= topic.created_at%>
+      </div>
     </div>
   <% end %>
 <div>

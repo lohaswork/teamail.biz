@@ -13,5 +13,7 @@
       <%= link_to('登录', login_path) %>
     </li>
   <%end%>
-
+  <% if current_organization %>
+    <%= link_to(current_organization.name, topics_path(organizaiton_id: current_organization.id))%>
+  <% end %>
 </ul>
