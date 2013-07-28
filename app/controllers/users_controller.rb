@@ -21,8 +21,8 @@ class UsersController < ApplicationController
 
 
   def do_forgot
-    @email = params[:email]
-    user = User.forgot_password(@email)
+    email = params[:email]
+    user = User.forgot_password(email)
     render :json => {:status => "success", :redirect => forgot_success_path(user.remember_token)}
   end
 
