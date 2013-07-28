@@ -1,0 +1,21 @@
+<div class="login">
+  <%= form_tag sessions_path, :method => "post", :class=>"form-horizontal" , :remote => true do %>
+    <div class="center control-group">
+      <%= text_field_tag :email, nil, :class=>"input-large", :placeholder=>"邮箱"%>
+    </div>
+    <div class="center control-group">
+      <%= password_field_tag :password, nil, :class=>"input-large", :placeholder=>"密码"%>
+    </div>
+    <div class="center control-group row">
+      <span>记住我</span>
+      <%= check_box_tag :remember_me, "remember", false, :class=>"checkbox span1"%>
+      <%= submit_tag "登录", :class=>"btn"%>
+    </div>
+    <div class="center control-group">
+      <%= link_to("忘记密码", forgot_path)%>
+    </div>
+    <div class="center control-group">
+      <%= link_to("注册", new_user_path)%>
+    </div>
+  <% end %>
+</div>

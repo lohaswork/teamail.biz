@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130717130521) do
+ActiveRecord::Schema.define(:version => 20130721102927) do
 
   create_table "organization_memberships", :force => true do |t|
     t.integer  "organization_id"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(:version => 20130717130521) do
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
     t.string   "active_code"
+    t.string   "reset_token"
   end
 
 end

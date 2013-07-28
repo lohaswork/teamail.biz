@@ -1,5 +1,5 @@
 <div class="forgot">
-  <%= form_tag '/forgot', :method => "post", :class=>"form-horizontal" do %>
+  <%= form_tag forgot_path, :method => "post", :class=>"form-horizontal", :remote => true do %>
     <div class="center control-group">
       <%= text_field_tag :email, nil, :class=>"input-large", :placeholder=>"邮箱"%>
     </div>
