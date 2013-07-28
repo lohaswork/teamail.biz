@@ -4,7 +4,7 @@ module ControllerModules::ExceptionHandlers
   extend ActiveSupport::Concern
   #TODO： error message mapping
   included do
-    rescue_from ActiveRecord::RecordInvalid, :with => :handle_validation_error
+    rescue_from ActiveRecord::RecordInvalid, ValidationError, :with => :handle_validation_error
   end
 
   protected
@@ -14,8 +14,7 @@ module ControllerModules::ExceptionHandlers
       Rails.logger.warn exception
     end
     error_messages = exception.message
-    error_messages = "unexpected error" if error_messages.blank?
+    error_messages = "信息有误" if error_messages.blank?
     render :json => {:status => "error", :message => "Validation failed", :code => 422, :errors => error_messages }, :status => 422
   end
-
 end

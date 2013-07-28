@@ -14,6 +14,6 @@ end
 guard 'rspec', :version => 2, :all_after_pass => false, :cli => '--drb' do
     watch(%r{^config/(.+)\.rb$})                        { ["spec"] }
     watch(%r{^spec/(.+)\.rb$$})                         { ["spec"] }
-    watch(%r{^app/(.+)\.rb$})                           { ["spec"] }
+    watch(%r{^app/(.+)$})                               { ["spec"] }
     watch(%r{^lib/(.+)\.rb$})                           { ["spec"] }
 end

@@ -34,13 +34,13 @@ group :test, :development do
   gem 'spork'
   gem 'guard-spork'
   gem 'guard-rspec'
+  gem 'metric_fu'
   gem 'poltergeist'
 end
 
 gem 'bootstrap-sass'
 gem 'rest-client'
 gem 'multimap'
-gem 'metric_fu'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
