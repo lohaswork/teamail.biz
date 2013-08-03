@@ -11,6 +11,10 @@ module ControllerModules::Organization
     end
 
     def current_organization
-      @current_organization ||= session[:organization] && current_user && ::Organization.for_user(current_user).find(session[:organization])
+      begin
+        @current_organization ||= ::Organization.for_user(current_user).find(session[:organization])
+      rescue
+        nil
+      end
     end
 end
