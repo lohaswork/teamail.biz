@@ -4,11 +4,12 @@ require 'helpers'
 
 describe "the topics action" do
   include Helpers
-  context "user on the topic list page" do
+  context "user on the topic list page", :js => true do
     it  "should see the topic title" do
       organization = create(:organization)
       user = organization.users.first
       login_with(user.email, user.password)
+      page.should have_content(user.email)
       visit topics_path(organization_id:organization.id)
       page.should have_content "this is test topic1"
       page.should have_content "this is test topic2"
