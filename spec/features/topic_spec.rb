@@ -11,8 +11,7 @@ describe "the topics action" do
       login_with(user.email, user.password)
       page.should have_content(user.email)
       visit topics_path(organization_id:organization.id)
-      page.should have_content "this is test topic1"
-      page.should have_content "this is test topic2"
+      page.should have_content organization.topics.first.title
     end
   end
 
