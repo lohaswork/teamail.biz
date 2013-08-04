@@ -3,7 +3,11 @@ FactoryGirl.define do
     "person#{n}@test.com"
   end
 
-  sequence :active_code do |n|
+  sequence :active_code do
+    SecureRandom.urlsafe_base64
+  end
+
+  sequence :reset_token do
     SecureRandom.urlsafe_base64
   end
 
@@ -17,6 +21,10 @@ FactoryGirl.define do
 
     factory :already_activate_user do
       active_status 1
+    end
+
+    factory :should_reset_user do
+      reset_token
     end
   end
 
