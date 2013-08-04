@@ -20,6 +20,35 @@ describe "user authentaction action" do
           page.should have_content '您已成功注册并创建了您的公司或团体'
         }.to change(User, :count).by(1)
       end
+
+      describe "user active" do
+
+        context "with valid active link and never activate before" do
+
+          it "should see active succsess info" do
+            user = create(:non_activate_user)
+            visit "/active/#{user.active_code}"
+            page.should have_content '您的电子邮箱已通过验证。'
+          end
+        end
+
+        context "with valid active link yet activated before" do
+
+          it "should see active failure info" do
+            user = create(:already_activate_user)
+            visit "/active/#{user.active_code}"
+            page.should have_content '您的账户已经处于激活状态!'
+          end
+        end
+
+        context "with invalid active link" do
+
+          it "should not see active failure info" do
+            visit "/active/invalidinfo"
+            page.should have_content '激活失败，您的激活链接错误或不完整。'
+          end
+        end
+      end
     end
 
     describe "user signup fail" do
@@ -53,35 +82,6 @@ describe "user authentaction action" do
             page.should have_content '组织名已使用'
           end
         end
-      end
-    end
-  end
-
-  describe "user active" do
-
-    context "with valid active link and never activate before" do
-
-      it "should see active succsess info" do
-        user = create(:non_activate_user)
-        visit "/active/#{user.active_code}"
-        page.should have_content '您的电子邮箱已通过验证。'
-      end
-    end
-
-    context "with valid active link yet activated before" do
-
-      it "should see active failure info" do
-        user = create(:already_activate_user)
-        visit "/active/#{user.active_code}"
-        page.should have_content '您的账户已经处于激活状态!'
-      end
-    end
-
-    context "with invalid active link" do
-
-      it "should not see active failure info" do
-        visit "/active/invalidinfo"
-        page.should have_content '激活失败，您的激活链接错误或不完整。'
       end
     end
   end
@@ -184,16 +184,78 @@ describe "user authentaction action" do
   describe "user forgot password" do
     before { visit forgot_path }
 
-    describe "user visit forgot password page" do
+    context "user visit forgot password page" do
       it "should see forgot page" do
         page.should have_button('发送邮件重置密码')
       end
     end
 
-    describe "forgot password when no such user", :js => true do
-      it "have not fill in user email" do
+    context "forgot password when no such user", :js => true do
+      it "should say your email is incorrect" do
         click_button '发送邮件重置密码'
         page.should have_content '您的邮件地址不正确'
+      end
+    end
+
+    context "fill in a correct email", :js => true do
+      it "should go to the forgot succsess page" do
+        user = create(:non_activate_user)
+        fill_in "email", :with => user.email
+        click_button '发送邮件重置密码'
+        page.should have_content '重置密码的邮件已发送至您的邮箱。'
+        page.should have_content user.email
+      end
+    end
+  end
+
+  describe "user reset password" do
+    before{@user = create(:should_reset_user)}
+
+    describe "user reset succsess" do
+      context "user click reset password link" do
+        it "should on the reset password page if link is right" do
+          visit "/reset/#{@user.reset_token}"
+          page.should have_button "重置密码"
+        end
+      end
+      context "user reset succsess", :js => true do
+        it "should on the succsess page" do
+          visit "/reset/#{@user.reset_token}"
+          fill_in 'password', :with => "new-password"
+          click_button "重置密码"
+          page.should have_content "您已重新设置了密码。"
+        end
+      end
+    end
+
+    describe "user reset failed", :js => true do
+      context "link is not correct" do
+        it "should saw error message if link is incorrect" do
+          visit "/reset/incorrect-link"
+          page.should have_content "您的链接已失效"
+        end
+      end
+
+      context "user enter an incorrect password"do
+        it "should saw error message" do
+          visit "/reset/#{@user.reset_token}"
+          fill_in 'password', :with => "wrong"
+          click_button "重置密码"
+          page.should have_content "密码至少需要六位"
+        end
+      end
+
+      context "user click an used link" do
+        before do
+          visit "/reset/#{@user.reset_token}"
+          fill_in 'password', :with => "new-password"
+          click_button "重置密码"
+        end
+
+        it "should saw error message" do
+          visit "/reset/#{@user.reset_token}"
+          page.should have_content "您的链接已失效"
+        end
       end
     end
   end
