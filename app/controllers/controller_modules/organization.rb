@@ -6,7 +6,7 @@ module ControllerModules::Organization
   end
 
   protected
-    def update_organization(organization)
+    def update_current_organization(organization)
       session[:organization] = organization.id
     end
 
