@@ -15,6 +15,7 @@ LohasWorkCom::Application.routes.draw do
   end
   resources :users, :only =>[:new, :create]
   resources :sessions, :only => [:new, :create, :destroy]
+  resources :topics, :only => [:index]
   match "/*other" => redirect('/')
   # The priority is based upon order of creation:
   # first created -> highest priority.
