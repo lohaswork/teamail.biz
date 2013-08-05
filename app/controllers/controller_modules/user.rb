@@ -11,7 +11,7 @@ module ControllerModules::User
   end
 
   def current_user
-    @current_user ||= cookies[:login_token] && User.find_by_remember_token(cookies[:login_token])
+    @current_user ||= cookies[:login_token] && ::User.find_by_remember_token(cookies[:login_token])
   end
 
   def authenticated?

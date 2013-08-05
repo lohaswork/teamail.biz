@@ -1,7 +1,6 @@
 LohasWorkCom::Application.routes.draw do
-  get "logout" => "sessions#destroy", :as => "logout"
-  get "login" => "sessions#new", :as => "login"
   root :to => 'users#new'
+
   controller :users do
     get '/signup-success'                        => :signup_success,              :as => :signup_success
     get '/active/:active_code'                   => :active,                      :as => :active
@@ -14,8 +13,14 @@ LohasWorkCom::Application.routes.draw do
     get '/reset_success'                          => :reset_success,              :as => :reset_success
   end
   resources :users, :only =>[:new, :create]
+
+  get "logout" => "sessions#destroy", :as => "logout"
+  get "login" => "sessions#new", :as => "login"
   resources :sessions, :only => [:new, :create, :destroy]
-  resources :topics, :only => [:index]
+
+  resources :organization do
+    resources :topics, :only => [:index]
+  end
   match "/*other" => redirect('/')
   # The priority is based upon order of creation:
   # first created -> highest priority.

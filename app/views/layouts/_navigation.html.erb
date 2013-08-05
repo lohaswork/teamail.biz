@@ -14,6 +14,6 @@
     </li>
   <%end%>
   <% if current_organization %>
-    <%= link_to(current_organization.name, topics_path(organizaiton_id: current_organization.id))%>
+    <%= link_to(current_organization.name, organization_topics_path(organizaiton_id: current_organization.id))%>
   <% end %>
 </ul>

@@ -1,6 +1,6 @@
 # encoding: utf-8
 class Organization < ActiveRecord::Base
-  attr_accessible :name, :plan
+  attr_accessible :name
   has_many :organization_memberships
   has_many :users, :through => :organization_memberships
   has_many :topics
