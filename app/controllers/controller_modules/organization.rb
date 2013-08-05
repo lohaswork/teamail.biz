@@ -6,11 +6,15 @@ module ControllerModules::Organization
   end
 
   protected
-    def update_organization(organization)
+    def update_current_organization(organization)
       session[:organization] = organization.id
     end
 
     def current_organization
-      @current_organization ||= session[:organization] && current_user && ::Organization.for_user(current_user).find(session[:organization])
+      begin
+        @current_organization ||= ::Organization.for_user(current_user).find(session[:organization])
+      rescue
+        nil
+      end
     end
 end
