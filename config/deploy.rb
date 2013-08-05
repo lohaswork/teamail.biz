@@ -8,7 +8,7 @@ set :unicorn_config, "#{current_path}/config/unicorn.rb"
 set :unicorn_pid, "#{current_path}/tmp/pids/unicorn.pid"
 # set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
-set :user, "deployer"
+set :user, "lohaswork"
 set :deploy_to, "/home/www/#{application}"
 set :deploy_via, :remote_cache 
 set :use_sudo, false
