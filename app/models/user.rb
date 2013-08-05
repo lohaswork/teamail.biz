@@ -1,7 +1,6 @@
 # encoding: utf-8
 class User < ActiveRecord::Base
-  attr_accessible :active_status, :authority_type, :email, :name, :online_status,\
-                 :password, :remember_token, :active_code, :reset_token
+  attr_accessible :email, :password
 
   has_many :organization_memberships
   has_many :organizations, :through => :organization_memberships
