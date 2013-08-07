@@ -1,5 +1,5 @@
 require 'bundler/capistrano'
-set :application, "LohasWorkCom"
+set :application, "LohasWork.com"
 set :scm, :git
 set :repository,  "git@github.com:lohaswork/LohasWork.com"
 set :branch, "serco/deployment"
@@ -9,13 +9,13 @@ set :unicorn_pid, "#{current_path}/tmp/pids/unicorn.pid"
 # set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 set :user, "lohaswork"
-set :deploy_to, "/home/www/#{application}"
-set :deploy_via, :remote_cache 
+set :deploy_to, "/home/lohaswork/apps/LohasWork.com"
+set :deploy_via, :remote_cache
 set :use_sudo, false
 
-role :web, "localhost"                          # Your HTTP server, Apache/etc
-role :app, "localhost"                          # This may be the same as your `Web` server
-role :db,  "localhost", :primary => true        # This is where Rails migrations will run
+role :web, "192.168.1.114"                          # Your HTTP server, Apache/etc
+role :app, "192.168.1.114"                          # This may be the same as your `Web` server
+role :db,  "192.168.1.114", :primary => true        # This is where Rails migrations will run
 
 
 # if you want to clean up old releases on each deploy uncomment this:
