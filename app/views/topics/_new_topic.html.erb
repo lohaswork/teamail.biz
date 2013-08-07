@@ -1,14 +1,17 @@
 <div id='new-topic'>
   <div class='row'>
-    <%= link_to('创建新话题', '#', :class=>"btn offset6")%>
+    <%= link_to('创建新话题', '#', :id => 'new-topic-button', :class=>"btn offset6")%>
   </div>
-  <div class='row top-buffer left-buffer hide'>
+  <div id='new-topic-form', class='row top-buffer left-buffer hide'>
     <%= form_tag topics_path, :method => "post", :class=>"form-horizontal", :remote => true do %>
       <div class="control-group">
         <%= text_field_tag :title, nil, :class=>"span8 input-large search-query", :placeholder=>"标题"%>
       </div>
       <div>
         <%= submit_tag "创建", :class=>"btn"%>
+      </div>
+      <div>
+        <%= link_to('取消', '#', :id => 'cancel-create-button', :class=>"btn")%>
       </div>
     <% end %>
   </div>

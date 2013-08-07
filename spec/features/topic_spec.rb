@@ -37,16 +37,30 @@ describe "the topics action" do
 
   describe "user create new topic", :js => true do
     before do
-      @organization = create(:organization)
-      @user = @organization.users.first
-      login_with(@user.email, @user.password)
+      organization = create(:organization)
+      user = organization.users.first
+      login_with(user.email, user.password)
+      visit organization_topics_path(organization_id:organization.id)
     end
 
     describe "user can open a create topic field" do
       context "user click the new topic buttion" do
         it "should have a field for new topic" do
-          visit organization_topics_path(organization_id:@organization.id)
           page.should have_link "创建新话题"
+          page.should_not have_selector "form"
+          click_on "创建新话题"
+          page.should have_selector "form"
+        end
+      end
+
+      context "user reopen the field" do
+        it "should keep the text" do
+          click_on "创建新话题"
+          fill_in "title", :with => "test title"
+          click_on "取消"
+          page.should_not have_link "取消"
+          click_on "创建新话题"
+          find_field('title').value == "test title"
         end
       end
     end
