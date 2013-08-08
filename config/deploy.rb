@@ -40,6 +40,7 @@ after "deploy:restart", "deploy:cleanup"
 #     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
 #   end
 # end
+
 namespace :deploy do
   task :start, :roles => :app, :except => { :no_release => true } do
     run "cd #{current_path} && RAILS_ENV=production bundle exec unicorn_rails -c #{unicorn_config} -D"
@@ -54,11 +55,4 @@ namespace :deploy do
     run "if [ -f #{unicorn_pid} ]; then kill -s USR2 `cat #{unicorn_pid}`; fi"
   end
 
-  task :precompile, :roles => :app do
-    run "cd #{current_path} && #{rake} RAILS_ENV=#{rails_env} assets:precompile"
-  end
-
-  #task :symlink do
-    # no-op to remove default symlink task, not needed by fast_git_deploy
-  #end
 end
