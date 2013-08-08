@@ -4,7 +4,7 @@ set :scm, :git
 set :repository,  "git@github.com:lohaswork/LohasWork.com"
 set :branch, "serco/deployment"
 set :rails_env, "production"
-set :normalize_asset_timestamps, false
+#set :normalize_asset_timestamps, false
 #set :current_path, ""
 
 # set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
