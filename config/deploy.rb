@@ -13,7 +13,7 @@ set :deploy_to, "/home/lohaswork/apps/LohasWork.com"
 set :deploy_via, :remote_cache
 set :use_sudo, false
 
-set :rbenv_version, ENV['RBENV_VERSION'] || "1.9.3-p327"
+set :rbenv_version, ENV['RBENV_VERSION'] || "1.9.3-p448"
 set :default_environment, {
   'PATH' => "/home/#{user}/.rbenv/shims:/home/#{user}/.rbenv/bin:$PATH",
   'RBENV_VERSION' => "#{rbenv_version}",
