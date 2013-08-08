@@ -54,7 +54,11 @@ namespace :deploy do
     run "if [ -f #{unicorn_pid} ]; then kill -s USR2 `cat #{unicorn_pid}`; fi"
   end
 
-  task :symlink do
-    # no-op to remove default symlink task, not needed by fast_git_deploy
+  task :precompile, :roles => :app do
+    run "cd #{current_path} && #{rake} RAILS_ENV=#{rails_env} assets:precompile"
   end
+
+  #task :symlink do
+    # no-op to remove default symlink task, not needed by fast_git_deploy
+  #end
 end
