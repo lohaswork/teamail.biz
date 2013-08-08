@@ -3,6 +3,7 @@ set :application, "LohasWork.com"
 set :scm, :git
 set :repository,  "git@github.com:lohaswork/LohasWork.com"
 set :branch, "serco/deployment"
+set :rails_env, "production"
 set :normalize_asset_timestamps, false
 #set :current_path, ""
 
