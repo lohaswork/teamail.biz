@@ -1,9 +1,14 @@
-require "rvm/capistrano"
 require 'bundler/capistrano'
 set :application, "LohasWork.com"
 set :scm, :git
 set :repository,  "git@github.com:lohaswork/LohasWork.com"
 set :branch, "serco/deployment"
+
+set :rbenv_version, ENV['RBENV_VERSION'] || "1.9.3-p448"
+set :default_environment, {
+  'PATH' => "/home/#{user}/.rbenv/shims:/home/#{user}/.rbenv/bin:$PATH",
+  'RBENV_VERSION' => "#{rbenv_version}",
+}
 
 set :unicorn_config, "#{current_path}/config/unicorn.rb"
 set :unicorn_pid, "#{current_path}/tmp/pids/unicorn.pid"
