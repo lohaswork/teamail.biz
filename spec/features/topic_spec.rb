@@ -64,5 +64,24 @@ describe "the topics action" do
         end
       end
     end
+
+    describe "user create new topic" do
+      context "user create success" do
+        it "should see the new topic on the list" do
+          click_on "创建新话题"
+          fill_in "title", :with => "test title"
+          click_button "创建"
+          page.should have_content "test title"
+        end
+      end
+
+      context "user create success" do
+        it "should see the new topic on the list" do
+          click_on "创建新话题"
+          click_button "创建"
+          page.should have_content "请输入标题"
+        end
+      end
+    end
   end
 end
