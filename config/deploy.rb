@@ -4,12 +4,6 @@ set :scm, :git
 set :repository,  "git@github.com:lohaswork/LohasWork.com"
 set :branch, "serco/deployment"
 
-set :rbenv_version, ENV['RBENV_VERSION'] || "1.9.3-p448"
-set :default_environment, {
-  'PATH' => "/home/#{user}/.rbenv/shims:/home/#{user}/.rbenv/bin:$PATH",
-  'RBENV_VERSION' => "#{rbenv_version}",
-}
-
 set :unicorn_config, "#{current_path}/config/unicorn.rb"
 set :unicorn_pid, "#{current_path}/tmp/pids/unicorn.pid"
 # set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
@@ -18,6 +12,12 @@ set :user, "lohaswork"
 set :deploy_to, "/home/lohaswork/apps/LohasWork.com"
 set :deploy_via, :remote_cache
 set :use_sudo, false
+
+set :rbenv_version, ENV['RBENV_VERSION'] || "1.9.3-p327"
+set :default_environment, {
+  'PATH' => "/home/#{user}/.rbenv/shims:/home/#{user}/.rbenv/bin:$PATH",
+  'RBENV_VERSION' => "#{rbenv_version}",
+}
 
 role :web, "192.168.1.114"                          # Your HTTP server, Apache/etc
 role :app, "192.168.1.114"                          # This may be the same as your `Web` server
