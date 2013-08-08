@@ -11,6 +11,6 @@ class TopicsController < ApplicationController
       redirect_to root_path
     end
     topics = current_organization.topics
-    render :json => {:update => {"topic-list" => render_to_string(:partial => 'topic_list.html', :layout => false, :locals => {:topics => topics})}}
+    render :json => {:update => {"topic-list" => render_to_string(:partial => 'topic_list', :layout => false, :locals => {:topics => topics}), "new-topic" => render_to_string(:partial => 'new_topic', :layout => false)}}
   end
 end

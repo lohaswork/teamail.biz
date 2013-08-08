@@ -47,9 +47,9 @@ describe "the topics action" do
       context "user click the new topic buttion" do
         it "should have a field for new topic" do
           page.should have_link "创建新话题"
-          page.should_not have_selector "form"
+          page.should_not have_selector "#new-topic-form"
           click_on "创建新话题"
-          page.should have_selector "form"
+          page.should have_selector "#new-topic-form"
         end
       end
 
@@ -72,11 +72,12 @@ describe "the topics action" do
           fill_in "title", :with => "test title"
           click_button "创建"
           page.should have_content "test title"
+          page.should_not have_selector "#new-topic-form"
         end
       end
 
-      context "user create success" do
-        it "should see the new topic on the list" do
+      context "user create failed" do
+        it "should see error message" do
           click_on "创建新话题"
           click_button "创建"
           page.should have_content "请输入标题"
