@@ -3,7 +3,7 @@ set :application, "LohasWork.com"
 set :scm, :git
 set :repository,  "git@github.com:lohaswork/LohasWork.com"
 set :branch, "serco/deployment"
-set :current_path, ""
+#set :current_path, ""
 
 # set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
@@ -40,6 +40,10 @@ after "deploy:restart", "deploy:cleanup"
 #     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
 #   end
 # end
+
+before "deploy:assets:precompile" do
+  run ["ln -nfs #{shared_path}/config/database.yml #{current_path}/config/database.yml"]
+end
 
 namespace :deploy do
   task :start, :roles => :app, :except => { :no_release => true } do
