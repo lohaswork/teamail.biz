@@ -53,4 +53,8 @@ namespace :deploy do
     # 用USR2信号来实现无缝部署重启
     run "if [ -f #{unicorn_pid} ]; then kill -s USR2 `cat #{unicorn_pid}`; fi"
   end
+
+  task :symlink do
+    # no-op to remove default symlink task, not needed by fast_git_deploy
+  end
 end
