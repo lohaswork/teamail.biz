@@ -3,15 +3,17 @@ set :application, "LohasWork.com"
 set :scm, :git
 set :repository,  "git@github.com:lohaswork/LohasWork.com"
 set :branch, "serco/deployment"
+set :current_path, ""
 
-set :unicorn_config, "#{current_path}/config/unicorn.rb"
-set :unicorn_pid, "#{current_path}/tmp/pids/unicorn.pid"
 # set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 set :user, "lohaswork"
 set :deploy_to, "/home/lohaswork/apps/LohasWork.com"
 set :deploy_via, :remote_cache
 set :use_sudo, false
+
+set :unicorn_config, "#{current_path}/config/unicorn.rb"
+set :unicorn_pid, "#{current_path}/tmp/pids/unicorn.pid"
 
 set :rbenv_version, ENV['RBENV_VERSION'] || "1.9.3-p448"
 set :default_environment, {
