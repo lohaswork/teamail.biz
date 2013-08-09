@@ -54,7 +54,7 @@ namespace :deploy do
   desc 'reload nginx when nginx.conf changes'
   task :nginx_reload, :roles => :app do
     run "#{sudo} ln -s #{shared_path}/config/nginx.conf /etc/nginx/sites-enabled/nginx.conf", :pty => true
-    run "service nginx reload"
+    run "#{sudo} service nginx reload"
   end
 
   desc 'load sql schema'
@@ -69,5 +69,6 @@ namespace :deploy do
 
 end
 
-after 'deploy:create_symlink', 'deploy:housekeeping', 'deploy:create_db','deploy:load_schema','deploy:migrate'
+after 'deploy:create_symlink', 'deploy:housekeeping', 'deploy:migrate' #'deploy:create_db','deploy:load_schema'
+after 'deploy:update', 'deploy:nginx_reload'
 after "deploy:restart", "deploy:cleanup"
