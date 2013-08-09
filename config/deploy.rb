@@ -28,25 +28,6 @@ role :app, "192.168.1.114"                          # This may be the same as yo
 role :db,  "192.168.1.114", :primary => true        # This is where Rails migrations will run
 
 
-# if you want to clean up old releases on each deploy uncomment this:
-after "deploy:restart", "deploy:cleanup"
-
-# if you're still using the script/reaper helper you will need
-# these http://github.com/rails/irs_process_scripts
-
-# If you are using Passenger mod_rails uncomment this:
-# namespace :deploy do
-#   task :start do ; end
-#   task :stop do ; end
-#   task :restart, :roles => :app, :except => { :no_release => true } do
-#     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
-#   end
-# end
-
-before "deploy:assets:precompile" do
-  run ["ln -nfs #{shared_path}/config/database.yml #{current_path}/config/database.yml"]
-end
-
 namespace :deploy do
   task :start, :roles => :app, :except => { :no_release => true } do
     run "cd #{current_path} && RAILS_ENV=production bundle exec unicorn_rails -c #{unicorn_config} -D"
@@ -61,4 +42,17 @@ namespace :deploy do
     run "if [ -f #{unicorn_pid} ]; then kill -s USR2 `cat #{unicorn_pid}`; fi"
   end
 
+  desc 'clean old files, link shared files'
+  task :housekeeping, :roles => :app do
+    run "rm -f #{current_path}/config/database.yml"
+    run "ln -s #{shared_path}/config/database.yml #{current_path}/config/database.yml"
+    #run "ln -nfs #{shared_path}/public/assets #{release_path}/public/assets"
+    run "rm -rf #{current_path}/public/uploads"
+    run "ln -s #{shared_path}/uploads #{current_path}/public/uploads"
+    run "cd #{current_path}; RAILS_ENV=#{rails_env} bundle exec rake assets:clean"
+    run "cd #{current_path}; RAILS_ENV=#{rails_env} bundle exec rake assets:precompile"
+  end
 end
+
+after 'deploy:create_symlink', 'deploy:housekeeping', 'deploy:migrate'
+after "deploy:restart", "deploy:cleanup"
