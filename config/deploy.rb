@@ -53,7 +53,7 @@ namespace :deploy do
 
   desc 'load sql schema'
   task :load_schema, :roles => :app do
-    run "cd #{current_path}; rake db:schema:load"
+    run "cd #{current_path}; RAILS_ENV=production rake db:schema:load"
   end
 
 end
