@@ -1,4 +1,6 @@
 require 'bundler/capistrano'
+require 'capistrano/nginx/tasks'
+
 set :application, "LohasWork.com"
 set :scm, :git
 set :repository,  "git@github.com:lohaswork/LohasWork.com"
@@ -56,9 +58,9 @@ namespace :deploy do
     run "#{sudo} ln -s #{shared_path}/config/nginx.conf /etc/nginx/sites-enabled/nginx.conf", :pty => true
   end
 
-  task :nginx_reload, :roles => :app do
-    run "#{sudo} service nginx reload", :pty => true
-  end
+  #task :nginx_reload, :roles => :app do
+  #  run "#{sudo} service nginx reload", :pty => true
+  #end
 
   desc 'load sql schema'
   task :load_schema, :roles => :app do
@@ -72,6 +74,6 @@ namespace :deploy do
 
 end
 
+after "deploy:setup", "nginx:setup", "nginx:reload"
 after 'deploy:create_symlink', 'deploy:housekeeping', 'deploy:migrate' #'deploy:create_db','deploy:load_schema'
-after 'deploy:update', 'deploy:nginx_reload'
-after "deploy:restart", "deploy:cleanup"
+after "deploy:restart", "deploy:cleanup", "nginx:reload"
