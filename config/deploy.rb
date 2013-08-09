@@ -56,7 +56,12 @@ namespace :deploy do
     run "cd #{current_path}; RAILS_ENV=production rake db:schema:load"
   end
 
+  desc 'create_db'
+  task :load_schema, :roles => :app do
+    run "cd #{current_path}; RAILS_ENV=production rake db:schema:load"
+  end
+
 end
 
-after 'deploy:create_symlink', 'deploy:housekeeping', 'deploy:load_schema','deploy:migrate'
+after 'deploy:create_symlink', 'deploy:housekeeping', 'deploy:create_db','deploy:load_schema','deploy:migrate'
 after "deploy:restart", "deploy:cleanup"
