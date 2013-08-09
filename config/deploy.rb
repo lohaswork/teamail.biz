@@ -7,6 +7,20 @@ set :rails_env, "production"
 set :normalize_asset_timestamps, false
 #set :current_path, ""
 
+set_default(:postgresql_user) { "lohaswork" }
+set_default(:postgresql_password) { Capistrano::CLI.password_prompt "PostgreSQL Password: " }
+set_default(:postgresql_database) { "lohaswork_production" }
+
+namespace :postgresql do
+  desc "Create a database for this application."
+  task :create_database, roles: :db, only: {primary: true} do
+    run %Q{#{sudo} -u postgres psql -c "create user #{postgresql_user} with password '#{postgresql_password}';"}
+    run %Q{#{sudo} -u postgres psql -c "create database #{postgresql_database} owner #{postgresql_user};"}
+  end
+  after "deploy:setup", "postgresql:create_database"
+end
+
+
 # set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 set :user, "lohaswork"
@@ -48,7 +62,6 @@ namespace :deploy do
     #run "ln -nfs #{shared_path}/public/assets #{release_path}/public/assets"
     run "rm -rf #{current_path}/public/uploads"
     run "ln -s #{shared_path}/uploads #{current_path}/public/uploads"
-    run "cd #{current_path}; RAILS_ENV=#{rails_env} bundle exec rake db:schema:load"
   end
 end
 
