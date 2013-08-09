@@ -27,7 +27,6 @@ role :web, "192.168.1.114"                          # Your HTTP server, Apache/e
 role :app, "192.168.1.114"                          # This may be the same as your `Web` server
 role :db,  "192.168.1.114", :primary => true        # This is where Rails migrations will run
 
-
 namespace :deploy do
   task :start, :roles => :app, :except => { :no_release => true } do
     run "cd #{current_path} && RAILS_ENV=production bundle exec unicorn_rails -c #{unicorn_config} -D"
@@ -49,8 +48,7 @@ namespace :deploy do
     #run "ln -nfs #{shared_path}/public/assets #{release_path}/public/assets"
     run "rm -rf #{current_path}/public/uploads"
     run "ln -s #{shared_path}/uploads #{current_path}/public/uploads"
-    run "cd #{current_path}; RAILS_ENV=#{rails_env} bundle exec rake assets:clean"
-    run "cd #{current_path}; RAILS_ENV=#{rails_env} bundle exec rake assets:precompile"
+    run "cd #{current_path}; RAILS_ENV=#{rails_env} bundle exec rake db:schema:load"
   end
 end
 
