@@ -7,6 +7,7 @@ set :repository,  "git@github.com:lohaswork/LohasWork.com"
 set :branch, "serco/deployment"
 set :rails_env, "production"
 set :normalize_asset_timestamps, false
+default_run_options[:pty] = true
 #set :current_path, ""
 
 
