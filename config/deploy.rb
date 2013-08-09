@@ -63,8 +63,8 @@ namespace :deploy do
   end
 
   desc 'create_db'
-  task :load_schema, :roles => :app do
-    run "cd #{current_path}; RAILS_ENV=production rake db:schema:load"
+  task :create_db, :roles => :app do
+    run "cd #{current_path}; RAILS_ENV=production rake db:create"
   end
 
 end
