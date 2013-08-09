@@ -1,5 +1,4 @@
 require 'bundler/capistrano'
-require 'capistrano/nginx/tasks'
 
 set :application, "LohasWork.com"
 set :scm, :git
@@ -7,8 +6,7 @@ set :repository,  "git@github.com:lohaswork/LohasWork.com"
 set :branch, "serco/deployment"
 set :rails_env, "production"
 set :normalize_asset_timestamps, false
-default_run_options[:pty] = true
-#set :current_path, ""
+#default_run_options[:pty] = true
 
 
 # set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
@@ -61,10 +59,6 @@ namespace :deploy do
     run "#{sudo} ln -s #{shared_path}/config/nginx.conf /etc/nginx/sites-enabled/nginx.conf", :pty => true
   end
 
-  #task :nginx_reload, :roles => :app do
-  #  run "#{sudo} service nginx reload", :pty => true
-  #end
-
   desc 'load sql schema'
   task :load_schema, :roles => :app do
     run "cd #{current_path}; RAILS_ENV=production rake db:schema:load"
@@ -77,6 +71,5 @@ namespace :deploy do
 
 end
 
-after "deploy:setup", "nginx:setup", "nginx:reload"
 after 'deploy:create_symlink', 'deploy:housekeeping', 'deploy:migrate' #'deploy:create_db','deploy:load_schema'
-after "deploy:restart", "deploy:cleanup", "nginx:reload"
+after "deploy:restart", "deploy:cleanup"
