@@ -53,7 +53,7 @@ namespace :deploy do
 
   desc 'reload nginx when nginx.conf changes'
   task :nginx_reload, :roles => :app do
-    run "#{sudo :as => 'root'} ln -s #{shared_path}/config/nginx.conf /etc/nginx/sites-enabled/nginx.conf"
+    run "#{sudo} ln -s #{shared_path}/config/nginx.conf /etc/nginx/sites-enabled/nginx.conf", :pty => true
     run "service nginx reload"
   end
 
