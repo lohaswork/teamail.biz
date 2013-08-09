@@ -52,20 +52,11 @@ namespace :deploy do
   end
 
   desc 'load sql schema'
-  task :cold do       # Overriding the default deploy:cold
-    update
-    load_schema       # My own step, replacing migrations.
-    start
-  end
-
   task :load_schema, :roles => :app do
     run "cd #{current_path}; rake db:schema:load"
   end
 
-  task :create_db, :roles => :app do
-    run "cd #{current_path}; rake db:create:production"
-  end
 end
 
-after 'deploy:create_symlink', 'deploy:housekeeping', 'deploy:create_db','deploy:migrate'
+after 'deploy:create_symlink', 'deploy:housekeeping', 'deploy:load_schema','deploy:migrate'
 after "deploy:restart", "deploy:cleanup"
