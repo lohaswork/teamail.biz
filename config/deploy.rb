@@ -7,9 +7,9 @@ set :rails_env, "production"
 set :normalize_asset_timestamps, false
 #set :current_path, ""
 
-set :postgresql_user, "lohaswork"
-set :postgresql_password, Capistrano::CLI.password_prompt "PostgreSQL Password: "
-set :postgresql_database, "lohaswork_production"
+set (:postgresql_user, "lohaswork")
+set (:postgresql_password, {Capistrano::CLI.password_prompt "PostgreSQL Password: "})
+set (:postgresql_database, "lohaswork_production")
 
 namespace :postgresql do
   desc "Create a database for this application."
