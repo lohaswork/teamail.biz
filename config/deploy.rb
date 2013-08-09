@@ -52,9 +52,12 @@ namespace :deploy do
   end
 
   desc 'reload nginx when nginx.conf changes'
-  task :nginx_reload, :roles => :app do
+  task :nginx_config, :roles => :app do
     run "#{sudo} ln -s #{shared_path}/config/nginx.conf /etc/nginx/sites-enabled/nginx.conf", :pty => true
-    run "#{sudo} service nginx reload"
+  end
+
+  task :nginx_reload, :roles => :app do
+    run "#{sudo} service nginx reload", :pty => true
   end
 
   desc 'load sql schema'
