@@ -51,6 +51,12 @@ namespace :deploy do
     run "ln -s #{shared_path}/uploads #{current_path}/public/uploads"
   end
 
+  desc 'reload nginx when nginx.conf changes'
+  task :nginx_reload, :roles => :app do
+    run "ln -s #{shared_path}/config/nginx.conf /etc/nginx/sites-enabled/nginx.conf"
+    run "service nginx reload"
+  end
+
   desc 'load sql schema'
   task :load_schema, :roles => :app do
     run "cd #{current_path}; RAILS_ENV=production rake db:schema:load"
