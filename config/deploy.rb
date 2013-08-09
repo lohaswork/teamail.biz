@@ -7,19 +7,6 @@ set :rails_env, "production"
 set :normalize_asset_timestamps, false
 #set :current_path, ""
 
-set :postgresql_user, "lohaswork"
-set(:postgresql_password) { Capistrano::CLI.password_prompt("postgresql password: ") }
-set :postgresql_database, "lohaswork_production"
-
-namespace :postgresql do
-  desc "Create a database for this application."
-  task :create_database, roles: :db, only: {primary: true} do
-    run %Q{#{sudo} -u postgres psql -c "create user #{postgresql_user} with password '#{postgresql_password}';"}
-    run %Q{#{sudo} -u postgres psql -c "create database #{postgresql_database} owner #{postgresql_user};"}
-  end
-  after "deploy:setup", "postgresql:create_database"
-end
-
 
 # set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
@@ -62,6 +49,17 @@ namespace :deploy do
     #run "ln -nfs #{shared_path}/public/assets #{release_path}/public/assets"
     run "rm -rf #{current_path}/public/uploads"
     run "ln -s #{shared_path}/uploads #{current_path}/public/uploads"
+  end
+
+  desc 'load sql schema'
+  task :cold do       # Overriding the default deploy:cold
+    update
+    load_schema       # My own step, replacing migrations.
+    start
+  end
+
+  task :load_schema, :roles => :app do
+    run "cd #{current_path}; rake db:schema:load"
   end
 end
 
