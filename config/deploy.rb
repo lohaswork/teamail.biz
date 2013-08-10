@@ -55,8 +55,8 @@ task :pkg_install => :environment do
       queue 'git clone git://github.com/sstephenson/rbenv.git ~/.rbenv'
       queue 'git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build'
       queue 'git clone git://github.com/sstephenson/rbenv-gem-rehash.git ~/.rbenv/plugins/rbenv-gem-rehash'
-      queue 'echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.profile'
-      queue 'echo 'eval "$(rbenv init -)"' >> ~/.profile'
+      queue "echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.profile"
+      queue "echo 'eval "$(rbenv init -)"' >> ~/.profile"
       queue 'exec $SHELL'
     end
     queue 'rbenv install 1.9.3-p327'
