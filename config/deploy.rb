@@ -49,7 +49,7 @@ task :pkg_install do
   queue %[git config --global user.email "support@lohaswork.com"]
   queue 'sudo mkdir /www'
   queue 'sudo mkdir /www/LohasWork.com'
-  queue 'sudo chown deployer:deployer /www/LohasWork.com'
+  queue 'sudo chown -R deployer /www/LohasWork.com'
   in_directory 'home/deployer' do
     queue %[ssh-keygen -t rsa -C "support@lohaswork.com"]
     queue 'git clone git://github.com/sstephenson/rbenv.git ~/.rbenv'
@@ -103,7 +103,7 @@ end
 
 desc "Deploys the very first version to the server."
 task :deploy_cold => :environment do
-  deploy_cold do
+  deploy do
     # Put things that will set up an empty directory into a fully set-up
     # instance of your project.
     invoke :'git:clone'
