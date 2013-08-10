@@ -42,42 +42,41 @@ end
 
 esc "Install dependencies in server."
 task :pkg_install => :environment do
-    # Install packages
-    queue 'sudo apt-get update'
-    queue 'sudo apt-get install -y build-essential openssl curl libcurl3-dev libreadline6 libreadline6-dev git zlib1g zlib1g-dev libssl-dev libyaml-dev libxml2-dev libxslt-dev autoconf automake libtool imagemagick libmagickwand-dev libpcre3-dev libsqlite3-dev libmysql-ruby libmysqlclient-dev'
-    queue 'sudo apt-get git'
-    queue 'git config --global user.name "lohaswork"'
-    queue 'git config --global user.email "support@lohaswork.com'
-    queue 'sudo mkdir /www/LohasWork.com'
-    queue 'sudo chown -R deployer /www/LohasWork.com'
-    in_directory '#{home_dir}' do
-      queue 'ssh-keygen -t rsa -C "support@lohaswork.com"'
-      queue 'git clone git://github.com/sstephenson/rbenv.git ~/.rbenv'
-      queue 'git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build'
-      queue 'git clone git://github.com/sstephenson/rbenv-gem-rehash.git ~/.rbenv/plugins/rbenv-gem-rehash'
-      queue %[echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.profile]
-      queue %[echo 'eval "$(rbenv init -)"' >> ~/.profile]
-      queue 'exec $SHELL'
-    end
-    queue 'rbenv install 1.9.3-p327'
-    queue 'rbenv global 1.9.3-p327'
-    queue 'gem source -r https://rubygems.org/'
-    queue 'gem source -a http://ruby.taobao.org'
-    queue 'gem install bundler'
-    queue 'sudo apt-add-repository ppa:chris-lea/node.js'
-    queue 'sudo apt-get update'
-    queue 'sudo apt-get install nodejs'
-    queue 'sudo apt-get install postgresql-9.1'
-    queue 'sudo apt-get install postgresql-client-9.1 postgresql-contrib-9.1 postgresql-server-dev-9.1'
-    queue 'service postgresql start'
-    queue 'sudo apt-get install python-software-properties'
-    queue 'sudo add-apt-repository ppa:nginx/stable'
-    queue 'sudo apt-get update'
-    queue 'sudo apt-get install nginx'
-    queue 'sudo service nginx start'
-    in_directory '/etc/nginx/sites-enabled/' do
-      sudo rm default
-    end
+  # Install packages
+  queue 'sudo apt-get update'
+  queue 'sudo apt-get install -y build-essential openssl curl libcurl3-dev libreadline6 libreadline6-dev git zlib1g zlib1g-dev libssl-dev libyaml-dev libxml2-dev libxslt-dev autoconf automake libtool imagemagick libmagickwand-dev libpcre3-dev libsqlite3-dev libmysql-ruby libmysqlclient-dev'
+  queue 'sudo apt-get git'
+  queue 'git config --global user.name "lohaswork"'
+  queue 'git config --global user.email "support@lohaswork.com'
+  queue 'sudo mkdir /www/LohasWork.com'
+  queue 'sudo chown -R deployer /www/LohasWork.com'
+  in_directory '#{home_dir}' do
+    queue 'ssh-keygen -t rsa -C "support@lohaswork.com"'
+    queue 'git clone git://github.com/sstephenson/rbenv.git ~/.rbenv'
+    queue 'git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build'
+    queue 'git clone git://github.com/sstephenson/rbenv-gem-rehash.git ~/.rbenv/plugins/rbenv-gem-rehash'
+    queue %[echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.profile]
+    queue %[echo 'eval "$(rbenv init -)"' >> ~/.profile]
+    queue 'exec $SHELL'
+  end
+  queue 'rbenv install 1.9.3-p327'
+  queue 'rbenv global 1.9.3-p327'
+  queue 'gem source -r https://rubygems.org/'
+  queue 'gem source -a http://ruby.taobao.org'
+  queue 'gem install bundler'
+  queue 'sudo apt-add-repository ppa:chris-lea/node.js'
+  queue 'sudo apt-get update'
+  queue 'sudo apt-get install nodejs'
+  queue 'sudo apt-get install postgresql-9.1'
+  queue 'sudo apt-get install postgresql-client-9.1 postgresql-contrib-9.1 postgresql-server-dev-9.1'
+  queue 'service postgresql start'
+  queue 'sudo apt-get install python-software-properties'
+  queue 'sudo add-apt-repository ppa:nginx/stable'
+  queue 'sudo apt-get update'
+  queue 'sudo apt-get install nginx'
+  queue 'sudo service nginx start'
+  in_directory '/etc/nginx/sites-enabled/' do
+    sudo rm default
   end
 end
 
