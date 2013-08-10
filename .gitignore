@@ -1,8 +1,9 @@
-config/unicorn.rb
 config/database.yml
 vendor/bundle
 lib/config/local.rb
 tmp/*
+!tmp/pids
+!tmp/pids/unicorn.pid
 !tmp/.gitkeep
 log/*
 !log/.gitkeep

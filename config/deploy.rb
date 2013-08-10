@@ -39,19 +39,6 @@ end
 # Put any custom mkdir's in here for when `mina setup` is ran.
 # For Rails apps, we'll make some of the shared paths that are shared between
 # all releases.
-task :setup => :environment do
-  queue! %[mkdir -p "#{deploy_to}/shared/log"]
-  queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/log"]
-
-  queue! %[mkdir -p "#{deploy_to}/shared/tmp"]
-  queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/tmp"]
-
-  queue! %[mkdir -p "#{deploy_to}/shared/config"]
-  queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/config"]
-
-  queue! %[touch "#{deploy_to}/shared/config/database.yml"]
-  queue  %[echo "-----> Be sure to edit 'shared/config/database.yml'."]
-end
 
 esc "Install dependencies in server."
 task :pkg_install => :environment do
@@ -70,8 +57,40 @@ task :pkg_install => :environment do
       queue 'echo 'eval "$(rbenv init -)"' >> ~/.profile'
       queue 'exec $SHELL'
     end
-
+    queue 'rbenv install 1.9.3-p327'
+    queue 'rbenv global 1.9.3-p327'
+    queue 'gem source -r https://rubygems.org/'
+    queue 'gem source -a http://ruby.taobao.org'
+    queue 'gem install bundler'
+    queue 'sudo apt-add-repository ppa:chris-lea/node.js'
+    queue 'sudo apt-get update'
+    queue 'sudo apt-get install nodejs'
+    queue 'sudo apt-get install postgresql-9.1'
+    queue 'sudo apt-get install postgresql-client-9.1 postgresql-contrib-9.1 postgresql-server-dev-9.1'
+    queue 'service postgresql start'
+    queue 'sudo apt-get install python-software-properties'
+    queue 'sudo add-apt-repository ppa:nginx/stable'
+    queue 'sudo apt-get update'
+    queue 'sudo apt-get install nginx'
+    queue 'sudo service nginx start'
+    in_directory '/etc/nginx/sites-enabled/' do
+      sudo rm default
+    end
   end
+end
+
+task :setup => :environment do
+  queue! %[mkdir -p "#{deploy_to}/shared/log"]
+  queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/log"]
+
+  queue! %[mkdir -p "#{deploy_to}/shared/tmp"]
+  queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/tmp"]
+
+  queue! %[mkdir -p "#{deploy_to}/shared/config"]
+  queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/config"]
+
+  queue! %[touch "#{deploy_to}/shared/config/database.yml"]
+  queue  %[echo "-----> Be sure to edit 'shared/config/database.yml'."]
 end
 
 desc "Deploys the very first version to the server."
@@ -84,9 +103,10 @@ task :deploy_cold => :environment do
     invoke :'bundle:install'
     invoke :create_db
     invoke :'rails:assets_precompile'
+    queue 'sudo ln -s #{current_path}/config/nginx.conf'
 
     to :launch do
-      queue "touch #{deploy_to}/tmp/restart.txt"
+      invoke :restart
     end
   end
 end
@@ -106,11 +126,23 @@ task :deploy => :environment do
     invoke :'rails:assets_precompile'
 
     to :launch do
-      queue "touch #{deploy_to}/tmp/restart.txt"
+      invoke :restart
     end
   end
 end
 
+task :start => :environment do
+  queue "cd #{current_path} && RAILS_ENV=production bundle exec unicorn_rails -c #{unicorn_config} -D"
+end
+
+task :stop => :environment do
+  queue "if [ -f #{unicorn_pid} ]; then kill -QUIT `cat #{unicorn_pid}`; fi"
+end
+
+task :restart => :environment do
+  # 用USR2信号来实现无缝部署重启
+  queue "if [ -f #{unicorn_pid} ]; then kill -s USR2 `cat #{unicorn_pid}`; fi"
+end
 # For help in making your deploy script, see the Mina documentation:
 #
 #  - http://nadarei.co/mina
