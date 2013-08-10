@@ -47,10 +47,10 @@ task :pkg_install do
   queue 'sudo apt-get install git'
   queue %[git config --global user.name "lohaswork"]
   queue %[git config --global user.email "support@lohaswork.com"]
-  #queue 'sudo mkdir /www'
-  #queue 'sudo mkdir /www/LohasWork.com'
-  queue echo_cmd('sudo chown -R deployer /www/LohasWork.com')
-  in_directory '/home/deployer' do
+  queue 'sudo mkdir /www'
+  queue 'sudo mkdir /www/LohasWork.com'
+  queue 'sudo chown -R deployer /www/LohasWork.com'
+  in_directory 'home/deployer' do
     queue %[ssh-keygen -t rsa -C "support@lohaswork.com"]
     queue 'git clone git://github.com/sstephenson/rbenv.git ~/.rbenv'
     queue 'git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build'
@@ -69,7 +69,7 @@ task :pkg_install do
   queue 'sudo apt-get install nodejs'
   queue 'sudo apt-get install postgresql-9.1'
   queue 'sudo apt-get install postgresql-client-9.1 postgresql-contrib-9.1 postgresql-server-dev-9.1'
-  queue 'service postgresql start'
+  queue 'sudo service postgresql start'
   queue 'sudo apt-get install python-software-properties'
   queue 'sudo add-apt-repository ppa:nginx/stable'
   queue 'sudo apt-get update'
@@ -80,17 +80,22 @@ task :pkg_install do
   end
 end
 
+task :after_reboot do
+  queue 'sudo service postgresql start'
+  queue 'sudo service nginx start'
+end
+
 task :setup => :environment do
-  queue! %[mkdir -p "#{deploy_to}/shared/log"]
-  queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/log"]
+  queue! %[sudo mkdir -p "#{deploy_to}/shared/log"]
+  queue! %[sudo chmod g+rx,u+rwx "#{deploy_to}/shared/log"]
 
-  queue! %[mkdir -p "#{deploy_to}/shared/tmp"]
-  queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/tmp"]
+  queue! %[sudo mkdir -p "#{deploy_to}/shared/tmp"]
+  queue! %[sudo chmod g+rx,u+rwx "#{deploy_to}/shared/tmp"]
 
-  queue! %[mkdir -p "#{deploy_to}/shared/config"]
-  queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/config"]
+  queue! %[sudo mkdir -p "#{deploy_to}/shared/config"]
+  queue! %[sudo chmod g+rx,u+rwx "#{deploy_to}/shared/config"]
 
-  queue! %[touch "#{deploy_to}/shared/config/database.yml"]
+  queue! %[sudo touch "#{deploy_to}/shared/config/database.yml"]
   queue  %[echo "-----> Be sure to edit 'shared/config/database.yml'."]
 end
 
