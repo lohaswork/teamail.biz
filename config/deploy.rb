@@ -12,10 +12,11 @@ require 'mina/rbenv'  # for rbenv support. (http://rbenv.org)
 
 set :domain, '192.168.0.104'  # NEED CHANGE
 set :deploy_to, '/www/lohaswork_deploy'
-set :repository, 'git:git@github.com:lohaswork/LohasWork.com.git'
+set :repository, 'git@github.com:lohaswork/LohasWork.com.git'
 set :branch, 'serco/mina'  # NEED CHANGE
 set :rails_env, 'production'
-
+set :user, 'deployer' # NEED CHANGE
+set :home_dir, '/home/#{user}'
 # Manually create these paths in shared/ (eg: shared/config/database.yml) in your server.
 # They will be linked in the 'deploy:link_shared_paths' step.
 set :shared_paths, ['config/database.yml', 'log','tmp']
@@ -60,7 +61,15 @@ task :pkg_install => :environment do
     queue 'sudo apt-get git'
     queue 'git config --global user.name "lohaswork"'
     queue 'git config --global user.email "support@lohaswork.com'
-    queue 'ssh-keygen -t rsa -C "support@lohaswork.com"'
+    in_directory '#{home_dir}' do
+      queue 'ssh-keygen -t rsa -C "support@lohaswork.com"'
+      queue 'git clone git://github.com/sstephenson/rbenv.git ~/.rbenv'
+      queue 'git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build'
+      queue 'git clone git://github.com/sstephenson/rbenv-gem-rehash.git ~/.rbenv/plugins/rbenv-gem-rehash'
+      queue 'echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.profile'
+      queue 'echo 'eval "$(rbenv init -)"' >> ~/.profile'
+      queue 'exec $SHELL'
+    end
 
   end
 end
