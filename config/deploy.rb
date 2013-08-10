@@ -49,7 +49,7 @@ task :pkg_install do
   queue %[git config --global user.email "support@lohaswork.com"]
   queue 'sudo mkdir /www'
   queue 'sudo mkdir /www/LohasWork.com'
-  queue 'sudo chown -R deployer /www/LohasWork.com'
+  queue 'sudo chown deployer:deployer /www/LohasWork.com'
   in_directory 'home/deployer' do
     queue %[ssh-keygen -t rsa -C "support@lohaswork.com"]
     queue 'git clone git://github.com/sstephenson/rbenv.git ~/.rbenv'
@@ -87,16 +87,16 @@ end
 
 task :setup => :environment do
   in_directory '/' do
-    queue! %[sudo mkdir -p "#{deploy_to}/shared/log"]
-    queue! %[sudo chmod g+rx,u+rwx "#{deploy_to}/shared/log"]
+    queue! %[mkdir -p "#{deploy_to}/shared/log"]
+    queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/log"]
 
-    queue! %[sudo mkdir -p "#{deploy_to}/shared/tmp"]
-    queue! %[sudo chmod g+rx,u+rwx "#{deploy_to}/shared/tmp"]
+    queue! %[mkdir -p "#{deploy_to}/shared/tmp"]
+    queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/tmp"]
 
-    queue! %[sudo mkdir -p "#{deploy_to}/shared/config"]
-    queue! %[sudo chmod g+rx,u+rwx "#{deploy_to}/shared/config"]
+    queue! %[mkdir -p "#{deploy_to}/shared/config"]
+    queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/config"]
 
-    queue! %[sudo touch "#{deploy_to}/shared/config/database.yml"]
+    queue! %[touch "#{deploy_to}/shared/config/database.yml"]
     queue  %[echo "-----> Be sure to edit 'shared/config/database.yml'."]
   end
 end
