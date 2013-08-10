@@ -76,7 +76,7 @@ task :pkg_install do
   queue 'sudo apt-get install nginx'
   queue 'sudo service nginx start'
   in_directory '/etc/nginx/sites-enabled/' do
-    sudo rm default
+    queue 'sudo rm default'
   end
 end
 
