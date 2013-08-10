@@ -48,7 +48,11 @@ gem 'multimap'
 # gem 'jbuilder'
 
 # Use unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn'
+gem 'unicorn-worker-killer'
+
+# Deploy with Mina
+gem 'mina'
 
 # Deploy with Capistrano
 # gem 'capistrano'
