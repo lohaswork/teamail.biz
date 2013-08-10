@@ -112,7 +112,7 @@ task :deploy_cold => :environment do
   end
 end
 
-task :create_db
+task :create_db do
   queue 'bundle exec rake:db:create'
 end
 
