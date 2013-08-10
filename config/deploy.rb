@@ -16,7 +16,6 @@ set :repository, 'git@github.com:lohaswork/LohasWork.com.git'
 set :branch, 'serco/mina'  # NEED CHANGE
 set :rails_env, 'production'
 set :user, 'deployer' # NEED CHANGE
-set :home_dir, '/home/#{user}'
 # Manually create these paths in shared/ (eg: shared/config/database.yml) in your server.
 # They will be linked in the 'deploy:link_shared_paths' step.
 set :shared_paths, ['config/database.yml', 'log','tmp','config/unicorn.rb','config/nginx.conf']
@@ -50,9 +49,9 @@ task :pkg_install do
   queue %[git config --global user.email "support@lohaswork.com"]
   #queue 'sudo mkdir /www'
   #queue 'sudo mkdir /www/LohasWork.com'
-  queue 'sudo chown -R deployer /www/LohasWork.com'
-  in_directory '#{home_dir}' do
-    queue 'ssh-keygen -t rsa -C "support@lohaswork.com"'
+  queue echo_cmd('sudo chown -R deployer /www/LohasWork.com')
+  in_directory '/home/deployer' do
+    queue %[ssh-keygen -t rsa -C "support@lohaswork.com"]
     queue 'git clone git://github.com/sstephenson/rbenv.git ~/.rbenv'
     queue 'git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build'
     queue 'git clone git://github.com/sstephenson/rbenv-gem-rehash.git ~/.rbenv/plugins/rbenv-gem-rehash'
