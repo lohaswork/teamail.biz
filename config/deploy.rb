@@ -19,7 +19,7 @@ set :user, 'deployer' # NEED CHANGE
 set :home_dir, '/home/#{user}'
 # Manually create these paths in shared/ (eg: shared/config/database.yml) in your server.
 # They will be linked in the 'deploy:link_shared_paths' step.
-set :shared_paths, ['config/database.yml', 'log','tmp']
+set :shared_paths, ['config/database.yml', 'log','tmp','config/unicorn.rb','config/nginx.conf']
 
 # Optional settings:
 #   set :user, 'foobar'    # Username in the server to SSH to.
@@ -48,6 +48,8 @@ task :pkg_install => :environment do
     queue 'sudo apt-get git'
     queue 'git config --global user.name "lohaswork"'
     queue 'git config --global user.email "support@lohaswork.com'
+    queue 'sudo mkdir /www/LohasWork.com'
+    queue 'sudo chown -R deployer /www/LohasWork.com'
     in_directory '#{home_dir}' do
       queue 'ssh-keygen -t rsa -C "support@lohaswork.com"'
       queue 'git clone git://github.com/sstephenson/rbenv.git ~/.rbenv'
