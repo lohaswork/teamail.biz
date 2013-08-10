@@ -41,7 +41,7 @@ end
 # all releases.
 
 esc "Install dependencies in server."
-task :pkg_install => :environment do
+task :pkg_install do
   # Install packages
   queue 'sudo apt-get update'
   queue 'sudo apt-get install -y build-essential openssl curl libcurl3-dev libreadline6 libreadline6-dev git zlib1g zlib1g-dev libssl-dev libyaml-dev libxml2-dev libxslt-dev autoconf automake libtool imagemagick libmagickwand-dev libpcre3-dev libsqlite3-dev libmysql-ruby libmysqlclient-dev'
