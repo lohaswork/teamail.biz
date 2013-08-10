@@ -46,8 +46,7 @@ task :pkg_install do
   queue 'sudo apt-get update'
   queue 'sudo apt-get install -y build-essential openssl curl libcurl3-dev libreadline6 libreadline6-dev git zlib1g zlib1g-dev libssl-dev libyaml-dev libxml2-dev libxslt-dev autoconf automake libtool imagemagick libmagickwand-dev libpcre3-dev libsqlite3-dev libmysql-ruby libmysqlclient-dev'
   queue 'sudo apt-get git'
-  queue %[git config --global user.name "lohaswork"]
-  queue %[git config --global user.email "support@lohaswork.com"]
+  queue 'sudo mkdir /www'
   queue 'sudo mkdir /www/LohasWork.com'
   queue 'sudo chown -R deployer /www/LohasWork.com'
   in_directory '#{home_dir}' do
