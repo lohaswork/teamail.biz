@@ -11,7 +11,7 @@ require 'mina/rbenv'  # for rbenv support. (http://rbenv.org)
 #   branch       - Branch name to deploy. (needed by mina/git)
 
 set :domain, '192.168.0.104'  # NEED CHANGE
-set :deploy_to, '/www/lohaswork_deploy'
+set :deploy_to, '/www/LohasWork.com'
 set :repository, 'git@github.com:lohaswork/LohasWork.com.git'
 set :branch, 'serco/mina'  # NEED CHANGE
 set :rails_env, 'production'
@@ -86,17 +86,19 @@ task :after_reboot do
 end
 
 task :setup => :environment do
-  queue! %[sudo mkdir -p "#{deploy_to}/shared/log"]
-  queue! %[sudo chmod g+rx,u+rwx "#{deploy_to}/shared/log"]
+  in_directory '/' do
+    queue! %[sudo mkdir -p "#{deploy_to}/shared/log"]
+    queue! %[sudo chmod g+rx,u+rwx "#{deploy_to}/shared/log"]
 
-  queue! %[sudo mkdir -p "#{deploy_to}/shared/tmp"]
-  queue! %[sudo chmod g+rx,u+rwx "#{deploy_to}/shared/tmp"]
+    queue! %[sudo mkdir -p "#{deploy_to}/shared/tmp"]
+    queue! %[sudo chmod g+rx,u+rwx "#{deploy_to}/shared/tmp"]
 
-  queue! %[sudo mkdir -p "#{deploy_to}/shared/config"]
-  queue! %[sudo chmod g+rx,u+rwx "#{deploy_to}/shared/config"]
+    queue! %[sudo mkdir -p "#{deploy_to}/shared/config"]
+    queue! %[sudo chmod g+rx,u+rwx "#{deploy_to}/shared/config"]
 
-  queue! %[sudo touch "#{deploy_to}/shared/config/database.yml"]
-  queue  %[echo "-----> Be sure to edit 'shared/config/database.yml'."]
+    queue! %[sudo touch "#{deploy_to}/shared/config/database.yml"]
+    queue  %[echo "-----> Be sure to edit 'shared/config/database.yml'."]
+  end
 end
 
 desc "Deploys the very first version to the server."
