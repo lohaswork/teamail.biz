@@ -107,6 +107,7 @@ task :deploy_cold => :environment do
     # Put things that will set up an empty directory into a fully set-up
     # instance of your project.
     invoke :'git:clone'
+    queue 'gem install bundler'
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:install'
     invoke :create_db
