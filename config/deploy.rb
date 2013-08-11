@@ -33,16 +33,16 @@ role :db,  "192.168.1.114", :primary => true        # This is where Rails migrat
 
 namespace :deploy do
   task :start, :roles => :app, :except => { :no_release => true } do
-    run "#{sudo} cd #{current_path} && RAILS_ENV=production bundle exec unicorn_rails -c #{unicorn_config} -D", :pty => true
+    run "cd #{current_path} && RAILS_ENV=production bundle exec unicorn_rails -c #{unicorn_config} -D"
   end
 
   task :stop, :roles => :app, :except => { :no_release => true } do
-    run "#{sudo} if [ -f #{unicorn_pid} ]; then kill -QUIT `cat #{unicorn_pid}`; fi", :pty => true
+    run "if [ -f #{unicorn_pid} ]; then kill -QUIT `cat #{unicorn_pid}`; fi"
   end
 
   task :restart, :roles => :app, :except => { :no_release => true } do
     # 用USR2信号来实现无缝部署重启
-    run "#{sudo} if [ -f #{unicorn_pid} ]; then kill -s USR2 `cat #{unicorn_pid}`; fi", :pty => true
+    run "if [ -f #{unicorn_pid} ]; then kill -s USR2 `cat #{unicorn_pid}`; fi"
   end
 
   desc 'clean old files, link shared files'
