@@ -57,7 +57,7 @@ namespace :deploy do
   desc "Create socket file symlink for nginx"
   task :symlink_sockets, :except => {:no_release => true} do
     run "mkdir -p #{shared_path}/sockets"
-    run "ln -s #{shared_path}/sockets #{release_path}/tmp/sockets"
+    run "ln -s #{shared_path}/sockets #{current_path}/tmp/sockets"
   end
 
   # utilize that capistrano has already done this!
