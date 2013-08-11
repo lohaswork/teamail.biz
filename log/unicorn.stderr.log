@@ -1,0 +1,39 @@
+I, [2013-08-09T15:07:55.001155 #67525]  INFO -- : Refreshing Gem list
+WARNING: Nokogiri was built against LibXML version 2.8.0, but has dynamically loaded 2.7.8
+I, [2013-08-09T15:08:00.106196 #67525]  INFO -- : listening on addr=/tmp/unicorn.sock fd=11
+I, [2013-08-09T15:08:00.106683 #67525]  INFO -- : listening on addr=0.0.0.0:4096 fd=12
+I, [2013-08-09T15:08:00.106872 #67525]  INFO -- : listening on addr=0.0.0.0:8080 fd=13
+I, [2013-08-09T15:08:00.764704 #67525]  INFO -- : master process ready
+I, [2013-08-09T15:08:00.768405 #67531]  INFO -- : worker=0 ready
+I, [2013-08-09T15:08:00.777650 #67532]  INFO -- : worker=1 ready
+I, [2013-08-09T15:08:00.779694 #67534]  INFO -- : worker=3 ready
+I, [2013-08-09T15:08:00.785383 #67535]  INFO -- : worker=4 ready
+I, [2013-08-09T15:08:00.786606 #67533]  INFO -- : worker=2 ready
+I, [2013-08-09T15:08:00.791544 #67536]  INFO -- : worker=5 ready
+127.0.0.1 - - [09/Aug/2013 15:08:18] "GET / HTTP/1.1" 200 - 2.0810
+127.0.0.1 - - [09/Aug/2013 15:08:18] "GET /jquery_ujs.js?body=1 HTTP/1.1" 200 15477 0.0283
+127.0.0.1 - - [09/Aug/2013 15:08:18] "GET /bootstrap-alert.js?body=1 HTTP/1.1" 200 2526 0.0136
+127.0.0.1 - - [09/Aug/2013 15:08:18] "GET /bootstrap-button.js?body=1 HTTP/1.1" 200 2843 0.0305
+127.0.0.1 - - [09/Aug/2013 15:08:18] "GET /bootstrap-carousel.js?body=1 HTTP/1.1" 200 6059 0.0184
+127.0.0.1 - - [09/Aug/2013 15:08:18] "GET /bootstrap-collapse.js?body=1 HTTP/1.1" 200 4737 0.0154
+127.0.0.1 - - [09/Aug/2013 15:08:18] "GET /bootstrap-dropdown.js?body=1 HTTP/1.1" 200 4414 0.0257
+127.0.0.1 - - [09/Aug/2013 15:08:18] "GET /bootstrap-modal.js?body=1 HTTP/1.1" 200 6657 0.0135
+127.0.0.1 - - [09/Aug/2013 15:08:18] "GET /bootstrap-scrollspy.js?body=1 HTTP/1.1" 200 4657 0.0140
+127.0.0.1 - - [09/Aug/2013 15:08:18] "GET /bootstrap-tab.js?body=1 HTTP/1.1" 200 3498 0.0167
+127.0.0.1 - - [09/Aug/2013 15:08:19] "GET /bootstrap-tooltip.js?body=1 HTTP/1.1" 200 9912 0.0195
+127.0.0.1 - - [09/Aug/2013 15:08:19] "GET /bootstrap-popover.js?body=1 HTTP/1.1" 200 3116 0.0120
+127.0.0.1 - - [09/Aug/2013 15:08:19] "GET /bootstrap-typeahead.js?body=1 HTTP/1.1" 200 8321 0.0123
+127.0.0.1 - - [09/Aug/2013 15:08:19] "GET /bootstrap.js?body=1 HTTP/1.1" 200 13 0.0584
+127.0.0.1 - - [09/Aug/2013 15:08:19] "GET /form.js?body=1 HTTP/1.1" 200 1330 0.0091
+127.0.0.1 - - [09/Aug/2013 15:08:19] "GET %2Fassets%2Fapplication.js?body=1 HTTP/1.1" 200 141097 0.0083
+W, [2013-08-09T15:08:19.277718 #67536]  WARN -- : #<Unicorn::HttpServer:0x007fc0db6b2d28>: worker (pid: 67536) exceeds memory limit (319430656 bytes > 228603771 bytes)
+W, [2013-08-09T15:08:19.278062 #67536]  WARN -- : Unicorn::WorkerKiller send SIGQUIT (pid: 67536) alive: 1 sec (trial 1)
+127.0.0.1 - - [09/Aug/2013 15:08:19] "GET %2Fassets%2Fapplication.css?body=1 HTTP/1.1" 200 121663 1.2584
+127.0.0.1 - - [09/Aug/2013 15:08:19] "GET /bootstrap-affix.js?body=1 HTTP/1.1" 200 3485 1.2693
+127.0.0.1 - - [09/Aug/2013 15:08:19] "GET /jquery.js?body=1 HTTP/1.1" 200 273200 1.3044
+127.0.0.1 - - [09/Aug/2013 15:08:19] "GET /bootstrap-transition.js?body=1 HTTP/1.1" 200 1758 1.3002
+127.0.0.1 - - [09/Aug/2013 15:08:19] "GET /bootstrap_and_overrides.css?body=1 HTTP/1.1" 200 323619 1.3301
+I, [2013-08-09T15:08:19.736324 #67525]  INFO -- : reaped #<Process::Status: pid 67536 exit 0> worker=5
+I, [2013-08-09T15:08:19.764734 #67546]  INFO -- : worker=5 ready
+127.0.0.1 - - [09/Aug/2013 15:08:19] "GET %2Ffavicon.ico HTTP/1.1" 200 - 0.0012
+127.0.0.1 - - [09/Aug/2013 15:08:49] "GET / HTTP/1.1" 200 - 0.3121

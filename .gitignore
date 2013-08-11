@@ -3,10 +3,13 @@ vendor/bundle
 lib/config/local.rb
 tmp/*
 !tmp/pids
+!tmp/sockets
 !tmp/pids/unicorn.pid
 !tmp/.gitkeep
 log/*
 !log/.gitkeep
+!log/unicorn.stderr.log
+!log/unicorn.stdout.log
 config/secrets.rb
 bin
 .bundle
