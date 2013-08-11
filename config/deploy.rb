@@ -54,6 +54,21 @@ namespace :deploy do
     run "ln -s #{shared_path}/uploads #{current_path}/public/uploads"
   end
 
+  desc "Create socket file symlink for nginx"
+  task :symlink_sockets, :except => {:no_release => true} do
+    run "mkdir -p #{shared_path}/sockets"
+    run "ln -s #{shared_path}/sockets #{release_path}/tmp/sockets"
+  end
+
+  # utilize that capistrano has already done this!
+  #
+  # If you put your shared file or folder here:
+  #   /path/to/app/shared/sockets
+  # Then it will be symlinked here:
+  #   /path/to/app/releases/20120517191233/tmp/sockets
+  #
+  shared_children.push "tmp/sockets"
+
   desc 'reload nginx when nginx.conf changes'
   task :nginx_config, :roles => :app do
     run "#{sudo} ln -s #{shared_path}/config/nginx.conf /etc/nginx/sites-enabled/nginx.conf", :pty => true
