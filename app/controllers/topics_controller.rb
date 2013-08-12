@@ -7,10 +7,20 @@ class TopicsController < ApplicationController
   end
 
   def create
-    unless current_user && current_organization && Topic.create_topic(params[:title], current_organization.id, current_user.id)
+    unless current_organization && Topic.create_topic(params[:title], current_organization.id, current_user.id)
       redirect_to root_path
     end
     topics = current_organization.topics
-    render :json => {:update => {"topic-list" => render_to_string(:partial => 'topic_list', :layout => false, :locals => {:topics => topics}), "new-topic" => render_to_string(:partial => 'new_topic', :layout => false)}}
+    render :json => {
+              :update => {
+                          "topic-list" => render_to_string(:partial => 'topic_list',
+                                                            :layout => false,
+                                                            :locals => {
+                                                                  :topics => topics
+                                                                }),
+                           "new-topic" => render_to_string(:partial => 'new_topic',
+                                                            :layout => false)
+                         }
+                 }
   end
 end
