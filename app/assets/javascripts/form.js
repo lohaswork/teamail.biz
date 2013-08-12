@@ -11,7 +11,11 @@ $(document)
     var me = $(this);
     if ($.isPlainObject(data)) {
       if (data.update) {
-        //TODO: add the partial refresh feture
+        for (var id in data.update) {
+          var newElement = $(data.update[id]);
+          var updateMethod = newElement.find(id).andSelf().length > 0 ? 'replaceWith' : 'html';
+          $('#' + id)[updateMethod](newElement);
+        }
       }
       else if (data.reload) {
         window.location.reload(true);
