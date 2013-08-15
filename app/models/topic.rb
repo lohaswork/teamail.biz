@@ -3,6 +3,7 @@ class Topic < ActiveRecord::Base
   attr_accessible :title
 
   belongs_to :organization
+  has_many :discussions
   has_many :user_topics
   has_many :users, :through => :user_topics
   validates :title, :presence => {:message=>'请输入标题'}
