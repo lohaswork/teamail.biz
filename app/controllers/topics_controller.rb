@@ -25,6 +25,7 @@ class TopicsController < ApplicationController
   end
 
   def show
-    render :nothing => true
+    @topic = Topic.find(params[:id])
+    @discussions = @topic.discussions
   end
 end

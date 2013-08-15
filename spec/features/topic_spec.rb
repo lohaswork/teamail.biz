@@ -100,6 +100,7 @@ describe "the topics action" do
         visit organization_topics_path(@organization)
         click_on @organization.topics.first.title
         current_path.should == topic_path(@organization.topics.first)
+        page.should have_content @organization.topics.first.discussions.first.content
       end
     end
   end
