@@ -19,7 +19,7 @@
         <%= topic.users.first.email%>
       </div>
       <div class='span3'>
-        <%= topic.title%>
+        <%= link_to(topic.title, topic_path(topic))%>
       </div>
       <div class='span3'>
         <%= topic.created_at%>

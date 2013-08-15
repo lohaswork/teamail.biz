@@ -11,7 +11,7 @@ describe "the topics action" do
         user = organization.users.first
         login_with(user.email, user.password)
         page.should have_content(user.email)
-        visit organization_topics_path(organization_id:organization.id)
+        visit organization_topics_path(organization)
         page.should have_content organization.topics.first.title
       end
     end
@@ -19,7 +19,7 @@ describe "the topics action" do
     context "user not login go the topic title list page" do
       it "should not see the topic title" do
         organization = create(:organization)
-        visit organization_topics_path(organization_id:organization.id)
+        visit organization_topics_path(organization)
         page.should_not have_content organization.topics.first.title
       end
     end
@@ -29,7 +29,7 @@ describe "the topics action" do
         organization = create(:organization)
         user = create(:already_activate_user)
         login_with(user.email, user.password)
-        visit organization_topics_path(organization_id:organization.id)
+        visit organization_topics_path(organization)
         page.should_not have_content organization.topics.first.title
       end
     end
@@ -40,7 +40,8 @@ describe "the topics action" do
       organization = create(:organization)
       user = organization.users.first
       login_with(user.email, user.password)
-      visit organization_topics_path(organization_id:organization.id)
+      page.should have_content user.email
+      visit organization_topics_path(organization)
     end
 
     describe "user can open a create topic field" do
@@ -82,6 +83,23 @@ describe "the topics action" do
           click_button "创建"
           page.should have_content "请输入标题"
         end
+      end
+    end
+  end
+
+  describe "user on topic detail page", :js => true do
+    before do
+      @organization = create(:organization)
+      user = @organization.users.first
+      login_with(user.email, user.password)
+      page.should have_content(user.email)
+    end
+
+    context "click the topic title" do
+      it "should go to the topic detail page" do
+        visit organization_topics_path(@organization)
+        click_on @organization.topics.first.title
+        current_path.should == topic_path(@organization.topics.first)
       end
     end
   end

@@ -23,4 +23,8 @@ class TopicsController < ApplicationController
                          }
                  }
   end
+
+  def show
+    render :nothing => true
+  end
 end
