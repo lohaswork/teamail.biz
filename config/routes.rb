@@ -1,5 +1,5 @@
 LohasWorkCom::Application.routes.draw do
-  root :to => 'users#new'
+  root :to => 'early_adopters#index'
 
   controller :users do
     get '/signup-success'                        => :signup_success,              :as => :signup_success
@@ -22,6 +22,7 @@ LohasWorkCom::Application.routes.draw do
     resources :topics, :only => [:index]
   end
   resources :topics, :only => [:create]
+  resources :early_adopters
   match "/*other" => redirect('/')
   # The priority is based upon order of creation:
   # first created -> highest priority.
