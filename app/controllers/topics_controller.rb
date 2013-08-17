@@ -7,7 +7,7 @@ class TopicsController < ApplicationController
   end
 
   def create
-    unless current_organization && Topic.create_topic(params[:title], current_organization.id, current_user.id)
+    unless current_organization && Topic.create_topic(params[:title], params[:content], current_organization.id, current_user.id)
       redirect_to root_path
     end
     topics = current_organization.topics

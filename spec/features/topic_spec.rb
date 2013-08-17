@@ -77,6 +77,17 @@ describe "the topics action" do
         end
       end
 
+      context "user create success with a discussion" do
+        it "shold see the discussion size change" do
+          click_on "创建新话题"
+          fill_in "title", :with => "test title"
+          fill_in "content", :with => "this is test discussion"
+          click_button "创建"
+          page.should have_content "test title"
+          page.should have_content 1
+        end
+      end
+
       context "user create failed" do
         it "should see error message" do
           click_on "创建新话题"
