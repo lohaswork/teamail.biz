@@ -103,5 +103,15 @@ describe "the topics action" do
         page.should have_content @organization.topics.first.discussions.first.content
       end
     end
+
+    context "user create a new discussions" do
+      it "should see the content on the page" do
+        visit organization_topics_path(@organization)
+        click_on @organization.topics.first.title
+        fill_in "content", :with => "user create a discussion"
+        click_button "回复"
+        page.should have_content "user create a discussion"
+      end
+    end
   end
 end

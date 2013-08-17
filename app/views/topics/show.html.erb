@@ -1,4 +1,7 @@
-<div>
-  <%= @topic.title%>
+<div class='topic-show'>
+  <div class='title'>
+    <%= @topic.title%>
+  </div>
+  <%= render :partial => 'discussion_list', :locals => {:discussions => @discussions}%>
+  <%= render :partial => 'new_discussion'%>
 </div>
-<%= render :partial => 'discussion_list', :locals => {:discussions => @discussions}%>

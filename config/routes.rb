@@ -22,6 +22,9 @@ LohasWorkCom::Application.routes.draw do
     resources :topics, :only => [:index]
   end
   resources :topics, :only => [:create, :show]
+  resources :topic do
+    resources :discussions, :only => [:create]
+  end
   match "/*other" => redirect('/')
   # The priority is based upon order of creation:
   # first created -> highest priority.
