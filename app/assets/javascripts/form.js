@@ -31,6 +31,8 @@ $(document)
         }
       }
     }
+
+    $('.error').hide();
   })
   .on( 'ajax:complete', 'form[data-remote], a[data-remote]',function (e, xhr) {
 

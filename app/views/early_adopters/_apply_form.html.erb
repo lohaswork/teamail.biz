@@ -1,0 +1,8 @@
+<div id="early-adopter-from",class="apply-form">
+  <h4>我们的产品即将上线，申请提前体验</h4>
+    <%= form_tag early_adopters_path, :method => "post", :class=>"lohaswork-form sign-up-form", :style=>"margin-bottom:0px!important;", :remote => true do %>
+        <%= text_field_tag :email, nil, :class=>"email required", :placeholder=>"邮箱地址", :title=>"Email address" %>
+        <%= submit_tag "提交", :id=>"applyBtn", :value=>"立刻提交" %>
+    <% end %>
+    <%= render 'layouts/messages'%>
+</div>

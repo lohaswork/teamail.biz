@@ -10,11 +10,12 @@ class EarlyAdoptersController < ApplicationController
 
   def create
     email = params[:email]
-    begin
-      EarlyAdopter.create!(:email => email)
-      render :partial => 'create_success'
-    rescue Exception => e
-      render :json => {:status => "error", :message => "Validation failed", :code => 422, :errors => e.message }, :status => 422
-    end
+    EarlyAdopter.create!(:email => email)
+    render :json => {
+                    :update => {
+                                  'early-adopter-from' => render_to_string(:partial => 'apply_form',
+                                                                          :layout => false)
+                                }
+                    }
   end
 end
