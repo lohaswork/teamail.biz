@@ -5,6 +5,7 @@ class Discussion < ActiveRecord::Base
   belongs_to :topic
   has_many :user_discussions
   has_many :users, :through => :user_discussions
+  validates :content, :presence => {:message => "请输入回复内容"}
 
   class << self
     def create_discussion(user_id, topic_id, content)

@@ -93,11 +93,11 @@ describe "the topics action" do
       user = @organization.users.first
       login_with(user.email, user.password)
       page.should have_content(user.email)
+      visit organization_topics_path(@organization)
     end
 
     context "click the topic title" do
       it "should go to the topic detail page" do
-        visit organization_topics_path(@organization)
         click_on @organization.topics.first.title
         current_path.should == topic_path(@organization.topics.first)
         page.should have_content @organization.topics.first.discussions.first.content
@@ -106,11 +106,18 @@ describe "the topics action" do
 
     context "user create a new discussions" do
       it "should see the content on the page" do
-        visit organization_topics_path(@organization)
-        click_on @organization.topics.first.title
+        visit topic_path(@organization.topics.first)
         fill_in "content", :with => "user create a discussion"
         click_button "回复"
         page.should have_content "user create a discussion"
+      end
+    end
+
+    context "user fill in nothing for discussion" do
+      it "should see the error message" do
+        visit topic_path(@organization.topics.first)
+        click_button "回复"
+        page.should have_content "请输入回复内容"
       end
     end
   end
