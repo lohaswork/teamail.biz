@@ -17,6 +17,10 @@ $(document)
           $('#' + id)[updateMethod](newElement);
         }
       }
+      if (data.modal) {
+          var newElement = $(data.modal);
+          $('#myModal').html(newElement).modal();
+        }
       else if (data.reload) {
         window.location.reload(true);
       }

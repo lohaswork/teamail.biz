@@ -15,7 +15,9 @@ class EarlyAdoptersController < ApplicationController
                     :update => {
                                   'early-adopter-from' => render_to_string(:partial => 'apply_form',
                                                                           :layout => false)
-                                }
+                                },
+                    :modal => render_to_string(:partial => 'create_success',
+                                                :layout => false)
                     }
   end
 end
