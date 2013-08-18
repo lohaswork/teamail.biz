@@ -22,4 +22,8 @@ class Topic < ActiveRecord::Base
       topic.save!
     end
   end
+
+  def last_active_time
+    !self.discussions.empty? && self.discussions.last.updated_at || self.updated_at
+  end
 end
