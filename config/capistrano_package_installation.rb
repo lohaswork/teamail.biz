@@ -11,17 +11,16 @@ Capistrano::Configuration.instance.load do
       run %[git config --global user.name "lohaswork"]
       run %[git config --global user.email "support@lohaswork.com"]
       run '#{sudo} mkdir /www'
-      run '#{sudo} mkdir /www/LohasWork.com'
-      run '#{sudo} chown -R deployer /www/LohasWork.com'
-      in_directory 'home/deployer' do
-        run %[ssh-keygen -t rsa -C "support@lohaswork.com"]
-        run 'git clone git://github.com/sstephenson/rbenv.git ~/.rbenv'
-        run 'git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build'
-        run 'git clone git://github.com/sstephenson/rbenv-gem-rehash.git ~/.rbenv/plugins/rbenv-gem-rehash'
-        run %[echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.profile]
-        run %[echo 'eval "$(rbenv init -)"' >> ~/.profile]
-        run 'exec $SHELL'
-      end
+      run '#{sudo} mkdir /www/teamind_deploy'
+      run '#{sudo} chown -R deployer /www/teamind_deploy'
+      run 'cd home/deployer'
+      run %[ssh-keygen -t rsa -C "support@lohaswork.com"]
+      run 'git clone git://github.com/sstephenson/rbenv.git ~/.rbenv'
+      run 'git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build'
+      run 'git clone git://github.com/sstephenson/rbenv-gem-rehash.git ~/.rbenv/plugins/rbenv-gem-rehash'
+      run %[echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.profile]
+      run %[echo 'eval "$(rbenv init -)"' >> ~/.profile]
+      run 'exec $SHELL'
       run 'rbenv install 1.9.3-p327'
       run 'rbenv global 1.9.3-p327'
       run 'gem source -r https://rubygems.org/'
@@ -38,9 +37,8 @@ Capistrano::Configuration.instance.load do
       run '#{sudo} apt-get update'
       run '#{sudo} apt-get install nginx'
       run '#{sudo} service nginx start'
-      in_directory '/etc/nginx/sites-enabled/' do
-        run '#{sudo} rm default'
-      end
+      run 'cd /etc/nginx/sites-enabled/'
+      run '#{sudo} rm default'
     end
   end
 end
