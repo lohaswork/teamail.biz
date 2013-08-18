@@ -1,37 +1,57 @@
 require 'bundler/capistrano'
+require "capistrano_database_yml"
+require 'capistrano-db-rollback'
 
+# Five steps to run the first deployment
+# 0. Create unicorn related files at local development ENV
+# 1. Create deploy_user in linux and install packages
+# 2. Manually create deploy_user in postgres and create www/#{appname} directory
+# 3. Modify server info in deploy.rb & nginx.conf
+# 4. Run deploy:setup and config database following the leading message
+# 5. !Important: Run deploy:cold for the very first deployment
+
+# Need change before deployment
+set :server_name, "192.168.1.114"
+set :user, "deployer"
+set :sudo_user, "deployer"
+set :deploy_to, "/www/teamind_deploy"
+
+# Repository
 set :application, "LohasWork.com"
 set :scm, :git
 set :repository,  "git@github.com:lohaswork/LohasWork.com"
-set :branch, "serco/deployment"
+set :branch, "serco/deployment"  # Need changge to master
+
+# Configurations
 set :rails_env, "production"
-set :normalize_asset_timestamps, false
-#default_run_options[:pty] = true
-
-
-# set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
-# Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
-set :user, "lohaswork"
-set :server_name, "192.168.1.114"
-set :sudo_user, "lohaswork"
-set :deploy_to, "/home/lohaswork/apps/LohasWork.com"
 set :deploy_via, :remote_cache
 set :use_sudo, false
-
-set :unicorn_config, "#{current_path}/config/unicorn.rb"
-set :unicorn_pid, "#{current_path}/tmp/pids/unicorn.pid"
-
-set :rbenv_version, ENV['RBENV_VERSION'] || "1.9.3-p448"
+set :normalize_asset_timestamps, false
+#default_run_options[:pty] = true
+set :rbenv_version, ENV['RBENV_VERSION'] || "1.9.3-p327"
 set :default_environment, {
   'PATH' => "/home/#{user}/.rbenv/shims:/home/#{user}/.rbenv/bin:$PATH",
   'RBENV_VERSION' => "#{rbenv_version}",
 }
 
+#roles
 role :web, "192.168.1.114"                          # Your HTTP server, Apache/etc
 role :app, "192.168.1.114"                          # This may be the same as your `Web` server
 role :db,  "192.168.1.114", :primary => true        # This is where Rails migrations will run
 
 namespace :deploy do
+
+  task :cold do       # Overriding the default deploy:cold
+    update
+    setup_db       # My own step, replacing migrations.
+    start
+  end
+
+  task :add_tmp do
+    run "mkdir -p #{shared_path}/tmp"
+    run "chmod g+rx,u+rwx #{shared_path}/tmp"
+  end
+
   task :start, :roles => :app, :except => { :no_release => true } do
     run "cd #{current_path} && RAILS_ENV=production bundle exec unicorn_rails -c #{unicorn_config} -D"
   end
@@ -47,16 +67,21 @@ namespace :deploy do
 
   desc 'clean old files, link shared files'
   task :housekeeping, :roles => :app do
-    run "rm -f #{current_path}/config/database.yml"
-    run "ln -s #{shared_path}/config/database.yml #{current_path}/config/database.yml"
-    #run "ln -nfs #{shared_path}/public/assets #{release_path}/public/assets"
-    run "rm -rf #{current_path}/public/uploads"
-    run "ln -s #{shared_path}/uploads #{current_path}/public/uploads"
+    run "rm -rf #{current_path}/public/videos"
+    run "ln -s #{shared_path}/public/videos #{current_path}/public/videos"
+    run "#{sudo} ln -nfs #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/nginx.conf"
+    run "ln -nfs #{current_path}/config/unicorn.rb #{shared_path}/config/unicorn.rb"
   end
 
   desc "Create socket file symlink for nginx"
-  task :symlink_sockets, :except => {:no_release => true} do
+  task :symlink_unicorn, :roles => :app, :except => {:no_release => true} do
+    run "mkdir -p #{shared_path}/unicorn"
+    run "chmod g+rx,u+rwx #{shared_path}/unicorn"
+    run "cd #{shared_path}"
+    run "touch err.log out.log"
+    run "ln -s #{shared_path}/unicorn/ #{current_path}/unicorn"
     run "mkdir -p #{shared_path}/sockets"
+    run "chmod g+rx,u+rwx #{shared_path}/sockets"
     run "ln -s #{shared_path}/sockets #{current_path}/tmp/sockets"
   end
 
@@ -68,23 +93,21 @@ namespace :deploy do
   #   /path/to/app/releases/20120517191233/tmp/sockets
   #
   shared_children.push "tmp/sockets"
+  shared_children.push "unicorn"
 
-  desc 'reload nginx when nginx.conf changes'
-  task :nginx_config, :roles => :app do
-    run "#{sudo} ln -s #{shared_path}/config/nginx.conf /etc/nginx/sites-enabled/nginx.conf", :pty => true
-  end
+  # Manually execute this step
+  # desc 'reload nginx when nginx.conf changes'
+  # task :nginx_config, :roles => :app do
+  #   run "#{sudo} ln -s #{shared_path}/config/nginx.conf /etc/nginx/sites-enabled/nginx.conf", :pty => true
+  # end
 
-  desc 'load sql schema'
-  task :load_schema, :roles => :app do
-    run "cd #{current_path}; RAILS_ENV=production rake db:schema:load"
-  end
-
-  desc 'create_db'
-  task :create_db, :roles => :app do
-    run "cd #{current_path}; RAILS_ENV=production rake db:create"
-  end
+  task :setup_db, :roles => :app do
+  raise RuntimeError.new('db:setup aborted!') unless Capistrano::CLI.ui.ask("About to `rake db:setup`. Are you sure to wipe the entire database (anything other than 'yes' aborts):") == 'yes'
+  run "cd #{current_path}; bundle exec rake db:setup RAILS_ENV=#{rails_env}"
+end
 
 end
 
-after 'deploy:create_symlink', 'deploy:housekeeping', 'deploy:migrate' #'deploy:create_db','deploy:load_schema'
-after "deploy:restart", "deploy:cleanup"
+after 'deploy:setup', 'deploy:add_tmp'
+after 'deploy:create_symlink', 'deploy:housekeeping', 'deploy:symlink_unicorn'
+after 'deploy:restart', 'deploy:cleanup'

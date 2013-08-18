@@ -53,6 +53,7 @@ gem 'unicorn-worker-killer'
 
 # Deploy with Capistrano
 gem 'capistrano'
+gem 'capistrano-db-rollback'
 
 # To use debugger
 # gem 'debugger'
