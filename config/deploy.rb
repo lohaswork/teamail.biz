@@ -1,6 +1,6 @@
 require 'bundler/capistrano'
 require 'capistrano-db-rollback'
-$:.unshift('.')
+$:.unshift('./config')
 require 'capistrano_database_yml'
 require 'capistrano_package_installation'
 
