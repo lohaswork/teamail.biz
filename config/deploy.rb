@@ -1,5 +1,6 @@
 require 'bundler/capistrano'
 require "capistrano_database_yml"
+require "capistrano_package_installation"
 require 'capistrano-db-rollback'
 
 # Five steps to run the first deployment
@@ -27,7 +28,7 @@ set :rails_env, "production"
 set :deploy_via, :remote_cache
 set :use_sudo, false
 set :normalize_asset_timestamps, false
-#default_run_options[:pty] = true
+default_run_options[:pty] = true
 set :rbenv_version, ENV['RBENV_VERSION'] || "1.9.3-p327"
 set :default_environment, {
   'PATH' => "/home/#{user}/.rbenv/shims:/home/#{user}/.rbenv/bin:$PATH",
@@ -102,12 +103,16 @@ namespace :deploy do
   # end
 
   task :setup_db, :roles => :app do
-  raise RuntimeError.new('db:setup aborted!') unless Capistrano::CLI.ui.ask("About to `rake db:setup`. Are you sure to wipe the entire database (anything other than 'yes' aborts):") == 'yes'
-  run "cd #{current_path}; bundle exec rake db:setup RAILS_ENV=#{rails_env}"
+    raise RuntimeError.new('db:setup aborted!') unless Capistrano::CLI.ui.ask("About to `rake db:setup`. Are you sure to wipe the entire database (anything other than 'yes' aborts):") == 'yes'
+    run "cd #{current_path}; bundle exec rake db:setup RAILS_ENV=#{rails_env}"
+  end
+
+  task :start_sql, :roles => :db do
+    run "#{sudo} service postgresql start"
+  end
 end
 
-end
-
+before 'deploy:setup_db', 'deploy:start_sql'
 after 'deploy:setup', 'deploy:add_tmp'
 after 'deploy:create_symlink', 'deploy:housekeeping', 'deploy:symlink_unicorn'
 after 'deploy:restart', 'deploy:cleanup'
