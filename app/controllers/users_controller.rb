@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     # 激活失败的处理
     unless user && user.activate!
       flash[:notice] = user ? "您的账户已经处于激活状态!" : "激活失败，您的激活链接错误或不完整。"
-      redirect_to root_path
+      redirect_to welcome_path
     end
   end
 

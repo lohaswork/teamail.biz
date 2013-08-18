@@ -17,6 +17,10 @@ $(document)
           $('#' + id)[updateMethod](newElement);
         }
       }
+      if (data.modal) {
+          var newElement = $(data.modal);
+          $('#myModal').html(newElement).modal();
+        }
       else if (data.reload) {
         window.location.reload(true);
       }
@@ -31,6 +35,8 @@ $(document)
         }
       }
     }
+
+    $('.error').hide();
   })
   .on( 'ajax:complete', 'form[data-remote], a[data-remote]',function (e, xhr) {
 
