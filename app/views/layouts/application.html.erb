@@ -4,14 +4,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= content_for?(:title) ? yield(:title) : "LohasWork" %></title>
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="keywords" content="乐活工场 团队协作 项目管理 SaaS">
+    <meta name="description" content="乐活工场致力于打造出色的团队协作工具">
+    <meta name="author" content="LohasWork">
     <%= stylesheet_link_tag "application", :media => "all" %>
-    <%= javascript_include_tag "application" %>
+    <!--[if lt IE 8]>
+    <%= stylesheet_link_tag "font-awesome-ie7.min.css", media: "all" %>
+    <![endif]-->
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
   </head>
-  <body>
+  <body id="<%= "%s_%s" % [controller_name, action_name]%>" class="<%= "%s" % [controller_name]%>">
     <header class="navbar navbar-fixed-top">
       <nav class="navbar-inner">
         <div class="container">
@@ -22,6 +25,8 @@
     <div id="main" role="main">
       <div class="container">
         <div class="content">
+          <div id='myModal', class='lohas-modal'>
+          </div>
            <div class="row">
             <div class="span12">
               <%= render 'layouts/messages'%>
@@ -33,5 +38,6 @@
         </div>
       </div> <!--! end of .container -->
     </div> <!--! end of #main -->
+    <%= javascript_include_tag "application" %>
   </body>
 </html>

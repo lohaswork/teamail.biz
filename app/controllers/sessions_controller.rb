@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
     else
       cookies[:login_token]= user.remember_token
     end
-    render :json => {:status => "success", :redirect => root_path}
+    render :json => {:status => "success", :redirect => welcome_path}
   end
 
   def destroy

@@ -39,6 +39,8 @@ group :test, :development do
 end
 
 gem 'bootstrap-sass'
+gem 'video-js-rails'
+gem 'font-awesome-rails'
 gem 'rest-client'
 gem 'multimap'
 # To use ActiveModel has_secure_password
