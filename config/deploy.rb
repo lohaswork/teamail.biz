@@ -1,7 +1,8 @@
 require 'bundler/capistrano'
 require 'capistrano-db-rollback'
-require './capistrano_database_yml'
-require './capistrano_package_installation'
+$:.unshift('.')
+require 'capistrano_database_yml'
+require 'capistrano_package_installation'
 
 # Five steps to run the first deployment
 # 0. Create unicorn related files at local development ENV
