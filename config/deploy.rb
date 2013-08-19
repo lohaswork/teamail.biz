@@ -7,12 +7,12 @@ require 'capistrano_database_yml'
 # 0. Create unicorn related files at local development ENV
 # 1. Create deploy_user in linux and install packages
 # 2. Manually create deploy_user in postgres and create www/#{appname} directory
-# 3. Modify server info in deploy.rb & nginx.conf
+# 3. Modify server info in deploy.rb & nginx.conf & capistrano_database_yml.rb
 # 4. Run deploy:setup and config database following the leading message
 # 5. !Important: Run cap deploy:cold for the very first deployment
 
 # Need change before deployment
-set :server_name, "192.168.1.114"
+set :server_name, "192.168.0.105"
 set :user, "deployer"
 set :sudo_user, "deployer"
 set :deploy_to, "/www/teamind_deploy"
@@ -36,9 +36,9 @@ set :default_environment, {
 }
 
 # Roles
-role :web, "192.168.1.114"                          # Your HTTP server, Apache/etc
-role :app, "192.168.1.114"                          # This may be the same as your `Web` server
-role :db,  "192.168.1.114", :primary => true        # This is where Rails migrations will run
+role :web, "192.168.0.105"                          # Your HTTP server, Apache/etc
+role :app, "192.168.0.105"                          # This may be the same as your `Web` server
+role :db,  "192.168.0.105", :primary => true        # This is where Rails migrations will run
 
 # For Unicorn service
 set :unicorn_config, "#{current_path}/config/unicorn.rb"
