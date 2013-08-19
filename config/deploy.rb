@@ -84,7 +84,6 @@ namespace :deploy do
   task :housekeeping, :roles => :app do
     run "rm -rf #{current_path}/public/videos"
     run "ln -s #{shared_path}/public/videos #{current_path}/public/videos"
-    run "#{sudo} rm -rf /etc/nginx/sites-enabled/nginx.conf"
     run "#{sudo} ln -nfs #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/nginx.conf"
     run "rm -rf #{current_path}/unicorn"
     run "ln -s #{shared_path}/unicorn/ #{current_path}/unicorn"
@@ -106,6 +105,10 @@ namespace :deploy do
   #
   shared_children.push "tmp/sockets"
   shared_children.push "unicorn"
+
+#  task :nginx_restart, :roles => :app do
+#    run "#{sudo} service nginx restart"
+#  end
 
   task :setup_db, :roles => :app do
     raise RuntimeError.new('db:setup aborted!') unless Capistrano::CLI.ui.ask("About to `rake db:setup`. Are you sure to wipe the entire database (anything other than 'yes' aborts):") == 'yes'
