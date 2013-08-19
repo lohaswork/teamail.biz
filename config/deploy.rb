@@ -1,5 +1,4 @@
 require 'bundler/capistrano'
-require 'capistrano-db-rollback'
 $:.unshift('./config')
 require 'capistrano_database_yml'
 
@@ -9,7 +8,7 @@ require 'capistrano_database_yml'
 # 2. Manually create deploy_user in postgres and create www/#{appname} directory
 # 3. Modify server info in deploy.rb & nginx.conf
 # 4. Run deploy:setup and config database following the leading message
-# 5. !Important: Run cap production deploy:cold for the very first deployment
+# 5. !Important: Run cap deploy:cold for the very first deployment
 
 # Need change before deployment
 set :server_name, "192.168.1.114"
@@ -106,12 +105,6 @@ namespace :deploy do
   #
   shared_children.push "tmp/sockets"
   shared_children.push "unicorn"
-
-  # Manually execute this step
-  # desc 'reload nginx when nginx.conf changes'
-  # task :nginx_config, :roles => :app do
-  #   run "#{sudo} ln -s #{shared_path}/config/nginx.conf /etc/nginx/sites-enabled/nginx.conf", :pty => true
-  # end
 
   task :setup_db, :roles => :app do
     raise RuntimeError.new('db:setup aborted!') unless Capistrano::CLI.ui.ask("About to `rake db:setup`. Are you sure to wipe the entire database (anything other than 'yes' aborts):") == 'yes'
