@@ -131,5 +131,16 @@ describe "the topics action" do
         page.should have_content "请输入回复内容"
       end
     end
+
+    context "user create topic with blank content success" do
+      it "should see the R.T for content" do
+        click_on "创建新话题"
+        fill_in "title", :with => "test title"
+        click_button "创建"
+        page.should have_content "test title"
+        click_on @organization.topics.last.title
+        page.should have_content "R.T"
+      end
+    end
   end
 end

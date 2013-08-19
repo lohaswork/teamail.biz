@@ -3,7 +3,7 @@ class Topic < ActiveRecord::Base
   attr_accessible :title
 
   belongs_to :organization
-  has_many :discussions
+  has_many :discussions, :order => "updated_at asc"
   has_many :user_topics
   has_many :users, :through => :user_topics
   validates :title, :presence => {:message=>'请输入标题'}
@@ -14,7 +14,8 @@ class Topic < ActiveRecord::Base
       current_user = User.find(user_id)
       topic.organization = Organization.find(organization_id)
       topic.users << current_user
-      if topic.valid? && !content.blank?
+      if topic.valid?
+        content = content.blank? ? "R.T" : content
         discussion = Discussion.create(:content=>content)
         discussion.creator = current_user
       end
@@ -24,6 +25,6 @@ class Topic < ActiveRecord::Base
   end
 
   def last_active_time
-    !self.discussions.empty? && self.discussions.last.updated_at || self.updated_at
+    self.discussions.last.updated_at
   end
 end
