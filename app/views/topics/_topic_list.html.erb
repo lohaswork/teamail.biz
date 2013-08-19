@@ -19,7 +19,7 @@
   <%- topics.try(:each) do |topic|%>
     <div class='row'>
       <div class='span2'>
-        <%= topic.users.first.email%>
+        <%= topic.last_updator.email%>
       </div>
       <div class='span2'>
         <%= topic.discussions.size > 0 ? topic.discussions.size : ''%>

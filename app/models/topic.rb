@@ -15,7 +15,7 @@ class Topic < ActiveRecord::Base
       topic.organization = Organization.find(organization_id)
       topic.users << current_user
       if topic.valid?
-        content = content.blank? ? "R.T" : content
+        content = content.blank? ? "如题" : content
         discussion = Discussion.create(:content=>content)
         discussion.creator = current_user
       end
@@ -25,6 +25,10 @@ class Topic < ActiveRecord::Base
   end
 
   def last_active_time
-    self.discussions.last.updated_at
+    discussions.last.updated_at
+  end
+
+  def last_updator
+    User.find(discussions.last.user_from)
   end
 end

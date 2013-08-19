@@ -139,7 +139,7 @@ describe "the topics action" do
         click_button "创建"
         page.should have_content "test title"
         click_on @organization.topics.last.title
-        page.should have_content "R.T"
+        page.should have_content "如题"
       end
     end
   end
