@@ -74,9 +74,28 @@ Capistrano::Configuration.instance.load do
       DESC
       task :setup, :except => { :no_release => true } do
 
+#        default_template = <<-EOF
+#          base: &base
+#            adapter: postgresql
+#            username: #{Capistrano::CLI.ui.ask("Enter database username: ")}
+#            password: #{Capistrano::CLI.password_prompt("Enter database password: ")}
+#            pool: 5
+#          development:
+#            database: lahaswork_development
+#            <<: *base
+#          test:
+#            database: lohaswork_test
+#            <<: *base
+#          production:
+#            database: lohaswork_production
+#            <<: *base
+#        EOF
+
         default_template = <<-EOF
           base: &base
-            adapter: postgresql
+            adapter: mysql2
+            encoding: utf8
+            socket: /tmp/mysql.sock
             username: #{Capistrano::CLI.ui.ask("Enter database username: ")}
             password: #{Capistrano::CLI.password_prompt("Enter database password: ")}
             pool: 5
