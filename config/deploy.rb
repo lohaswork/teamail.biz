@@ -1,5 +1,6 @@
 require 'bundler/capistrano'
 $:.unshift('./config')
+require 'capistrano-db-rollback'
 require 'capistrano_database_yml'
 
 # Five steps to run the first deployment
