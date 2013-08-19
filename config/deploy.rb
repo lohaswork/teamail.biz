@@ -114,7 +114,6 @@ namespace :deploy do
 
 end
 
-before 'deploy:setup_db'
 after 'deploy:setup', 'deploy:add_shared'
 after 'deploy:create_symlink', 'deploy:housekeeping'
 after 'deploy:restart', 'deploy:cleanup'
