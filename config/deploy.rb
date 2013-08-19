@@ -21,7 +21,7 @@ set :deploy_to, "/www/teamind_deploy"
 set :application, "LohasWork.com"
 set :scm, :git
 set :repository,  "git@github.com:lohaswork/LohasWork.com"
-set :branch, "serco/deployment"  # Need changge to master
+set :branch, "master"  # Need changge to master
 
 # Configurations
 set :rails_env, "production"
