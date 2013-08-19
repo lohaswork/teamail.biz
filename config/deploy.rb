@@ -112,12 +112,9 @@ namespace :deploy do
     run "cd #{current_path}; bundle exec rake db:setup RAILS_ENV=#{rails_env}"
   end
 
-  task :start_sql, :roles => :db do
-    run "#{sudo} service postgresql start"
-  end
 end
 
-before 'deploy:setup_db', 'deploy:start_sql'
+before 'deploy:setup_db'
 after 'deploy:setup', 'deploy:add_shared'
 after 'deploy:create_symlink', 'deploy:housekeeping'
 after 'deploy:restart', 'deploy:cleanup'
