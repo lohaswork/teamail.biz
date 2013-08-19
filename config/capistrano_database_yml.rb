@@ -95,7 +95,6 @@ Capistrano::Configuration.instance.load do
           base: &base
             adapter: mysql2
             encoding: utf8
-            socket: /tmp/mysql.sock
             username: #{Capistrano::CLI.ui.ask("Enter database username: ")}
             password: #{Capistrano::CLI.password_prompt("Enter database password: ")}
             pool: 5
