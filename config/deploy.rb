@@ -9,7 +9,7 @@ require 'capistrano_database_yml'
 # 2. Manually create deploy_user in postgres and create www/#{appname} directory
 # 3. Modify server info in deploy.rb & nginx.conf
 # 4. Run deploy:setup and config database following the leading message
-# 5. !Important: Run deploy:cold for the very first deployment
+# 5. !Important: Run cap production deploy:cold for the very first deployment
 
 # Need change before deployment
 set :server_name, "192.168.1.114"
@@ -35,10 +35,14 @@ set :default_environment, {
   'RBENV_VERSION' => "#{rbenv_version}",
 }
 
-#roles
+# Roles
 role :web, "192.168.1.114"                          # Your HTTP server, Apache/etc
 role :app, "192.168.1.114"                          # This may be the same as your `Web` server
 role :db,  "192.168.1.114", :primary => true        # This is where Rails migrations will run
+
+# For Unicorn service
+set :unicorn_config, "#{current_path}/config/unicorn.rb"
+set :unicorn_pid, "#{current_path}/tmp/pids/unicorn.pid"
 
 namespace :deploy do
 
@@ -48,9 +52,19 @@ namespace :deploy do
     start
   end
 
-  task :add_tmp do
+  task :add_shared do
     run "mkdir -p #{shared_path}/tmp"
     run "chmod g+rx,u+rwx #{shared_path}/tmp"
+    run "mkdir -p #{shared_path}/unicorn"
+    run "chmod g+rx,u+rwx #{shared_path}/unicorn"
+    run "cd #{shared_path}"
+    run "touch err.log out.log"
+    run "mkdir -p #{shared_path}/sockets"
+    run "chmod g+rx,u+rwx #{shared_path}/sockets"
+    run "mkdir -p #{shared_dir}/tmp/sessions"
+    run "chmod g+rx,u+rwx #{shared_path}/tmp/sessions"
+    run "mkdir -p #{shared_dir}/tmp/cache"
+    run "chmod g+rx,u+rwx #{shared_path}/tmp/cache"
   end
 
   task :start, :roles => :app, :except => { :no_release => true } do
@@ -70,20 +84,17 @@ namespace :deploy do
   task :housekeeping, :roles => :app do
     run "rm -rf #{current_path}/public/videos"
     run "ln -s #{shared_path}/public/videos #{current_path}/public/videos"
+    run "#{sudo} rm -rf /etc/nginx/sites-enabled/nginx.conf"
     run "#{sudo} ln -nfs #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/nginx.conf"
-    run "ln -nfs #{current_path}/config/unicorn.rb #{shared_path}/config/unicorn.rb"
-  end
-
-  desc "Create socket file symlink for nginx"
-  task :symlink_unicorn, :roles => :app, :except => {:no_release => true} do
-    run "mkdir -p #{shared_path}/unicorn"
-    run "chmod g+rx,u+rwx #{shared_path}/unicorn"
-    run "cd #{shared_path}"
-    run "touch err.log out.log"
+    run "rm -rf #{current_path}/unicorn"
     run "ln -s #{shared_path}/unicorn/ #{current_path}/unicorn"
-    run "mkdir -p #{shared_path}/sockets"
-    run "chmod g+rx,u+rwx #{shared_path}/sockets"
+    run "rm -rf #{current_path}/tmp/sockets"
     run "ln -s #{shared_path}/sockets #{current_path}/tmp/sockets"
+    run "rm -rf #{current_path}/tmp/sessions"
+    run "ln -s #{shared_path}/tmp/sessions #{current_path}/tmp/sessions"
+    run "rm -rf #{current_path}/tmp/cache"
+    run "ln -s #{shared_path}/tmp/cache #{current_path}/tmp/cache"
+
   end
 
   # utilize that capistrano has already done this!
@@ -113,6 +124,6 @@ namespace :deploy do
 end
 
 before 'deploy:setup_db', 'deploy:start_sql'
-after 'deploy:setup', 'deploy:add_tmp'
-after 'deploy:create_symlink', 'deploy:housekeeping', 'deploy:symlink_unicorn'
+after 'deploy:setup', 'deploy:add_shared'
+after 'deploy:create_symlink', 'deploy:housekeeping'
 after 'deploy:restart', 'deploy:cleanup'
