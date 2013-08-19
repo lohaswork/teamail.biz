@@ -61,9 +61,9 @@ namespace :deploy do
     run "touch err.log out.log"
     run "mkdir -p #{shared_path}/sockets"
     run "chmod g+rx,u+rwx #{shared_path}/sockets"
-    run "mkdir -p #{shared_dir}/tmp/sessions"
+    run "mkdir -p #{shared_path}/tmp/sessions"
     run "chmod g+rx,u+rwx #{shared_path}/tmp/sessions"
-    run "mkdir -p #{shared_dir}/tmp/cache"
+    run "mkdir -p #{shared_path}/tmp/cache"
     run "chmod g+rx,u+rwx #{shared_path}/tmp/cache"
   end
 
