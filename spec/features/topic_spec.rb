@@ -40,6 +40,7 @@ describe "the topics action" do
       organization = create(:organization)
       user = organization.users.first
       login_with(user.email, user.password)
+      page.should have_content user.email
       visit organization_topics_path(organization_id:organization.id)
     end
 

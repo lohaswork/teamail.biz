@@ -2,7 +2,7 @@
 #the helper method for test
 module Helpers
   def sign_up_with(email, password, organization)
-    visit root_path
+    visit signup_path
     fill_in 'user[email]', :with => email
     fill_in 'user[password]', :with => password
     fill_in 'organization_name', :with => organization
