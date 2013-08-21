@@ -7,9 +7,10 @@ class TopicsController < ApplicationController
   end
 
   def create
-    unless current_organization && Topic.create_topic(params[:title], params[:content], current_organization.id, current_user.id)
+    unless current_organization && new_topic = Topic.create_topic(params[:title], params[:content], current_organization.id, current_user.id)
       redirect_to root_path
     end
+    EmailEngine::TopicNotifier.new(new_topic.id).create_topic_notifaction
     topics = current_organization.topics_by_active_time
     render :json => {
               :update => {
