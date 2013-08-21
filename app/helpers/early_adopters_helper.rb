@@ -1,0 +1,2 @@
+module EarlyAdoptersHelper
+end

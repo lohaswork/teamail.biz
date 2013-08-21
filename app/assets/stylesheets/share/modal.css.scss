@@ -1,0 +1,49 @@
+.lohas-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 1050;
+  width: 580px;
+  margin-left: -260px;
+  margin-top: -260px;
+  background-color: #fafafa;
+  border-radius: 5px;
+  border: 1px solid #a8b7ca;
+
+  .modal-header {
+    padding: 0 20px;
+    h3 {
+      margin: 0;
+      line-height: 53px;
+      color: #0177ae;
+      text-transform: uppercase;
+    }
+    .subtitle {
+      color: #41546d;
+      line-height: 13px;
+      margin-bottom: 15px;
+    }
+  }
+
+  .modal-body {
+    position: relative;
+    max-height: 400px;
+    padding: 15px;
+    overflow-y: auto;
+    border-radius: 5px;
+    border: 1px solid #d8dee6;
+    background-color: f6f7f9;
+    width: 538px;
+    margin: 0 5px 0 5px;
+    box-shadow: 1px 2px 2px rgba(216,222,230,0.4) inset;
+    min-height: 150px;
+    max-height: 300px;
+  }
+
+
+  .modal-footer {
+    padding: 14px 7px 15px;
+    margin-bottom: 0;
+    text-align: right;
+  }
+}

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130815123108) do
+ActiveRecord::Schema.define(:version => 20130816074010) do
 
   create_table "discussions", :force => true do |t|
     t.integer  "topic_id"
@@ -21,6 +21,12 @@ ActiveRecord::Schema.define(:version => 20130815123108) do
     t.integer  "user_to"
     t.integer  "user_cc"
     t.integer  "user_bcc"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "early_adopters", :force => true do |t|
+    t.string   "email"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
