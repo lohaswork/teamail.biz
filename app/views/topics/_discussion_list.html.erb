@@ -1,0 +1,16 @@
+<div id='discussion-list'>
+  <%- discussions.try(:each) do |discussion|%>
+    <div class='row'>
+      <div class='span2'>
+        <%= discussion.creator.email%>
+      </div>
+      <div class='span3'>
+        <%= discussion.content%>
+      </div>
+      <div class='span3'>
+        <%= discussion.created_at%>
+      </div>
+    </div>
+  <% end %>
+</div>
+

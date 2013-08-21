@@ -6,6 +6,9 @@
     <div class='span2'>
       创建者：
     </div>
+    <div class='span2'>
+      回复数：
+    </div>
     <div class='span3'>
       标题：
     </div>
@@ -16,13 +19,16 @@
   <%- topics.try(:each) do |topic|%>
     <div class='row'>
       <div class='span2'>
-        <%= topic.users.first.email%>
+        <%= topic.last_updator.email%>
+      </div>
+      <div class='span2'>
+        <%= topic.discussions.size > 0 ? topic.discussions.size : ''%>
       </div>
       <div class='span3'>
-        <%= topic.title%>
+        <%= link_to(topic.title, topic_path(topic))%>
       </div>
       <div class='span3'>
-        <%= topic.created_at%>
+        <%= topic.last_active_time%>
       </div>
     </div>
   <% end %>

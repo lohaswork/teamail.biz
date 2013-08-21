@@ -6,7 +6,8 @@
     <div id='new-topic-form', class='row top-buffer left-buffer hide'>
       <%= form_tag topics_path, :method => "post", :class=>"form-horizontal", :remote => true do %>
         <div class="control-group">
-          <%= text_field_tag :title, nil, :class=>"span8 input-large search-query", :placeholder=>"标题"%>
+          <%= text_field_tag :title, nil, :class=>"span8 input-large", :placeholder=>"标题"%>
+          <%= text_area_tag :content, nil, :class=>"span8 top-buffer", :placeholder=>"内容"%>
         </div>
         <div>
           <%= submit_tag "创建", :class=>"btn"%>

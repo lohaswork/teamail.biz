@@ -3,6 +3,9 @@ FactoryGirl.define do
     title
     after(:create) do |topic|
       topic.users << topic.organization.users
+      10.times do
+        create(:discussion, topic: topic, user_from: topic.users.first.id)
+      end
     end
   end
 
