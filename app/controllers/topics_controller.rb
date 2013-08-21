@@ -3,14 +3,14 @@ class TopicsController < ApplicationController
   def index
     organization_id = params[:organization_id]
     organization_id && update_current_organization(Organization.find(organization_id))
-    @topics = current_organization && current_organization.topics
+    @topics = current_organization && current_organization.topics_by_active_time
   end
 
   def create
-    unless current_organization && Topic.create_topic(params[:title], current_organization.id, current_user.id)
+    unless current_organization && Topic.create_topic(params[:title], params[:content], current_organization.id, current_user.id)
       redirect_to root_path
     end
-    topics = current_organization.topics
+    topics = current_organization.topics_by_active_time
     render :json => {
               :update => {
                           "topic-list" => render_to_string(:partial => 'topic_list',
@@ -22,5 +22,10 @@ class TopicsController < ApplicationController
                                                             :layout => false)
                          }
                  }
+  end
+
+  def show
+    @topic = Topic.find(params[:id])
+    @discussions = @topic.discussions
   end
 end
