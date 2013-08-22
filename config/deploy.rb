@@ -10,6 +10,7 @@ require 'capistrano_database_yml'
 # 3. Modify server info in deploy.rb & nginx.conf & capistrano_database_yml.rb
 # 4. Run deploy:setup and config database following the leading message
 # 5. !Important: Run cap deploy:cold for the very first deployment
+# 6. Upload the video manually
 
 # Need change before deployment
 set :server_name, "192.168.0.105"
@@ -21,7 +22,7 @@ set :deploy_to, "/www/teamind_deploy"
 set :application, "LohasWork.com"
 set :scm, :git
 set :repository,  "git@github.com:lohaswork/LohasWork.com"
-set :branch, "master"  # Need changge to master
+set :branch, "serco/for-deploy"  # Need changge to master
 
 # Configurations
 set :rails_env, "production"
@@ -82,7 +83,7 @@ namespace :deploy do
 
   desc 'clean old files, link shared files'
   task :housekeeping, :roles => :app do
-    run "rm -rf #{current_path}/public/videos"
+    run "rm -rf #{current_path}/public/videos"  ###
     run "ln -s #{shared_path}/public/videos #{current_path}/public/videos"
     run "#{sudo} ln -nfs #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/nginx.conf"
     run "rm -rf #{current_path}/unicorn"
@@ -106,9 +107,9 @@ namespace :deploy do
   shared_children.push "tmp/sockets"
   shared_children.push "unicorn"
 
-#  task :nginx_restart, :roles => :app do
-#    run "#{sudo} service nginx restart"
-#  end
+  task :nginx_restart, :roles => :app do
+    run "#{sudo} service nginx restart"
+  end
 
   task :setup_db, :roles => :app do
     raise RuntimeError.new('db:setup aborted!') unless Capistrano::CLI.ui.ask("About to `rake db:setup`. Are you sure to wipe the entire database (anything other than 'yes' aborts):") == 'yes'
