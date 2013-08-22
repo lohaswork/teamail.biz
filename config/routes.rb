@@ -12,6 +12,7 @@ LohasWorkCom::Application.routes.draw do
     post '/reset/:reset_token'                   => :do_reset,                    :as => :reset
     get '/reset_success'                          => :reset_success,              :as => :reset_success
   end
+  get "signup" => "users#new", :as => "signup"
   resources :users, :only =>[:new, :create]
 
   get "logout" => "sessions#destroy", :as => "logout"
@@ -21,7 +22,11 @@ LohasWorkCom::Application.routes.draw do
   resources :organization do
     resources :topics, :only => [:index]
   end
-  resources :topics, :only => [:create]
+
+  resources :topics, :only => [:create, :show]
+  resources :topic do
+    resources :discussions, :only => [:create]
+  end
   resources :early_adopters
   match "/*other" => redirect('/')
   # The priority is based upon order of creation:

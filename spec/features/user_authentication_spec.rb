@@ -8,7 +8,7 @@ describe "user authentaction action" do
   describe "user signup" do
     describe "user visit signup page" do
       it "see signup page" do
-        visit root_path
+        visit signup_path
         page.should have_button('注册')
       end
     end
@@ -90,7 +90,7 @@ describe "user authentaction action" do
 
     context "user click the login link" do
       it "should on the login page" do
-        visit root_path
+        visit signup_path
         click_on "登录"
         current_path.should == '/login'
       end
@@ -115,11 +115,6 @@ describe "user authentaction action" do
       before do
         @user = create(:already_activate_user)
         login_with(@user.email, @user.password)
-      end
-      it "should redirect to welcome page visit root path" do
-        visit root_path
-        current_path.should == '/welcome'
-        page.should have_content(@user.email)
       end
 
       it "should redirect to welcome page visit login path" do
