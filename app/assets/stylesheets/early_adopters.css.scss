@@ -39,25 +39,11 @@ body.early_adopters {
     margin:50px auto 0px;
   }
   .home-container{
-    height:740px;
+    height:1050px;
   }
 
   .agency-wrap{
     position:relative;
-  }
-  .agency-wrap .agency-credit{
-    position:absolute;
-    right:10px;
-    bottom:10px;
-    text-align:right;
-  }
-  .agency-wrap .agency-credit a{
-    color:#fff;
-    font-size:12px;
-    opacity:0.5;
-  }
-  .agency-wrap .agency-credit a:hover{
-    opacity:1;
   }
   .page-wrapper{
     position:relative;
@@ -74,23 +60,18 @@ body.early_adopters {
     float:left;
     font-weight:400;
     color:#fff;
-    padding-left:55px;
+    padding-left:45px;
     font-size:28px;
     position:relative;
-    padding-top:6px;
+    top:-25px;
   }
-
+/*
   .top-nav .logo-link img{
     position:absolute;
     left:0px;
     top:-8px;
   }
-  .logo-link span{
-    position:relative;
-    top:-8px;
-    margin-left:10px;
-    margin-bottom:100px;
-  }
+*/
   .top-nav .nav li {
     float: left;
     margin: 0 5px;
@@ -115,19 +96,17 @@ body.early_adopters {
   }
 
   .header-main{
-    margin: 100px auto 0;
-    padding-bottom: 23px;
+    margin: 50px auto 0;
   }
   .header-main h1, .call-to-action h1{
-    font-family: sans-serif;
     font-weight:900;
     color:#fff;
-    font-size:45px;
+    font-size:50px;
     margin-bottom:20px;
   }
   .header-main h2 {
     font-family: "Playball", cursive;
-    font-size:35px;
+    font-size:40px;
     color:#fff;
     margin-top:20px;
     width:500px;
@@ -137,7 +116,7 @@ body.early_adopters {
     text-align:center;
   }
   .call-to-action h2 {
-    font-family: sans-serif;
+    font-family:"Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
     font-size:35px;
     color:#fff;
     margin-top:20px;
@@ -149,7 +128,7 @@ body.early_adopters {
   }
 
   .header-main h4, .header-main-phone h4{
-    font-family: "Source Sans Pro", Helvetica, Arial, sans-serif;
+    font-family:"Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
     font-weight:400;
     color:#fff;
     font-size:21px;
@@ -158,6 +137,7 @@ body.early_adopters {
   }
 
   .header-main p, .header-main-phone p{
+    font-family:"Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
     color:#fff;
     font-size:17px;
     margin-top:40px;
@@ -166,15 +146,13 @@ body.early_adopters {
   }
 
   .slogan {
-    float: left;
+    clear: both;
     text-align: center;
-    height: 480px;
-    bottom: 50px;
+    height: 420px;
   }
 
   .vplayer {
-    float: right;
-    width: 640px;
+    width: 670px;
     margin: 30px auto 0;
     text-align: right;
     border-radius: 12px;
@@ -233,13 +211,13 @@ body.early_adopters {
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
     padding:20px 20px;
-    height:20px;
+    height:60px;
     width:230px;
     color:#7f7f7f;
     font-size:17px;
     vertical-align: bottom;
     margin:0px;
-    font-family:Helvetica, Arial, sans-serif;
+    font-family:Helvetica, Arial, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
   }
 
   .lohaswork-form input[type="submit"]:hover{
@@ -248,6 +226,7 @@ body.early_adopters {
 
   .lohaswork-form.sign-up-form input[type="submit"]{
     background:#1ABC9C;
+    font-family:"Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
     border:none;
     -webkit-border-top-right-radius: 3px;
     -webkit-border-bottom-right-radius: 3px;
@@ -294,11 +273,10 @@ body.early_adopters {
     text-decoration:none;
     font-weight:700;
     font-size:19px;
-    padding-top:10px;
+    padding-top:3px;
   }
   .down-tab i{
     position:relative;
-    top:2px;
   }
   .down-tab:hover{
     color:#fff!important;
@@ -390,11 +368,7 @@ body.early_adopters {
     font-size:13px;
     line-height:20px;
   }
-  .full-width-features .span6 p{
-    font-size:13px;
-    color:#666;
-    line-height:21px;
-  }
+
   .full-width-features .features-wrap{
     margin-bottom:50px;
   }
@@ -416,14 +390,14 @@ body.early_adopters {
     -moz-border-radius: 3px;
     border-radius: 3px;
     position:relative;
-    right:-5px;
-    width:180px;
+    width:300px;
+    height: 65px;
     font-size:24px;
     margin:0px;
     font-family: "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
     font-weight:700;
     color:#fff;
-    padding:20px 30px;
+    padding-top:10px;
     display:block;
     margin:30px auto 0px;
     text-decoration:none;
@@ -450,12 +424,10 @@ body.early_adopters {
     background:url("bg-tab-wheel.png") no-repeat bottom center;
     height:104px;
     color:#fff;
-    font-family: "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
     text-align:center;
     text-decoration:none;
     font-weight:700;
     font-size:19px;
-    padding-top:10px;
   }
   .footer{
     background:#FFF;
@@ -488,7 +460,7 @@ body.early_adopters {
   }
   .footer .social-policies{
     float:right;
-    width:200px;
+    width:250px;
     padding:35px;
   }
   .footer .links{
@@ -512,98 +484,13 @@ body.early_adopters {
   }
 
 
-  /* responsive */
-  /* Portrait tablet to landscape and desktop */
-  @media (min-width: 980px) and (max-width: 1199px) {
 
-    .header-main{
-      margin: 0 auto 0;
-      width:940px;
-      position: relative;
-      top: 100px;
-      text-align: center;
-      width: 100%;
-    }
-    .header-main .slogan h1 {
-      display: block;
-      margin: 0 auto !important;
-      text-align: center!important;
-      position: relative;
-      left: 5%;
-    }
-    .home-container{
-      height:1050px;
-    }
-
-    .slogan {
-      float: none;
-      text-align: center;
-      height: 480px;
-      bottom: 50px;
-    }
-
-    .vplayer {
-      float: none;
-      margin-top: 30px;
-      width: 640px;
-      margin: 0 auto;
-      text-align: right;
-      border-radius: 12px;
-      border: 15px solid #EAE8E7;
-    }
-  }
-
-  /* Portrait tablet to landscape and desktop */
-  @media (min-width: 768px) and (max-width: 979px) {
-    .header-main{
-      clear: left;
-      margin-top: 120px;
-      padding-bottom: 23px;
-      text-align: center;
-      width:724px;
-    }
-    .home-container{
-      height:1050px;
-    }
-    .slogan {
-      float: none;
-      text-align: center;
-      height: 480px;
-      bottom: 50px;
-    }
-
-    .vplayer {
-      float: none;
-      margin-top: 30px;
-      width: 640px;
-      margin: 0 auto;
-      text-align: right;
-      border-radius: 12px;
-      border: 15px solid #EAE8E7;
-    }
-  }
-
-  /* Landscape phone to portrait tablet */
-  @media (max-width: 767px) {  }
 
   /* Landscape phones and down */
-  @media (max-width: 766px) {
-    body{
-      padding:0px!important;
-      margin:0px;
-    }
-    .page-container, .full-width-features, .home-container{
-      padding:20px;
-      padding-bottom:50px;
-    }
-    .home-container{
-      height:1050px;
-    }
-    .nav {
-      top: 70px;
-    }
-    .full-width-features{
-      text-align:center;
+  @media (max-width: 767px) {
+
+    .header-main{
+      width:690px;
     }
     .header-main h1, .call-to-action h1, .header-main-phone h1{
       font-size:41px;
@@ -612,10 +499,6 @@ body.early_adopters {
       font-size:28px;
       background:none;
     }
-    .full-width-features h3{
-      margin-bottom:20px;
-      margin-top:50px;
-    }
     .sign-up-form{
       margin-bottom:50px;
     }
@@ -623,17 +506,11 @@ body.early_adopters {
       -webkit-border-radius: 5px;
       -moz-border-radius: 5px;
       border-radius: 5px;
-      width:100%!important;
+      width:50%!important;
       padding:20px 0px!important;
       position:static!important;
     }
-    .sign-up-form input[type="submit"]{
-      background-image:none!important;
-    }
-    .sign-up-form input[type="email"]{
-      text-align:center;
-      margin-bottom:20px;
-    }
+
     .footer{
       text-align:center;
     }
@@ -650,26 +527,13 @@ body.early_adopters {
     .footer .links li a{
       margin:0px auto;
     }
-    .full-width-features h3 {
-      margin-top:10px;
-    }
-    .full-width-features p{
-      margin-bottom:50px;
-    }
-    .feature-1, .feature-2 {
-      padding-bottom:70px!important;
-    }
-    .feature-1 .container, .feature-2 .container {
-      padding:20px;
-    }
-
     .footer .copyright{
       float: none;
     }
     .footer .social-policies{
       float:none;
       margin: 0 auto;
-      padding-left:80px;
+      text-align: center;
     }
    }
 }
