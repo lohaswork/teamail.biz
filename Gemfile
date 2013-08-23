@@ -38,7 +38,7 @@ group :test, :development do
   gem 'poltergeist'
 end
 
-gem 'bootstrap-sass'
+gem 'anjlab-bootstrap-rails', '>= 3.0.0.0', :require => 'bootstrap-rails'
 gem 'video-js-rails'
 gem 'font-awesome-rails'
 gem 'rest-client'
