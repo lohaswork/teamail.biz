@@ -17,7 +17,7 @@
   <body id="<%= "%s_%s" % [controller_name, action_name]%>" class="<%= "%s" % [controller_name]%>">
     <div class="page-wrapper">
       <div class="agency-wrap">
-        <div class="container page-container home-container">
+        <div class="container home-container">
           <div id='myModal', class='modal fade'>
           </div>
           <div class="row">
@@ -37,7 +37,7 @@
                 </div>
               </div>
 
-              <div class="header-main hidden-sm">
+              <div class="header-main">
                 <div class="slogan">
                   <h1><%= image_tag "top-para.png" %></h1>
                   <h2>life of health and sustainability</h2>
@@ -58,7 +58,7 @@
           </div>
         </div>
       </div>
-      <a href="#feature-set" class="down-tab hidden-sm" name="feature-set">
+      <a href="#feature-set" class="down-tab" name="feature-set">
         了解更多 &nbsp&nbsp<i class="icon-chevron-down"></i>
       </a>
       <div class="full-width-features feature-1">
@@ -67,35 +67,37 @@
             <div class="col-md-12">
               <%= image_tag "logo-circle-grey-big.png" %>
               <h1>专为中小团队打造</h1>
-              <h2>乐活工场致力于通过科技产品及服务帮助人们提高工作效率<br class="hidden-sm"> 让大家能够有更多的时间用于生活、健康和公益</h2>
+              <h2>乐活工场致力于通过科技产品及服务帮助人们提高工作效率<br> 让大家能够有更多的时间用于生活、健康和公益</h2>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12">
               <div class="pline"><i class="icon-leaf icon-3x"></i></div>
             </div>
-            <div class="col-md-3">
+            <div class="col-xs-12 col-sm-6 col-md-3">
               <i class="icon-comments icon-2x"></i>
               <h3>轻松沟通</h3>
               <p>
                 通过LohasWork，随时随地了解项目进展，参与讨论，安排任务；网站、邮件、手机App、实时聊天，适合不同场景的行云流水般的沟通
               </p>
             </div>
-            <div class="col-md-3">
+            <div class="col-xs-12 col-sm-6 col-md-3">
               <i class="icon-lock icon-2x"></i>
               <h3>安全稳定</h3>
               <p>
                 服务搭建于健壮的公有云平台之上，数据自动备份，服务稳定可靠；专注工作，勿需担心其他琐事
               </p>
             </div>
-            <div class="col-md-3">
+            <!-- Add the extra clearfix for only the required viewport -->
+            <div class="clearfix visible-sm"></div>
+            <div class="col-xs-12 col-sm-6 col-md-3">
               <i class="icon-check-sign icon-2x"></i>
               <h3>简单易用</h3>
               <p>
                 不需复杂的用户手册，轻松上手；功能设计完全依据现有大众用户的操作习惯，最大程度降低学习成本
               </p>
             </div>
-            <div class="col-md-3">
+            <div class="col-xs-12 col-sm-6 col-md-3">
               <i class="icon-coffee icon-2x"></i>
               <h3>惬意工作</h3>
               <p>
@@ -110,35 +112,37 @@
           <div class="row">
             <div class="col-md-12">
               <h1>可靠的服务保障</h1>
-              <h2>基于稳定的公有云，可任意扩展配置 <Br class="hidden-sm">不必麻烦搭建服务器，24小时可用的云服务保障用户使用体验</h2>
+              <h2>基于稳定的公有云，可任意扩展配置 <Br>不必麻烦搭建服务器，24小时可用的云服务保障用户使用体验</h2>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12">
               <div class="pline"><i class="icon-gear icon-3x"></i></div>
             </div>
-            <div class="col-md-3">
+            <div class="col-xs-12 col-sm-6 col-md-3">
               <i class="icon-dashboard icon-2x"></i>
               <h3>快速响应</h3>
               <p>
                 可伸缩配置满足各种需求，快速响应操作，无需等待加载；电脑配置不是问题，再也不必抱怨软件运行速度慢
               </p>
             </div>
-            <div class="col-md-3">
+            <div class="col-xs-12 col-sm-6 col-md-3">
               <i class="icon-cloud icon-2x"></i>
               <h3>云端同步</h3>
               <p>
                 项目讨论、任务历史随时可查询，不必费心回忆和反复交代；文件自动云端同步，让移动硬盘成为过去
               </p>
             </div>
-            <div class="col-md-3">
+            <!-- Add the extra clearfix for only the required viewport -->
+            <div class="clearfix visible-sm"></div>
+            <div class="col-xs-12 col-sm-6 col-md-3">
               <i class="icon-search icon-2x"></i>
               <h3>一键检索</h3>
               <p>
                 专业的分词和检索技术提供给您贴心的检索服务，再不为查找而分心，轻松切换工作/休闲状态
               </p>
             </div>
-            <div class="col-md-3">
+            <div class="col-xs-12 col-sm-6 col-md-3">
               <i class="icon-envelope icon-2x"></i>
               <h3>邮件集成</h3>
               <p>
@@ -155,7 +159,7 @@
           马上加入 &nbsp&nbsp<i class="icon-circle-arrow-up icon-large"></i>
         </a>
       </div>
-      <div class="logo-circle-white">
+      <div class="logo-sep-bottom">
         <%= image_tag "logo-circle-white-1.png" %>
       </div>
       <div class="footer" name="contact">
