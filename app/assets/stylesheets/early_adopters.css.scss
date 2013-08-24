@@ -235,28 +235,20 @@ body.early_adopters {
     }
   }
   // features
+  .logo-cirle-grey{
+    margin:50px 0px 70px;
+  }
   .pline {
     height: 50px;
     width:100%;
     background:url("line-gray-gap.gif") no-repeat center center;
     margin-bottom:50px;
   }
-  .logo-cirle-grey{
-    margin:50px 0px 70px;
-  }
   .full-width-features {
-    @extend .logo-cirle-grey;
     width: auto;
     text-align: center;
     background:url("site-bg.png");
     padding:50px 0px;
-    .feature-1 {
-      padding-bottom:120px;
-    }
-    .feature-2{
-      background:url("site-bg2.png");
-      padding:130px 0px 150px;
-    }
     .container {
       margin-top:20px;
       margin:0px auto;
@@ -289,6 +281,13 @@ body.early_adopters {
       font-size:13px;
       line-height:20px;
     }
+  }
+  .feature-1 {
+    padding-bottom:120px;
+  }
+  .feature-2{
+    background:url("site-bg2.png");
+    padding:130px 0px 150px;
   }
   // call to action
   .call-to-action {
