@@ -1,5 +1,6 @@
 /*
 orange: #F57E27;
+paiting yellow: #FFD09C;
 light orange: #FBA847;
 grey: #EAE8E7;
 light green: #1ABC9C;
@@ -105,12 +106,14 @@ body.early_adopters {
     h2 {
       font-family: "Playball", cursive;
       font-size:40px;
+      background-color:rgba(25%,54%,44%,0.8);
+      filter:alpha(opacity=80);
       color:#fff;
       margin-top:20px;
-      width:500px;
+      line-height: 70px;
+      width:600px;
       text-align:center;
       margin:0px auto;
-      width:100%;
       text-align:center;
     }
     h4 {
@@ -125,7 +128,7 @@ body.early_adopters {
       font-family:"Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
       color:#fff;
       font-size:17px;
-      margin-top:40px;
+      margin-top:90px;
       line-height:23px;
       margin-bottom:20px;
     }
@@ -133,7 +136,7 @@ body.early_adopters {
   .slogan {
     clear: both;
     text-align: center;
-    height: 420px;
+    padding-bottom: 10px;
   }
   .vplayer {
     width: 670px;
