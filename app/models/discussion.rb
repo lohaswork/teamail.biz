@@ -13,6 +13,7 @@ class Discussion < ActiveRecord::Base
       discussion.creator = User.find(user_id)
       discussion.topic = Topic.find(topic_id)
       discussion.save!
+      discussion
     end
   end
 

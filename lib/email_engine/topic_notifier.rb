@@ -27,10 +27,10 @@ module EmailEngine
     def new_topic_notification_text
       <<-EMAIL
       <html><body>
-      你好：#{topic.creator}创建了新话题：
+      你好：#{topic.creator.email}创建了新话题：
       <p>#{topic.title}</p>
       <div>内容：</div>
-      <div>topic.content<div>
+      <div>#{topic.content}<div>
       </body></html>
       EMAIL
     end
