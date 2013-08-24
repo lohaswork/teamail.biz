@@ -128,6 +128,7 @@ GEM
     json (1.8.0)
     json_pure (1.8.0)
     kgio (2.8.0)
+    libv8 (3.16.14.3)
     listen (1.2.2)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
@@ -237,6 +238,7 @@ GEM
       ruby2ruby (~> 2.0.2)
       ruby_parser (~> 3.1.1)
       sexp_processor
+    ref (1.0.5)
     rest-client (1.6.7)
       mime-types (>= 1.16)
     rspec (2.14.1)
@@ -285,6 +287,9 @@ GEM
     term-ansicolor (1.2.2)
       tins (~> 0.8)
     text-table (1.2.3)
+    therubyracer (0.12.0)
+      libv8 (~> 3.16.14.0)
+      ref
     thor (0.18.1)
     tilt (1.4.1)
     tins (0.8.3)
@@ -335,6 +340,7 @@ DEPENDENCIES
   selenium-webdriver
   spork
   tailor
+  therubyracer
   uglifier (>= 1.0.3)
   unicorn
   unicorn-worker-killer
