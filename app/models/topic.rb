@@ -14,13 +14,14 @@ class Topic < ActiveRecord::Base
       current_user = User.find(user_id)
       topic.organization = Organization.find(organization_id)
       topic.users << current_user
-      if topic.valid?
-        content = content.blank? ? "如题" : content
-        discussion = Discussion.create(:content=>content)
-        discussion.creator = current_user
-      end
-      topic.discussions << discussion if discussion
-      topic.save!
+      raise ValidationError.new(topic.errors.full_messages) if !topic.valid?
+      content = content.blank? ? "如题" : content
+      discussion = Discussion.new(:content=>content)
+      raise ValidationError.new(discussion.errors.full_messages) if !discussion.valid?
+      discussion.creator = current_user
+      discussion.save
+      topic.discussions << discussion
+      topic.save
       topic
     end
   end

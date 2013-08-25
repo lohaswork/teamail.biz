@@ -1,11 +1,15 @@
-config/unicorn.rb
 config/database.yml
 vendor/bundle
 lib/config/local.rb
 tmp/*
+!tmp/pids
+!tmp/sockets
+!tmp/pids/unicorn.pid
 !tmp/.gitkeep
 log/*
 !log/.gitkeep
+!log/unicorn.stderr.log
+!log/unicorn.stdout.log
 config/secrets.rb
 bin
 .bundle
@@ -16,7 +20,6 @@ db/*.sqlite3
 dump.rdb
 .idea
 Gemfile.local
-.rvmrc
 vendor/checkouts
 public/assets
 test_reports
