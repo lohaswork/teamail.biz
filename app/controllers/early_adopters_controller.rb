@@ -10,7 +10,7 @@ class EarlyAdoptersController < ApplicationController
 
   def create
     email = params[:email]
-    EarlyAdopter.create!(:email => email)
+    EarlyAdopter.create_early_adopter(email)
     render :json => {
                     :update => {
                                   'early-adopter-from' => render_to_string(:partial => 'apply_form',

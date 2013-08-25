@@ -1,6 +1,6 @@
 //TODO: Have noe use CoffeeScript temporarily, translate this to coffee later
 function showErrors(data){
-  $('.error').html(data.errors).show();
+  $('.error').html(data.message).show();
 }
 
 $(document)
