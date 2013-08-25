@@ -10,9 +10,10 @@ class Discussion < ActiveRecord::Base
   class << self
     def create_discussion(user_id, topic_id, content)
       discussion = new(:content => content)
+      raise ValidationError.new(discussion.errors.full_messages) if !discussion.valid?
       discussion.creator = User.find(user_id)
       discussion.topic = Topic.find(topic_id)
-      discussion.save!
+      discussion.save
     end
   end
 
