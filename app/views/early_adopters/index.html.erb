@@ -15,6 +15,8 @@
     <%= yield(:head) %>
   </head>
   <body>
+    <div id='myModal', class='modal fade'>
+    </div>
     <div class="navbar navbar-fixed-top">
       <div class="nav-inner">
         <div class="container">
@@ -25,11 +27,13 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a href="#" class="nav-brand"><%= image_tag "logo-on-top.png" %></a>
+            <div class="logo-container">
+              <a href="#" class="nav-brand"><%= image_tag "logo-on-top.png" %></a>
+            </div>
           </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav nav-pills navbar-right navbar-teamind">
               <li><a href="#">首页</a></li>
               <li><a href="#">博客</a></li>
               <li><a href="#">关于我们</a></li>
@@ -43,14 +47,18 @@
     <div class="hero-unit">
       <div class="container">
         <div class="row">
-          <div class="col-md-12">
-            <div class="vplayer">
+          <div class="col-xs-12 col-lg-7 video-player">
+            <div class="vplayer-box">
               <%= video_player src: { mp4: 'videos/LohasWork-bestshow.mp4' },
                                controls: true,
                                width: "640",
                                height: "360",
                                preload: "auto"%>
             </div>
+          </div>
+          <div class="col-xs-12 col-lg-5 intro">
+            <%= image_tag "top-para.png" %>
+            <%= render :partial=>'apply_form'%>
           </div>
         </div>
       </div>
@@ -65,7 +73,7 @@
               <%= image_tag "logo-with-word-grey.png" %>
             </a>
             <p>
-              Made by the team at <a href="http://lohaswork.com">LohasWork, Ltd</a>. Copyright 2013. <a href="http://lohaswork.com/terms-of-service">Terms of Service</a>
+              Made by the team at <a href="http://lohaswork.com">LohasWork, Ltd</a>. Copyright 2013.
             </p>
           </div>
           <div class="col-md-4">
