@@ -14,8 +14,7 @@
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
   </head>
-  <body id="<%= "%s_%s" % [controller_name, action_name]%>" class="<%= "%s" % [controller_name]%>">
-    <div class="container-fluid">
+  <body>
       <header class="navbar navbar-fixed-top">
         <nav class="navbar-inner">
           <div class="container">
@@ -39,7 +38,6 @@
           </div>
         </div> <!--! end of .container -->
       </div> <!--! end of #main -->
-    </div>
     <%= javascript_include_tag "application" %>
   </body>
 </html>
