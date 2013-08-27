@@ -6,6 +6,8 @@ grey: #EAE8E7;
 light green: #1ABC9C;
 dark green:#16A085;
 blue: #428BCA;
+venera navbar: #E7EADF;
+teamind navbar: #8E958A;
 */
 
 body {
@@ -16,6 +18,40 @@ body {
   font-size: 14px;
   color: #333;
 
+  a:hover{
+    text-decoration: none;
+  }
+  .scrolltop {
+    background-color: #F1F1F1;
+    border: 1px solid darkGray;
+    border-radius: 100px 100px 100px 100px;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    display: none;
+    font-size: 17px;
+    font-weight: 600;
+    height: 40px;
+    width: 40px;
+    opacity: 0.6;
+    filter: alpha(opacity=60);
+    position: fixed;
+    right: 10%;
+    /*text-indent: -9999px;*/
+    top: 65%;
+    z-index: 33;
+    span {
+      position: relative;
+      top: 7px;
+      left: 5px;
+    }
+  }
+  .navbar-toggle {
+    margin-top: 22px;
+    border: 2px solid #fff;
+  }
+  .icon-bar {
+    background-color:#fff;
+  }
   .nav-inner {
     border-bottom: 0 none;
     -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
@@ -44,7 +80,13 @@ body {
   }
   .navbar-teamind {
     margin-top: 20px;
+    font-size: 17px;
+    font-weight: 600;
     a {
+      margin-left: 5px;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      border-radius: 5px;
       color: #FFFFFF;
       &:hover {
         color: #428BCA!important;
@@ -55,7 +97,8 @@ body {
 
   /* Hero unit */
   .hero-unit {
-    padding-top: 75px;
+    padding-top: 55px;
+    padding-bottom: 50px;
     background: #ffffff; /* Old browsers */
     background: -moz-linear-gradient(top,  #ffffff 1%, #f9f9f9 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#ffffff), color-stop(100%,#f9f9f9)); /* Chrome,Safari4+ */
@@ -65,7 +108,7 @@ body {
     background: linear-gradient(to bottom,  #ffffff 1%,#f9f9f9 100%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f9f9f9',GradientType=0 ); /* IE6-9 */
     height: auto;
-    padding-bottom: 70px;
+    border-bottom: 1px solid #d1d2d4;
     box-shadow: 0px 3px 8px 0px #e7e7e7;
     text-align: center;
   }
@@ -76,20 +119,29 @@ body {
   .vplayer-box {
     text-align: center;
     width: 656px;
-    border: 8px solid #006F00;
+    border: 8px solid #8E958A;
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
     border-radius: 8px;
   }
 
   /* intro */
+  .intro-wraper {
+    background: url(content_bg-1.jpg) 0 0 repeat;
+    hr {
+      width: 30%;
+      border-top: 1px solid #BEC0C3;
+      border-bottom: 2px solid white;
+    }
+  }
   .intro {
     position: relative;
-    top: 45px;
+    margin-top: 45px;
     text-align: center;
-    h1 {
-      font-weight: 900;
-      font-size: 49px;
+    h3 {
+      font-family: Helvetica, Arial, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+      line-height: 35px;
+      margin: 40px auto 50px;
     }
   }
 
@@ -98,7 +150,7 @@ body {
   .apply-form {
     position: relative;
     padding-top:90px;
-    margin-bottom: 20px;
+    margin-bottom: 60px;
   }
   .sign-up-form{
     margin-top:20px;
@@ -159,13 +211,24 @@ body {
       float: left;
     }
     .social {
-      margin-top: 16px;
+      margin-top: 15px;
       float: left;
-      margin-left: 20px;
-      border-radius: 22px;
+      margin-left: 15px;
+      height: 38px;
+      width: 38px;
+      border-radius: 20px;
       &:hover {
         background-color: #1A1E25;
       }
+    }
+    .weibo {
+      padding-top: 6px;
+      padding-left: 9px;
+    }
+    .douban {
+      margin-left: 20px;
+      padding-top: 6px;
+      padding-left: 6px;
     }
   }
 
