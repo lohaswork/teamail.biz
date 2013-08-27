@@ -14,14 +14,14 @@
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
   </head>
-  <body>
+  <body id="earlyAdopters">
     <div id='myModal', class='modal fade'>
     </div>
     <a href="#" class="scrolltop back2top">
       <i class="icon-arrow-up icon-large"></i>
     </a>
     <header class="navbar navbar-fixed-top" role="navigation">
-      <nav class="nav-inner">
+      <nav class="navbar-inner">
         <div class="container">
           <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -61,8 +61,7 @@
                                controls: true,
                                width: "640",
                                height: "360",
-                               preload: "auto",
-                               poster: image_path("video-holder.png")%>
+                               preload: "auto"%>
             </div>
           </div>
         </div>

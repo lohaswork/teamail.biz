@@ -10,9 +10,9 @@ venera navbar: #E7EADF;
 teamind navbar: #8E958A;
 */
 
-body {
+body#earlyAdopters {
   position: relative;
-  padding-top: 70px;
+  padding-top: 60px;
   font-family:Helvetica, Arial, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
   -webkit-font-smoothing: antialiased;
   font-size: 14px;
@@ -47,6 +47,9 @@ body {
       top:-3px;
     }
   }
+  .scroll {
+    opacity: 0.85;
+  }
   .navbar-toggle {
     margin-top: 22px;
     border: 2px solid #fff;
@@ -54,22 +57,24 @@ body {
   .icon-bar {
     background-color:#fff;
   }
-  .nav-inner {
+  .navbar-inner {
+    height: 60px;
     border-bottom: 0 none;
     -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
     -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
     filter: none;
-    padding: 7px 0 8px 0;
-    /*background: none repeat scroll 0 0 #8E958A;*/
-    background: url("nav_bg.jpg") 0 0 repeat;
+    padding: 0 auto;
+    background: none repeat scroll 0 0 #000;
   }
   .logo-container {
+    position: relative;
+    top: -12px;
     h1 {
-    color: #fff!important;
-    /* font-family: 'Chau Philomene One', LiSu; */
-    font-weight: 700;
-    float: left;
+      color: #fff!important;
+      /* font-family: 'Chau Philomene One', LiSu; */
+      font-weight: 700;
+      float: left;
     }
     h2 {
       color: #fff!important;
@@ -77,21 +82,21 @@ body {
       float: left;
       position: relative;
       left: 12px;
-      top: 3px;
     }
   }
   .navbar-teamind {
-    margin-top: 20px;
+    margin-top: 3px;
     font-size: 17px;
     font-weight: 600;
     a {
-      margin-left: 5px;
+      margin-left: 15px;
       -webkit-border-radius: 5px;
       -moz-border-radius: 5px;
       border-radius: 5px;
       color: #FFFFFF;
       &:hover {
-        color: #428BCA!important;
+        background-color: #EAE8E7;
+        color: #666!important;
       }
     }
   }
@@ -99,16 +104,10 @@ body {
 
   /* Hero unit */
   .hero-unit {
-    padding-top: 55px;
+    padding-top: 45px;
     padding-bottom: 50px;
-    background: #ffffff; /* Old browsers */
-    background: -moz-linear-gradient(top,  #ffffff 1%, #f9f9f9 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#ffffff), color-stop(100%,#f9f9f9)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top,  #ffffff 1%,#f9f9f9 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top,  #ffffff 1%,#f9f9f9 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top,  #ffffff 1%,#f9f9f9 100%); /* IE10+ */
-    background: linear-gradient(to bottom,  #ffffff 1%,#f9f9f9 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f9f9f9',GradientType=0 ); /* IE6-9 */
+    background: url(colorful-texture.jpg) no-repeat;
+    background-size:100% 100%;
     height: auto;
     border-bottom: 1px solid #d1d2d4;
     box-shadow: 0px 3px 8px 0px #e7e7e7;
@@ -130,6 +129,7 @@ body {
   /* intro */
   .intro-wraper {
     background: url(content_bg-1.jpg) 0 0 repeat;
+    padding-bottom: 80px;
     hr {
       width: 30%;
       border-top: 1px solid #BEC0C3;
@@ -138,7 +138,7 @@ body {
   }
   .intro {
     position: relative;
-    margin-top: 45px;
+    margin-top: 65px;
     text-align: center;
     h3 {
       font-family: Helvetica, Arial, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
@@ -151,12 +151,9 @@ body {
   textarea, input { outline: none; }
   .apply-form {
     position: relative;
-    padding-top:90px;
-    margin-bottom: 60px;
+    margin-top: 120px;
   }
   .sign-up-form{
-    margin-top:20px;
-    position:relative;
     input[type="email"], input[type="text"] {
       background:#fff;
       border: 2px solid #1ABC9C;

@@ -12,7 +12,7 @@
  *= require font-awesome
  *= require video-js
  *= require_tree ./share
- *= require_tree .
+ *= require_directory .
  */
 
 @import "twitter/bootstrap";
@@ -28,14 +28,4 @@
   -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
   box-shadow: 0 1px 2px rgba(0,0,0,.15);
   min-height: 800px
-}
- .error{
-  display: none;
-  text-align: left;
-  max-width: 420px;
-  border: solid;
-  color: #B94A48;
-  background-color: #F2DEDE;
-  margin: 20px auto;
-  padding: 8px 14px 8px 14px
 }

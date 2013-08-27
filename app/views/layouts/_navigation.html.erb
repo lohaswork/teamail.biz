@@ -8,8 +8,8 @@
   </button>
   <div class="logo-container">
     <a href="#" class="nav-brand">
-      <h1>TeaMind.biz</h1>
-      <h2>茗想<h2>
+      <h4>TeaMind.biz</h4>
+      <h4>茗想</h4>
       <!-- <%= image_tag "logo-on-top.png" %> -->
     </a>
   </div>
@@ -17,7 +17,7 @@
 
 <!-- Collect the nav links, forms, and other content for toggling -->
 <div class="collapse navbar-collapse navbar-ex1-collapse">
-  <ul class="nav navbar-nav navbar-right navbar-teamind">
+  <ul class="navbar-nav navbar-right navbar-teamind">
     <li><%= link_to "Home", root_path, :class => 'brand' %></li>
     <% if authenticated?%>
     <li><%= current_user.email%></li>
