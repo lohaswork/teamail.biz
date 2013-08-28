@@ -1,4 +1,21 @@
 /*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require fontdiao
+ *= require font-awesome
+ *= require video-js
+ *= require_directory ./share
+ */
+
+/*
 orange: #F57E27;
 paiting yellow: #FFD09C;
 light orange: #FBA847;
@@ -10,7 +27,9 @@ venera navbar: #E7EADF;
 teamind navbar: #8E958A;
 */
 
-body#earlyAdopters {
+@import "twitter/bootstrap";
+
+body {
   position: relative;
   padding-top: 60px;
   font-family:Helvetica, Arial, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
@@ -20,6 +39,16 @@ body#earlyAdopters {
 
   a:hover{
     text-decoration: none;
+  }
+  .error {
+    display: none;
+    text-align: left;
+    max-width: 420px;
+    border: solid;
+    color: #B94A48;
+    background-color: #F2DEDE;
+    margin: 20px auto;
+    padding: 8px 15px;
   }
   .scrolltop {
     background-color: #F1F1F1;
@@ -51,7 +80,7 @@ body#earlyAdopters {
     opacity: 0.85;
   }
   .navbar-toggle {
-    margin-top: 22px;
+    margin-top: 12px;
     border: 2px solid #fff;
   }
   .icon-bar {
@@ -82,6 +111,21 @@ body#earlyAdopters {
       float: left;
       position: relative;
       left: 12px;
+      top: 3px;
+    }
+  }
+  .navbar-collapse {
+    position:relative;
+    top:-4px;
+    ul {
+      padding-top:5px;
+      padding-bottom:5px;
+      background-color: #000;
+      li {
+        a {
+          margin-right: 15px;
+        }
+      }
     }
   }
   .navbar-teamind {
@@ -221,13 +265,13 @@ body#earlyAdopters {
       }
     }
     .weibo {
-      padding-top: 6px;
-      padding-left: 9px;
+      padding-top: 4px;
+      padding-left: 5px;
     }
     .douban {
       margin-left: 20px;
-      padding-top: 6px;
-      padding-left: 6px;
+      padding-top: 4px;
+      padding-left: 5px;
     }
   }
 

@@ -4,17 +4,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= content_for?(:title) ? yield(:title) : "LohasWork" %></title>
-    <meta name="keywords" content="乐活工场 团队协作 项目管理 SaaS">
-    <meta name="description" content="乐活工场致力于打造出色的团队协作工具">
+    <meta name="keywords" content="Teamind 茗想 团队协作 项目管理 SaaS">
+    <meta name="description" content="TeaMind茗想是为中小团队定制的团队协作和项目管理工具">
     <meta name="author" content="LohasWork">
-    <%= stylesheet_link_tag "application", :media => "all" %>
+    <%= stylesheet_link_tag "early_adopters", :media => "all" %>
     <!--[if lt IE 8]>
     <%= stylesheet_link_tag "font-awesome-ie7.min.css", media: "all" %>
     <![endif]-->
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
   </head>
-  <body id="earlyAdopters">
+  <body>
     <div id='myModal', class='modal fade'>
     </div>
     <a href="#" class="scrolltop back2top">
@@ -71,7 +71,7 @@
       <div class="container">
         <div class="row">
           <div class="col-xs-12 intro">
-            <h3>TeaMind 是一款与 Email 深度集成的团队协作工具<br>专为中小团队定制</h3>
+            <h3>TeaMind 是一款简洁、易用的团队协作工具<br>与Email深度集成 &nbsp专为中小团队定制</h3>
             <%= image_tag "top-para.png" %>
             <%= render :partial=>'apply_form'%>
           </div>
@@ -96,10 +96,10 @@
           <div class="col-md-3 col-md-offset-5">
             <h3>社交媒体</h3>
             <a href="http://site.douban.com/219120/" class="social douban">
-              <i class="icon-douban icon-large"></i>
+              <i class="icon-douban icon-2x"></i>
             </a>
             <a href="http://weibo.com/u/3732217665/" class="social weibo">
-              <i class="icon-weibo icon-large"></i>
+              <i class="icon-weibo icon-2x"></i>
             </a>
           </div>
         </div>

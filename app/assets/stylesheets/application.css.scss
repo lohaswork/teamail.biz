@@ -10,12 +10,13 @@
  *
  *= require_self
  *= require font-awesome
- *= require video-js
- *= require_tree ./share
- *= require_directory .
+ *= require_directory ./share
  */
 
-@import "twitter/bootstrap";
+/* This file is currently abandoned.
+ * Demo pages use manifest of early_adopters.css.scss
+ * Product pages use manifest of layout.css.scss
+ */
 
 .content {
   background-color: #eee;
