@@ -1,3 +1,5 @@
+//= require video-js
+
 $(function () {
     $(window).scroll(function(){
         // add navbar opacity on scroll

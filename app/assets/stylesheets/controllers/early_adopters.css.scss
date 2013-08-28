@@ -1,21 +1,4 @@
 /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the top of the
- * compiled file, but it's generally better to create a new file per style scope.
- *
- *= require_self
- *= require fontdiao
- *= require font-awesome
- *= require video-js
- *= require_directory ./share
- */
-
-/*
 orange: #F57E27;
 paiting yellow: #FFD09C;
 light orange: #FBA847;
@@ -26,8 +9,6 @@ blue: #428BCA;
 venera navbar: #E7EADF;
 teamind navbar: #8E958A;
 */
-
-@import "twitter/bootstrap";
 
 body {
   position: relative;
@@ -150,7 +131,7 @@ body {
   .hero-unit {
     padding-top: 45px;
     padding-bottom: 50px;
-    background: url(colorful-texture.jpg) no-repeat;
+    background: image-url("colorful-texture.jpg") no-repeat;
     background-size:100% 100%;
     height: auto;
     border-bottom: 1px solid #d1d2d4;
@@ -172,7 +153,7 @@ body {
 
   /* intro */
   .intro-wraper {
-    background: url(content_bg-1.jpg) 0 0 repeat;
+    background: image-url("content_bg-1.jpg") 0 0 repeat;
     padding-bottom: 80px;
     hr {
       width: 30%;
@@ -246,7 +227,7 @@ body {
 
   /* footer */
   .footer {
-    background: url("footer_bg.jpg") 0 0 repeat;
+    background: image-url("footer_bg.jpg") 0 0 repeat;
     min-height: 140px;
     color: #fff;
     padding-top: 35px;
