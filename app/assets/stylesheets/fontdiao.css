@@ -7,7 +7,6 @@ Font Custom - icon webfonts made simple
 @font-face {
   font-family: "fontdiao";
 
-
   src: url("fontdiao.eot?#iefix&v=0.0.6") format("embedded-opentype"),
        url("fontdiao.woff?v=0.0.6") format("woff"),
        url("fontdiao.ttf?v=0.0.6") format("truetype"),
