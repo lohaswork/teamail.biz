@@ -9,11 +9,13 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
-*= require font-awesome
+ *= require font-awesome
  *= require video-js
  *= require_tree ./share
  *= require_directory .
  */
+
+@import "twitter/bootstrap";
 
 .content {
   background-color: #eee;
@@ -35,4 +37,10 @@
   background-color: #F2DEDE;
   margin: 20px;
   padding: 8px 14px 8px 14px
+}
+#main{
+  margin-top: 30px;
+}
+#new-topic-form {
+  display: none;
 }

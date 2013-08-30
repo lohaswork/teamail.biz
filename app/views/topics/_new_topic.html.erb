@@ -3,7 +3,7 @@
     <div class='row'>
       <%= link_to('创建新话题', '#', :id => 'new-topic-button', :class=>"btn offset6")%>
     </div>
-    <div id='new-topic-form', class='row top-buffer left-buffer hide'>
+    <div id='new-topic-form', class='row top-buffer left-buffer'>
       <%= form_tag topics_path, :method => "post", :class=>"form-horizontal", :remote => true do %>
         <div class="control-group">
           <%= text_field_tag :title, nil, :class=>"span8 input-large", :placeholder=>"标题"%>
