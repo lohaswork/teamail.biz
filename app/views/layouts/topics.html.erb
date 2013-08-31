@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : "TeaMind.biz" %></title>
+    <meta name="keywords" content="Teamind 茗想 团队协作 项目管理 SaaS">
+    <meta name="description" content="TeaMind茗想是为中小团队定制的团队协作和项目管理工具">
+    <meta name="author" content="LohasWork">
+    <%= stylesheet_link_tag "application", :media => "all" %>
+    <%= stylesheet_link_tag "app", :media => "all" %>
+    <!--[if lt IE 8]>
+    <%= stylesheet_link_tag "font-awesome-ie7.min.css", media: "all" %>
+    <![endif]-->
+    <%= javascript_include_tag "application" %>
+    <%= javascript_include_tag "controllers/topics" %>
+    <%= csrf_meta_tags %>
+    <%= yield(:head) %>
+  </head>
+  <body>
+    <%= render 'layouts/navigation' %>
+    <div id="main" role="main">
+      <div class="container">
+        <div class="content">
+          <div id='myModal', class='lohas-modal hide'>
+          </div>
+           <div class="row">
+            <div class="span12">
+              <%= render 'shared/messages'%>
+              <%= yield %>
+            </div>
+          </div>
+        </div>
+      </div> <!--! end of .container -->
+    </div> <!--! end of #main -->
+    <%= render 'layouts/footer' %>
+  </body>
+</html>

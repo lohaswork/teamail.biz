@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : "TeaMind.biz" %></title>
+    <meta name="keywords" content="Teamind 茗想 团队协作 项目管理 SaaS">
+    <meta name="description" content="TeaMind茗想是为中小团队定制的团队协作和项目管理工具">
+    <meta name="author" content="LohasWork">
+    <%= stylesheet_link_tag "application", :media => "all" %>
+    <%= stylesheet_link_tag "controllers/early_adopters", :media => "all" %>
+    <!--[if lt IE 8]>
+    <%= stylesheet_link_tag "ie/font-awesome-ie7.min.css", media: "all" %>
+    <![endif]-->
+    <%= javascript_include_tag "application" %>
+    <%= javascript_include_tag "controllers/early_adopters" %>
+    <%= csrf_meta_tags %>
+    <%= yield(:head) %>
+  </head>
+  <body>
+    <%= yield %>
+  </body>
+</html>

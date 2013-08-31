@@ -22,5 +22,6 @@ dump.rdb
 Gemfile.local
 vendor/checkouts
 public/assets
+public/videos/*
 test_reports
 coverage/*

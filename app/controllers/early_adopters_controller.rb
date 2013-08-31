@@ -3,8 +3,6 @@ class EarlyAdoptersController < ApplicationController
   def index
     if authenticated?
       redirect_to welcome_path
-    else
-      render :layout => false
     end
   end
 
