@@ -15,6 +15,11 @@
     <![endif]-->
     <%= javascript_include_tag "application" %>
     <%= javascript_include_tag "controllers/early_adopters" %>
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <%= javascript_include_tag "ie/html5shiv.js" %>
+        <%= javascript_include_tag "ie/respond.min.js" %>
+    <![endif]-->
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
   </head>

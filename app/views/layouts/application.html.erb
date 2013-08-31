@@ -14,6 +14,10 @@
     <%= stylesheet_link_tag "font-awesome-ie7.min.css", media: "all" %>
     <![endif]-->
     <%= javascript_include_tag "application" %>
+    <!--[if lt IE 9]>
+        <%= javascript_include_tag "ie/html5shiv.js" %>
+        <%= javascript_include_tag "ie/respond.min.js" %>
+    <![endif]-->
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
   </head>

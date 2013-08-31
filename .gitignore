@@ -3,6 +3,7 @@ vendor/bundle
 lib/config/local.rb
 tmp/*
 !tmp/pids
+tmp/pids/server.pid
 !tmp/sockets
 !tmp/pids/unicorn.pid
 !tmp/.gitkeep
