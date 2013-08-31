@@ -212,8 +212,8 @@ body {
       height:60px;
       width:160px;
       font-size:19px;
+      font-family:Helvetica, Arial, "Hiragino Sans GB", "WenQuanYi Micro Hei", sans-serif;
       margin:0px;
-      font-weight:500;
       color:#fff;
       padding-right:20px;
       &:hover {
@@ -233,30 +233,41 @@ body {
     min-height: 140px;
     color: #fff;
     padding-top: 35px;
+    p {
+      font-size: 14px;
+    }
     .social {
       margin-top: 15px;
+    }
+    .weibo {
       float: left;
-      margin-left: 15px;
+      margin-left: 5px;
       height: 38px;
       width: 38px;
       border-radius: 20px;
+      padding-top: 4px;
+      padding-left: 5px;
       &:hover {
         background-color: #1A1E25;
       }
     }
-    .weibo {
-      padding-top: 4px;
-      padding-left: 5px;
-    }
     .douban {
+      float: left;
+      height: 38px;
+      width: 38px;
+      border-radius: 20px;
       margin-left: 20px;
       padding-top: 4px;
       padding-left: 5px;
+      &:hover {
+        background-color: #1A1E25;
+      }
     }
     .icp {
+      float: left;
       position:relative;
-      top: 24px;
-      left: 20px;
+      top: 10px;
+      left: 10px;
     }
   }
 }
