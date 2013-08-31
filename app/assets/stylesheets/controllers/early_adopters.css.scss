@@ -94,9 +94,9 @@ body {
       top: 3px;
     }
   }
-  .navbar-collapse {
-    position:relative;
-    top:-4px;
+  .navbar-teamind {
+    font-size: 17px;
+    font-weight: 600;
     ul {
       padding-top:5px;
       padding-bottom:5px;
@@ -104,23 +104,16 @@ body {
       li {
         a {
           margin-right: 15px;
+          margin-left: 15px;
+          -webkit-border-radius: 5px;
+          -moz-border-radius: 5px;
+          border-radius: 5px;
+          color: #FFFFFF;
+          &:hover {
+            background-color: #EAE8E7;
+            color: #666!important;
+          }
         }
-      }
-    }
-  }
-  .navbar-teamind {
-    margin-top: 3px;
-    font-size: 17px;
-    font-weight: 600;
-    a {
-      margin-left: 15px;
-      -webkit-border-radius: 5px;
-      -moz-border-radius: 5px;
-      border-radius: 5px;
-      color: #FFFFFF;
-      &:hover {
-        background-color: #EAE8E7;
-        color: #666!important;
       }
     }
   }
@@ -212,7 +205,7 @@ body {
       height:60px;
       width:160px;
       font-size:19px;
-      font-family:Helvetica, Arial, "Hiragino Sans GB", "WenQuanYi Micro Hei", sans-serif;
+      font-family:Helvetica, Arial, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
       margin:0px;
       color:#fff;
       padding-right:20px;
