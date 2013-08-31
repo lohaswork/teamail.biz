@@ -61,9 +61,6 @@ LohasWorkCom::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
-    # Add font-awesome in asset pipeline
-  config.assets.precompile += %w( ie/font-awesome-ie7.min.css )
-
   # Using font in asset pipeline
   # Add the fonts path
   config.assets.paths << Rails.root.join('app', 'assets', 'font')

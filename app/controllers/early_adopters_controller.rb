@@ -11,7 +11,7 @@ class EarlyAdoptersController < ApplicationController
     EarlyAdopter.create_early_adopter(email)
     render :json => {
                     :update => {
-                                  'early-adopter-from' => render_to_string(:partial => 'apply_form',
+                                  'early-adopter-form' => render_to_string(:partial => 'apply_form',
                                                                           :layout => false)
                                 },
                     :modal => render_to_string(:partial => 'create_success',

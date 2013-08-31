@@ -13,7 +13,7 @@ require 'capistrano_database_yml'
 # 6. Upload the video manually
 
 # Need change before deployment
-set :server_name, "192.168.1.114"
+set :server_name, "121.199.43.92"
 set :user, "deployer"
 set :sudo_user, "deployer"
 set :deploy_to, "/www/teamind_deploy"
@@ -22,7 +22,7 @@ set :deploy_to, "/www/teamind_deploy"
 set :application, "LohasWork.com"
 set :scm, :git
 set :repository,  "git@github.com:lohaswork/LohasWork.com"
-set :branch, "serco/for-deploy"  # Need changge to master
+set :branch, "master"  # Need changge to master
 
 # Configurations
 set :rails_env, "production"
@@ -30,16 +30,16 @@ set :deploy_via, :remote_cache
 set :use_sudo, false
 set :normalize_asset_timestamps, false
 default_run_options[:pty] = true
-set :rbenv_version, ENV['RBENV_VERSION'] || "1.9.3-p327"
+set :rbenv_version, ENV['RBENV_VERSION'] || "1.9.3-p448"
 set :default_environment, {
   'PATH' => "/home/#{user}/.rbenv/shims:/home/#{user}/.rbenv/bin:$PATH",
   'RBENV_VERSION' => "#{rbenv_version}",
 }
 
 # Roles
-role :web, "192.168.1.114"                          # Your HTTP server, Apache/etc
-role :app, "192.168.1.114"                          # This may be the same as your `Web` server
-role :db,  "192.168.1.114", :primary => true        # This is where Rails migrations will run
+role :web, "121.199.43.92"                          # Your HTTP server, Apache/etc
+role :app, "121.199.43.92"                          # This may be the same as your `Web` server
+role :db,  "121.199.43.92", :primary => true        # This is where Rails migrations will run
 
 # For Unicorn service
 set :unicorn_config, "#{current_path}/config/unicorn.rb"
@@ -58,7 +58,7 @@ namespace :deploy do
     run "chmod g+rx,u+rwx #{shared_path}/public"
     run "mkdir -p #{shared_path}/public/videos"
     run "chmod g+rx,u+rwx #{shared_path}/public/videos"
-    run "mkdir -p #{shared_path}/"
+    run "mkdir -p #{shared_path}/tmp"
     run "chmod g+rx,u+rwx #{shared_path}/tmp"
     run "mkdir -p #{shared_path}/unicorn"
     run "chmod g+rx,u+rwx #{shared_path}/unicorn"
@@ -117,7 +117,7 @@ namespace :deploy do
 
   task :setup_db, :roles => :app do
     raise RuntimeError.new('db:setup aborted!') unless Capistrano::CLI.ui.ask("About to `rake db:setup`. Are you sure to wipe the entire database (anything other than 'yes' aborts):") == 'yes'
-    run "cd #{current_path}; bundle exec rake db:setup RAILS_ENV=#{rails_env}"
+    run "cd #{current_path}; bundle exec rake db:schema:load RAILS_ENV=#{rails_env}"
   end
 
 end
