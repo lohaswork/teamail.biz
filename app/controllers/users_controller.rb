@@ -4,6 +4,11 @@ class UsersController < ApplicationController
     redirect_to welcome_path if authenticated?
   end
 
+  def topics
+    redirect_to login_path if !authenticated?
+    @topics = current_user && current_user.topics
+  end
+
   def create
     @user = User.create_with_organization(params[:user], params[:organization_name])
     EmailEngine::SignupNotifier.new(@user.id).sign_up_success_notification

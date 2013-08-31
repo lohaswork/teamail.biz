@@ -8,12 +8,17 @@
     <li>
       <%= link_to('登出', logout_path) %>
     </li>
+    <li>
+      <%= link_to('个人空间', topics_path) %>
+    </li>
   <% else  %>
     <li>
       <%= link_to('登录', login_path) %>
     </li>
   <%end%>
   <% if current_organization %>
-    <%= link_to(current_organization.name, organization_topics_path(current_organization))%>
+    <li>
+      <%= link_to(current_organization.name, organization_topics_path(current_organization))%>
+    </li>
   <% end %>
 </ul>

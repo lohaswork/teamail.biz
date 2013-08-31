@@ -143,4 +143,36 @@ describe "the topics action" do
       end
     end
   end
+  describe "user on the own topics" do
+    context "user not login in" do
+      it "should redirect to the login page" do
+        visit topics_path
+        current_path.should == login_path
+      end
+
+    describe "user already login" ,:js=>true do
+      before do
+        organization = create(:organization)
+        @user = organization.users.first
+        login_with(@user.email, @user.password)
+        page.should have_content @user.email
+      end
+      context "user go to topics page" do
+        it "should have the topic title" do
+          visit topics_path
+          page.should have_content @user.topics.first.title
+        end
+
+        context "user click on the navybar" do
+          it "should have the topic title" do
+            click_on "个人空间"
+            page.should have_content @user.topics.first.title
+          end
+        end
+
+      end
+    end
+
+    end
+  end
 end
