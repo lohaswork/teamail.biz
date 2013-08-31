@@ -66,6 +66,7 @@ LohasWorkCom::Application.configure do
   config.assets.paths << Rails.root.join('app', 'assets', 'font')
 
   # Precompile additional assets
+  config.assets.precompile += %w( /controllers/* )
   config.assets.precompile += %w( .svg .eot .woff .ttf .js .css)
 
   # Log the query plan for queries taking more than this (works
