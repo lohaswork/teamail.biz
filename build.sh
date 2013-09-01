@@ -2,6 +2,8 @@
 #reek -n app
 echo "====================================================================This is build.sh file running ====================================================================="
 who
+echo $HOME
+echo $PATH
 ruby -version
 rvm use ruby-1.9.3-p392
 ruby -version
