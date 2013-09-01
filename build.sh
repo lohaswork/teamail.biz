@@ -4,9 +4,11 @@ echo "====================================================================This i
 who
 echo $HOME
 echo $PATH
-ruby -version
+su jenkins
+echo $PATH
+ruby -v
 rvm use ruby-1.9.3-p392
-ruby -version
+ruby -v
 
 echo "====================================================================This is build.sh file running ====================================================================="
 
