@@ -9,17 +9,16 @@
     <meta name="author" content="LohasWork">
     <%= favicon_link_tag 'favicon.ico' %>
     <%= stylesheet_link_tag "application", :media => "all" %>
-    <%= stylesheet_link_tag "controllers/early_adopters", :media => "all" %>
     <!--[if lt IE 8]>
-    <%= stylesheet_link_tag "ie/font-awesome-ie7.min.css", media: "all" %>
+        <%= stylesheet_link_tag "ie/font-awesome-ie7.min.css", media: "all" %>
+    <![endif]-->
+    <!--[if IE]>
+        <%= stylesheet_link_tag "ie/ie.css", media: "all" %>
     <![endif]-->
     <%= javascript_include_tag "application" %>
-    <%= javascript_include_tag "controllers/early_adopters" %>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-        <%= javascript_include_tag "ie/html5shiv.js" %>
-        <%= javascript_include_tag "ie/respond.min.js" %>
-        <%= javascript_include_tag "ie/placeholder.js" %>
+        <%= javascript_include_tag "ie" %>
     <![endif]-->
     <%= csrf_meta_tags %>
     <%= yield(:head) %>

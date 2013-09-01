@@ -9,15 +9,15 @@
     <meta name="author" content="LohasWork">
     <%= favicon_link_tag 'favicon.ico' %>
     <%= stylesheet_link_tag "application", :media => "all" %>
-    <%= stylesheet_link_tag "app", :media => "all" %>
     <!--[if lt IE 8]>
-    <%= stylesheet_link_tag "font-awesome-ie7.min.css", media: "all" %>
+        <%= stylesheet_link_tag "ie/font-awesome-ie7.min.css", media: "all" %>
+    <![endif]-->
+    <!--[if IE]>
+        <%= stylesheet_link_tag "ie/ie.css", media: "all" %>
     <![endif]-->
     <%= javascript_include_tag "application" %>
     <!--[if lt IE 9]>
-        <%= javascript_include_tag "ie/html5shiv.js" %>
-        <%= javascript_include_tag "ie/respond.min.js" %>
-        <%= javascript_include_tag "ie/placeholder.js" %>
+        <%= javascript_include_tag "ie" %>
     <![endif]-->
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
@@ -25,7 +25,9 @@
   <body>
     <%= render 'layouts/navigation' %>
     <%= render 'shared/messages'%>
-    <%= yield %>
+    <div class="main">
+        <%= yield %>
+    </div>
     <%= render 'layouts/footer' %>
   </body>
 </html>

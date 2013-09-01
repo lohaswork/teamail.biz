@@ -15,8 +15,7 @@
         </button>
         <div class="logo-container">
           <a href="#" class="nav-brand">
-            <h1>TeaMind.biz</h1>
-            <h2>茗想<h2>
+            <%= image_tag "TeaMind.biz.Brand.png" %>
           </a>
         </div>
       </div>
@@ -53,9 +52,9 @@
   <div class="container">
     <div class="row">
       <div class="col-xs-12 intro">
-        <h3>TeaMind 是一款简洁、易用的团队协作工具<br>与Email深度集成 &nbsp专为中小团队定制</h3>
-        <%= image_tag "top-para.png" %>
         <%= render :partial=>'apply_form'%>
+         <%= image_tag "top-para.png" %>
+        <h3>TeaMind 是一款简洁、易用的团队协作工具<br>与Email深度集成&nbsp/&nbsp专为中小团队定制</h3>
       </div>
     </div>
   </div>
@@ -66,22 +65,22 @@
   <div class="container">
     <div class="row copyright">
       <div class="col-md-4">
-        <a href="http://lohaswork.com" class="logo">
-          <%= image_tag "logo-with-word-grey.png" %>
-        </a>
-        <p>
-          Made by the team at <a href="http://lohaswork.com">LohasWork, Ltd</a>. Copyright 2013.
-        </p>
+          <p>
+            Copyright &#169; LohasWork Ltd. 2013 <br>
+            All Rights Reserved
+          </p>
       </div>
       <div class="col-md-4">
       </div>
       <div class="col-md-3 col-md-offset-5 social">
+        <!--
         <a href="http://site.douban.com/219120/" class="douban">
           <i class="icon-douban icon-2x", alt="豆瓣"></i>
         </a>
         <a href="http://weibo.com/u/3732217665/" class="weibo">
           <i class="icon-weibo icon-2x"></i>
         </a>
+        -->
         <p class="icp">沪ICP备13031730号-1</p>
       </div>
     </div>
