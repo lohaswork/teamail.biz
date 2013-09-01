@@ -16,7 +16,7 @@ else
   cp config/database.yml.template config/database.yml
 fi
 
-bundle install --deployment
+bundle install --system
 if [ $? -ne 0 ]; then
   echo 'bundle install error!'
   exit 1

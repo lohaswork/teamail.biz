@@ -3,7 +3,8 @@ class DiscussionsController < ApplicationController
   def create
     content = params[:content]
     @topic = Topic.find(params[:topic_id])
-    current_organization && Discussion.create_discussion(current_user.id, @topic.id, content)
+    current_organization && discussion = Discussion.create_discussion(current_user.id, @topic.id, content)
+    EmailEngine::DiscussionNotifier.new(discussion.id).create_discussion_notification
     discussions = @topic.discussions
     render :json => {
               :update => {
