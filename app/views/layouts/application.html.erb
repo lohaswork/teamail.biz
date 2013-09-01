@@ -22,7 +22,7 @@
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
   </head>
-  <body>
+  <body class="<%= controller_name %>">
     <%= render 'layouts/navigation' %>
     <%= render 'shared/messages'%>
     <div class="main">

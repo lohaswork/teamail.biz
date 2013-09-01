@@ -23,7 +23,7 @@
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
   </head>
-  <body>
+  <body class="<%= controller_name %>">
     <%= yield %>
   </body>
 </html>
