@@ -1,14 +1,14 @@
 #!/bin/bash
 #reek -n app
 echo "====================================================================This is build.sh file running ====================================================================="
-who
-echo $HOME
-echo $PATH
-source $HOME/.bashrc
+# who
+# echo $HOME
+# echo $PATH
+# source $HOME/.bashrc
 echo $PATH
 ruby -v
-rvm use ruby-1.9.3-p392
-ruby -v
+# rvm use ruby-1.9.3-p392
+# ruby -v
 
 echo "====================================================================This is build.sh file running ====================================================================="
 
