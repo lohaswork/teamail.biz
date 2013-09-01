@@ -7,6 +7,8 @@ echo "====================================================================This i
 # source $HOME/.bashrc
 echo $PATH
 ruby -v
+gemsets
+
 # rvm use ruby-1.9.3-p392
 # ruby -v
 
@@ -28,7 +30,7 @@ else
   cp config/database.yml.template config/database.yml
 fi
 
-bundle install
+bundle install --system
 if [ $? -ne 0 ]; then
   echo 'bundle install error!'
   exit 1
