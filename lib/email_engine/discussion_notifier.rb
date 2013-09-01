@@ -10,7 +10,7 @@ module EmailEngine
     end
 
 
-    def create_discussion_notifaction(emails=deliver_emails)
+    def create_discussion_notification(emails=deliver_emails)
       gateway.send_batch_message(
         to: emails,
         subject: topic.title,
