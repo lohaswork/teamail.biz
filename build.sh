@@ -4,7 +4,7 @@ echo "====================================================================This i
 who
 echo $HOME
 echo $PATH
-su jenkins
+source $HOME/.bashrc
 echo $PATH
 ruby -v
 rvm use ruby-1.9.3-p392
