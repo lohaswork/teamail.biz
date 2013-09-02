@@ -10,7 +10,7 @@ venera navbar: #E7EADF;
 teamind navbar: #8E958A;
 */
 
-body {
+body.early_adopters {
   .scrolltop {
     background-color: #F1F1F1;
     border: 1px solid #8E958A;
@@ -36,6 +36,24 @@ body {
       position:relative;
       top:-3px;
     }
+  }
+  .nav-brand img {
+    position:relative;
+    top: 15px;
+  }
+  .navbar-inner {
+    height: 60px;
+    border-bottom: 0 none;
+    -webkit-box-shadow: 0 1px 2px rgba(100, 100, 100, 0.5);
+    -moz-box-shadow: 0 1px 2px rgba(100, 100, 100, 0.5);
+    box-shadow: 0 1px 2px rgba(100, 100, 100, 0.5);
+    filter: none;
+    padding: 0 auto;
+    background-color: #F6F6F6;
+  }
+  .logo-container {
+    position: relative;
+    top: -12px;
   }
   .navbar-teamind {
     font-size: 17px;
@@ -167,6 +185,4 @@ body {
       }
     }
   }
-
-  /* footer */
 }
