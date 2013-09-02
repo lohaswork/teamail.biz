@@ -1,0 +1,172 @@
+/*
+orange: #F57E27;
+paiting yellow: #FFD09C;
+light orange: #FBA847;
+grey: #EAE8E7;
+light green: #1ABC9C;
+dark green:#16A085;
+blue: #428BCA;
+venera navbar: #E7EADF;
+teamind navbar: #8E958A;
+*/
+
+body {
+  .scrolltop {
+    background-color: #F1F1F1;
+    border: 1px solid #8E958A;
+    color: #8E958A;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    border-radius: 100px;
+    display: none;
+    font-size: 14px;
+    font-weight: 600;
+    height: 36px;
+    line-height: 36px;
+    width: 36px;
+    opacity: 0.6;
+    filter: alpha(opacity=60);
+    position: fixed;
+    right: 10%;
+    /*text-indent: -9999px;*/
+    top: 65%;
+    z-index: 33;
+    text-align: center;
+    i {
+      position:relative;
+      top:-3px;
+    }
+  }
+  .navbar-teamind {
+    font-size: 17px;
+    font-weight: 600;
+    ul {
+      padding-top:5px;
+      padding-bottom:5px;
+      background-color: #F6F6F6;
+      li {
+        a {
+          margin-right: 15px;
+          margin-left: 15px;
+          -webkit-border-radius: 5px;
+          -moz-border-radius: 5px;
+          border-radius: 5px;
+          color: #004500;
+          &:hover {
+            background-color: #EAE8E7;
+            color: #666!important;
+          }
+        }
+      }
+    }
+  }
+  /* End of nav */
+
+  /* Hero unit */
+  .hero-unit {
+    padding-top: 105px;
+    padding-bottom: 50px;
+    background: image-url("bg.jpg") no-repeat center top;
+    background-size:100% 100%;
+    height: auto;
+    border-bottom: 1px solid #d1d2d4;
+    box-shadow: 0px 3px 8px 0px #e7e7e7;
+    text-align: center;
+  }
+  .video-player {
+    max-width: 680px;
+    left: -200px;
+    margin: 0 auto;
+  }
+  .vplayer-box {
+    text-align: center;
+    width: 656px;
+    border: 8px solid #8E958A;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+  }
+
+  /* intro */
+  .intro-wraper {
+    background: image-url("content_bg-1.jpg") 0 0 repeat;
+    padding-bottom: 80px;
+    hr {
+      width: 30%;
+      border-top: 1px solid #BEC0C3;
+      border-bottom: 2px solid white;
+    }
+  }
+  .intro {
+    position: relative;
+    margin-top: 65px;
+    text-align: center;
+    h3 {
+      font-family: Helvetica, Arial, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+      line-height: 35px;
+      margin: 100px auto 30px;
+    }
+    img {
+      margin-top: 60px;
+    }
+  }
+
+  /* form */
+  textarea, input { outline: none; }
+  .apply-form {
+    position: relative;
+    margin-top: 40px;
+    top: -25px;
+  }
+  .sign-up-form{
+    h4 {
+      font-weight: 600;
+    }
+    input[type="email"], input[type="text"] {
+      background:#fff;
+      border: 2px solid #1ABC9C;
+      -webkit-border-top-left-radius: 3px;
+      -webkit-border-bottom-left-radius: 3px;
+      -moz-border-radius-topleft: 3px;
+      -moz-border-radius-bottomleft: 3px;
+      border-top-left-radius: 3px;
+      border-bottom-left-radius: 3px;
+      padding:20px 20px;
+      height:60px;
+      width:230px;
+      color:#7f7f7f;
+      font-size:17px;
+      vertical-align: bottom;
+      margin:0px;
+    }
+    input[type="submit"] {
+      background: #1ABC9C;
+      border:none;
+      -webkit-border-top-right-radius: 3px;
+      -webkit-border-bottom-right-radius: 3px;
+      -moz-border-radius-top-right:3px;
+      -moz-border-radius-bottom-right: 3px;
+      border-top-right-radius: 3px;
+      border-bottom-right-radius: 3px;
+      position:relative;
+      left:-5px;
+      height:60px;
+      width:160px;
+      font-size:19px;
+      font-family:Helvetica, Arial, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+      margin:0px;
+      color:#fff;
+      padding-right:20px;
+      &:hover {
+        -webkit-transition: background-color 200ms linear;
+        -moz-transition: background-color 200ms linear;
+        -o-transition: background-color 200ms linear;
+        -ms-transition: background-color 200ms linear;
+        transition: background-color 200ms linear;
+        cursor:pointer;
+      }
+    }
+  }
+
+  /* footer */
+}
