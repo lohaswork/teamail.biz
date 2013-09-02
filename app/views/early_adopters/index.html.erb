@@ -1,205 +1,88 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= content_for?(:title) ? yield(:title) : "LohasWork" %></title>
-    <meta name="keywords" content="乐活工场 团队协作 项目管理 SaaS">
-    <meta name="description" content="乐活工场致力于打造出色的团队协作工具">
-    <meta name="author" content="LohasWork">
-    <%= stylesheet_link_tag "application", :media => "all" %>
-    <!--[if lt IE 8]>
-    <%= stylesheet_link_tag "font-awesome-ie7.min.css", media: "all" %>
-    <![endif]-->
-    <%= csrf_meta_tags %>
-    <%= yield(:head) %>
-  </head>
-  <body id="<%= "%s_%s" % [controller_name, action_name]%>" class="<%= "%s" % [controller_name]%>">
-    <div class="page-wrapper">
-      <div class="agency-wrap">
-        <div class="container page-container home-container">
-          <div id='myModal', class='lohas-modal hide'>
-          </div>
-          <div class="row">
-            <div class="span12">
-              <div class="top-nav">
-                <div class="logo-on-top">
-                  <a href="http://lohaswork.com" class="logo-link"></a>
-                  <%= image_tag "logo-on-top.png" %>
-                  <ul class="nav nav-home">
-                    <li>
-                      <a href="#">联系我们</a>
-                    </li>
-                    <li>
-                      <a href="#">官方微博</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div class="header-main hidden-phone">
-                <div class="slogan">
-                  <h1><%= image_tag "top-para.png" %></h1>
-                  <h2>life of health and sustainability</h2>
-                  <p>全新理念的团队协作/项目管理工具就在&nbsp<span>LohasWork<span></p>
-                  <%= render :partial=>'apply_form'%>
-
-                </div>
-                <div class="vplayer">
-                  <%= video_player src: { mp4: 'videos/LohasWorkFirstShow.mp4' },
-                                   controls: true,
-                                   width: "640",
-                                   height: "359",
-                                   preload: "auto"%>
-                </div>
-
-              </div>
-            </div>
-          </div>
+<div id='myModal', class='modal fade'>
+</div>
+<a href="#" class="scrolltop back2top">
+  <i class="icon-arrow-up icon-large"></i>
+</a>
+<header class="navbar navbar-fixed-top" role="navigation">
+  <nav class="navbar-inner">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+          <span class="sr-only">展开</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <div class="logo-container">
+          <a href="#" class="nav-brand">
+            <%= image_tag "TeaMind.biz.Brand.png" %>
+          </a>
         </div>
       </div>
-      <a href="#feature-set" class="down-tab hidden-phone" name="feature-set">
-        了解更多 &nbsp&nbsp<i class="icon-chevron-down"></i>
-      </a>
-      <div class="full-width-features feature-1">
-        <div class="container">
-          <div class="row">
-            <div class="span12">
-              <%= image_tag "logo-circle-grey-big.png" %>
-              <h1>专为中小团队打造</h1>
-              <h2>乐活工场致力于通过科技产品及服务帮助人们提高工作效率<br class="hidden-phone"> 让大家能够有更多的时间用于生活、健康和公益</h2>
-            </div>
-          </div>
-          <div class="row">
-            <div class="span12">
-              <div class="pline"><i class="icon-leaf icon-3x"></i></div>
-            </div>
-            <div class="span3">
-              <i class="icon-comments icon-2x"></i>
-              <h3>轻松沟通</h3>
-              <p>
-                通过LohasWork，随时随地了解项目进展，参与讨论，安排任务；网站、邮件、手机App、实时聊天，适合不同场景的行云流水般的沟通
-              </p>
-            </div>
-            <div class="span3">
-              <i class="icon-lock icon-2x"></i>
-              <h3>安全稳定</h3>
-              <p>
-                服务搭建于健壮的公有云平台之上，数据自动备份，服务稳定可靠；专注工作，勿需担心其他琐事
-              </p>
-            </div>
-            <div class="span3">
-              <i class="icon-check-sign icon-2x"></i>
-              <h3>简单易用</h3>
-              <p>
-                不需复杂的用户手册，轻松上手；功能设计完全依据现有大众用户的操作习惯，最大程度降低学习成本
-              </p>
-            </div>
-            <div class="span3">
-              <i class="icon-coffee icon-2x"></i>
-              <h3>惬意工作</h3>
-              <p>
-                地点不再是问题，可以在家甚至咖啡馆办公，不再忍受通勤带来的奔波之苦；边旅行边工作，完成年轻时体验世界的梦想
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="full-width-features feature-2">
-        <div class="container">
-          <div class="row">
-            <div class="span12">
-              <h1>可靠的服务保障</h1>
-              <h2>基于稳定的公有云，可任意扩展配置 <Br class="hidden-phone">不必麻烦搭建服务器，24小时可用的云服务保障用户使用体验</h2>
-            </div>
-          </div>
-          <div class="row">
-            <div class="span12">
-              <div class="pline"><i class="icon-gear icon-3x"></i></div>
-            </div>
-            <div class="span3">
-              <i class="icon-dashboard icon-2x"></i>
-              <h3>快速响应</h3>
-              <p>
-                可伸缩配置满足各种需求，快速响应操作，无需等待加载；电脑配置不是问题，再也不必抱怨软件运行速度慢
-              </p>
-            </div>
-            <div class="span3">
-              <i class="icon-cloud icon-2x"></i>
-              <h3>云端同步</h3>
-              <p>
-                项目讨论、任务历史随时可查询，不必费心回忆和反复交代；文件自动云端同步，让移动硬盘成为过去
-              </p>
-            </div>
-            <div class="span3">
-              <i class="icon-search icon-2x"></i>
-              <h3>一键检索</h3>
-              <p>
-                专业的分词和检索技术提供给您贴心的检索服务，再不为查找而分心，轻松切换工作/休闲状态
-              </p>
-            </div>
-            <div class="span3">
-              <i class="icon-envelope icon-2x"></i>
-              <h3>邮件集成</h3>
-              <p>
-                项目管理历史自动同步到Email客户端，Email也可以直接创建回复讨论，无需并行使用多套系统</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="container call-to-action">
-        <h1>即将开始内测</h1>
-        <h2>加入客户体验军团</h2>
-        <a href="#top" class="scroll-top">
-          马上加入 &nbsp&nbsp<i class="icon-circle-arrow-up icon-large"></i>
-        </a>
-      </div>
-      <div class="logo-circle-white">
-        <%= image_tag "logo-circle-white-1.png" %>
-      </div>
-      <div class="footer" name="contact">
-        <div class="container">
-          <div class="copyright">
-            <a href="http://lohaswork.com" class="logo">
-              <%= image_tag "logo-with-word-grey.png" %>
-            </a>
-            <p>
-              Made by the team at <a href="http://lohaswork.com">LohasWork, Ltd</a>. Copyright 2013. <a href="http://lohaswork.com/terms-of-service">Terms of Service</a>
-            </p>
-          </div>
-          <div class="social-policies">
-            <ul class="links">
-              <li class="contact">
-                <a href="#" class="contact-link">
-                    <i class="icon-envelope-alt icon-2x"></i>
-                </a>
-              </li>
-              <li class="blog">
-                <a href="#">
-                    <i class="icon-file-text icon-2x"></i>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                    <i class="icon-weibo icon-2x"></i>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                    <i class="icon-douban icon-2x"></i>
-                </a>
-              </li>
-            </ul>
-            <!--
-            <div class="policies">
-              <a href="http://lohaswork.com/privacy-policy">Privacy Policy</a> &bull; <a href="#">Terms of Use</a>
-            </div>
-            -->
-          </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse navbar-ex1-collapse navbar-teamind">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#" class="back2top">首页</a></li>
+          <li><a href="http://blog.lohaswork.com/">博客</a></li>
+          <li><a href="#" class="scroller" data-section=".intro-wraper">提前体验</a></li>
+          <li><a href="mailto:market@lohaswork.com">给我写信</a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div>
+  </nav>
+</header>
+<!-- End of navbar-->
+<!-- EarlyAdopters page layout -->
+<div class="hero-unit">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 video-player">
+        <div class="vplayer-box">
+          <%= video_player src: { mp4: 'videos/LohasWork-bestshow.mp4' },
+                           controls: true,
+                           width: "640",
+                           height: "360",
+                           preload: "auto"%>
         </div>
       </div>
     </div>
-    <%= javascript_include_tag "application" %>
-  </body>
-</html>
+  </div>
+</div>
+<div class="intro-wraper">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 intro">
+        <%= render :partial=>'apply_form'%>
+         <%= image_tag "top-para.png" %>
+        <h3>TeaMind 是一款简洁、易用的团队协作工具<br>与Email深度集成&nbsp/&nbsp专为中小团队定制</h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- footer -->
+<div class="footer">
+  <div class="container">
+    <div class="row copyright">
+      <div class="col-md-4">
+          <p>
+            Copyright &#169; LohasWork Ltd. 2013 <br>
+            All Rights Reserved
+          </p>
+      </div>
+      <div class="col-md-4">
+      </div>
+      <div class="col-md-3 col-md-offset-5 social">
+        <!--
+        <a href="http://site.douban.com/219120/" class="douban">
+          <i class="icon-douban icon-2x", alt="豆瓣"></i>
+        </a>
+        <a href="http://weibo.com/u/3732217665/" class="weibo">
+          <i class="icon-weibo icon-2x"></i>
+        </a>
+        -->
+        <p class="icp">沪ICP备13031730号-1</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,19 +1,25 @@
-<%= link_to "Home", root_path, :class => 'brand' %>
-<ul class="nav">
+<header class="navbar navbar-fixed-top">
+  <nav class="navbar-inner">
+    <div class="container">
+      <%= link_to "Home", root_path, :class => 'brand' %>
+        <ul class="nav">
 
-  <% if authenticated?%>
-    <li>
-      <%= current_user.email%>
-    </li>
-    <li>
-      <%= link_to('登出', logout_path) %>
-    </li>
-  <% else  %>
-    <li>
-      <%= link_to('登录', login_path) %>
-    </li>
-  <%end%>
-  <% if current_organization %>
-    <%= link_to(current_organization.name, organization_topics_path(current_organization))%>
-  <% end %>
-</ul>
+          <% if authenticated?%>
+            <li>
+              <%= current_user.email%>
+            </li>
+            <li>
+              <%= link_to('登出', logout_path) %>
+            </li>
+          <% else  %>
+            <li>
+              <%= link_to('登录', login_path) %>
+            </li>
+          <%end%>
+          <% if current_organization %>
+            <%= link_to(current_organization.name, organization_topics_path(current_organization))%>
+          <% end %>
+        </ul>
+    </div>
+  </nav>
+</header>
