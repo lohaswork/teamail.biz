@@ -4,8 +4,8 @@ module EmailEngine
 
     attr_reader :user, :gateway
 
-    def initialize(user, gateway=EmailEngine::MailgunGateway.new)
-      @user = user
+    def initialize(user_id, gateway=EmailEngine::MailgunGateway.new)
+      @user = User.find user_id
       @gateway = gateway
     end
 

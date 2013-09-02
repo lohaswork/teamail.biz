@@ -22,6 +22,7 @@ class Topic < ActiveRecord::Base
       discussion.save
       topic.discussions << discussion
       topic.save
+      topic
     end
   end
 
@@ -31,5 +32,13 @@ class Topic < ActiveRecord::Base
 
   def last_updator
     User.find(discussions.last.user_from)
+  end
+
+  def creator
+    discussions.first.creator
+  end
+
+  def content
+    discussions.first.content
   end
 end
