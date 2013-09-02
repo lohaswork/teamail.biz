@@ -8,6 +8,7 @@
         <div class="control-group">
           <%= text_field_tag :title, nil, :class=>"span8 input-large", :placeholder=>"标题"%>
           <%= text_area_tag :content, nil, :class=>"span8 top-buffer", :placeholder=>"内容"%>
+          <%= hidden_field_tag :topic_users, '' %>
         </div>
         <div>
           <%= submit_tag "创建", :class=>"btn"%>
@@ -16,6 +17,7 @@
           <%= link_to('取消', '#', :id => 'cancel-create-button', :class=>"btn")%>
         </div>
       <% end %>
+      <%= render :partial=> 'user_select', :locals => {:organization_users => organization_users} %>
     </div>
   </div>
 <%- end %>

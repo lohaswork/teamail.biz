@@ -1,2 +1,3 @@
-<%= render :partial => 'new_topic' %>
+<p>团队空间</p>
+<%= render :partial => 'new_topic', :locals => {:organization_users => @organization_users} %>
 <%= render :partial => 'topic_list', :locals => {:topics => @topics} %>
