@@ -14,7 +14,7 @@ class TopicsController < ApplicationController
     unless current_organization && new_topic = Topic.create_new_topic(params[:title], params[:content], selected_emails, current_organization.id, current_user.id)
       redirect_to root_path
     end
-    EmailEngine::TopicNotifier.new(new_topic.id).create_topic_notifaction
+    EmailEngine::TopicNotifier.new(new_topic.id).create_topic_notification
     topics = current_organization.topics_by_active_time
     render :json => {
               :update => {
