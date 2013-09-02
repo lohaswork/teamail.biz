@@ -21,7 +21,7 @@ set :deploy_to, "/www/teamind_deploy"
 # Repository
 set :application, "LohasWork.com"
 set :scm, :git
-set :repository,  "git@github.com:lohaswork/LohasWork.com"
+set :repository,  "git@github.com:lohaswork/TeaMind.biz.git"
 set :branch, "master"  # Need changge to master
 
 # Configurations
