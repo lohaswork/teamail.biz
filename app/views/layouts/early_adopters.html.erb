@@ -24,6 +24,9 @@
     <%= yield(:head) %>
   </head>
   <body class="<%= controller_name %>">
+    <div id='myModal', class='modal fade'>
+    </div>
     <%= yield %>
+    <%= render 'layouts/footer' %>
   </body>
 </html>
