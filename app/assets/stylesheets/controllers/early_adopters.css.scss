@@ -108,7 +108,7 @@ body.early_adopters {
   /* intro */
   .intro-wraper {
     background: image-url("content_bg-1.jpg") 0 0 repeat;
-    padding-bottom: 80px;
+    padding-bottom: 50px;
     hr {
       width: 30%;
       border-top: 1px solid #BEC0C3;
@@ -122,7 +122,7 @@ body.early_adopters {
     h3 {
       font-family: Helvetica, Arial, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
       line-height: 35px;
-      margin: 100px auto 30px;
+      margin: 100px auto 0px;
     }
     img {
       margin-top: 60px;
@@ -134,7 +134,7 @@ body.early_adopters {
   .apply-form {
     position: relative;
     margin-top: 40px;
-    top: -25px;
+    top: -40px;
   }
   .sign-up-form{
     h4 {
@@ -149,9 +149,9 @@ body.early_adopters {
       -moz-border-radius-bottomleft: 3px;
       border-top-left-radius: 3px;
       border-bottom-left-radius: 3px;
-      padding:20px 20px;
-      height:60px;
-      width:230px;
+      padding:15px 15px;
+      height:48px;
+      width:200px;
       color:#7f7f7f;
       font-size:17px;
       vertical-align: bottom;
@@ -168,7 +168,7 @@ body.early_adopters {
       border-bottom-right-radius: 3px;
       position:relative;
       left:-5px;
-      height:60px;
+      height:48px;
       width:160px;
       font-size:19px;
       font-family:Helvetica, Arial, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
