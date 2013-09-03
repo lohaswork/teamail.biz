@@ -1,0 +1,99 @@
+/*
+green 1: #49BF67;
+green 2: #3eb05b;
+green 3: #35914c;
+*/
+
+.sidebar-bg {
+  width: 250px;
+  position: absolute;
+  float: left;
+  border-right: 1px solid #dddddd;
+  background: #f4f4f4;
+  display: block;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+}
+
+.main-nav {
+  width: 250px;
+  float: left;
+  display: block;
+  .navigation {
+    width: 100%;
+    ul {
+      display: block;
+      padding: 0;
+      margin: 0 0 10px 0;
+    }
+    .nav {
+      border-bottom: 1px solid #e7e7e7;
+      background: #f4f4f4;
+      margin-bottom: 0;
+      li.active > a {
+        background-color: #FEFEFE;
+      }
+      li {
+        position: relative;
+        display: block;
+        a {
+          background-color: #f4f4f4;
+          height: 40px;
+          display: block;
+          line-height: 45px;
+          padding: 0 10px;
+          border-bottom: 1px solid white;
+          border-top: 1px solid #e7e7e7;
+          color: #333;
+          &:hover {
+            background-color: #FEFEFE;
+            color: #222222;
+            text-shadow: none;
+          }
+          i.prefix-icon {
+            color: #6e6e6e;
+            font-size: 20px;
+            margin-right: 10px;
+            display: inline-block;
+            text-align: center;
+            width: 25px;
+          }
+          span {
+            color: #3c3c3c;
+            text-shadow: 1px 1px 1px #ececec;
+            position: relative;
+            top: -2px;
+          }
+          i.angle {
+            float: right;
+            line-height: 40px;
+            margin-right: 0;
+            font-size: 20px;
+          }
+        }
+      }
+    }
+  }
+}
+#collapseItem {
+  span {
+    padding-left: 20px;
+  }
+}
+#collapseItemTeam {
+  i {
+    padding-left: 20px;
+    color: #6e6e6e;
+    font-size: 18px;
+    margin-right: 18px;
+    display: inline-block;
+    text-align: center;
+    width: 25px;
+  }
+}
+.tag-container {
+  &:active {
+    background-color: red;
+  }
+}

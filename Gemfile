@@ -11,8 +11,8 @@ gem 'mysql2'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
+  gem 'compass-rails'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
@@ -23,7 +23,6 @@ end
 gem 'jquery-rails'
 
 group :test, :development do
-  gem 'pg'
   gem 'selenium-webdriver'
   gem 'database_cleaner'
   gem 'factory_girl_rails'
@@ -39,7 +38,8 @@ group :test, :development do
   gem 'poltergeist'
 end
 
-gem 'bootstrap-sass'
+gem 'sass-rails',   '~> 3.2.3'
+gem 'anjlab-bootstrap-rails', '>= 3.0.0.0', :require => 'bootstrap-rails'
 gem 'video-js-rails'
 gem 'font-awesome-rails'
 gem 'rest-client'

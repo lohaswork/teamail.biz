@@ -3,6 +3,7 @@ vendor/bundle
 lib/config/local.rb
 tmp/*
 !tmp/pids
+tmp/pids/server.pid
 !tmp/sockets
 !tmp/pids/unicorn.pid
 !tmp/.gitkeep
@@ -14,6 +15,8 @@ config/secrets.rb
 bin
 .bundle
 .rvmrc
+.ruby-version
+.ruby-gemset
 .sass-cache/
 db/*.sqlite3
 *.DS_Store
@@ -22,5 +25,6 @@ dump.rdb
 Gemfile.local
 vendor/checkouts
 public/assets
+public/videos/*
 test_reports
 coverage/*

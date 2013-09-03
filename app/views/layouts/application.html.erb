@@ -3,41 +3,38 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= content_for?(:title) ? yield(:title) : "LohasWork" %></title>
-    <meta name="keywords" content="乐活工场 团队协作 项目管理 SaaS">
-    <meta name="description" content="乐活工场致力于打造出色的团队协作工具">
+    <title><%= content_for?(:title) ? yield(:title) : "TeaMind.biz" %></title>
+    <meta name="keywords" content="Teamind 茗想 团队协作 项目管理 SaaS">
+    <meta name="description" content="TeaMind茗想是为中小团队定制的团队协作和项目管理工具">
     <meta name="author" content="LohasWork">
+    <%= favicon_link_tag 'favicon.ico' %>
+    <link href='http://fonts.googleapis.com/css?family=Lobster+Two:400,700' rel='stylesheet' type='text/css'>
     <%= stylesheet_link_tag "application", :media => "all" %>
     <!--[if lt IE 8]>
     <%= stylesheet_link_tag "font-awesome-ie7.min.css", media: "all" %>
     <![endif]-->
+    <!--[if IE]>
+        <%= stylesheet_link_tag "ie/ie.css", media: "all" %>
+    <![endif]-->
+    <%= javascript_include_tag "application" %>
+    <!--[if lt IE 9]>
+        <%= javascript_include_tag "ie" %>
+    <![endif]-->
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
   </head>
-  <body id="<%= "%s_%s" % [controller_name, action_name]%>" class="<%= "%s" % [controller_name]%>">
-    <header class="navbar navbar-fixed-top">
-      <nav class="navbar-inner">
+  <body class="<%= controller_name %>">
+    <div id='myModal', class='modal fade'>
+    </div>
+    <%= render 'layouts/navigation' %>
+    <%= render 'shared/messages' %>
+    <div class='wrapper'>
+      <section class="content">
         <div class="container">
-          <%= render 'layouts/navigation' %>
+          <%= yield %>
         </div>
-      </nav>
-    </header>
-    <div id="main" role="main">
-      <div class="container">
-        <div class="content">
-          <div id='myModal', class='lohas-modal hide'>
-          </div>
-           <div class="row">
-            <div class="span12">
-              <%= render 'layouts/messages'%>
-              <%= yield %>
-            </div>
-          </div>
-          <footer>
-          </footer>
-        </div>
-      </div> <!--! end of .container -->
-    </div> <!--! end of #main -->
-    <%= javascript_include_tag "application" %>
+      </section>
+    </div>
+    <%= render 'layouts/footer' %>
   </body>
 </html>
