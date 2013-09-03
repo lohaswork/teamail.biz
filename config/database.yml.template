@@ -1,24 +1,17 @@
-# PostgreSQL. Versions 8.2 and up are supported.
+# MySQL. Versions 5.5 supported.
 #
-# Install the pg driver:
-#   gem install pg
-# On Mac OS X with macports:
-#   gem install pg -- --with-pg-config=/opt/local/lib/postgresql84/bin/pg_config
-# On Windows:
-#   gem install pg
-#       Choose the win32 build.
-#       Install PostgreSQL and put its /bin directory on your path.
+# Install the mysql driver:
 #
 # Configure Using Gemfile
-# gem 'pg'
+# gem 'mysql2'
 #
 development:
   host: localhost
-  adapter: postgresql
-  encoding: unicode
+  adapter: mysql2
+  encoding: utf8
   database: lohaswork_development
   pool: 5
-  username: change_to_your_name 
+  username: change_to_your_name
   password: change_to_your_password
 
   # Connect on a TCP socket. Omitted by default since the client uses a
@@ -41,18 +34,18 @@ development:
 # Do not set this db to the same as development or production.
 test:
   host: localhost
-  adapter: postgresql
-  encoding: unicode
+  adapter: mysql2
+  encoding: utf8
   database: lohaswork_test
   pool: 5
-  username: change_to_your_name 
+  username: change_to_your_name
   password: change_to_your_password
 
 production:
   host: localhost
-  adapter: postgresql
-  encoding: unicode
+  adapter: mysql2
+  encoding: utf8
   database: lohaswork_production
   pool: 5
-  username: change_to_your_name 
+  username: change_to_your_name
   password: change_to_your_password

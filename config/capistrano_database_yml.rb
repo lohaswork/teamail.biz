@@ -95,7 +95,7 @@ Capistrano::Configuration.instance.load do
           base: &base
             adapter: mysql2
             encoding: utf8
-            hostname: rdsjabziajabzia.mysql.rds.aliyuncs.com
+            host: rdsjabziajabzia.mysql.rds.aliyuncs.com
             username: #{Capistrano::CLI.ui.ask("Enter database username: ")}
             password: #{Capistrano::CLI.password_prompt("Enter database password: ")}
             pool: 5
