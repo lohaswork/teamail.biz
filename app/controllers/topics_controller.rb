@@ -42,7 +42,7 @@ class TopicsController < ApplicationController
   def get_organizaiton_users(topic=nil)
     organization_users = current_organization.users
     #add defalut selecte later
-    organization_users.map{|user| {:emails => user.email, :topic => topic && topic.users.include?(user) || false} }
+    organization_users.map{|user| {:emails => user.email, :is_in_topic => topic && topic.users.include?(user) || false} }
     organization_users.reject!{|user| user.email == current_user.email}
   end
 end

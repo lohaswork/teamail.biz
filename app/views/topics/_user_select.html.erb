@@ -1,7 +1,7 @@
 <div class="row checkbox_group" id="select_user" data-update="topic_users">
   <%- organization_users.try(:each) do |user| %>
     <div class="span2" >
-      <%= check_box_tag nil, user.email, false, :class=>"checkbox"%>
+      <%= check_box_tag nil, user.email, false, :class=>"checkbox", :'data-item'=>true%>
       <span><%=user.email_name%></span>
     </div>
   <% end %>
