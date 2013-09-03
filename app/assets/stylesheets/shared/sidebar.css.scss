@@ -28,24 +28,19 @@ green 3: #35914c;
       margin: 0 0 10px 0;
     }
     .nav {
-      border-bottom: 1px solid #e7e7e7;
       background: #f4f4f4;
       margin-bottom: 0;
-      li.active > a {
-        background-color: #FEFEFE;
-      }
-      li {
+      li.panel {
         position: relative;
         display: block;
+        border:none;
         a {
           background-color: #f4f4f4;
           height: 40px;
           display: block;
           line-height: 45px;
           padding: 0 10px;
-          border-bottom: 1px solid white;
-          border-top: 1px solid #e7e7e7;
-          color: #333;
+          border-bottom: 1px solid #fcfcfc;
           &:hover {
             background-color: #FEFEFE;
             color: #222222;
@@ -67,10 +62,19 @@ green 3: #35914c;
           }
           i.angle {
             float: right;
+            color: #6e6e6e;
             line-height: 40px;
             margin-right: 0;
             font-size: 20px;
           }
+        }
+      }
+      li.active > a {
+        background-color: #FEFEFE;
+      }
+      li.active {
+        i.prefix-icon {
+          color: #49BF67!important;
         }
       }
     }
@@ -78,7 +82,7 @@ green 3: #35914c;
 }
 #collapseItem {
   span {
-    padding-left: 20px;
+    padding-left: 45px;
   }
 }
 #collapseItemTeam {
