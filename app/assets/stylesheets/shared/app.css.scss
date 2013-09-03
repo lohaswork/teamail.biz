@@ -5,8 +5,18 @@ green 3: #35914c;
 */
 
 /* to make test pass */
-.main {
-  margin-top: 300px;
+.content {
+  margin-left: 251px;
+  margin-top: 40px;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  background: #fbfbfb;
+  min-width: 276px;
+  background-color:#FBFBFB;
+}
+.wrapper {
+  min-height: 100%;
+  display: block;
 }
 #new-topic-form {
   display: none;
@@ -20,6 +30,7 @@ body {
   font-family:Helvetica, Arial, "Hiragino Sans GB", "WenQuanYi Micro Hei", sans-serif;
   -webkit-font-smoothing: antialiased;
   font-size: 14px;
+  line-height: 20px;
   color: #333;
 
   a:hover {

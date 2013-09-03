@@ -28,8 +28,13 @@
     </div>
     <%= render 'layouts/navigation' %>
     <%= render 'shared/messages'%>
-    <div class="main">
-        <%= yield %>
+    <div class='wrapper'>
+      <%= render 'shared/sidebar'%>
+      <section class="content">
+        <div class="container">
+          <%= yield %>
+        </div>
+      </section>
     </div>
     <%= render 'layouts/footer' %>
   </body>
