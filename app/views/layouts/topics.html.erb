@@ -24,17 +24,20 @@
     <%= yield(:head) %>
   </head>
   <body class="<%= controller_name %>">
-    <div id='myModal', class='modal fade'>
+    <div id='myModal' class='modal fade'>
     </div>
     <%= render 'layouts/navigation' %>
     <%= render 'shared/messages'%>
-    <div class='wrapper'>
-      <%= render 'shared/sidebar'%>
-      <section class="content">
-        <div class="container">
-          <%= yield %>
+    <div class='wrapper-bg'>
+      <div class="page-wrapper">
+        <div class="page-relative-wrapper">
+          <%= render 'shared/sidebar'%>
+          <section id="major-content">
+            <%= render 'shared/content_nav'%>
+            <%= yield %>
+          </section>
         </div>
-      </section>
+      </div>
     </div>
     <%= render 'layouts/footer' %>
   </body>

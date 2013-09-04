@@ -4,48 +4,32 @@ green 2: #3eb05b;
 green 3: #35914c;
 */
 
-.sidebar-bg {
-  width: 250px;
+.main-nav {
+  width: 210px;
   position: absolute;
   float: left;
+  padding-top: 40px;
+  height: 100%;
   border-right: 1px solid #dddddd;
-  background: #f4f4f4;
-  display: block;
-  z-index: -1;
-  top: 0;
-  bottom: 0;
-}
-
-.main-nav {
-  width: 250px;
-  float: left;
-  display: block;
+  background-color: #f4f4f4;
+  z-index: -2;
   .navigation {
-    width: 100%;
     ul {
-      display: block;
       padding: 0;
       margin: 0 0 10px 0;
     }
     .nav {
-      border-bottom: 1px solid #e7e7e7;
       background: #f4f4f4;
       margin-bottom: 0;
-      li.active > a {
-        background-color: #FEFEFE;
-      }
-      li {
+      li.panel {
         position: relative;
-        display: block;
+        border:none;
         a {
           background-color: #f4f4f4;
           height: 40px;
-          display: block;
           line-height: 45px;
           padding: 0 10px;
-          border-bottom: 1px solid white;
-          border-top: 1px solid #e7e7e7;
-          color: #333;
+          border-bottom: 1px solid #fcfcfc;
           &:hover {
             background-color: #FEFEFE;
             color: #222222;
@@ -55,7 +39,6 @@ green 3: #35914c;
             color: #6e6e6e;
             font-size: 20px;
             margin-right: 10px;
-            display: inline-block;
             text-align: center;
             width: 25px;
           }
@@ -67,10 +50,19 @@ green 3: #35914c;
           }
           i.angle {
             float: right;
+            color: #6e6e6e;
             line-height: 40px;
             margin-right: 0;
             font-size: 20px;
           }
+        }
+      }
+      li.active > a {
+        background-color: #FEFEFE;
+      }
+      li.active {
+        i.prefix-icon {
+          color: #49BF67!important;
         }
       }
     }
@@ -78,22 +70,41 @@ green 3: #35914c;
 }
 #collapseItem {
   span {
-    padding-left: 20px;
+    padding-left: 45px;
   }
 }
 #collapseItemTeam {
   i {
     padding-left: 20px;
     color: #6e6e6e;
-    font-size: 18px;
+    font-size: 15px;
     margin-right: 18px;
-    display: inline-block;
     text-align: center;
     width: 25px;
+    position: relative;
+    top: -2px;
   }
 }
 .tag-container {
   &:active {
     background-color: red;
+  }
+}
+
+.tag-container {
+  .red {
+    color: #F34541!important;
+  }
+  .purple {
+    color: #9564E2!important;
+  }
+  .yellow {
+    color: #F8A326!important;
+  }
+  .blue {
+    color: #00ACEC!important;
+  }
+  .green {
+    color: #49BF67!important;
   }
 }
