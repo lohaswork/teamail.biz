@@ -27,4 +27,17 @@ $(
     value.splice( $.inArray(me.val(), value), 1 );
     target.val(value);
   })
+  .on('change', '.checkbox_group input[data-all]', function(){
+    var selectAll = $(this);
+    $(".checkbox_group input[data-item]").prop('checked', function(){
+      var me = $(this),
+          checkStatus = selectAll.is(':checked'),
+          checkEvent = checkStatus ? 'checked' : 'unchecked';
+      //if the checkbox status is not same as the select-all, then change and trigger the event
+      if (me.is(':checked') !== checkStatus) {
+        me.trigger(checkEvent);
+      }
+      return checkStatus;
+    });
+  })
 )
