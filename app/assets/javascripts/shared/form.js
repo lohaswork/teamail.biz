@@ -48,7 +48,9 @@ $(document)
     if(data.update) {
     }
     if (xhr.status > 399 && xhr.status < 500) {
-      if (data) {
+      if (data.redirect) {
+        window.location = data.redirect;
+      } else {
         showErrors(data);
       }
     }

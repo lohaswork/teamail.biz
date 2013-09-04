@@ -149,6 +149,7 @@ describe "the topics action" do
         visit topics_path
         current_path.should == login_path
       end
+    end
 
     describe "user already login" ,:js=>true do
       before do
@@ -172,7 +173,12 @@ describe "the topics action" do
 
       end
     end
+  end
 
+  describe "user go to topic page with a invalid id" do
+    it "should on the 404 page" do
+      visit organization_topics_path('invalid_id')
+      current_path.should == '/404.html'
     end
   end
 end
