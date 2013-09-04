@@ -2,7 +2,7 @@
   <div id='new-discussion-form', class='row top-buffer left-buffer'>
     <%= form_tag topic_discussions_path(@topic), :method => "post", :class=>"form-horizontal", :remote => true do %>
       <div class="control-group">
-        <%= text_area_tag :content, nil, :class=>"span8", :placeholder=>"即时评论"%>
+        <%= text_area_tag :content, nil, :class=>"col-xs-8", :placeholder=>"即时评论"%>
       </div>
       <div>
         <%= submit_tag "回复", :class=>"btn"%>
