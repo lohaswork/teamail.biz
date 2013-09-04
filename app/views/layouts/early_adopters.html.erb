@@ -26,7 +26,9 @@
   <body class="<%= controller_name %>">
     <div id='myModal', class='modal fade'>
     </div>
-    <%= yield %>
-    <%= render 'layouts/footer' %>
+    <div class='wrapper'>
+      <%= yield %>
+      <%= render 'layouts/footer_index' %>
+    </div>
   </body>
 </html>

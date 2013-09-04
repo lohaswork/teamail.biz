@@ -4,26 +4,17 @@ green 2: #3eb05b;
 green 3: #35914c;
 */
 
-.sidebar-bg {
-  width: 250px;
+.main-nav {
+  width: 210px;
   position: absolute;
   float: left;
+  padding-top: 40px;
+  height: 100%;
   border-right: 1px solid #dddddd;
-  background: #f4f4f4;
-  display: block;
-  z-index: -1;
-  top: 0;
-  bottom: 0;
-}
-
-.main-nav {
-  width: 250px;
-  float: left;
-  display: block;
+  background-color: #f4f4f4;
+  z-index: -2;
   .navigation {
-    width: 100%;
     ul {
-      display: block;
       padding: 0;
       margin: 0 0 10px 0;
     }
@@ -32,12 +23,10 @@ green 3: #35914c;
       margin-bottom: 0;
       li.panel {
         position: relative;
-        display: block;
         border:none;
         a {
           background-color: #f4f4f4;
           height: 40px;
-          display: block;
           line-height: 45px;
           padding: 0 10px;
           border-bottom: 1px solid #fcfcfc;
@@ -50,7 +39,6 @@ green 3: #35914c;
             color: #6e6e6e;
             font-size: 20px;
             margin-right: 10px;
-            display: inline-block;
             text-align: center;
             width: 25px;
           }
@@ -91,7 +79,6 @@ green 3: #35914c;
     color: #6e6e6e;
     font-size: 15px;
     margin-right: 18px;
-    display: inline-block;
     text-align: center;
     width: 25px;
     position: relative;

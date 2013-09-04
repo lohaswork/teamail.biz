@@ -1,0 +1,23 @@
+/* footer */
+.footer-fix {
+  clear: both;
+}
+.footer {
+  z-index: -1;
+  position: absolute;
+  bottom: 0;
+  background: image-url("footer_bg.png") 0 0 repeat;
+  width: 100%;
+  min-height: 100px;
+  color: #838383;
+  padding-top: 35px;
+  p {
+    font-size: 14px;
+  }
+  .icp {
+    float: left;
+    position:relative;
+    top: -5px;
+    left: 40px;
+  }
+}

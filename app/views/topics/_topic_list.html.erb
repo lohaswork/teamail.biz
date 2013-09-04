@@ -1,35 +1,33 @@
-<div id='topic-list'>
-  <div>
-    您的话题有：
+<div class="row">
+  <div id='topic-list'>
+    <div>
+      您的话题有：
+    </div>
+      <div class='col-xs-2'>
+        创建者：
+      </div>
+      <div class='col-xs-2'>
+        回复数：
+      </div>
+      <div class='col-xs-3'>
+        标题：
+      </div>
+      <div class='col-xs-3'>
+        创建时间：
+      </div>
+    <%- topics.try(:each) do |topic|%>
+        <div class='col-xs-2'>
+          <%= topic.last_updator.email%>
+        </div>
+        <div class='col-xs-2'>
+          <%= topic.discussions.size > 0 ? topic.discussions.size : ''%>
+        </div>
+        <div class='col-xs-3'>
+          <%= link_to(topic.title, topic_path(topic))%>
+        </div>
+        <div class='col-xs-3'>
+          <%= topic.last_active_time%>
+        </div>
+    <% end %>
   </div>
-  <div class='row'>
-    <div class='span2'>
-      创建者：
-    </div>
-    <div class='span2'>
-      回复数：
-    </div>
-    <div class='span3'>
-      标题：
-    </div>
-    <div class='span3'>
-      创建时间：
-    </div>
-  </div>
-  <%- topics.try(:each) do |topic|%>
-    <div class='row'>
-      <div class='span2'>
-        <%= topic.last_updator.email%>
-      </div>
-      <div class='span2'>
-        <%= topic.discussions.size > 0 ? topic.discussions.size : ''%>
-      </div>
-      <div class='span3'>
-        <%= link_to(topic.title, topic_path(topic))%>
-      </div>
-      <div class='span3'>
-        <%= topic.last_active_time%>
-      </div>
-    </div>
-  <% end %>
-<div>
+</div>
