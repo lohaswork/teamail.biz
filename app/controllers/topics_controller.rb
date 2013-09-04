@@ -35,14 +35,6 @@ class TopicsController < ApplicationController
   def show
     @topic = Topic.find(params[:id])
     @discussions = @topic.discussions
-  end
-
-  protected
-
-  def get_organizaiton_users(topic=nil)
-    organization_users = current_organization.users
-    #add defalut selecte later
-    organization_users.map{|user| {:emails => user.email, :is_in_topic => topic && topic.users.include?(user) || false} }
-    organization_users.reject!{|user| user.email == current_user.email}
+    @organization_users = get_organizaiton_users(@topic)
   end
 end

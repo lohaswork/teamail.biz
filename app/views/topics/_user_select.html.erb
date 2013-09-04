@@ -6,8 +6,8 @@
     </div>
     <%- organization_users.each do |user| %>
       <div class="col-xs-2" >
-        <%= check_box_tag nil, user.email, false, :class=>"item", :'data-item'=>true%>
-        <span><%=user.email_name%></span>
+        <%= check_box_tag nil, user[:email], false, :class=>"item", :'data-item'=>true, :'data-selected'=>user[:is_in_topic] %>
+        <span><%=user[:email_name]%></span>
       </div>
     <% end %>
   <% end %>

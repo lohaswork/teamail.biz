@@ -17,4 +17,11 @@ module ControllerModules::Organization
         nil
       end
     end
+
+    def get_organizaiton_users(topic=nil)
+      organization_users = current_organization.users
+      #add defalut selecte later
+      organization_users = organization_users.map{|user| {:email => user.email, :email_name => user.email_name, :is_in_topic => topic && topic.users.include?(user) || false} }
+      organization_users.reject!{|user| user[:email] == current_user.email}
+    end
 end
