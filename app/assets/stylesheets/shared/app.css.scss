@@ -9,15 +9,37 @@ html, body {
   height: 100%;
 }
 body {
+  font-size: 62.5%;
+  font-size: 1.4rem;
+  line-height: 2rem;
   -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
   -moz-box-sizing: border-box;    /* Firefox, other Gecko */
   box-sizing: border-box;
   font-family:Helvetica, Arial, "Hiragino Sans GB", "WenQuanYi Micro Hei", sans-serif;
   -webkit-font-smoothing: antialiased;
-  font-size: 14px;
-  line-height: 20px;
   color: #333;
   background-color: #fff;
+  h1 {
+    font-size: 3.6rem;
+  }
+  h2 {
+    font-size: 3rem;
+  }
+  h3 {
+    font-size: 2.4rem;
+  }
+  h4 {
+    font-size: 1.8rem;
+  }
+  h5 {
+    font-size: 1.4rem;
+  }
+  h6 {
+    font-size: 1.2rem;
+  }
+  p{
+    font-size: 1.4rem;
+  }
   a:hover {
     text-decoration: none;
   }
