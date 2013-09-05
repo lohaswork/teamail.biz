@@ -8,6 +8,7 @@ $(document)
 
   })
   .on('ajax:success', 'form[data-remote], a[data-remote]', function (e, data, status, xhr) {
+    //implement realod the js after ajax later, use the element data-reload attribute, after make the js OO orenited
     var me = $(this);
     if ($.isPlainObject(data)) {
       if (data.update) {
