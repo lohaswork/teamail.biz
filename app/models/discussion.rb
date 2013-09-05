@@ -6,27 +6,18 @@ class Discussion < ActiveRecord::Base
   has_many :user_discussions
   has_many :users, :through => :user_discussions, :uniq => true
   validates :content, :presence => {:message => "请输入回复内容"}
+  after_create :update_topic_members
 
   class << self
-    def create_discussion(user_id, topic_id, content)
-      discussion = new(:content => content)
-      raise ValidationError.new(discussion.errors.full_messages) if !discussion.valid?
-      discussion.creator = User.find(user_id)
-      discussion.topic = Topic.find(topic_id)
-      discussion.save
-      discussion
-    end
-
-    def create_with_topic(user_id, topic, emails, content)
+    def create_discussion(user_id, topic, emails, content)
       discussion = Discussion.new(:content=>content)
       raise ValidationError.new(discussion.errors.full_messages) if !discussion.valid?
-      topic.discussions << discussion
-      topic.save
       selected_users = emails.map{|email| User.find_by_email email}
       current_user = User.find(user_id)
       discussion.creator = current_user
       discussion.users << (selected_users << current_user)
-      discussion.save
+      topic.discussions << discussion
+      topic.save
       discussion
     end
   end
@@ -38,4 +29,11 @@ class Discussion < ActiveRecord::Base
   def creator=(user)
     self.user_from = user.id
   end
+
+  private
+
+  def update_topic_members
+    topic.users << users
+  end
+
 end

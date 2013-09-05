@@ -10,7 +10,7 @@ class TopicsController < ApplicationController
   end
 
   def create
-    selected_emails = params[:topic_users].split(',')
+    selected_emails = params[:selected_users].split(',')
     unless current_organization && new_topic = Topic.create_new_topic(params[:title], params[:content], selected_emails, current_organization.id, current_user.id)
       redirect_to root_path
     end

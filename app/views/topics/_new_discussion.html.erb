@@ -3,7 +3,7 @@
     <%= form_tag topic_discussions_path(@topic), :method => "post", :class=>"form-horizontal", :remote => true do %>
       <div class="control-group">
         <%= text_area_tag :content, nil, :class=>"col-xs-8", :placeholder=>"即时评论"%>
-        <%= hidden_field_tag :topic_users, '' %>
+        <%= hidden_field_tag :selected_users, '' %>
       </div>
       <div>
         <%= submit_tag "回复", :class=>"btn"%>

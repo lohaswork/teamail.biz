@@ -14,7 +14,7 @@ class Topic < ActiveRecord::Base
       raise ValidationError.new(topic.errors.full_messages) if !topic.valid?
       content = content.blank? ? "如题" : content
       topic.organization = Organization.find(organization_id)
-      discussion = Discussion.create_with_topic(user_id, topic, emails, content)
+      discussion = Discussion.create_discussion(user_id, topic, emails, content)
       topic
     end
   end

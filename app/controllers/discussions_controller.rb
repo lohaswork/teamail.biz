@@ -3,7 +3,8 @@ class DiscussionsController < ApplicationController
   def create
     content = params[:content]
     @topic = Topic.find(params[:topic_id])
-    current_organization && discussion = Discussion.create_discussion(current_user.id, @topic.id, content)
+    selected_emails = params[:selected_users].split(',')
+    current_organization && discussion = Discussion.create_discussion(current_user.id, @topic, selected_emails, content)
     EmailEngine::DiscussionNotifier.new(discussion.id).create_discussion_notification
     discussions = @topic.discussions
     organization_users = get_organizaiton_users(@topic)

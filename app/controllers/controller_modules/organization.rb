@@ -20,7 +20,7 @@ module ControllerModules::Organization
 
     def get_organizaiton_users(topic=nil)
       organization_users = current_organization.users
-      #add defalut selecte later
+      #The is_in_topic should be matain by the active_user of the topic, they the members of the last discussion
       organization_users = organization_users.map{|user| {:email => user.email, :email_name => user.email_name, :is_in_topic => topic && topic.users.include?(user) || false} }
       organization_users.reject!{|user| user[:email] == current_user.email}
     end
