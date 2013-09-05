@@ -1,4 +1,4 @@
-$(
+$(function() {
   $(document).on("change", ".checkbox_group input", function(){
     var me = $(this);
     if (me.is(':checked')) {
@@ -39,5 +39,14 @@ $(
       }
       return checkStatus;
     });
+  });
+
+  $(".checkbox_group input[data-item]").prop('checked', function(){
+    var me = $(this),
+        checkStatus = me.data('selected');
+    if (checkStatus){
+      me.trigger('checked');
+    }
+    return checkStatus;
   })
-)
+})
