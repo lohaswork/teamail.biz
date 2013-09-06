@@ -11,7 +11,7 @@ class TopicsController < ApplicationController
 
   def create
     selected_emails = params[:selected_users].split(',')
-    unless current_organization && new_topic = Topic.create_new_topic(params[:title], params[:content], selected_emails, current_organization.id, current_user.id)
+    unless current_organization && new_topic = Topic.create_topic(params[:title], params[:content], selected_emails, current_organization, current_user)
       redirect_to root_path
     end
     EmailEngine::TopicNotifier.new(new_topic.id).create_topic_notification

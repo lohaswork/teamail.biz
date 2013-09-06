@@ -9,12 +9,12 @@ class Topic < ActiveRecord::Base
   validates :title, :presence => {:message=>'请输入标题'}
 
   class << self
-    def create_new_topic(title, content, emails, organization_id, user_id)
+    def create_topic(title, content, emails, organization, current_user)
       topic = new(:title => title)
       raise ValidationError.new(topic.errors.full_messages) if !topic.valid?
       content = content.blank? ? "如题" : content
-      topic.organization = Organization.find(organization_id)
-      discussion = Discussion.create_discussion(user_id, topic, emails, content)
+      topic.organization = organization
+      Discussion.create_discussion(current_user, topic, emails, content)
       topic
     end
   end

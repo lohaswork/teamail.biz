@@ -4,7 +4,7 @@ class DiscussionsController < ApplicationController
     content = params[:content]
     @topic = Topic.find(params[:topic_id])
     selected_emails = params[:selected_users].split(',')
-    current_organization && discussion = Discussion.create_discussion(current_user.id, @topic, selected_emails, content)
+    current_organization && discussion = Discussion.create_discussion(current_user, @topic, selected_emails, content)
     EmailEngine::DiscussionNotifier.new(discussion.id).create_discussion_notification
     discussions = @topic.discussions
     organization_users = get_organizaiton_users(@topic)

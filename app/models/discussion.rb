@@ -9,11 +9,10 @@ class Discussion < ActiveRecord::Base
   after_create :update_topic_members
 
   class << self
-    def create_discussion(user_id, topic, emails, content)
+    def create_discussion(current_user, topic, emails, content)
       discussion = Discussion.new(:content=>content)
       raise ValidationError.new(discussion.errors.full_messages) if !discussion.valid?
       selected_users = emails.map{|email| User.find_by_email email}
-      current_user = User.find(user_id)
       discussion.creator = current_user
       discussion.users << (selected_users << current_user)
       topic.discussions << discussion
