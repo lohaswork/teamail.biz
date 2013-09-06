@@ -6,7 +6,7 @@ class TopicsController < ApplicationController
     organization_id = params[:organization_id]
     organization_id && update_current_organization(Organization.find(organization_id))
     @topics = current_organization && current_organization.topics_by_active_time
-    @organization_users = current_organization && get_organizaiton_users
+    @colleagues = current_organization && get_colleagues
   end
 
   def create
@@ -26,7 +26,7 @@ class TopicsController < ApplicationController
                            "new-topic" => render_to_string(:partial => 'new_topic',
                                                             :layout => false,
                                                             :locals => {
-                                                                  :organization_users => get_organizaiton_users(new_topic)
+                                                                  :colleagues => get_colleagues(new_topic)
                                                               })
                          }
                  }
@@ -35,6 +35,6 @@ class TopicsController < ApplicationController
   def show
     @topic = Topic.find(params[:id])
     @discussions = @topic.discussions
-    @organization_users = get_organizaiton_users(@topic)
+    @colleagues = get_colleagues(@topic)
   end
 end

@@ -34,4 +34,8 @@ class Topic < ActiveRecord::Base
   def content
     discussions.first.content
   end
+
+  def active_members
+    discussions.last.users
+  end
 end

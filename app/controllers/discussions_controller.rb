@@ -7,7 +7,7 @@ class DiscussionsController < ApplicationController
     current_organization && discussion = Discussion.create_discussion(current_user, @topic, selected_emails, content)
     EmailEngine::DiscussionNotifier.new(discussion.id).create_discussion_notification
     discussions = @topic.discussions
-    organization_users = get_organizaiton_users(@topic)
+    colleagues = get_colleagues(@topic)
     render :json => {
               :update => {
                           "discussion-list" => render_to_string(:partial => 'topics/discussion_list',
@@ -18,7 +18,7 @@ class DiscussionsController < ApplicationController
                            "new-discussion" => render_to_string(:partial => 'topics/new_discussion',
                                                                 :layout => false,
                                                                 :locals => {
-                                                                  :organization_users => organization_users
+                                                                  :colleagues => colleagues
                                                                 })
                          }
                  }
