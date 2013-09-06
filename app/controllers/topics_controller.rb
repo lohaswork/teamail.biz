@@ -1,19 +1,17 @@
 # encoding: utf-8
 class TopicsController < ApplicationController
-    # use before_filter for current_organization check
+  before_filter :access_organization, :except => [:index]
 
   def index
-    organization_id = params[:organization_id]
-    organization_id && update_current_organization(Organization.find(organization_id))
-    @topics = current_organization && current_organization.topics_by_active_time
-    @colleagues = current_organization && get_colleagues
+    params[:organization_id] && update_current_organization(Organization.find(params[:organization_id])) if !current_organization_accessable?
+    redirect_to('/404.html') && return if !current_organization
+    @topics = current_organization.topics_by_active_time
+    @colleagues = get_colleagues
   end
 
   def create
     selected_emails = params[:selected_users].split(',')
-    unless current_organization && new_topic = Topic.create_topic(params[:title], params[:content], selected_emails, current_organization, current_user)
-      redirect_to root_path
-    end
+    new_topic = Topic.create_topic(params[:title], params[:content], selected_emails, current_organization, current_user)
     EmailEngine::TopicNotifier.new(new_topic.id).create_topic_notification
     topics = current_organization.topics_by_active_time
     render :json => {
@@ -37,4 +35,5 @@ class TopicsController < ApplicationController
     @discussions = @topic.discussions
     @colleagues = get_colleagues(@topic)
   end
+
 end

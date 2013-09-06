@@ -7,8 +7,8 @@ describe "the topics action" do
   describe "user on topic list page" do
     context "user on the topic list page", :js => true do
       it  "should see the topic title" do
-        organization = create(:organization)
-        user = organization.users.first
+        user = create(:normal_user)
+        organization = user.organization
         login_with(user.email, user.password)
         page.should have_content(user.email)
         visit organization_topics_path(organization)
@@ -18,7 +18,7 @@ describe "the topics action" do
 
     context "user not login go the topic title list page" do
       it "should not see the topic title" do
-        organization = create(:organization)
+        organization = create(:normal_user).organization
         visit organization_topics_path(organization)
         page.should_not have_content organization.topics.first.title
       end
@@ -26,19 +26,19 @@ describe "the topics action" do
 
     context "not the organization user go to the topic list" do
       it "should not saw the topics title" do
-        organization = create(:organization)
-        user = create(:already_activate_user)
+        organization = create(:organization_with_topic, name:"new-organization")
+        user = create(:normal_user)
         login_with(user.email, user.password)
         visit organization_topics_path(organization)
-        page.should_not have_content organization.topics.first.title
+        page.should_not have_content organization.topics.last.title
       end
     end
   end
 
   describe "user create new topic", :js => true do
     before do
-      organization = create(:organization)
-      user = organization.users.first
+      user = create(:normal_user)
+      organization = user.organization
       login_with(user.email, user.password)
       page.should have_content user.email
       visit organization_topics_path(organization)
@@ -100,8 +100,8 @@ describe "the topics action" do
 
   describe "user on topic detail page", :js => true do
     before do
-      @organization = create(:organization)
-      user = @organization.users.first
+      user = create(:normal_user)
+      @organization = user.organization
       login_with(user.email, user.password)
       page.should have_content(user.email)
       visit organization_topics_path(@organization)
@@ -153,8 +153,7 @@ describe "the topics action" do
 
     describe "user already login" ,:js=>true do
       before do
-        organization = create(:organization)
-        @user = organization.users.first
+        @user = create(:normal_user)
         login_with(@user.email, @user.password)
         page.should have_content @user.email
       end

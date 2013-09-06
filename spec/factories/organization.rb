@@ -1,10 +1,10 @@
 FactoryGirl.define do
   factory :organization do
     name "test organization"
-    after(:create) do |organization|
-      organization.users << create(:already_activate_user)
-      10.times do
-        create(:topic, organization:organization)
+
+    factory :organization_with_topic do
+      after(:create) do |organization|
+        organization.topics << create(:topic, title:"organization_with_topic")
       end
     end
   end

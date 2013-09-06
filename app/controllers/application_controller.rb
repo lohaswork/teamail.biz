@@ -5,4 +5,7 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
 
+  def access_organization
+    redirect_to '/404.html' if !current_organization_accessable?
+  end
 end

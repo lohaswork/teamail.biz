@@ -71,6 +71,10 @@ class User < ActiveRecord::Base
     email[/[^@]+/]
   end
 
+  def organization
+    #For MVP, user only have one organization
+    organizations.first
+  end
   private
   def create_remember_token
     generate_token(:remember_token)

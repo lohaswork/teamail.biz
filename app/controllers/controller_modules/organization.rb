@@ -22,4 +22,8 @@ module ControllerModules::Organization
       organization_users = current_organization.users
       organization_users.reject!{|user| user.email == current_user.email}
     end
+
+    def current_organization_accessable?
+      !!current_organization
+    end
 end
