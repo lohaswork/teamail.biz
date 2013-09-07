@@ -3,5 +3,5 @@
     <%= @topic.title%>
   </div>
   <%= render :partial => 'discussion_list', :locals => {:discussions => @discussions}%>
-  <%= render :partial => 'new_discussion', :locals => {:colleagues => @colleagues}%>
+  <%= render :partial => 'new_discussion', :locals => {:colleagues => @colleagues, :topic => @topic}%>
 </div>

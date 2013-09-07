@@ -24,7 +24,8 @@ class TopicsController < ApplicationController
                            "new-topic" => render_to_string(:partial => 'new_topic',
                                                             :layout => false,
                                                             :locals => {
-                                                                  :colleagues => get_colleagues(new_topic)
+                                                                  :colleagues => get_colleagues,
+                                                                  :topic => topics
                                                               })
                          }
                  }
@@ -33,7 +34,7 @@ class TopicsController < ApplicationController
   def show
     @topic = Topic.find(params[:id])
     @discussions = @topic.discussions
-    @colleagues = get_colleagues(@topic)
+    @colleagues = get_colleagues
   end
 
 end

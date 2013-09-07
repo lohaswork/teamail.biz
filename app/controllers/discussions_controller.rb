@@ -18,7 +18,7 @@ class DiscussionsController < ApplicationController
                            "new-discussion" => render_to_string(:partial => 'topics/new_discussion',
                                                                 :layout => false,
                                                                 :locals => {
-                                                                  :colleagues => get_colleagues(@topic)
+                                                                  :colleagues => get_colleagues
                                                                 })
                          }
                  }

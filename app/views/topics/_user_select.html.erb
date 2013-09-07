@@ -4,7 +4,7 @@
       <input type="checkbox", class='all', data-all=true>
       <span>全选</span>
     </div>
-    <%- show_for_checkbox(colleagues).each do |user| %>
+    <%- show_for_checkbox(colleagues, topic).each do |user| %>
       <div class="col-xs-2" >
         <%= check_box_tag nil, user[:email], false, :class=>"item", :'data-item'=>true, :'data-selected'=>user[:is_in_topic] %>
         <span><%=user[:email_name]%></span>

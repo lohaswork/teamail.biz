@@ -9,7 +9,7 @@
         <%= submit_tag "回复", :class=>"btn"%>
       </div>
     <% end %>
-    <%= render :partial=> 'topics/user_select', :locals => {:colleagues => colleagues} %>
+    <%= render :partial=> 'topics/user_select', :locals => {:colleagues => colleagues, :topic => @topic} %>
   </div>
 </div>
 
