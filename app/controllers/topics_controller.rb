@@ -25,7 +25,7 @@ class TopicsController < ApplicationController
                                                             :layout => false,
                                                             :locals => {
                                                                   :colleagues => get_colleagues,
-                                                                  :topic => topics
+                                                                  :topic => new_topic
                                                               })
                          }
                  }

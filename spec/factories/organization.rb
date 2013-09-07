@@ -7,6 +7,15 @@ FactoryGirl.define do
         organization.topics << create(:topic, title:"organization_with_topic")
       end
     end
+
+    factory :organization_with_multi_users do
+      after(:create) do |organization|
+        10.times do
+          user = create(:clean_user)
+          organization.users << user
+        end
+      end
+    end
   end
 end
 

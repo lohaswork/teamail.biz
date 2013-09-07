@@ -30,6 +30,10 @@ FactoryGirl.define do
       active_status 1
     end
 
+    factory :clean_user do
+      active_status 1
+    end
+
     factory :non_activate_user do
     end
 

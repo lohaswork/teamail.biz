@@ -1,4 +1,5 @@
 # encoding: utf-8
+#TODO: update the cleaner
 require 'spec_helper'
 require 'helpers'
 
@@ -37,11 +38,11 @@ describe "the topics action" do
 
   describe "user create new topic", :js => true do
     before do
-      user = create(:normal_user)
-      organization = user.organization
-      login_with(user.email, user.password)
-      page.should have_content user.email
-      visit organization_topics_path(organization)
+      @organization = create(:organization_with_multi_users)
+      @user = @organization.users.first
+      login_with(@user.email, @user.password)
+      page.should have_content @user.email
+      visit organization_topics_path(@organization)
     end
 
     describe "user can open a create topic field" do
@@ -51,6 +52,18 @@ describe "the topics action" do
           page.should_not have_selector "#new-topic-form"
           click_on "创建新话题"
           page.should have_selector "#new-topic-form"
+        end
+
+        it "should saw the user select checkbox" do
+          page.should have_link "创建新话题"
+          click_on "创建新话题"
+          find('#select-user').should have_content(@organization.users.last.email_name)
+        end
+
+        it "should not have current user name in the select user checkbox" do
+          page.should have_link "创建新话题"
+          click_on "创建新话题"
+          find('#select-user').should_not have_content(@user.email_name)
         end
       end
 
@@ -64,6 +77,7 @@ describe "the topics action" do
           find_field('title').value == "test title"
         end
       end
+
     end
 
     describe "user create new topic" do
@@ -74,6 +88,32 @@ describe "the topics action" do
           click_button "创建"
           page.should have_content "test title"
           page.should_not have_selector "#new-topic-form"
+        end
+
+        it "should add the selected user into topic members" do
+          click_on "创建新话题"
+          fill_in "title", :with => "test title"
+          find(:xpath, "(//input[@type='checkbox'])[10]").set(true)
+          click_button "创建"
+          page.should have_content "test title"
+          @organization.topics.last.users.should include(@organization.users.last)
+        end
+
+        it "should default add the current user as member" do
+          click_on "创建新话题"
+          fill_in "title", :with => "test title"
+          click_button "创建"
+          page.should have_content "test title"
+          @organization.topics.last.users.should include(@user)
+        end
+
+        it "should select all of the users by select all checkbox" do
+          click_on "创建新话题"
+          fill_in "title", :with => "test title"
+          find(:xpath, "//input[@class='all']").set(true)
+          click_button "创建"
+          page.should have_content "test title"
+          @organization.topics.last.users.size.should == @organization.users.size
         end
       end
 
@@ -162,15 +202,15 @@ describe "the topics action" do
           visit topics_path
           page.should have_content @user.topics.first.title
         end
-
-        context "user click on the navybar" do
-          it "should have the topic title" do
-            click_on "个人空间"
-            page.should have_content @user.topics.first.title
-          end
-        end
-
       end
+
+      context "user click on the navybar" do
+        it "should have the topic title" do
+          click_on "个人空间"
+          page.should have_content @user.topics.first.title
+        end
+      end
+
     end
   end
 
