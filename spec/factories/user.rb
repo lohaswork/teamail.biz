@@ -16,11 +16,25 @@ FactoryGirl.define do
     password 'password'
     active_code
 
-    factory :non_activate_user do
+    factory :normal_user do
+      after(:create) do |user|
+        organization = create(:organization)
+        10.times do
+          topic = create(:topic)
+          organization.topics << topic
+          create_discussion(user, topic)
+          user.topics << topic
+        end
+        user.organizations << organization
+      end
+      active_status 1
     end
 
-    factory :already_activate_user do
+    factory :clean_user do
       active_status 1
+    end
+
+    factory :non_activate_user do
     end
 
     factory :should_reset_user do
@@ -28,4 +42,11 @@ FactoryGirl.define do
     end
   end
 
+end
+
+def create_discussion(user, topic)
+    10.times do
+      discussion = create(:discussion, user_from: user.id, topic:topic)
+      discussion.users << user
+    end
 end

@@ -35,7 +35,7 @@ describe "user authentaction action" do
         context "with valid active link yet activated before" do
 
           it "should see active failure info" do
-            user = create(:already_activate_user)
+            user = create(:normal_user)
             visit "/active/#{user.active_code}"
             page.should have_content '您的账户已经处于激活状态!'
           end
@@ -104,16 +104,17 @@ describe "user authentaction action" do
     end
 
     context "user login succsess", :js => true do
-      before {@user = create(:already_activate_user)}
+      before {@user = create(:normal_user)}
       it "should see user message" do
         login_with(@user.email, @user.password)
         page.should have_content "欢迎您：#{@user.email}"
+        page.should have_content @user.organization.name
       end
     end
 
     context "user visit pages after login succsess" do
       before do
-        @user = create(:already_activate_user)
+        @user = create(:normal_user)
         login_with(@user.email, @user.password)
       end
 
@@ -132,7 +133,7 @@ describe "user authentaction action" do
     end
 
     describe "user login failed" do
-      before {@user = create(:already_activate_user)}
+      before {@user = create(:normal_user)}
 
       context "user miss email or password", :js => true do
         it "should see error message" do

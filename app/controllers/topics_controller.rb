@@ -1,15 +1,17 @@
 # encoding: utf-8
 class TopicsController < ApplicationController
+  before_filter :access_organization, :except => [:index]
+
   def index
-    organization_id = params[:organization_id]
-    organization_id && update_current_organization(Organization.find(organization_id))
-    @topics = current_organization && current_organization.topics_by_active_time
+    params[:organization_id] && update_current_organization(Organization.find(params[:organization_id])) if !current_organization_accessable?
+    redirect_to('/404.html') && return if !current_organization
+    @topics = current_organization.topics_by_active_time
+    @colleagues = get_colleagues
   end
 
   def create
-    unless current_organization && new_topic = Topic.create_topic(params[:title], params[:content], current_organization.id, current_user.id)
-      redirect_to root_path
-    end
+    selected_emails = params[:selected_users].split(',')
+    new_topic = Topic.create_topic(params[:title], params[:content], selected_emails, current_organization, current_user)
     EmailEngine::TopicNotifier.new(new_topic.id).create_topic_notification
     topics = current_organization.topics_by_active_time
     render :json => {
@@ -20,7 +22,11 @@ class TopicsController < ApplicationController
                                                                   :topics => topics
                                                                 }),
                            "new-topic" => render_to_string(:partial => 'new_topic',
-                                                            :layout => false)
+                                                            :layout => false,
+                                                            :locals => {
+                                                                  :colleagues => get_colleagues,
+                                                                  :topic => new_topic
+                                                              })
                          }
                  }
   end
@@ -28,5 +34,7 @@ class TopicsController < ApplicationController
   def show
     @topic = Topic.find(params[:id])
     @discussions = @topic.discussions
+    @colleagues = get_colleagues
   end
+
 end

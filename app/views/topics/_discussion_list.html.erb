@@ -1,13 +1,13 @@
 <div id='discussion-list'>
   <%- discussions.try(:each) do |discussion|%>
     <div class='row'>
-      <div class='span2'>
+      <div class='col-xs-2'>
         <%= discussion.creator.email%>
       </div>
-      <div class='span3'>
+      <div class='col-xs-3'>
         <%= discussion.content%>
       </div>
-      <div class='span3'>
+      <div class='col-xs-3'>
         <%= discussion.created_at%>
       </div>
     </div>

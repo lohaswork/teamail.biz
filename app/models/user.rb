@@ -3,11 +3,11 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password
 
   has_many :organization_memberships
-  has_many :organizations, :through => :organization_memberships
+  has_many :organizations, :through => :organization_memberships, :uniq => true
   has_many :user_topics
-  has_many :topics, :through => :user_topics
+  has_many :topics, :through => :user_topics, :uniq => true
   has_many :user_discussions
-  has_many :discussions, :through => :user_discussions
+  has_many :discussions, :through => :user_discussions, :uniq => true
   before_create :add_active_code, :create_remember_token
 
   before_validation(:on=>:create) { |user| user.email = email.downcase }
@@ -67,6 +67,14 @@ class User < ActiveRecord::Base
    active_status? ? false : update_attribute(:active_status, true)
   end
 
+  def email_name
+    email[/[^@]+/]
+  end
+
+  def organization
+    #For MVP, user only have one organization
+    organizations.first
+  end
   private
   def create_remember_token
     generate_token(:remember_token)
