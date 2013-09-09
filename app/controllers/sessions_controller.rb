@@ -12,6 +12,7 @@ class SessionsController < ApplicationController
     else
       cookies[:login_token]= user.remember_token
     end
+    update_current_organization(user.organization)
     render :json => {:status => "success", :redirect => welcome_path}
   end
 

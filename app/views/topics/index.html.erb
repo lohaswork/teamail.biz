@@ -1,4 +1,5 @@
 <div class="topic-area">
-      <%= render :partial => 'new_topic' %>
-      <%= render :partial => 'topic_list', :locals => {:topics => @topics} %>
+  <p>团队空间</p>
+  <%= render :partial => 'new_topic', :locals => {:colleagues => @colleagues, :topic => nil} %>
+  <%= render :partial => 'topic_list', :locals => {:topics => @topics} %>
 </div>
