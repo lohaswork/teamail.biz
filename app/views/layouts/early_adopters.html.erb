@@ -23,7 +23,7 @@
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
   </head>
-  <body class="<%= controller_name %>">
+  <body class="<%= controller_name %>" data-page="<%= @page_id %>">
     <div id='myModal', class='modal fade'>
     </div>
     <div class='wrapper'>

@@ -13,6 +13,12 @@
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
+//= require shared/app
 //= require_directory ./shared
 //= require_directory ./controllers
+//= require_self
 
+
+$(document).ready(function(){
+  App.init(document.body);
+});
