@@ -15,11 +15,6 @@
     <!--[if IE]>
         <%= stylesheet_link_tag "ie/ie.css", media: "all" %>
     <![endif]-->
-    <%= javascript_include_tag "application" %>
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-        <%= javascript_include_tag "ie" %>
-    <![endif]-->
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
   </head>
@@ -30,24 +25,10 @@
       <%= yield %>
       <%= render 'layouts/footer_index' %>
     </div>
-    <script type="text/javascript">
-      // Once the video is ready
-      _V_("demo-video").ready(function(){
-
-        var myPlayer = this;    // Store the video object
-        var aspectRatio = 9/16; // Make up an aspect ratio
-
-        function resizeVideoJS(){
-          // Get the parent element's actual width
-          var width = document.getElementById(myPlayer.id).parentElement.offsetWidth;
-          width = width - 8;
-          // Set width to fill parent element, Set height
-          myPlayer.width(width).height( width * aspectRatio );
-        }
-
-        resizeVideoJS(); // Initialize the function
-        window.onresize = resizeVideoJS; // Call the function on resize
-      });
-    </script>
+    <%= javascript_include_tag "application" %>
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <%= javascript_include_tag "ie" %>
+    <![endif]-->
   </body>
 </html>

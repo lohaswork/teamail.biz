@@ -15,10 +15,6 @@
     <!--[if IE]>
         <%= stylesheet_link_tag "ie/ie.css", media: "all" %>
     <![endif]-->
-    <%= javascript_include_tag "application" %>
-    <!--[if lt IE 9]>
-        <%= javascript_include_tag "ie" %>
-    <![endif]-->
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
   </head>
@@ -40,4 +36,8 @@
     </div>
     <%= render 'layouts/footer' %>
   </body>
+  <%= javascript_include_tag "application" %>
+  <!--[if lt IE 9]>
+      <%= javascript_include_tag "ie" %>
+  <![endif]-->
 </html>
