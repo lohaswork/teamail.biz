@@ -1,6 +1,7 @@
 App = (function (){
   var self = {
     page: {},
+    lib: {},
     util: {}
   };
 
@@ -10,8 +11,6 @@ App = (function (){
     if ( name !== "" && namespace.page[name] && typeof namespace.page[name] == "function" ) {
       var page = namespace.page[name];
       new page(container);
-    } else {
-      throw 'A plugin with the name [' + page + '] could not be found. Make sure the script is included on the page.';
     }
   }
 
@@ -22,8 +21,10 @@ App = (function (){
       var $this = $(this),
           name = $this.attr('data-page');
       self.util.exec( name, $this );
-
     });
+    for (var k in self.lib){
+      self.lib[k]();
+    };
   }
 
   return self;
