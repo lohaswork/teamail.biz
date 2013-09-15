@@ -14,16 +14,17 @@ App = (function (){
     }
   }
 
-  self.init = function(element){
+  self.init = function(element, reload){
     var $element = $(element),
-        $pages = $element.find("[data-page]").add($element.filter("[data-page]"));
+        selector = typeof reload !== 'undefined'  ? "[data-reload]" : "[data-page]",
+        $pages = $element.find(selector).add($element.filter(selector));
     $pages.each(function () {
       var $this = $(this),
           name = $this.attr('data-page');
       self.util.exec( name, $this );
     });
     for (var k in self.lib){
-      self.lib[k]();
+      new self.lib[k]();
     };
   }
 

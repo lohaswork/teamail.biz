@@ -1,12 +1,17 @@
 //TODO: Have noe use CoffeeScript temporarily, translate this to coffee later
-App.lib.ajax = function () {
-  var $errorBar = $('.error');
+!function($) {
 
-  function showErrors(data){
-    $errorBar.html(data.message).show();
-  };
+  App.lib.ajax = function (){
+    this.init();
+  }
+  App.lib.ajax.prototype = {
+    showErrors: function (data){
+      var $errorBar = $('.error');
+      $errorBar.html(data.message).show();
+    },
 
-  (function(){
+    init: function(){
+    var self = this;
     $(document).on( 'ajax:before', 'form[data-remote], a[data-remote]', function (e) {
         //Going To add the spinner
       })
@@ -19,6 +24,8 @@ App.lib.ajax = function () {
               var newElement = $(data.update[id]);
               var updateMethod = newElement.find(id).andSelf().length > 0 ? 'replaceWith' : 'html';
               $('#' + id)[updateMethod](newElement);
+              //reload the JS if have reload in this part
+              App.init($('#' + id), true);
             }
           }
           if (data.modal) {
@@ -55,11 +62,11 @@ App.lib.ajax = function () {
           if (data.redirect) {
             window.location = data.redirect;
           } else {
-            showErrors(data);
+            self.showErrors(data);
           }
         }
       });
+    }
+  }
 
-  }())
-
-}
+}(window.jQuery);

@@ -243,6 +243,15 @@ describe "the topics action" do
           page.should have_content "user create a discussion for topic users"
           Topic.last.users.size.should == 10
         end
+
+        it "should add set the last created user as default checked" do
+          fill_in "content", :with => "user create a discussion for discussion users"
+          checkbox = find(:xpath, "(//input[@type='checkbox'])[10]")
+          checkbox.set(true)
+          click_button "回复"
+          page.should have_content "user create a discussion for discussion users"
+          find(:xpath, "(//input[@type='checkbox'])[10]").should be_checked
+        end
       end
     end
   end
