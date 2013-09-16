@@ -46,7 +46,7 @@ end
 
 def create_discussion(user, topic)
     10.times do
-      discussion = create(:discussion, user_from: user.id, topic:topic)
+      discussion = create(:discussion, user_from: user.id, discussable: topic)
       discussion.users << user
     end
 end
