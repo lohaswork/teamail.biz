@@ -24,8 +24,7 @@ class TopicsController < ApplicationController
                            "new-topic" => render_to_string(:partial => 'new_topic',
                                                             :layout => false,
                                                             :locals => {
-                                                                  :colleagues => get_colleagues,
-                                                                  :topic => new_topic
+                                                                  :colleagues => get_colleagues
                                                               })
                          }
                  }

@@ -246,6 +246,7 @@ describe "user authentaction action" do
           visit "/reset/#{@user.reset_token}"
           fill_in 'password', :with => "new-password"
           click_button "重置密码"
+          page.should have_content "您已重新设置了密码。"
         end
 
         it "should saw error message" do
