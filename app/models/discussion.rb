@@ -32,7 +32,7 @@ class Discussion < ActiveRecord::Base
   private
 
   def update_topic_members
-    self.discussable.users << users
+    discussable.users << users
   end
 
 end
