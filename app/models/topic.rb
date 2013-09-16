@@ -3,7 +3,7 @@ class Topic < ActiveRecord::Base
   attr_accessible :title
 
   belongs_to :organization
-  has_many :discussions, :order => "updated_at asc", :uniq => true
+  has_many :discussions, :as => :discussable, :order => "updated_at asc", :uniq => true
   has_many :user_topics
   has_many :users, :through => :user_topics, :uniq => true
   validates :title, :presence => {:message=>'请输入标题'}

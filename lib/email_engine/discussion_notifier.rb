@@ -21,7 +21,7 @@ module EmailEngine
 
     private
     def topic
-      discussion.topic
+      discussion.discussable_type == "Topic" && discussion.discussable
     end
 
     def deliver_emails
