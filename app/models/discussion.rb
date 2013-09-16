@@ -2,7 +2,7 @@
 class Discussion < ActiveRecord::Base
   attr_accessible :content
 
-  belongs_to :topic
+  belongs_to :discussable, :polymorphic => true
   has_many :user_discussions
   has_many :users, :through => :user_discussions, :uniq => true
   validates :content, :presence => {:message => "请输入回复内容"}
@@ -32,7 +32,7 @@ class Discussion < ActiveRecord::Base
   private
 
   def update_topic_members
-    topic.users << users
+    self.discussable.users << users
   end
 
 end
