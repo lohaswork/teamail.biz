@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130915093911) do
+ActiveRecord::Schema.define(:version => 20130917120146) do
 
   create_table "discussions", :force => true do |t|
     t.integer  "discussable_id"
@@ -72,16 +72,17 @@ ActiveRecord::Schema.define(:version => 20130915093911) do
 
   create_table "users", :force => true do |t|
     t.string   "name"
-    t.string   "email",          :null => false
+    t.string   "email",                   :null => false
     t.string   "password"
     t.string   "remember_token"
     t.integer  "online_status"
     t.integer  "active_status"
     t.integer  "authority_type"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
     t.string   "active_code"
     t.string   "reset_token"
+    t.integer  "default_organization_id"
   end
 
 end

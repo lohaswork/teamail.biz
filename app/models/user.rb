@@ -75,6 +75,14 @@ class User < ActiveRecord::Base
     #For MVP, user only have one organization
     organizations.first
   end
+
+  def default_organization=(organization)
+    default_organization_id = organization.id
+  end
+
+  def default_organization
+    default_organization_id && Organization.find(default_organization_id) || organization
+  end
   private
   def create_remember_token
     generate_token(:remember_token)
