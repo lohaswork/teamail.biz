@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'spec_helper'
 require 'helpers'
 
@@ -17,6 +18,13 @@ describe "topic section" do
         click_button "tagging-dropdown"
         # Need to replace page with specific div
         page.should have_content @organization.tags.last.name
+      end
+
+      it "should see the newly created tag", :js => true do
+        click_button "tagging-dropdown"
+        fill_in "tag_name", :with => "新标签"
+        click_button "新建"
+        page.should have_content "新标签"
       end
     end
   end

@@ -6,11 +6,11 @@
   }
   App.page.TaggingGroup.prototype = {
     init: function(){
-
-      $("#tagging-dropdown").click(function(){
-        $('.dropdown-menu').toggle();
-      });
-
+      var self = this;
+      self.el.on('click', '#tagging-dropdown', function(){
+        $('#dropdown-tags').toggle();
+        return false;
+      })
     }
   }
 

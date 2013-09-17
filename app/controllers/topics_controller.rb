@@ -8,6 +8,7 @@ class TopicsController < ApplicationController
     @topics = current_organization.topics_by_active_time
     @colleagues = get_colleagues
     @tags = get_tag_list
+    @organization = current_organization
   end
 
   def create

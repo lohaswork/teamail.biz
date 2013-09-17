@@ -1,6 +1,6 @@
 <div class="topic-area">
   <p>团队空间</p>
-  <%= render :partial => 'shared/tagging', :locals => {:tags => @tags} %>
+  <%= render :partial => 'tags/tagging', :locals => {:tags => @tags, :organization => @organization} %>
   <%= render :partial => 'new_topic', :locals => {:colleagues => @colleagues, :topic => nil} %>
   <%= render :partial => 'topic_list', :locals => {:topics => @topics} %>
 </div>

@@ -22,6 +22,7 @@ LohasWorkCom::Application.routes.draw do
 
   resources :organization do
     resources :topics, :only => [:index]
+    resources :tags, :only => [:create]
   end
 
   resources :topics, :only => [:create, :show]
