@@ -2,7 +2,7 @@ module ControllerModules::Organization
     extend ActiveSupport::Concern
 
   included do
-    helper_method :current_organization, :get_colleagues
+    helper_method :current_organization, :get_colleagues, :get_tag_list
   end
 
   protected
@@ -21,6 +21,10 @@ module ControllerModules::Organization
     def get_colleagues
       organization_users = current_organization.users
       organization_users.reject{|user| user.email == current_user.email}
+    end
+
+    def get_tag_list
+      organization_tags = current_organization.tags
     end
 
     def current_organization_accessable?

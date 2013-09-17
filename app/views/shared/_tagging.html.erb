@@ -1,4 +1,4 @@
-<div class="btn-group" data-page="TaggingGroup">
+<div id="tagging-controls" class="btn-group" data-page="TaggingGroup">
   <button type="button" id="tagging-dropdown" class="btn btn-default dropdown-toggle">
     <i class="icon-tags"></i>
     <span class="caret"></span>
@@ -14,8 +14,9 @@
     </div><!-- /.col-lg-6 -->
     <li class="divider"></li>
     <lable>标记为：</lable>
-    <li><a href="#">Tag1</a></li>
-    <li><a href="#">Tag2</a></li>
+    <%- tags.try(:each) do |tag|%>
+      <li><a href="#"><%= tag.name %></a></li>
+    <% end %>
     <li class="divider"></li>
     <li><a href="#">应用</a></li>
   </ul>

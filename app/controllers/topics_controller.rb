@@ -7,6 +7,7 @@ class TopicsController < ApplicationController
     redirect_to('/404.html') && return if !current_organization
     @topics = current_organization.topics_by_active_time
     @colleagues = get_colleagues
+    @tags = get_tag_list
   end
 
   def create

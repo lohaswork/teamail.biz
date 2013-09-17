@@ -12,7 +12,9 @@ FactoryGirl.define do
       after(:create) do |organization|
         10.times do
           user = create(:clean_user)
+          tag = create(:tag)
           organization.users << user
+          organization.tags << tag
         end
       end
     end

@@ -2,7 +2,13 @@
 
 FactoryGirl.define do
   factory :tag do
-    name "MyString"
-    color "MyString"
+    name
+    color
+  end
+  sequence :name do |n|
+    "tag#{n}"
+  end
+  sequence :color do |n|
+    "color#{n}"
   end
 end
