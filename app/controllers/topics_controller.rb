@@ -22,7 +22,7 @@ class TopicsController < ApplicationController
                                                             :locals => {
                                                                   :topics => topics
                                                                 }),
-                           "new-topic" => render_to_string(:partial => 'new_topic',
+                           "new-topic" => render_to_string(:partial => 'shared/new_topic',
                                                             :layout => false,
                                                             :locals => {
                                                                   :colleagues => get_colleagues
