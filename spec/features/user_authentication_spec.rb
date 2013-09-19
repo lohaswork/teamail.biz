@@ -105,10 +105,10 @@ describe "user authentaction action" do
 
     context "user login succsess", :js => true do
       before {@user = create(:normal_user)}
-      it "should see user message" do
+      it "should go to the personal sapce page" do
         login_with(@user.email, @user.password)
-        page.should have_content "欢迎您：#{@user.email}"
-        page.should have_content @user.organization.name
+        page.should have_content @user.topics.first.title
+        current_path.should == '/topics'
       end
     end
 
@@ -118,10 +118,10 @@ describe "user authentaction action" do
         login_with(@user.email, @user.password)
       end
 
-      it "should redirect to welcome page visit login path" do
+      it "should redirect to topics page visit login path" do
         visit login_path
-        current_path.should == '/welcome'
-        page.should have_content(@user.email)
+        current_path.should == '/topics'
+        page.should have_content @user.topics.first.title
       end
 
       it "should go to root path after logout" do
