@@ -283,6 +283,15 @@ describe "the topics action" do
         end
       end
 
+      context "when no colleagues of the user" do
+        it "should have no select-all checkbox" do
+          visit topics_path
+          click_on "创建新话题"
+          page.should have_selector "#new-topic-form"
+          find('#select-user').should_not have_content("全选")
+        end
+      end
+
     end
 
     describe "user create new topic on the personal space page", :js => true  do
