@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   def topics
     redirect_to(login_path) && return if !authenticated?
     @topics = current_user.topics
+    @colleagues = get_colleagues
   end
 
   def create

@@ -284,6 +284,108 @@ describe "the topics action" do
       end
 
     end
+
+    describe "user create new topic on the personal space page", :js => true  do
+      before do
+        @organization = create(:organization_with_multi_users)
+        @user = @organization.users.first
+        login_with(@user.email, @user.password)
+        page.should have_content @user.email
+        visit topics_path
+      end
+
+      describe "user can open a create topic field" do
+        context "user click the new topic buttion" do
+          it "should have a field for new topic" do
+            page.should have_link "创建新话题"
+            page.should_not have_selector "#new-topic-form"
+            click_on "创建新话题"
+            page.should have_selector "#new-topic-form"
+          end
+
+          it "should saw the user select checkbox" do
+            page.should have_link "创建新话题"
+            click_on "创建新话题"
+            find('#select-user').should have_content(@organization.users.last.email_name)
+          end
+
+          it "should not have current user name in the select user checkbox" do
+            page.should have_link "创建新话题"
+            click_on "创建新话题"
+            find('#select-user').should_not have_content(@user.email_name)
+          end
+        end
+
+        context "user reopen the field" do
+          it "should keep the text" do
+            click_on "创建新话题"
+            fill_in "title", :with => "test title"
+            click_on "取消"
+            page.should_not have_link "取消"
+            click_on "创建新话题"
+            find_field('title').value == "test title"
+          end
+        end
+
+      end
+
+      describe "user create new topic on personal space" do
+        context "user create success" do
+          it "should see the new topic on the list" do
+            click_on "创建新话题"
+            fill_in "title", :with => "test title"
+            click_button "创建"
+            page.should have_content "test title"
+            page.should_not have_selector "#new-topic-form"
+          end
+
+          it "should add the selected user into topic members" do
+            click_on "创建新话题"
+            fill_in "title", :with => "test title"
+            find(:xpath, "(//input[@type='checkbox'])[10]").set(true)
+            click_button "创建"
+            page.should have_content "test title"
+            @organization.topics.last.users.should include(@organization.users.last)
+          end
+
+          it "should default add the current user as member" do
+            click_on "创建新话题"
+            fill_in "title", :with => "test title"
+            click_button "创建"
+            page.should have_content "test title"
+            @organization.topics.last.users.should include(@user)
+          end
+
+          it "should select all of the users by select all checkbox" do
+            click_on "创建新话题"
+            fill_in "title", :with => "test title"
+            find(:xpath, "//input[@class='all']").set(true)
+            click_button "创建"
+            page.should have_content "test title"
+            @organization.topics.last.users.size.should == @organization.users.size
+          end
+        end
+
+        context "user create success with a discussion" do
+          it "shold see the discussion size change" do
+            click_on "创建新话题"
+            fill_in "title", :with => "test title"
+            fill_in "content", :with => "this is test discussion"
+            click_button "创建"
+            page.should have_content "test title"
+            page.should have_content 1
+          end
+        end
+
+        context "user create failed" do
+          it "should see error message" do
+            click_on "创建新话题"
+            click_button "创建"
+            page.should have_content "请输入标题"
+          end
+        end
+      end
+    end
   end
 
   describe "user go to topic page with a invalid id" do

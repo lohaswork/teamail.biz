@@ -26,7 +26,7 @@
             <%= link_to('取消', '#', :id => 'cancel-create-button', :class=>"btn")%>
           </div>
         <% end %>
-        <%= render :partial=> 'user_select', :locals => {:colleagues => get_colleagues, :topic => nil} %>
+        <%= render :partial=> 'topics/user_select', :locals => {:colleagues => get_colleagues, :topic => nil} %>
       </div>
     </div>
   <%- end %>
