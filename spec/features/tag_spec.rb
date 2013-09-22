@@ -14,7 +14,14 @@ describe "topic section" do
     end
 
     context "in the topic list page, click the tagging-group control" do
-      before {click_button "tagging-dropdown"}
+      before do
+        click_on "创建新话题"
+        fill_in "title", :with => "test title"
+        click_button "创建"
+        page.should have_content "test title"
+        find(:css, "input[type='checkbox']").set(true)
+        click_button "tagging-dropdown"
+      end
       it  "should see the organization tags" do
         page.should have_content @organization.tags.last.name
       end

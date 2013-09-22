@@ -18,10 +18,10 @@
       创建时间：
     </div>
   </div>
-  <div class='row checkbox-group' id="select-topic" data-update="#selected_topics", data-page="CheckBoxGroup", data-reload=true>
+  <div class='row' id="select-topic" data-page="TaggingSelectPage">
     <%- topics.try(:each) do |topic|%>
       <div class='col-xs-2'>
-        <%= check_box_tag nil, topic.id, false, :class=>"item", :'data-item'=>true %>
+        <%= check_box_tag 'topics[]', topic.id, false, :class=>"item", :'data-item'=>true %>
       </div>
       <div class='col-xs-2'>
         <%= topic.last_updator.email%>
