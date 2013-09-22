@@ -1,3 +1,4 @@
 <p>个人空间</p>
 <%= render :partial => 'tags/tagging', :locals => {:tags => @tags, :organization => @organization} %>
+<%= render :partial => 'shared/new_topic', :locals => {:colleagues => @colleagues, :topic => nil} %>
 <%= render :partial => 'topics/topic_list', :locals => {:topics => @topics} %>

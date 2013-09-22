@@ -5,6 +5,7 @@ class TopicsController < ApplicationController
   def index
     params[:organization_id] && update_current_organization(Organization.find(params[:organization_id])) if !current_organization_accessable?
     redirect_to('/404.html') && return if !current_organization
+    current_user.default_organization = current_organization
     @topics = current_organization.topics_by_active_time
     @colleagues = get_colleagues
     @tags = get_tag_list
@@ -23,7 +24,7 @@ class TopicsController < ApplicationController
                                                             :locals => {
                                                                   :topics => topics
                                                                 }),
-                           "new-topic" => render_to_string(:partial => 'new_topic',
+                           "new-topic" => render_to_string(:partial => 'shared/new_topic',
                                                             :layout => false,
                                                             :locals => {
                                                                   :colleagues => get_colleagues

@@ -2,7 +2,7 @@
 class SessionsController < ApplicationController
 
   def new
-    redirect_to welcome_path if authenticated?
+    redirect_to topics_path if authenticated?
   end
 
   def create
@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
       cookies[:login_token]= user.remember_token
     end
     update_current_organization(user.organization)
-    render :json => {:status => "success", :redirect => welcome_path}
+    render :json => {:status => "success", :redirect => topics_path}
   end
 
   def destroy

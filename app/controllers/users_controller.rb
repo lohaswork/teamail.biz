@@ -9,6 +9,7 @@ class UsersController < ApplicationController
     @topics = current_user.topics
     @tags = get_tag_list
     @organization = current_organization
+    @colleagues = get_colleagues
   end
 
   def create
