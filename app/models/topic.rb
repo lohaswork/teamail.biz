@@ -22,7 +22,9 @@ class Topic < ActiveRecord::Base
   end
 
   def add_taggings(tags_ids)
-    tags = Tag.find(tags_ids.spilt(','))
+    tags = tags_ids.map {|id| Tag.find(id)}
+    self.tags << tags
+    self
   end
   def last_active_time
     discussions.last.updated_at

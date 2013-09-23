@@ -19,7 +19,7 @@
       创建时间：
     </div>
   </div>
-  <div class='row' id="select-topic" data-page="TaggingSelectPage">
+  <div class='row' id="select-topic" data-update="#selected_topics" data-page="CheckBoxGroup">
     <%- topic_with_tags(topics).each do |topic|%>
       <div class='col-xs-2'>
         <%= check_box_tag 'topics[]', topic[:id], false, :class=>"item", :'data-item'=>true %>
