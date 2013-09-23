@@ -12,6 +12,8 @@ FactoryGirl.define do
       after(:create) do |organization|
         10.times do
           user = create(:clean_user)
+          user.default_organization_id = organization.id
+          user.save
           organization.users << user
         end
       end

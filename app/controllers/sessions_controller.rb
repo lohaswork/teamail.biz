@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
     else
       cookies[:login_token]= user.remember_token
     end
-    update_current_organization(user.organization)
+    update_current_organization(user.default_organization)
     render :json => {:status => "success", :redirect => topics_path}
   end
 
