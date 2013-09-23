@@ -18,5 +18,19 @@ class TagsController < ApplicationController
   end
 
   def add
+    selected_taggs_ids = params[:tags[]]
+    selected_topics_ids = params[:topics[]]
+    #@topics = selected_topics_ids.each {|topic_id| Topic.find(topic_id).add_taggings(selected_taggs_ids) }
+    @topics = Topic.find(selected_topics_ids.split(',')).add_taggings(selected_taggs_ids)
+
+    render :json => {
+              :update => {
+                "topic-list" => render_to_string(:partial => 'topics/topic_list',
+                                              :layout => false,
+                                              :locals => {
+                                                :topics => @topics
+                                              })
+                        }
+                    }
   end
 end

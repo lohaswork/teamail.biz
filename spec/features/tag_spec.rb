@@ -18,6 +18,16 @@ describe "topic section" do
       page.should have_content "test title"
     end
 
+    context "in the topic list page, select topics and tags, click 应用 button" do
+      it  "should see tags attached to the selected topics" do
+        first(:css, "div#select-topic input[type='checkbox']").set(true)
+        click_button "tagging-dropdown"
+        first(:css, "div#tag-list input[type='checkbox']").set(true)
+        click_button "应用"
+        page.should have_selector(:css, '.headline-tag')
+      end
+    end
+
     context "in the topic list page, not select topic, click the tagging-group control" do
       it  "should not see the organization tags" do
         find('#tagging-dropdown')[:disabled].should eq "disabled"

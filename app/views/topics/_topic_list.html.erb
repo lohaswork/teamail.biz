@@ -20,21 +20,22 @@
     </div>
   </div>
   <div class='row' id="select-topic" data-page="TaggingSelectPage">
-    <%- topics.try(:each) do |topic|%>
+    <%- topic_with_tags(topics).each do |topic|%>
       <div class='col-xs-2'>
-        <%= check_box_tag 'topics[]', topic.id, false, :class=>"item", :'data-item'=>true %>
+        <%= check_box_tag 'topics[]', topic[:id], false, :class=>"item", :'data-item'=>true %>
       </div>
       <div class='col-xs-2'>
-        <%= topic.last_updator.email%>
+        <%= topic[:updator]%>
       </div>
       <div class='col-xs-2'>
-        <%= topic.discussions.size > 0 ? topic.discussions.size : ''%>
+        <%= topic[:size] > 0 ? topic[:size] : ''%>
       </div>
       <div class='col-xs-3'>
-        <%= link_to(topic.title, topic_path(topic))%>
+        <%= link_to(topic[:title], topic_path(topic))%>
+        <div class="headline-tag" style="display:inline;"><%= topic[:tags] %></div>
       </div>
       <div class='col-xs-3'>
-        <%= topic.last_active_time%>
+        <%= topic[:active_time] %>
       </div>
     <% end %>
   </div>

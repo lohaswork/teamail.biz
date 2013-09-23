@@ -21,6 +21,9 @@ class Topic < ActiveRecord::Base
     end
   end
 
+  def add_taggings(tags_ids)
+    tags = Tag.find(tags_ids.spilt(','))
+  end
   def last_active_time
     discussions.last.updated_at
   end
