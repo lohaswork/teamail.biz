@@ -26,6 +26,8 @@ FactoryGirl.define do
           user.topics << topic
         end
         user.organizations << organization
+        user.default_organization_id = organization.id
+        user.save
       end
       active_status 1
     end

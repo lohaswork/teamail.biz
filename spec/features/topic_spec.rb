@@ -9,7 +9,7 @@ describe "the topics action" do
     context "user on the topic list page", :js => true do
       it  "should see the topic title" do
         user = create(:normal_user)
-        organization = user.organization
+        organization = user.default_organization
         login_with(user.email, user.password)
         page.should have_content(user.email)
         visit organization_topics_path(organization)
@@ -19,7 +19,7 @@ describe "the topics action" do
 
     context "user not login go the topic title list page" do
       it "should not see the topic title" do
-        organization = create(:normal_user).organization
+        organization = create(:normal_user).default_organization
         visit organization_topics_path(organization)
         page.should_not have_content organization.topics.first.title
       end
@@ -141,7 +141,7 @@ describe "the topics action" do
   describe "user on topic detail page", :js => true do
     before do
       user = create(:normal_user)
-      @organization = user.organization
+      @organization = user.default_organization
       login_with(user.email, user.password)
       page.should have_content(user.email)
       visit organization_topics_path(@organization)
