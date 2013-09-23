@@ -13,10 +13,11 @@ class Tag < ActiveRecord::Base
   class << self
     def create_with_organization(tag_name, organization)
       tag = Tag.new(:name => tag_name)
+      organization = Organization.find_by_id(organization.id)
       raise ValidationError.new(tag.errors.full_messages) if !tag.valid?
       organization.tags << tag
       organization.save
-      tag
+      organization.tags
     end
   end
 end
