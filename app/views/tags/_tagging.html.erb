@@ -4,7 +4,7 @@
     <span class="caret"></span>
   </button>
   <ul id="dropdown-tags" class="dropdown-menu" role="menu">
-    <%= render :partial => 'tags/new_tag', :locals => {:organization => @organization} %>
     <%= render :partial => 'tags/tag_list', :locals => {:tags => @tags} %>
+    <%= render :partial => 'tags/new_tag', :locals => {:organization => @organization} %>
   </ul>
 </div>

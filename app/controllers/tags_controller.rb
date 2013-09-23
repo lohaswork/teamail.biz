@@ -16,4 +16,7 @@ class TagsController < ApplicationController
                         }
                     }
   end
+
+  def add
+  end
 end
