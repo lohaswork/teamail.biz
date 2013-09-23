@@ -2,7 +2,7 @@
 class EarlyAdoptersController < ApplicationController
   def index
     if authenticated?
-      redirect_to welcome_path
+      redirect_to topics_path
     end
   end
 
