@@ -5,10 +5,8 @@
     this.init();
   }
   App.page.TaggingSelectPage.prototype = {
-    selectTopic: $("input[name='topics[]']"),
 
     init: function(){
-      var self = this;
       $(document).on("click", "#select-topic input[data-item]", function(){
         var check_status = 0;
         var checkbox_group = $("#select-topic").find(':checkbox')
