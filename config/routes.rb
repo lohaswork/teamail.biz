@@ -7,7 +7,6 @@ LohasWorkCom::Application.routes.draw do
     get '/forgot'                                => :forgot,                      :as => :forgot
     post '/forgot'                               => :do_forgot,                   :as => :forgot
     get '/forgot_success/:token'                 => :forgot_success,              :as => :forgot_success
-    get '/welcome'                               => :welcome,                     :as => :welcome
     get  '/reset/:reset_token'                   => :reset,                       :as => :reset
     post '/reset/:reset_token'                   => :do_reset,                    :as => :reset
     get '/reset_success'                         => :reset_success,               :as => :reset_success
@@ -82,7 +81,6 @@ LohasWorkCom::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
 
   # See how all your routes lay out with "rake routes"
 

@@ -13,6 +13,8 @@ FactoryGirl.define do
         10.times do
           user = create(:clean_user)
           tag = create(:tag)
+          user.default_organization_id = organization.id
+          user.save
           organization.users << user
           organization.tags << tag
         end
