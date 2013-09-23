@@ -25,15 +25,21 @@ class User < ActiveRecord::Base
       organ = Organization.create(:name => organization_name)
       raise ValidationError.new(organ.errors.full_messages)if !organ.valid?
       user.organizations << organ
+      user.default_organization = organ
       user.save!
       user
     end
 
     def authentication(email, password)
       user = email && self.find_by_email(email)
-      raise ValidationError.new("没有这个用户") if !user
-      raise ValidationError.new("您的账户尚未激活") if !user.active_status?
-      raise ValidationError.new("密码或邮件地址不正确") if user.password != password
+      if !user
+        error_message = "没有这个用户"
+      elsif !user.active_status?
+        error_message = "您的账户尚未激活"
+      elsif user.password != password
+        error_message = "密码或邮件地址不正确"
+      end
+      raise(ValidationError.new(error_message)) if error_message
       user
     end
 
@@ -71,17 +77,12 @@ class User < ActiveRecord::Base
     email[/[^@]+/]
   end
 
-  def organization
-    #For MVP, user only have one organization
-    organizations.first
-  end
-
   def default_organization=(organization)
     default_organization_id = organization.id
   end
 
   def default_organization
-    default_organization_id && Organization.find(default_organization_id) || organization
+    default_organization_id && Organization.find(default_organization_id)
   end
   private
   def create_remember_token

@@ -124,6 +124,12 @@ describe "user authentaction action" do
         page.should have_content @user.topics.first.title
       end
 
+      it "should redirect to topics page visit signup_path" do
+        visit signup_path
+        current_path.should == '/topics'
+        page.should have_content @user.topics.first.title
+      end
+
       it "should go to root path after logout" do
         visit root_path
         click_on("登出")
