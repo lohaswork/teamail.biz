@@ -25,7 +25,11 @@ LohasWorkCom::Application.routes.draw do
     resources :tags, :only => [:create]
   end
 
-  post "/add-taggings" => "tags#add", :as=> "add_taggings"
+  resources :tags, :only => [] do
+    collection do
+      post 'add'
+    end
+  end
 
   resources :topics, :only => [:create, :show]
   resources :topic do

@@ -1,10 +1,10 @@
-<div id="tagging-controls" class="btn-group" data-update="#selected_tags" data-page="CheckBoxGroup">
+<div id="tagging-controls" class="btn-group" data-page="CheckBoxGroup">
   <button type="button" id="tagging-dropdown" class="btn btn-default dropdown-toggle" disabled="disabled">
     <i class="icon-tags"></i>
     <span class="caret"></span>
   </button>
   <ul id="dropdown-tags" class="dropdown-menu" role="menu">
-    <%= render :partial => 'tags/tag_list', :locals => {:tags => @tags} %>
+    <%= render :partial => 'tags/tag_list', :locals => {:organization => @organization, :tags => @tags} %>
     <%= render :partial => 'tags/new_tag', :locals => {:organization => @organization} %>
   </ul>
 </div>

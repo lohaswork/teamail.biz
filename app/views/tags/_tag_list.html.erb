@@ -1,6 +1,6 @@
-<div id="tag-list">
+<div id="tag-list" class="checkbox-group" data-update="#selected_tags" data-reload=true>
   <lable>标记为：</lable>
-  <%= form_tag add_taggings_path, :method => "post", :remote => true do %>
+  <%= form_tag add_tags_path, :method => "post", :remote => true do %>
   <%- tags.try(:each) do |tag|%>
     <li>
       <%= check_box_tag 'tags[]', tag.id, false, :class=>"item", :'data-item'=>true %>

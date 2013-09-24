@@ -9,24 +9,27 @@ class TagsController < ApplicationController
     render :json => {
               :update => {
                 "tag-list" => render_to_string(:partial => 'tags/tag_list',
-                                              :layout => false,
-                                              :locals => {
-                                                :tags => tags
+                                               :layout => false,
+                                               :locals => {
+                                                 :tags => tags
                                               })
                         }
                     }
   end
 
   def add
-    @topics = params[:topics].map  {|id| Topic.find(id).add_taggings(params[:tags])}
+    # uniq need refactor
+    topics = current_organization.topics.map do |topic|
+      topic.add_taggings(params[:tags]) if params[:selected_topics].split(',').uniq.include? topic.id
+    end
 
     render :json => {
               :update => {
                 "topic-list" => render_to_string(:partial => 'topics/topic_list',
-                                              :layout => false,
-                                              :locals => {
-                                                :topics => @topics
-                                              })
+                                                 :layout => false,
+                                                 :locals => {
+                                                   :topics => topics
+                                                })
                         }
                     }
   end

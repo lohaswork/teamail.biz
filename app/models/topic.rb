@@ -6,7 +6,7 @@ class Topic < ActiveRecord::Base
   has_many :discussions, :as => :discussable, :order => "updated_at asc", :uniq => true
   has_many :user_topics
   has_many :taggings, :as => :taggable
-  has_many :tags, :through => :taggings
+  has_many :tags, :through => :taggings, :uniq => true
   has_many :users, :through => :user_topics, :uniq => true
   validates :title, :presence => {:message=>'请输入标题'}
 
@@ -26,6 +26,7 @@ class Topic < ActiveRecord::Base
     self.tags << tags
     self
   end
+
   def last_active_time
     discussions.last.updated_at
   end

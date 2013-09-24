@@ -48,14 +48,7 @@
         });
       })
       .on("click", "#select-topic input[data-item]", function(){
-        var check_status = 0;
-        var checkbox_group = $("#select-topic").find(':checkbox');
-        checkbox_group.each(function(index,element) {
-          if($(element).prop('checked')){
-            check_status += 1;
-          }
-        });
-        if (check_status > 0) {
+        if (sumCheckStatus("#select-topic") > 0) {
           $("#tagging-dropdown").attr("disabled",false);
         } else {
           $("#tagging-dropdown").attr("disabled","disabled");
@@ -73,14 +66,7 @@
         }
       })// Enable tags create button
       .on("click", "#tag-list input[data-item]", function(){
-        var check_status = 0;
-        var checkbox_group = $("#tag-list").find(':checkbox');
-        checkbox_group.each(function(index,element) {
-          if($(element).prop('checked')){
-            check_status += 1;
-          }
-        });
-        if (check_status > 0) {
+        if (sumCheckStatus("#tag-list") > 0) {
           $("#tagging-submit").show();
           $("#tag-input").hide();
         } else {
@@ -88,6 +74,17 @@
           $("#tag-input").show();
         }
       });// Enable tags submit button
+
+      var sumCheckStatus = function(check_element) {
+        var check_status = 0;
+        var checkbox_group = $(check_element).find(':checkbox');
+        checkbox_group.each(function(index,element) {
+          if($(element).prop('checked')){
+            check_status += 1;
+          }
+        });
+        return check_status;
+      };
 
       $(".checkbox-group input[data-item]").prop('checked', function(){
         var me = $(this),
