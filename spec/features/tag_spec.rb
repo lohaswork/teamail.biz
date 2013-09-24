@@ -59,6 +59,20 @@ describe "topic section" do
         page.should have_content "新标签"
       end
 
+      it "should be able to create tags with upper-case name & down-case name", :js => true do
+        fill_in "tag_name", :with => "ABCTag"
+        click_button "新建"
+        page.should have_content "ABCTag"
+        fill_in "tag_name", :with => "abcTag"
+        click_button "新建"
+        page.should have_content "abcTag"
+      end
+
+      it "should disable the create button when nothing inputs" do
+        fill_in "tag_name", :with => ""
+        find('#tag-submit')[:disabled].should eq "disabled"
+      end
+
       it "cannot create same tag twice", :js => true do
         fill_in "tag_name", :with => "同一个标签"
         click_button "新建"

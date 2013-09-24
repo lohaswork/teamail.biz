@@ -4,7 +4,7 @@ class TagsController < ApplicationController
   def create
     organization = current_organization
     tag_name = params[:tag_name].strip
-    tags = Tag.create_with_organization(tag_name, organization)
+    tags = organization.add_tag_to_organization(tag_name).tags
 
     render :json => {
               :update => {
