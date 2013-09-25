@@ -23,7 +23,7 @@ module ControllerModules::ExceptionHandlers
   def handle_not_found_error(exception)
     log_the_error exception
     if request.xhr?
-      render :json => {:redirect_to => '/404.html'},
+      render :json => { :redirect_to => '/404.html' },
                       :status => 404
     else
       redirect_to '/404.html'

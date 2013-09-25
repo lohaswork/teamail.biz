@@ -87,10 +87,10 @@ Tailor.config do |config|
     style.allow_screaming_snake_case_classes false, level: :error
     style.allow_trailing_line_spaces false, level: :error
     style.allow_invalid_ruby false, level: :warn
-    style.indentation_spaces 2, level: :warn
+    style.indentation_spaces 2, level: :off
     style.max_code_lines_in_class 300, level: :error
     style.max_code_lines_in_method 30, level: :error
-    style.max_line_length 120, level: :error
+    style.max_line_length 120, level: :off
     style.spaces_after_comma 1, level: :error
     style.spaces_after_lbrace 1, level: :error
     style.spaces_after_lbracket 0, level: :error
