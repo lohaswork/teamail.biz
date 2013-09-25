@@ -2,7 +2,7 @@ begin
   require 'metric_fu'
 
   MetricFu::Configuration.run do |config|
-    config.metrics -= [:cane]
+    config.metrics = [:rails_best_practices, :reek]
     config.reek = { :dirs_to_reek => ['app/models', 'app/helpers', 'lib'] }
   end
 
