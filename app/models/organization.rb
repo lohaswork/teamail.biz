@@ -13,7 +13,7 @@ class Organization < ActiveRecord::Base
     self.topics.sort_by{|topic|topic.last_active_time}.reverse
   end
 
-  def add_tag_to_organization(tag_name)
+  def add_tag(tag_name)
     tag = Tag.new(:name => tag_name)
     raise ValidationError.new(tag.errors.full_messages) if !tag.valid?
     organization = Organization.find_by_id(self.id)
