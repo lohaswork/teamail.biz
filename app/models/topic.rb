@@ -6,7 +6,7 @@ class Topic < ActiveRecord::Base
   has_many :discussions, :as => :discussable, :order => "updated_at asc", :uniq => true
   has_many :user_topics
   has_many :users, :through => :user_topics, :uniq => true
-  validates :title, :presence => {:message=>'请输入标题'}
+  validates :title, :presence => { :message=>'请输入标题' }
 
   class << self
     def create_topic(title, content, emails, organization, current_user)

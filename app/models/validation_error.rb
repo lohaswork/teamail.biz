@@ -15,7 +15,7 @@ class ValidationError < StandardError
 
   def add(error)
     if error.instance_of? Array
-        error.each {|m| add(m) }
+        error.each { |m| add(m) }
     else
       @messages << "#{error}"
     end
