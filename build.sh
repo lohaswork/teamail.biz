@@ -1,6 +1,6 @@
 #!/bin/bash
 #reek -n app
-tailor app/**/*.rb
+bundle exec rake tailor
 if [ $? -ne 0 ]; then
   echo 'tailor has warning or error!'
 else
