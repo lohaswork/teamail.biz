@@ -12,4 +12,13 @@ class Organization < ActiveRecord::Base
   def topics_by_active_time
     self.topics.sort_by{|topic|topic.last_active_time}.reverse
   end
+
+  # 有待重构
+  def topics_add_taggings(selected_topics_ids, selected_tags_ids)
+    selected_topics_ids = selected_topics_ids.map { |id| id.to_i }
+    self.topics.map do |topic|
+      selected_topics_ids.include? topic.id ? topic.add_taggings(selected_tags_ids) : topic
+    end
+    self.topics
+  end
 end

@@ -19,9 +19,8 @@ class TagsController < ApplicationController
 
   def add
     # uniq need refactor
-    topics = current_organization.topics.map do |topic|
-      topic.add_taggings(params[:tags]) if params[:selected_topics].split(',').uniq.include? topic.id
-    end
+    selected_topics_ids = params[:selected_topics].split(',').uniq
+    topics = current_organization.topics_add_taggings(selected_topics_ids, params[:tags])
 
     render :json => {
               :update => {
