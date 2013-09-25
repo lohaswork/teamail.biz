@@ -27,6 +27,12 @@ class Topic < ActiveRecord::Base
     self
   end
 
+  def remove_tagging(tag_id)
+    tag = Tag.find(tag_id)
+    self.tags.delete(tag)
+    self
+  end
+
   def last_active_time
     discussions.last.updated_at
   end

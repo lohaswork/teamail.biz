@@ -19,23 +19,32 @@
       创建时间：
     </div>
   </div>
-  <div class='row checkbox-group' id="select-topic" data-update="#selected_topics" data-reload=true data-page="CheckBoxGroup">
-    <%- topic_with_tags(topics).each do |topic|%>
-      <div class='col-xs-2'>
-        <%= check_box_tag 'topics[]', topic[:id], false, :class=>"item", :'data-item'=>true %>
-      </div>
-      <div class='col-xs-2'>
-        <%= topic[:updator]%>
-      </div>
-      <div class='col-xs-2'>
-        <%= topic[:size] > 0 ? topic[:size] : ''%>
-      </div>
-      <div class='col-xs-3'>
-        <%= link_to(topic[:title], topic_path(topic))%>
-        <div class="headline-tag" style="display:inline;"><%= topic[:tags] %></div>
-      </div>
-      <div class='col-xs-3'>
-        <%= topic[:active_time] %>
+  <div class='checkbox-group' id="select-topic" data-update="#selected_topics" data-reload=true data-page="CheckBoxGroup">
+    <%- topics.try(:each) do |topic| %>
+      <div class="row">
+        <div class='col-xs-2'>
+          <%= check_box_tag 'topics[]', topic.id, false, :class=>"item", :'data-item'=>true %>
+        </div>
+        <div class='col-xs-2'>
+          <%= topic.last_updator.email_name%>
+        </div>
+        <div class='col-xs-2'>
+          <%= topic.discussions.size > 0 ? topic.discussions.size : ''%>
+        </div>
+        <div class='col-xs-3'>
+          <%= link_to(topic.title, topic_path(topic))%>
+          <div class="headline-tag">
+            <%- topic.tags.each do |tag| %>
+              <span><%= tag.name %><span>
+              <%= link_to remove_topic_tag_path(topic, tag), :method => :post, :remote => true, :class => "tag-remove-link" do %>
+                <i class="icon-remove remove-tag"></i>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+        <div class='col-xs-3'>
+          <%= topic.last_active_time %>
+        </div>
       </div>
     <% end %>
   </div>

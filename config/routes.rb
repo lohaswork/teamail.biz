@@ -34,6 +34,9 @@ LohasWorkCom::Application.routes.draw do
   resources :topics, :only => [:create, :show]
   resources :topic do
     resources :discussions, :only => [:create]
+    resources :tags, :only => [] do
+      post 'remove', :on => :member
+    end
   end
   resources :early_adopters
   match "/*other" => redirect('/')

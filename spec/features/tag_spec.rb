@@ -19,12 +19,21 @@ describe "topic section" do
     end
 
     context "in the topic list page, select topics and tags, click 应用 button" do
-      it  "should see tags attached to the selected topics" do
+      before do
         first(:css, "div#select-topic input[type='checkbox']").set(true)
         click_button "tagging-dropdown"
         first(:css, "div#tag-list input[type='checkbox']").set(true)
         click_button "应用"
-        page.should have_selector(:css, '.headline-tag')
+      end
+
+      it  "should see tags attached to the selected topics" do
+        find(:css, "div#select-topic").should have_content @organization.tags.first.name
+      end
+
+      it "click delete tagging link, should not see the attached tag" do
+        remove_tagging_link = find(:css, "a.tag-remove-link")
+        remove_tagging_link.click
+        find(:css, "div#select-topic").should_not have_content @organization.tags.first.name
       end
     end
 
