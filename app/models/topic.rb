@@ -8,7 +8,7 @@ class Topic < ActiveRecord::Base
   has_many :taggings, :as => :taggable
   has_many :tags, :through => :taggings
   has_many :users, :through => :user_topics, :uniq => true
-  validates :title, :presence => {:message=>'请输入标题'}
+  validates :title, :presence => { :message=>'请输入标题' }
 
   class << self
     def create_topic(title, content, emails, organization, current_user)

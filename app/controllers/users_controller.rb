@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   def create
     @user = User.create_with_organization(params[:user], params[:organization_name])
     EmailEngine::SignupNotifier.new(@user.id).sign_up_success_notification
-    render :json => {:status => "success", :redirect => signup_success_path}
+    render :json => { :status => "success", :redirect => signup_success_path }
   end
 
   def active
@@ -31,7 +31,7 @@ class UsersController < ApplicationController
   def do_forgot
     email = params[:email]
     user = User.forgot_password(email)
-    render :json => {:status => "success", :redirect => forgot_success_path(user.remember_token)}
+    render :json => { :status => "success", :redirect => forgot_success_path(user.remember_token) }
   end
 
   def reset
@@ -41,7 +41,7 @@ class UsersController < ApplicationController
 
   def do_reset
     User.reset_password(params[:reset_token], params[:password])
-    render :json => {:status => "success", :redirect => reset_success_path}
+    render :json => { :status => "success", :redirect => reset_success_path }
   end
 
   def forgot_success

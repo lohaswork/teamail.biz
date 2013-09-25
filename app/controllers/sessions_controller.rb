@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
       cookies[:login_token]= user.remember_token
     end
     update_current_organization(user.default_organization)
-    render :json => {:status => "success", :redirect => topics_path}
+    render :json => { :status => "success", :redirect => topics_path }
   end
 
   def destroy
