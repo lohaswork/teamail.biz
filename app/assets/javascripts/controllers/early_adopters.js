@@ -10,7 +10,7 @@
     back2top: $('.back2top'),
     scroller: $('.scroller'),
 
-    vedioReady: function (){
+    videoReady: function (){
       // Once the video is ready
       _V_("demo-video").ready(function(){
 
@@ -32,7 +32,7 @@
 
     init: function(){
       var self =this;
-      self.vedioReady();
+      self.videoReady();
 
       $(window).scroll(function(){
         // add navbar opacity on scroll

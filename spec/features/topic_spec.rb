@@ -93,7 +93,7 @@ describe "the topics action" do
         it "should add the selected user into topic members" do
           click_on "创建新话题"
           fill_in "title", :with => "test title"
-          find(:xpath, "(//input[@type='checkbox'])[10]").set(true)
+          all(:css, "div#select-user input[type='checkbox']").last.set(true)
           click_button "创建"
           page.should have_content "test title"
           @organization.topics.last.users.should include(@organization.users.last)
@@ -196,7 +196,7 @@ describe "the topics action" do
       it "should see the last discussion member default selected " do
         click_on "创建新话题"
         fill_in "title", :with => "test title"
-        find(:xpath, "(//input[@type='checkbox'])[10]").set(true)
+        all(:css, "div#select-user input[type='checkbox']").last.set(true)
         click_button "创建"
         page.should have_content("test title")
         click_on "test title"
@@ -351,7 +351,7 @@ describe "the topics action" do
           it "should add the selected user into topic members" do
             click_on "创建新话题"
             fill_in "title", :with => "test title"
-            find(:xpath, "(//input[@type='checkbox'])[10]").set(true)
+            all(:css, "div#select-user input[type='checkbox']").last.set(true)
             click_button "创建"
             page.should have_content "test title"
             @organization.topics.last.users.should include(@organization.users.last)
