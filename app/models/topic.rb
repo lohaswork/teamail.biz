@@ -22,7 +22,7 @@ class Topic < ActiveRecord::Base
   end
 
   def add_taggings(tags_ids)
-    tags = tags_ids.map {|id| Tag.find(id)}
+    tags = tags_ids.map { |id| Tag.find(id) }
     self.tags << tags
     self
   end

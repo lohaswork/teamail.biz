@@ -4,6 +4,6 @@ module TopicsHelper
   end
 
   def topic_with_tags(topics)
-    topics.map{|topic| {:id=> topic.id, :updator => topic.last_updator.email_name, :size => topic.discussions.size, :title => topic.title, :tags => topic.tags, :active_time => topic.last_active_time } }
+    topics.map { |topic| { :id=> topic.id, :updator => topic.last_updator.email_name, :size => topic.discussions.size, :title => topic.title, :tags => topic.tags, :active_time => topic.last_active_time } }
   end
 end

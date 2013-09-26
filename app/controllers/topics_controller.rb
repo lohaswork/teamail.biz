@@ -45,7 +45,7 @@ class TopicsController < ApplicationController
 
     render :json => {
               :update => {
-                "tag-container-#{topic.id}" => render_to_string(:partial => 'topics/headline_tags',
+                "tag-container-3" => render_to_string(:partial => 'topics/headline_tags',
                                                                 :layout => false,
                                                                 :locals => {
                                                                     :topic => topic

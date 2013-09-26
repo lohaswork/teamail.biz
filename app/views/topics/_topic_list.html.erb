@@ -33,7 +33,7 @@
         </div>
         <div class='col-xs-3'>
           <%= link_to(topic.title, topic_path(topic))%>
-          <%= render :partial => 'topics/headline_tags', :locals => {:topic => topic} %>
+          <%= render :partial => 'topics/headline_tags', :locals => { :topic => topic } %>
         </div>
         <div class='col-xs-3'>
           <%= topic.last_active_time %>
