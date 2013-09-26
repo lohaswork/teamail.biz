@@ -21,7 +21,9 @@ FactoryGirl.define do
         organization = create(:organization)
         10.times do
           topic = create(:topic)
+          tag = create(:tag)
           organization.topics << topic
+          organization.tags << tag
           create_discussion(user, topic)
           user.topics << topic
         end

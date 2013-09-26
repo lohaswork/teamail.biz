@@ -4,6 +4,9 @@
       您的话题有：
     </div>
     <div class='col-xs-2'>
+      选择框：
+    </div>
+    <div class='col-xs-2'>
       创建者：
     </div>
     <div class='col-xs-2'>
@@ -16,8 +19,11 @@
       创建时间：
     </div>
   </div>
-  <%- topics.try(:each) do |topic|%>
-    <div class='row'>
+  <div class='row' id="select-topic" data-page="TaggingSelectPage">
+    <%- topics.try(:each) do |topic|%>
+      <div class='col-xs-2'>
+        <%= check_box_tag 'topics[]', topic.id, false, :class=>"item", :'data-item'=>true %>
+      </div>
       <div class='col-xs-2'>
         <%= topic.last_updator.email%>
       </div>
@@ -30,6 +36,6 @@
       <div class='col-xs-3'>
         <%= topic.last_active_time%>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>

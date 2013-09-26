@@ -1,0 +1,10 @@
+    <div class="col-md-12">
+      <div id="tag-input" class="input-group">
+        <%= form_tag organization_tags_path(@organization), :method => "post", :remote => true do %>
+          <%= text_field_tag :tag_name, nil, :placeholder=>"输入新标签名", :class=>"form-control" %>
+          <span class="input-group-btn">
+            <%= submit_tag "新建", :id=>"tag-submit", :class=>"btn btn-default", :disabled=>"disabled" %>
+          </span>
+        <% end %>
+      </div><!-- /input-group -->
+    </div><!-- /.col-md-12 -->
