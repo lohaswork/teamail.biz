@@ -6,16 +6,11 @@ describe "topic section" do
   include Helpers
   describe "user login with organization", :js => true do
     before do
-      @organization = create(:organization_with_multi_users)
-      @user = @organization.users.first
-      login_with(@user.email, @user.password)
-      page.should have_content @user.email
+      user = create(:normal_user)
+      @organization = user.organizations.first
+      login_with(user.email, user.password)
+      page.should have_content user.email
       visit organization_topics_path(@organization)
-      click_on "创建新话题"
-      fill_in "title", :with => "test title"
-      click_button "创建"
-      sleep 1
-      page.should have_content "test title"
     end
 
     context "in the topic list page, select topics and tags, click 应用 button" do
@@ -81,6 +76,20 @@ describe "topic section" do
         fill_in "tag_name", :with => "新标签"
         click_button "新建"
         page.should have_content "新标签"
+      end
+
+      it "should be able to create tags with upper-case name & down-case name", :js => true do
+        fill_in "tag_name", :with => "ABCTag"
+        click_button "新建"
+        page.should have_content "ABCTag"
+        fill_in "tag_name", :with => "abcTag"
+        click_button "新建"
+        page.should have_content "abcTag"
+      end
+
+      it "should disable the create button when nothing inputs" do
+        fill_in "tag_name", :with => ""
+        find('#tag-submit')[:disabled].should eq "disabled"
       end
 
       it "cannot create same tag twice", :js => true do

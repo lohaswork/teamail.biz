@@ -4,14 +4,14 @@ class TagsController < ApplicationController
   def create
     organization = current_organization
     tag_name = params[:tag_name].strip
-    tags = Tag.create_with_organization(tag_name, organization)
+    tags = organization.add_tag(tag_name).tags
 
     render :json => {
               :update => {
                 "tag-list" => render_to_string(:partial => 'tags/tag_list',
                                                :layout => false,
                                                :locals => {
-                                                 :tags => tags
+                                                  :tags => tags
                                               })
                         }
                     }
@@ -30,7 +30,7 @@ class TagsController < ApplicationController
                 "topic-list" => render_to_string(:partial => 'topics/topic_list',
                                                  :layout => false,
                                                  :locals => {
-                                                   :topics => topics
+                                                    :topics => topics
                                                 })
                         }
                     }
