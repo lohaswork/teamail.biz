@@ -47,44 +47,6 @@
           return checkStatus;
         });
       })
-      .on("click", "#select-topic input[data-item]", function(){
-        if (sumCheckStatus("#select-topic") > 0) {
-          $("#tagging-dropdown").attr("disabled",false);
-        } else {
-          $("#tagging-dropdown").attr("disabled","disabled");
-        }
-      })// Enable #tagging-dropdown button
-      .on('click', '#tagging-dropdown', function(){
-        $('#dropdown-tags').toggle();
-        return false;
-      })
-      .on('keyup', '#tag_name', function(){
-        if ($('#tag_name').val() != "") {
-          $("#tag-submit").attr("disabled",false);
-        } else {
-          $("#tag-submit").attr("disabled","disabled");
-        }
-      })// Enable tags create button
-      .on("click", "#tag-list input[data-item]", function(){
-        if (sumCheckStatus("#tag-list") > 0) {
-          $("#tagging-submit").show();
-          $("#tag-input").hide();
-        } else {
-          $("#tagging-submit").hide();
-          $("#tag-input").show();
-        }
-      });// Enable tags submit button
-
-      var sumCheckStatus = function(check_element) {
-        var check_status = 0;
-        var checkbox_group = $(check_element).find(':checkbox');
-        checkbox_group.each(function(index,element) {
-          if($(element).prop('checked')){
-            check_status += 1;
-          }
-        });
-        return check_status;
-      };
 
       $(".checkbox-group input[data-item]").prop('checked', function(){
         var me = $(this),
