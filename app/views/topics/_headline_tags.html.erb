@@ -1,0 +1,10 @@
+<div id="tag-container-#{topic.id}" class="tag-container">
+  <%- topic.tags.each do |tag| %>
+    <div class="headline-tag">
+      <span><%= tag.name %><span>
+      <%= link_to topic_remove_tag_path(topic, :tag => tag.id), :method => :post, :remote => true, :class => "tag-remove-link" do %>
+        <i class="icon-remove remove-tag"></i>
+      <% end %>
+    </div>
+  <% end %>
+</div>

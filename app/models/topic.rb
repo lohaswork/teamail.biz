@@ -27,8 +27,8 @@ class Topic < ActiveRecord::Base
     self
   end
 
-  def remove_tagging(tag_id)
-    tag = Tag.find(tag_id)
+  def remove_tagging(id)
+    tag = Tag.find(id)
     self.tags.delete(tag)
     self
   end

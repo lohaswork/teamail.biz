@@ -20,14 +20,14 @@ class TopicsController < ApplicationController
     render :json => {
               :update => {
                           "topic-list" => render_to_string(:partial => 'topic_list',
-                                                            :layout => false,
-                                                            :locals => {
-                                                                  :topics => topics
+                                                           :layout => false,
+                                                           :locals => {
+                                                               :topics => topics
                                                                 }),
                            "new-topic" => render_to_string(:partial => 'shared/new_topic',
-                                                            :layout => false,
-                                                            :locals => {
-                                                                  :colleagues => get_colleagues
+                                                           :layout => false,
+                                                           :locals => {
+                                                               :colleagues => get_colleagues
                                                               })
                          }
                  }
@@ -37,6 +37,22 @@ class TopicsController < ApplicationController
     @topic = Topic.find(params[:id])
     @discussions = @topic.discussions
     @colleagues = get_colleagues
+  end
+
+  def remove_tag
+    # 更换数据操作的方法
+    # 更换topics取得的方法，使得个人空间也适用
+    topic = Topic.find(params[:id]).remove_tagging(params[:tag])
+
+    render :json => {
+              :update => {
+                "tag-container-#{topic.id}" => render_to_string(:partial => 'topics/headline_tags',
+                                                                :layout => false,
+                                                                :locals => {
+                                                                    :topic => topic
+                                                               })
+                          }
+                    }
   end
 
 end
