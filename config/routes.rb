@@ -29,9 +29,13 @@ LohasWorkCom::Application.routes.draw do
       post 'add'
     end
   end
-  resources :topics, :only => [:create, :show]
+  resources :topics, :only => [:create, :show] do
+    collection do
+      post 'remove_tag'
+      post 'add_tag'
+    end
+  end
   resources :topic, :only => [] do
-    post 'remove_tag' =>"topics#remove_tag", :on => :member
     resources :discussions, :only => [:create]
   end
   resources :early_adopters, :only => [:index, :create]

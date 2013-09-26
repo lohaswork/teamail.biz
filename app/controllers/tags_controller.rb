@@ -17,24 +17,4 @@ class TagsController < ApplicationController
                         }
                     }
   end
-
-  def add
-    # uniq need refactor
-    # 更换数据操作的方法
-    # 更换topics取得的方法，使得个人空间也适用
-    selected_topics_ids = params[:selected_topics].split(',').uniq
-    topics = current_organization.topics_add_taggings(selected_topics_ids, params[:tags])
-    topics = current_organization.topics
-
-    render :json => {
-              :update => {
-                "topic-list" => render_to_string(:partial => 'topics/topic_list',
-                                                 :layout => false,
-                                                 :locals => {
-                                                    :topics => topics
-                                                })
-                        }
-                    }
-  end
-
 end

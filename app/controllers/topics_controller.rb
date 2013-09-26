@@ -38,20 +38,35 @@ class TopicsController < ApplicationController
     @colleagues = get_colleagues
   end
 
-  def remove_tag
-    # 更换数据操作的方法
-    # 更换topics取得的方法，使得个人空间也适用
-    topic = Topic.find(params[:id]).remove_tagging(params[:tag])
+  def add_tag
+    selected_topics_ids = params[:selected_topics].split(',').uniq
+    Topic.find(selected_topics_ids).each { |topic| topic.add_taggings(params[:tags]) }
+    topics = Topic.find(params[:topics])
 
     render :json => {
               :update => {
-                "tag-container-3" => render_to_string(:partial => 'topics/headline_tags',
-                                                                :layout => false,
-                                                                :locals => {
-                                                                    :topic => topic
-                                                               })
-                          }
+                          "topic-list" => render_to_string(:partial => 'topics/topic_list',
+                                                           :layout => false,
+                                                           :locals => {
+                                                               :topics => topics
+                                                          })
+                        }
                     }
+  end
+
+  def remove_tag
+    topic = Topic.find(params[:topic]).remove_tagging(params[:tag])
+    topics = Topic.find(params[:topics])
+
+    render :json => {
+              :update => {
+                          "topic-list" => render_to_string(:partial => 'topics/topic_list',
+                                                           :layout => false,
+                                                           :locals => {
+                                                               :topics => topics
+                                                           })
+                                    }
+                              }
   end
 
 end
