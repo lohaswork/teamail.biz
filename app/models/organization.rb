@@ -18,6 +18,6 @@ class Organization < ActiveRecord::Base
     tag = Tag.new(:name => tag_name)
     raise ValidationError.new(tag.errors.full_messages) if !tag.valid?
     tags << tag
-    reload
+    self
   end
 end
