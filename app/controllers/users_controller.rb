@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   def topics
     redirect_to(login_path) && return if !authenticated?
     @topics = current_user.topics
+    !current_organization && update_current_organization(current_user.default_organization)
     @organization = current_organization
     @tags = @organization.tags
     @colleagues = get_colleagues
