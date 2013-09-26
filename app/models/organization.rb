@@ -19,7 +19,7 @@ class Organization < ActiveRecord::Base
     raise ValidationError.new(tag.errors.full_messages) if !tag.valid?
     organization = Organization.find_by_id(self.id)
     organization.tags << tag
-    organization.save
+    organization.save!
     organization
   end
 

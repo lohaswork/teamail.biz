@@ -34,7 +34,7 @@ LohasWorkCom::Application.routes.draw do
     post 'remove_tag' =>"topics#remove_tag", :on => :member
     resources :discussions, :only => [:create]
   end
-  resources :early_adopters
+  resources :early_adopters, :only => [:index, :create]
   match "/*other" => redirect('/')
   # The priority is based upon order of creation:
   # first created -> highest priority.
