@@ -46,7 +46,7 @@
           }
           return checkStatus;
         });
-      })
+      });
 
       $(".checkbox-group input[data-item]").prop('checked', function(){
         var me = $(this),
