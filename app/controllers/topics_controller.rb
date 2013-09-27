@@ -6,7 +6,7 @@ class TopicsController < ApplicationController
     params[:organization_id] && params[:organization_id] != current_organization.try(:id) && update_current_organization(Organization.find(params[:organization_id]))
     redirect_to('/404.html') && return if !current_organization_accessable?
     @organization = current_organization
-    @topics = order_by_updator @organization.topics
+    @topics = @organization.topics
     @colleagues = get_colleagues
     @tags = @organization.tags
   end
@@ -15,7 +15,7 @@ class TopicsController < ApplicationController
     selected_emails = params[:selected_users].split(',')
     new_topic = Topic.create_topic(params[:title], params[:content], selected_emails, current_organization, current_user)
     EmailEngine::TopicNotifier.new(new_topic.id).create_topic_notification
-    topics = order_by_updator current_organization.topics
+    topics = current_organization.topics
 
     render :json => {
               :update => {
@@ -42,7 +42,7 @@ class TopicsController < ApplicationController
   def add_tag
     selected_topics_ids = params[:selected_topics].split(',').uniq
     Topic.find(selected_topics_ids).each { |topic| topic.add_taggings(params[:tags]) }
-    topics = order_by_updator Topic.find(params[:topics])
+    topics = Topic.find(params[:topics])
 
     render :json => {
               :update => {
