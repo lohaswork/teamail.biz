@@ -26,6 +26,8 @@
               $('#' + id)[updateMethod](newElement);
               //reload the JS if have reload in this part
               App.init($('#' + id), true);
+              // Need refactor: trigger after ajax:complete nicely
+              $('#' + id).trigger('refreshed');
             }
           }
           if (data.modal) {

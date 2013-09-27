@@ -46,7 +46,11 @@
           $("#tagging-submit").hide();
           $("#tag-input").show();
         }
-      });// Enable tags submit button
+      })// Enable tags submit button
+      .on("refreshed", "#topic-list", function () {
+        $("#dropdown-tags").hide();
+        $("#tag-list :checkbox").attr('checked', false);
+      });
 
       var sumCheckStatus = function(check_element) {
         var check_status = 0;
