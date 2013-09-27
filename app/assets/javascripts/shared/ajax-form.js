@@ -32,6 +32,11 @@
               var newElement = $(data.modal);
               $('#myModal').html(newElement).modal();
             }
+          else if (data.remove) {
+            for (var id in data.remove) {
+              $('#' + data.remove[id]).remove();
+            }
+          }
           else if (data.reload) {
             window.location.reload(true);
           }

@@ -56,18 +56,12 @@ class TopicsController < ApplicationController
   end
 
   def remove_tag
-    topic = Topic.find(params[:topic]).remove_tagging(params[:tag])
-    topics = order_by_updator Topic.find(params[:topics])
+    tag_id = params[:tag]
+    topic = Topic.find(params[:topic]).remove_tagging(tag_id)
 
     render :json => {
-              :update => {
-                          "topic-list" => render_to_string(:partial => 'topics/topic_list',
-                                                           :layout => false,
-                                                           :locals => {
-                                                               :topics => topics
-                                                           })
-                                    }
-                              }
+              :remove => ["tag-#{topic.id}-#{tag_id}"]
+                    }
   end
 
 end
