@@ -15,13 +15,15 @@ describe "topic section" do
 
     context "in the topic list page, select topics and tags, click 应用 button" do
       before do
+        # topics should not have any tags before this
+        find(:css, "div#select-topic").should_not have_content @organization.tags.first.name
         first(:css, "div#select-topic input[type='checkbox']").set(true)
         click_button "tagging-dropdown"
         first(:css, "div#tag-list input[type='checkbox']").set(true)
         click_button "应用"
       end
 
-      it  "should see tags attached to the selected topics" do
+      it "should see already exist tags attached to the selected topics" do
         find(:css, "div#select-topic").should have_content @organization.tags.first.name
       end
 
