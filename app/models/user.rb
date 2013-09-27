@@ -1,6 +1,7 @@
 # encoding: utf-8
 class User < ActiveRecord::Base
-  attr_accessible :email, :password
+  attr_accessible :email, :password, :password_confirmation
+  has_secure_password
 
   has_many :organization_memberships
   has_many :organizations, :through => :organization_memberships, :uniq => true
@@ -20,7 +21,7 @@ class User < ActiveRecord::Base
 
   class << self
     def create_with_organization(user, organization_name)
-      user = User.new(:email => user[:email], :password => user[:password])
+      user = User.new(:email => user[:email], :password => user[:password], :password_confirmation => user[:password])
       raise ValidationError.new(user.errors.full_messages) if !user.valid?
       organ = Organization.new(:name => organization_name)
       raise ValidationError.new(organ.errors.full_messages)if !organ.valid?
@@ -37,7 +38,7 @@ class User < ActiveRecord::Base
         error_message = "没有这个用户"
       elsif !user.active_status?
         error_message = "您的账户尚未激活"
-      elsif user.password != password
+      elsif user.authenticate(password) == false
         error_message = "密码或邮件地址不正确"
       end
       raise(ValidationError.new(error_message)) if error_message
