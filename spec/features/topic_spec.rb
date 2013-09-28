@@ -38,8 +38,8 @@ describe "the topics action" do
 
   describe "user create new topic", :js => true do
     before do
-      @organization = create(:organization_with_multi_users)
-      @user = @organization.users.first
+      @user = create(:user_with_many_colleagues)
+      @organization = @user.default_organization
       login_with(@user.email, @user.password)
       page.should have_content @user.email
       visit organization_topics_path(@organization)
@@ -185,8 +185,8 @@ describe "the topics action" do
   end
   describe "go to discussion page with selected user", :js => true do
     before do
-      @organization = create(:organization_with_multi_users)
-      @user = @organization.users.first
+      @user = create(:user_with_many_colleagues)
+      @organization = @user.default_organization
       login_with(@user.email, @user.password)
       page.should have_content @user.email
       visit organization_topics_path(@organization)
@@ -296,8 +296,8 @@ describe "the topics action" do
 
     describe "user create new topic on the personal space page", :js => true  do
       before do
-        @organization = create(:organization_with_multi_users)
-        @user = @organization.users.first
+        @user = create(:user_with_many_colleagues)
+        @organization = @user.default_organization
         login_with(@user.email, @user.password)
         page.should have_content @user.email
         visit topics_path

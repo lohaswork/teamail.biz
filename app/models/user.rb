@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
       raise ValidationError.new(organ.errors.full_messages)if !organ.valid?
       user.organizations << organ
       organ.save!
-      user.default_organization = organ
+      user.default_organization_id = organ.id
       user.save!
       user
     end
@@ -57,6 +57,7 @@ class User < ActiveRecord::Base
       begin
         user = self.find_by_reset_token(reset_token)
         user.password = password
+        user.password_confirmation = password
         user.save!
         user.update_attribute(:reset_token, nil)
       rescue

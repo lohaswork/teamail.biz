@@ -14,6 +14,7 @@ FactoryGirl.define do
   factory :user do
     email
     password 'password'
+    password_confirmation 'password'
     active_code
 
     factory :normal_user do
@@ -36,6 +37,16 @@ FactoryGirl.define do
 
     factory :clean_user do
       active_status 1
+    end
+
+    factory :user_with_many_colleagues do
+      active_status 1
+      after(:create) do |user|
+        organization = create(:organization_with_multi_users)
+        user.organizations << organization
+        user.default_organization_id = organization.id
+        user.save
+      end
     end
 
     factory :non_activate_user do
