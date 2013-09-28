@@ -1,12 +1,10 @@
 !function($) {
 
-  TaggingPage = function (){
+  App.page.TaggingControls = function (){
     this.init();
   }
-  App.page.UsersTopicsPage = TaggingPage
-  App.page.TopicsIndexPage = TaggingPage
 
-  TaggingPage.prototype = {
+  App.page.TaggingControls.prototype = {
     init: function(){
       $(document).bind('click',function(e){
           var e = e || window.event; //浏览器兼容性
