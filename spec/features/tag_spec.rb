@@ -7,7 +7,7 @@ describe "topic section" do
   describe "user login with organization", :js => true do
     before do
       user = create(:normal_user)
-      @organization = user.organizations.first
+      @organization = user.default_organization
       login_with(user.email, user.password)
       page.should have_content user.email
       visit organization_topics_path(@organization)

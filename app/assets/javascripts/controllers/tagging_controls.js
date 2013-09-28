@@ -1,7 +1,6 @@
 !function($) {
 
-  TaggingPage = function (element){
-    this.el = element;
+  TaggingPage = function (){
     this.init();
   }
   App.page.UsersTopicsPage = TaggingPage
