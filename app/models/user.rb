@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
       user.organizations << organ
       user.default_organization_id = organ.id
       user.save!
-      OrganizationMembership.current_pair(user, organ).first.authority_type = 1
+      OrganizationMembership.current_pair(user, organ).first.update_attribute(:authority_type, 1)
       user
     end
 
