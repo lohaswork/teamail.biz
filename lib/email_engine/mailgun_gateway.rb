@@ -11,10 +11,14 @@ module EmailEngine
           to: delivery_filter(options[:to]),
           subject: options[:subject],
           html: options[:body]
-          ) if !Rails.env.test?
+          ) if send_email?
     end
 
     private
+
+    def send_email?
+      !!$config.email
+    end
 
     def default_sender
       "LohasWork <notice@charleschu.mailgun.org>"
