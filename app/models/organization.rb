@@ -20,4 +20,10 @@ class Organization < ActiveRecord::Base
     tags << tag
     self
   end
+
+  def cut_down(user)
+    user = User.find(user)
+    self.users.delete(user)
+    self
+  end
 end

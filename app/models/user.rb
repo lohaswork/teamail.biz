@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
       organ = Organization.create(:name => organization_name)
       raise ValidationError.new(organ.errors.full_messages)if !organ.valid?
       user.organizations << organ
-      user.default_organization = organ
+      user.default_organization_id = organ.id
       user.save!
       user
     end

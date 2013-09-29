@@ -19,9 +19,15 @@ LohasWorkCom::Application.routes.draw do
   get "login" => "sessions#new", :as => "login"
   resources :sessions, :only => [:new, :create, :destroy]
 
-  resources :organization do
+  resources :organization, :only => [] do
     resources :topics, :only => [:index]
     resources :tags, :only => [:create]
+  end
+
+  controller :organization do
+    get "show_member" => "organizations#show_member"
+    post "downsize" => "organizations#downsize"
+    post "add_member" => "organizations#add_member"
   end
 
   get "add-taggings" => "tags#add", :as=> "add_taggings"
