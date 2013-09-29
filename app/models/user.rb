@@ -24,9 +24,9 @@ class User < ActiveRecord::Base
       raise ValidationError.new(user.errors.full_messages) if !user.valid?
       organ = Organization.new(:name => organization_name)
       raise ValidationError.new(organ.errors.full_messages)if !organ.valid?
-      user.organizations << organ
       organ.save!
-      user.default_organization_id = organ.id
+      user.organizations << organ
+      user.default_organization = organ
       user.save!
       user
     end
@@ -79,7 +79,7 @@ class User < ActiveRecord::Base
   end
 
   def default_organization=(organization)
-    default_organization_id = organization.id
+    self.default_organization_id = organization.id
   end
 
   def default_organization
