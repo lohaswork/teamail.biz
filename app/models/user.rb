@@ -25,6 +25,7 @@ class User < ActiveRecord::Base
       organ = Organization.create(:name => organization_name)
       raise ValidationError.new(organ.errors.full_messages)if !organ.valid?
       user.organizations << organ
+      OrganizationMembership.current_pair(user, organ).first.authority_type = 1
       user.default_organization_id = organ.id
       user.save!
       user
@@ -57,11 +58,19 @@ class User < ActiveRecord::Base
         user.password = password
         user.save!
         user.update_attribute(:reset_token, nil)
+        user.update_attribute(:active_status, 1) if user.active_status != 1
       rescue
         raise ValidationError.new(user.errors.full_messages)
       end
     end
 
+    def generate_init_password
+      SecureRandom.urlsafe_base64
+    end
+
+    def already_on_board?(email)
+      !!self.find_by_email(email)
+    end
   end
 
   def generate_reset_token

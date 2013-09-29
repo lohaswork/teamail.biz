@@ -1,3 +1,4 @@
 <div>成员管理
+  <%= render :partial => 'invite_member', :locals => {:colleagues => @colleagues} %>
   <%= render :partial => 'member_list', :locals => {:colleagues => @colleagues} %>
 </div>

@@ -21,9 +21,23 @@ class Organization < ActiveRecord::Base
     self
   end
 
-  def cut_down(user)
-    user = User.find(user)
+  def cut_down(user_id)
+    user = User.find(user_id)
     self.users.delete(user)
+    user.default_organization_id = user.organizations.first if user.default_organization_id == self.id
+    user.save
+    self
+  end
+
+  def invite_user(email)
+    unless user = User.find_by_email(email)
+      user = User.new(:email => email, :password => User.generate_init_password)
+      raise ValidationError.new(user.errors.full_messages) if !user.valid?
+    user.generate_reset_token
+    end
+    user.organizations << self
+    user.default_organization_id = self.id if user.default_organization.blank?
+    user.save!
     self
   end
 end

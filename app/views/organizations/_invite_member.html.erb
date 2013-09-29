@@ -1,0 +1,12 @@
+<div>
+  <%- if current_organization_admin? %>
+    <%= form_tag add_member_path, :method => :post, :remote => true do %>
+      <div class="control-group">
+        <%= text_field_tag :user_email, nil, :placeholder=>"请输入Email"%>
+      </div>
+      <div>
+        <%= submit_tag "邀请", :class=>"btn btn-default"%>
+      </div>
+    <% end %>
+  <% end %>
+</div>

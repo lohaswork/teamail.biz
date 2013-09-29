@@ -9,8 +9,10 @@
         <% end %>
       </div>
       <div>
-        <%= link_to downsize_path(:user => user), :method => :post, :remote => true, :class=>"center" do %>
-          <span>删除该成员</span>
+        <%- if current_organization_admin? %>
+          <%= link_to downsize_path(:user => user), :method => :post, :remote => true, :class=>"center" do %>
+            <span>删除该成员</span>
+          <% end %>
         <% end %>
       </div>
     <% end %>
