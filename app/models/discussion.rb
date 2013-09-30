@@ -16,7 +16,7 @@ class Discussion < ActiveRecord::Base
       discussion.creator = current_user
       discussion.users << (selected_users << current_user)
       topic.discussions << discussion
-      topic.save
+      topic.save!
       discussion
     end
   end

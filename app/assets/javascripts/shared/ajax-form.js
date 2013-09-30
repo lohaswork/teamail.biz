@@ -26,12 +26,20 @@
               $('#' + id)[updateMethod](newElement);
               //reload the JS if have reload in this part
               App.init($('#' + id), true);
+              // Need refactor: trigger after ajax:complete nicely
+              $('#' + id).trigger('refreshed');
             }
           }
           if (data.modal) {
               var newElement = $(data.modal);
               $('#myModal').html(newElement).modal();
             }
+          // remove part is not used
+          else if (data.remove) {
+            for (var id in data.remove) {
+              $('#' + data.remove[id]).remove();
+            }
+          }
           else if (data.reload) {
             window.location.reload(true);
           }
