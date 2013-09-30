@@ -66,21 +66,27 @@ class TopicsController < ApplicationController
                                                                                :topic => topic
                                                                          })
                           }
-                }
+                    }
   end
 
   def tag_filter
-    topics = current_organization.topics.map { |topic| topic if topic.has_tagging?(params[:tag]) }
-    topics = topics.reject! { |t| t.blank? }
-
-    render :json => {
-              :update => {
-                          "topic-list" => render_to_string(:partial => 'topics/topic_list',
-                                                           :layout => false,
-                                                           :locals => {
-                                                               :topics => topics
-                                                          })
-                        }
-                    }
+    topics = current_organization.topics.map { |topic| topic if topic.has_tagging?(params[:tag]) }.reject { |t| t.blank? }
+    if topics.blank?
+      render :json => {
+                :update => {
+                            "topic-list" => "<div class='row'>没有该标签下的讨论</div>"
+                          }
+                      }
+    else
+      render :json => {
+                :update => {
+                            "topic-list" => render_to_string(:partial => 'topics/topic_list',
+                                                             :layout => false,
+                                                             :locals => {
+                                                                 :topics => topics
+                                                            })
+                          }
+                      }
+    end
   end
 end
