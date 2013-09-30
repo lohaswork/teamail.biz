@@ -117,4 +117,34 @@ describe "topic section" do
       end
     end
   end
+
+  describe "left bar", :js => true do
+    before do
+      user = create(:normal_user)
+      @organization = user.default_organization
+      login_with(user.email, user.password)
+      page.should have_content user.email
+      visit organization_topics_path(@organization)
+      specific_tag = @organization.tags.first
+      specific_topic = @organization.topics.first
+      specific_topic.tags << specific_tag
+    end
+
+    it "should see all organization tags" do
+      find(:css, "div#tag-filters").should have_content @organization.tags.last.name
+    end
+
+    it "filter using tags" do
+      link = all(:css, "div#tag-filters :link").first
+      link.click
+      page.should have_content @organization.topics.first.title
+      page.should_not have_content @organization.topics.last.title
+    end
+
+    it "filter using tags" do
+      link = all(:css, "div#tag-filters :link").last
+      link.click
+      page.should have_content "没有该标签下的讨论"
+    end
+  end
 end
