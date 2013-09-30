@@ -67,9 +67,6 @@ class TopicsController < ApplicationController
                                                                      })
                     }
                 }
-    #render :json => {
-    #          :remove => ["tag-#{topic.id}-#{tag_id}"]
-    #                }
   end
 
 end
