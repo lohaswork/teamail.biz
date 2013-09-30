@@ -134,17 +134,27 @@ describe "topic section" do
       find(:css, "div#tag-filters").should have_content @organization.tags.last.name
     end
 
-    it "filter using tags" do
+    it "filter using tags and topics under the tag show" do
       link = all(:css, "div#tag-filters :link").first
       link.click
       page.should have_content @organization.topics.first.title
       page.should_not have_content @organization.topics.last.title
     end
 
-    it "filter using tags" do
+    it "filter using tags when no topic shows" do
       link = all(:css, "div#tag-filters :link").last
       link.click
-      page.should have_content "没有该标签下的讨论"
+      page.should_not have_css("div.topic-headline")
+    end
+
+    it "click tag and it turns active and others become inactive" do
+      first_link = all(:css, "div#tag-filters :link").first
+      last_link = all(:css, "div#tag-filters :link").last
+      first_link.click
+      all(:css, "div#tag-filters li").first.should have_css(":link.active-tag")
+      last_link.click
+      all(:css, "div#tag-filters li").last.should have_css(":link.active-tag")
+      all(:css, "div#tag-filters li").first.should_not have_css(":link.active-tag")
     end
   end
 end

@@ -74,7 +74,11 @@ class TopicsController < ApplicationController
     if topics.blank?
       render :json => {
                 :update => {
-                            "topic-list" => "<div class='row'>没有该标签下的讨论</div>"
+                            "topic-list" => render_to_string(:partial => 'topics/topic_list',
+                                                             :layout => false,
+                                                             :locals => {
+                                                                 :topics => nil
+                                                            })
                           }
                       }
     else

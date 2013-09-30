@@ -1,7 +1,7 @@
-<div id="tag-filters">
+<div id="tag-filters" data-page="SidebarTags">
   <ul>
     <%- tags.try(:each) do |tag|%>
-      <li>
+      <li id="tag-link-#{tag.id}">
         <%= link_to tag_filter_topics_path(:tag => tag), :method => :post, :remote => true do %>
           <%= tag.name %>
         <% end %>
