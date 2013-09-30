@@ -1,7 +1,9 @@
 <div id="tag-filters">
   <%- tags.try(:each) do |tag|%>
     <li>
-      <%= tag.name %>
+      <%= link_to tag_filter_topics_path(:tag => tag), :method => :post, :remote => true do %>
+        <%= tag.name %>
+      <% end %>
     </li>
   <% end %>
 </div>

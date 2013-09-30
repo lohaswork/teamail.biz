@@ -1,11 +1,15 @@
 <div class="sidebar">
   <div class="personal-inbox">
-    <div>个人空间</div>
+    <div>
+      <%= link_to('个人空间', topics_path) %>
+    </div>
     <div>未处理</div>
     <div>所有</div>
   </div>
   <div class="organization-inbox">
-    <div>团队空间</div>
+    <div>
+      <%= link_to("团队空间", organization_topics_path(current_organization))%>
+    </div>
     <%= render :partial => 'tags/tag_filters', :locals => { :tags => current_organization.tags } %>
   </div>
 </div>

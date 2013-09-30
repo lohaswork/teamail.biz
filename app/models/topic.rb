@@ -23,7 +23,7 @@ class Topic < ActiveRecord::Base
 
   def add_taggings(ids)
     tags = ids.map { |id| Tag.find(id) }
-    self.tags << tags
+    tags.map { |tag| self.tags << tag if !self.tags.include?(tag) }
     self
   end
 
@@ -31,6 +31,11 @@ class Topic < ActiveRecord::Base
     tag = Tag.find(id)
     self.tags.delete(tag)
     self
+  end
+
+  def has_tagging?(id)
+    tag = Tag.find(id)
+    self.tags.include?(tag)
   end
 
   def last_active_time
