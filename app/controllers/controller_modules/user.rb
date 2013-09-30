@@ -18,4 +18,8 @@ module ControllerModules::User
     !!current_user
   end
 
+  def non_organizations?
+    current_user.default_organization.blank?
+  end
+
 end

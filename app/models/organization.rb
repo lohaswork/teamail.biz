@@ -3,7 +3,7 @@ class Organization < ActiveRecord::Base
   attr_accessible :name
 
   has_many :organization_memberships
-  has_many :users, :through => :organization_memberships
+  has_many :users, :through => :organization_memberships, :uniq => true
   has_many :topics
   has_many :tags
   validates :name, presence: true, :uniqueness => { :case_sensitive => false, :message => "组织名已使用" }
@@ -33,11 +33,16 @@ class Organization < ActiveRecord::Base
     unless user = User.find_by_email(email)
       user = User.new(:email => email, :password => User.generate_init_password)
       raise ValidationError.new(user.errors.full_messages) if !user.valid?
-    user.generate_reset_token
+      user.generate_reset_token
     end
     user.organizations << self
     user.default_organization_id = self.id if user.default_organization.blank?
     user.save!
     self
+  end
+
+  def has_member?(email)
+    user = User.find_by_email(email)
+    self.users.include? user
   end
 end

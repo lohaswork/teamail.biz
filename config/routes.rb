@@ -11,6 +11,7 @@ LohasWorkCom::Application.routes.draw do
     post '/reset/:reset_token'                   => :do_reset,                    :as => :reset
     get '/reset_success'                         => :reset_success,               :as => :reset_success
     get '/topics'                                => :topics,                      :as => :topics
+    get '/non_organ'                             => :non_organ,                   :as => :non_organ
   end
   get "signup" => "users#new", :as => "signup"
   resources :users, :only =>[:new, :create]

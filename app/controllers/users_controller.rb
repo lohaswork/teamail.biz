@@ -1,11 +1,17 @@
 # encoding: utf-8
 class UsersController < ApplicationController
   def new
-    redirect_to topics_path if authenticated?
+    if authenticated?
+      redirect_to non_organizations? ? non_organ_path : topics_path
+    end
+  end
+
+  def non_organ
   end
 
   def topics
     redirect_to(login_path) && return if !authenticated?
+    redirect_to(non_organ_path) && return if non_organizations?
     @topics = current_user.topics
     !current_organization && update_current_organization(current_user.default_organization)
     @organization = current_organization

@@ -1,7 +1,7 @@
   <div class='row' id="member-list">
     <div><%= current_user.email_name %></div>
     <%- colleagues.try(:each) do |user|%>
-      <div>
+      <div class="member-name">
         <%- if user.active_status %>
           <%= user.email_name %>
         <%- else %>

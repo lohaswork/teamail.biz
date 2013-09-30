@@ -2,7 +2,7 @@
 class EarlyAdoptersController < ApplicationController
   def index
     if authenticated?
-      redirect_to topics_path
+      redirect_to non_organizations? ? non_organ_path : topics_path
     end
   end
 
