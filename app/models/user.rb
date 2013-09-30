@@ -22,8 +22,9 @@ class User < ActiveRecord::Base
     def create_with_organization(user, organization_name)
       user = User.new(:email => user[:email], :password => user[:password])
       raise ValidationError.new(user.errors.full_messages) if !user.valid?
-      organ = Organization.create(:name => organization_name)
+      organ = Organization.new(:name => organization_name)
       raise ValidationError.new(organ.errors.full_messages)if !organ.valid?
+      organ.save!
       user.organizations << organ
       user.default_organization_id = organ.id
       user.save!
@@ -87,7 +88,7 @@ class User < ActiveRecord::Base
   end
 
   def default_organization=(organization)
-    default_organization_id = organization.id
+    self.default_organization_id = organization.id
   end
 
   def default_organization

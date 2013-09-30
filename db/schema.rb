@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130923040033) do
+ActiveRecord::Schema.define(:version => 20130926025529) do
 
   create_table "discussions", :force => true do |t|
     t.integer  "discussable_id"
@@ -26,6 +26,8 @@ ActiveRecord::Schema.define(:version => 20130923040033) do
     t.string   "discussable_type"
   end
 
+  add_index "discussions", ["discussable_id", "discussable_type"], :name => "index_discussions_on_discussable_id_and_discussable_type"
+
   create_table "early_adopters", :force => true do |t|
     t.string   "email"
     t.datetime "created_at", :null => false
@@ -39,6 +41,9 @@ ActiveRecord::Schema.define(:version => 20130923040033) do
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
   end
+
+  add_index "organization_memberships", ["organization_id"], :name => "index_organization_memberships_on_organization_id"
+  add_index "organization_memberships", ["user_id"], :name => "index_organization_memberships_on_user_id"
 
   create_table "organizations", :force => true do |t|
     t.string   "name",       :null => false
@@ -55,6 +60,9 @@ ActiveRecord::Schema.define(:version => 20130923040033) do
     t.datetime "updated_at",    :null => false
   end
 
+  add_index "taggings", ["tag_id"], :name => "index_taggings_on_tag_id"
+  add_index "taggings", ["taggable_id", "taggable_type"], :name => "index_taggings_on_taggable_id_and_taggable_type"
+
   create_table "tags", :force => true do |t|
     t.string   "name"
     t.string   "color"
@@ -63,12 +71,16 @@ ActiveRecord::Schema.define(:version => 20130923040033) do
     t.datetime "updated_at",      :null => false
   end
 
+  add_index "tags", ["organization_id"], :name => "index_tags_on_organization_id"
+
   create_table "topics", :force => true do |t|
     t.string   "title"
     t.integer  "organization_id"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
   end
+
+  add_index "topics", ["organization_id"], :name => "index_topics_on_organization_id"
 
   create_table "user_discussions", :id => false, :force => true do |t|
     t.integer  "user_id"
@@ -78,6 +90,9 @@ ActiveRecord::Schema.define(:version => 20130923040033) do
     t.datetime "updated_at",    :null => false
   end
 
+  add_index "user_discussions", ["discussion_id"], :name => "index_user_discussions_on_discussion_id"
+  add_index "user_discussions", ["user_id"], :name => "index_user_discussions_on_user_id"
+
   create_table "user_topics", :force => true do |t|
     t.integer  "user_id"
     t.integer  "topic_id"
@@ -85,6 +100,9 @@ ActiveRecord::Schema.define(:version => 20130923040033) do
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end
+
+  add_index "user_topics", ["topic_id"], :name => "index_user_topics_on_topic_id"
+  add_index "user_topics", ["user_id"], :name => "index_user_topics_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "name"

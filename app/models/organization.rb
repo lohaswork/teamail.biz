@@ -10,10 +10,6 @@ class Organization < ActiveRecord::Base
 
   scope :for_user, lambda { |user| joins(:users).where("user_id = ?", user.id).readonly(false) }
 
-  def topics_by_active_time
-    self.topics.sort_by { |topic| topic.last_active_time }.reverse
-  end
-
   def add_tag(tag_name)
     tag = Tag.new(:name => tag_name)
     raise ValidationError.new(tag.errors.full_messages) if !tag.valid?

@@ -6,7 +6,7 @@ class Topic < ActiveRecord::Base
   has_many :discussions, :as => :discussable, :order => "updated_at asc", :uniq => true
   has_many :user_topics
   has_many :taggings, :as => :taggable
-  has_many :tags, :through => :taggings
+  has_many :tags, :through => :taggings, :uniq => true
   has_many :users, :through => :user_topics, :uniq => true
   validates :title, :presence => { :message=>'请输入标题' }
 
@@ -19,6 +19,18 @@ class Topic < ActiveRecord::Base
       Discussion.create_discussion(current_user, topic, emails, content)
       topic
     end
+  end
+
+  def add_taggings(ids)
+    tags = ids.map { |id| Tag.find(id) }
+    self.tags << tags
+    self
+  end
+
+  def remove_tagging(id)
+    tag = Tag.find(id)
+    self.tags.delete(tag)
+    self
   end
 
   def last_active_time

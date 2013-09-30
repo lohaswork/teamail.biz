@@ -31,13 +31,24 @@ LohasWorkCom::Application.routes.draw do
     post "add_member" => "organizations#add_member"
   end
 
-  get "add-taggings" => "tags#add", :as=> "add_taggings"
+  resources :tags, :only => [] do
+    collection do
+      post 'add'
+    end
+  end
 
-  resources :topics, :only => [:create, :show]
-  resources :topic do
+  resources :topics, :only => [:create, :show] do
+    collection do
+      post 'remove_tag'
+      post 'add_tag'
+    end
+  end
+
+  resources :topic, :only => [] do
     resources :discussions, :only => [:create]
   end
-  resources :early_adopters
+
+  resources :early_adopters, :only => [:index, :create]
   match "/*other" => redirect('/')
   # The priority is based upon order of creation:
   # first created -> highest priority.
