@@ -7,10 +7,31 @@ describe "topic section" do
   describe "user login with organization", :js => true do
     before do
       user = create(:normal_user)
-      @organization = user.organizations.first
+      @organization = user.default_organization
       login_with(user.email, user.password)
       page.should have_content user.email
       visit organization_topics_path(@organization)
+    end
+
+    context "in the topic list page, select topics and tags, click 应用 button" do
+      before do
+        # topics should not have any tags before this
+        find(:css, "div#select-topic").should_not have_content @organization.tags.first.name
+        first(:css, "div#select-topic input[type='checkbox']").set(true)
+        click_button "tagging-dropdown"
+        first(:css, "div#tag-list input[type='checkbox']").set(true)
+        click_button "应用"
+      end
+
+      it "should see already exist tags attached to the selected topics" do
+        find(:css, "div#select-topic").should have_content @organization.tags.first.name
+      end
+
+      it "click delete tagging link, should not see the attached tag" do
+        remove_tagging_link = find(:css, "a.tag-remove-link")
+        remove_tagging_link.click
+        find(:css, "div#select-topic").should_not have_content @organization.tags.first.name
+      end
     end
 
     context "in the topic list page, not select topic, click the tagging-group control" do

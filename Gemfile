@@ -13,6 +13,7 @@ gem 'mysql2'
 group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'compass-rails'
+  gem 'turbo-sprockets-rails3'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
@@ -36,6 +37,7 @@ group :test, :development do
   gem 'guard-rspec'
   gem 'metric_fu'
   gem 'poltergeist'
+  gem "rails_best_practices"
 end
 
 gem 'sass-rails',   '~> 3.2.3'
