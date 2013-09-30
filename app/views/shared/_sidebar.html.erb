@@ -1,76 +1,11 @@
 <div class="sidebar">
-  <nav class="main-nav">
-    <div class="navigation">
-      <ul class="nav nav-stacked panel-group" id="accordion">
-        <li class="active panel">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapseItem">
-            <i class="icon-inbox prefix-icon"></i>
-            <span>个人空间</span>
-            <i class="icon-angle-down angle"></i>
-          </a>
-          <ul id="collapseItem" class="nav nav-stacked collapse in">
-            <li>
-              <a href="#">
-                <span>未处理</span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <span>所有</span>
-              </a>
-            </li>
-          </ul> <!-- End of collapseItem -->
-        </li>
-        <li class="panel">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapseItemTeam">
-            <i class="icon-sitemap prefix-icon"></i>
-            <span>团队空间</span>
-            <i class="icon-angle-down angle"></i>
-          </a>
-          <ul id="collapseItemTeam" class="nav nav-stacked collapse">
-            <li>
-              <a href="#">
-                <div class="tag-container">
-                  <i class="icon-circle red"></i>
-                  <span>公司事务</span>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <div class="tag-container">
-                  <i class="icon-circle purple"></i>
-                  <span>杂事</span>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <div class="tag-container">
-                  <i class="icon-circle yellow"></i>
-                  <span>TeaMind项目</span>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <div class="tag-container">
-                  <i class="icon-circle blue"></i>
-                  <span>社会化媒体</span>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <div class="tag-container">
-                  <i class="icon-circle green"></i>
-                  <span>培训</span>
-                </div>
-              </a>
-            </li>
-          </ul> <!-- End of collapseItemTeam -->
-        </li>
-      </ul> <!-- End of accordion -->
-    </div>
-  </nav>
+  <div class="personal-inbox">
+    <div>个人空间</div>
+    <div>未处理</div>
+    <div>所有</div>
+  </div>
+  <div class="organization-inbox">
+    <div>团队空间</div>
+    <%= render :partial => 'tags/tag_filters', :locals => { :tags => current_organization.tags } %>
+  </div>
 </div>

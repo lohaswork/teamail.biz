@@ -77,7 +77,8 @@ describe "topic section" do
       it "should see the newly created tag", :js => true do
         fill_in "tag_name", :with => "新标签"
         click_button "新建"
-        page.should have_content "新标签"
+        find(:css, "div#tag-list").should have_content "新标签"
+        find(:css, "div#tag-filters").should have_content "新标签"
       end
 
       it "should be able to create tags with upper-case name & down-case name", :js => true do

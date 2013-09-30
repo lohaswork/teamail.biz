@@ -1,0 +1,7 @@
+<div id="tag-filters">
+  <%- tags.try(:each) do |tag|%>
+    <li>
+      <%= tag.name %>
+    </li>
+  <% end %>
+</div>
