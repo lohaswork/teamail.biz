@@ -34,6 +34,7 @@
               var newElement = $(data.modal);
               $('#myModal').html(newElement).modal();
             }
+          // remove part is not used
           else if (data.remove) {
             for (var id in data.remove) {
               $('#' + data.remove[id]).remove();

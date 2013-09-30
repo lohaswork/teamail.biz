@@ -33,17 +33,7 @@
         </div>
         <div class='col-xs-3'>
           <%= link_to(topic.title, topic_path(topic))%>
-          <div class="tag-container">
-            <%- topic.tags.each do |tag| %>
-              <% div_id = "tag-#{topic.id}-#{tag.id}" -%>
-              <div id="<%= div_id -%>">
-                <span><%= tag.name %><span>
-                <%= link_to remove_tag_topics_path(:topic => topic, :tag => tag), :method => :post, :remote => true, :class => "tag-remove-link" do %>
-                  <i class="icon-remove remove-tag"></i>
-                <% end %>
-              </div>
-            <% end %>
-          </div>
+          <%= render :partial => 'tags/headline_tags', :locals => {:topic => topic} %>
         </div>
         <div class='col-xs-3'>
           <%= topic.last_active_time %>

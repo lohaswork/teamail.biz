@@ -46,7 +46,13 @@
       })// Enable tags submit button
       .on("refreshed", "#topic-list", function () {
         $("#dropdown-tags").hide();
+        $("#tagging-dropdown").attr("disabled","disabled");
         $("#tag-list :checkbox").attr('checked', false);
+        $("#tagging-submit").hide();
+        $("#tag-input").show();
+      })
+      .on("refreshed", "#tag-list", function () {
+        $("#tag-input input[type='text']").val("");
       });
 
       var sumCheckStatus = function(check_element) {
