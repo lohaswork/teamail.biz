@@ -4,7 +4,7 @@ class TopicsController < ApplicationController
 
   def index
     params[:organization_id] && params[:organization_id] != current_organization.try(:id) && update_current_organization(Organization.find(params[:organization_id]))
-    redirect_to('/404.html') && return if !current_organization_accessable?
+    redirect_to('/404.html') && return if !current_organization_accessible?
     @organization = current_organization
     @topics = @organization.topics
     @colleagues = get_colleagues

@@ -2,7 +2,11 @@ module ControllerModules::User
   extend ActiveSupport::Concern
 
   included do
-    helper_method :current_user, :authenticated?
+    helper_method :current_user, :authenticated?, :currently_admin?
+  end
+
+  def get_colleagues
+    current_organization.users.reject { |user| user.email == current_user.email }
   end
 
   def current_user=(user)
@@ -18,8 +22,8 @@ module ControllerModules::User
     !!current_user
   end
 
-  def non_organizations?
-    current_user.default_organization.blank?
+  def currently_admin?
+    current_user.is_admin?(current_organization)
   end
 
 end

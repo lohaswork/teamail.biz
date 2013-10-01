@@ -1,5 +1,5 @@
 <div>
-  <%- if current_organization_admin? %>
+  <%- if currently_admin? %>
     <%= form_tag add_member_path, :method => :post, :remote => true do %>
       <div class="control-group">
         <%= text_field_tag :user_email, nil, :placeholder=>"请输入Email"%>

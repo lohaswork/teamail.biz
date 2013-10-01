@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   before_filter :set_page_id
 
   def access_organization
-    redirect_to '/404.html' if !current_organization_accessable?
+    redirect_to '/404.html' if !current_organization_accessible?
   end
 
   def set_page_id

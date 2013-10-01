@@ -10,6 +10,10 @@ class Organization < ActiveRecord::Base
 
   scope :for_user, lambda { |user| joins(:users).where("user_id = ?", user.id).readonly(false) }
 
+  def membership(user)
+    self.organization_memberships.find_by_user_id(user.id)
+  end
+
   def add_tag(tag_name)
     tag = Tag.new(:name => tag_name)
     raise ValidationError.new(tag.errors.full_messages) if !tag.valid?
@@ -17,7 +21,7 @@ class Organization < ActiveRecord::Base
     self
   end
 
-  def cut_down(user_id)
+  def delete_user(user_id)
     user = User.find(user_id)
     self.users.delete(user)
     user.default_organization_id = user.organizations.first if user.default_organization_id == self.id

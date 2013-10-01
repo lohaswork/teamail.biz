@@ -11,7 +11,7 @@ LohasWorkCom::Application.routes.draw do
     post '/reset/:reset_token'                   => :do_reset,                    :as => :reset
     get '/reset_success'                         => :reset_success,               :as => :reset_success
     get '/topics'                                => :topics,                      :as => :topics
-    get '/non_organ'                             => :non_organ,                   :as => :non_organ
+    get '/no_organizations'                      => :no_organizations,            :as => :no_organizations
   end
   get "signup" => "users#new", :as => "signup"
   resources :users, :only =>[:new, :create]
@@ -27,7 +27,7 @@ LohasWorkCom::Application.routes.draw do
 
   controller :organization do
     get "show_member" => "organizations#show_member"
-    post "downsize" => "organizations#downsize"
+    post "delete_member" => "organizations#delete_member"
     post "add_member" => "organizations#add_member"
   end
 

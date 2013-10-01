@@ -2,16 +2,16 @@
 class UsersController < ApplicationController
   def new
     if authenticated?
-      redirect_to non_organizations? ? non_organ_path : topics_path
+      redirect_to current_user.default_organization.blank? ? no_organizations_path : topics_path
     end
   end
 
-  def non_organ
+  def no_organizations
   end
 
   def topics
     redirect_to(login_path) && return if !authenticated?
-    redirect_to(non_organ_path) && return if non_organizations?
+    redirect_to(no_organizations_path) && return if current_user.default_organization.blank?
     @topics = current_user.topics
     !current_organization && update_current_organization(current_user.default_organization)
     @organization = current_organization

@@ -16,11 +16,13 @@ describe "organization member section" do
 
     it "should see colleagues email_name" do
       page.should have_content @organization.users.last.email_name
+      page.should_not have_content "删除该成员"
+      page.should_not have_button "邀请"
     end
 
     describe "as the admin of the organization" do
       before do
-        OrganizationMembership.current_pair(@user, @organization).first.update_attribute(:authority_type, 1)
+        @organization.membership(@user).update_attribute(:authority_type, 1)
         visit show_member_path
       end
 
@@ -70,12 +72,12 @@ describe "organization member section" do
       page.should have_content "请联系团队管理员，让您回到组织怀抱。"
     end
 
-    it "visit topics path should redirect to non_organ_path" do
+    it "visit topics path should redirect to no_organizations_path" do
       visit topics_path
       page.should have_content "请联系团队管理员，让您回到组织怀抱。"
     end
 
-    it "visit organization topics path should redirect to non_organ_path" do
+    it "visit organization topics path should redirect to no_organizations_path" do
       visit organization_topics_path(1)
       current_path.should == "/404.html"
     end
