@@ -21,24 +21,24 @@ class Topic < ActiveRecord::Base
     end
   end
 
-  def add_taggings(ids)
+  def add_tags(ids)
     tags = ids.map { |id| Tag.find(id) }
     tags.map { |tag| self.tags << tag }
     self
   end
 
-  def remove_tagging(id)
+  def remove_tag(id)
     tag = Tag.find(id)
     self.tags.delete(tag)
     self
   end
 
-  def has_tagging?(id)
+  def has_tag?(id)
     tag = Tag.find(id)
     self.tags.include?(tag)
   end
 
-  def last_active_time
+  def last_update_time
     discussions.last.updated_at
   end
 

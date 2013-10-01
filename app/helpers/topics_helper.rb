@@ -4,6 +4,6 @@ module TopicsHelper
   end
 
   def order_by_updator(topics)
-    topics.sort_by { |topic| topic.last_active_time }.reverse if !topics.blank?
+    topics.sort_by { |topic| topic.last_update_time }.reverse if !topics.blank?
   end
 end

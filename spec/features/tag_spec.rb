@@ -28,8 +28,8 @@ describe "topic section" do
       end
 
       it "click delete tagging link, should not see the attached tag" do
-        remove_tagging_link = find(:css, "a.tag-remove-link")
-        remove_tagging_link.click
+        remove_tag_link = find(:css, "a.tag-remove-link")
+        remove_tag_link.click
         find(:css, "div#select-topic").should_not have_content @organization.tags.first.name
       end
     end
@@ -131,6 +131,7 @@ describe "topic section" do
     end
 
     it "should see all organization tags" do
+      find(:css, "div#tag-filters").should have_content @organization.tags.first.name
       find(:css, "div#tag-filters").should have_content @organization.tags.last.name
     end
 

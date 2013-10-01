@@ -36,10 +36,9 @@
           <%= render :partial => 'tags/headline_tags', :locals => {:topic => topic} %>
         </div>
         <div class='col-xs-3'>
-          <%= topic.last_active_time %>
+          <%= topic.last_update_time %>
         </div>
       </div>
     <% end %>
   </div>
 </div>
-<%= render :partial => 'topics/topic_message', :locals => {:message => nil} %>
