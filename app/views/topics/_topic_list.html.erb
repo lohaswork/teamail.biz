@@ -21,7 +21,7 @@
   </div>
   <div class='checkbox-group' id="select-topic" data-update="#selected_topics" data-reload=true data-page="CheckBoxGroup">
     <%- order_by_updator(topics).try(:each) do |topic| %>
-      <div class="row">
+      <div class="row topic-headline">
         <div class='col-xs-2'>
           <%= check_box_tag 'topics[]', topic.id, false, :class=>"item", :'data-item'=>true %>
         </div>
@@ -36,7 +36,7 @@
           <%= render :partial => 'tags/headline_tags', :locals => {:topic => topic} %>
         </div>
         <div class='col-xs-3'>
-          <%= topic.last_active_time %>
+          <%= topic.last_update_time %>
         </div>
       </div>
     <% end %>

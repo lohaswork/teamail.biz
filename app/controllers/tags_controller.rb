@@ -10,7 +10,12 @@ class TagsController < ApplicationController
                 "tag-list" => render_to_string(:partial => 'tags/tag_list',
                                                :layout => false,
                                                :locals => {
-                                                  :tags => tags
+                                                   :tags => tags
+                                              }),
+                "tag-filters" => render_to_string(:partial => 'tags/tag_filters',
+                                                  :layout => false,
+                                                  :locals => {
+                                                      :tags => tags
                                               })
                         }
                     }

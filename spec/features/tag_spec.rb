@@ -28,8 +28,8 @@ describe "topic section" do
       end
 
       it "click delete tagging link, should not see the attached tag" do
-        remove_tagging_link = find(:css, "a.tag-remove-link")
-        remove_tagging_link.click
+        remove_tag_link = find(:css, "a.tag-remove-link")
+        remove_tag_link.click
         find(:css, "div#select-topic").should_not have_content @organization.tags.first.name
       end
     end
@@ -77,7 +77,8 @@ describe "topic section" do
       it "should see the newly created tag", :js => true do
         fill_in "tag_name", :with => "新标签"
         click_button "新建"
-        page.should have_content "新标签"
+        find(:css, "div#tag-list").should have_content "新标签"
+        find(:css, "div#tag-filters").should have_content "新标签"
       end
 
       it "should be able to create tags with upper-case name & down-case name", :js => true do
@@ -114,6 +115,47 @@ describe "topic section" do
         click_button "新建"
         page.should have_content "名称不合法"
       end
+    end
+  end
+
+  describe "left bar", :js => true do
+    before do
+      user = create(:normal_user)
+      @organization = user.default_organization
+      login_with(user.email, user.password)
+      page.should have_content user.email
+      visit organization_topics_path(@organization)
+      specific_tag = @organization.tags.first
+      specific_topic = @organization.topics.first
+      specific_topic.tags << specific_tag
+    end
+
+    it "should see all organization tags" do
+      find(:css, "div#tag-filters").should have_content @organization.tags.first.name
+      find(:css, "div#tag-filters").should have_content @organization.tags.last.name
+    end
+
+    it "filter using tags and topics under the tag show" do
+      link = all(:css, "div#tag-filters :link").first
+      link.click
+      page.should have_content @organization.topics.first.title
+      page.should_not have_content @organization.topics.last.title
+    end
+
+    it "filter using tags when no topic shows" do
+      link = all(:css, "div#tag-filters :link").last
+      link.click
+      page.should_not have_css("div.topic-headline")
+    end
+
+    it "click tag and it turns active and others become inactive" do
+      first_link = all(:css, "div#tag-filters :link").first
+      last_link = all(:css, "div#tag-filters :link").last
+      first_link.click
+      all(:css, "div#tag-filters li").first.should have_css(":link.active-tag")
+      last_link.click
+      all(:css, "div#tag-filters li").last.should have_css(":link.active-tag")
+      all(:css, "div#tag-filters li").first.should_not have_css(":link.active-tag")
     end
   end
 end

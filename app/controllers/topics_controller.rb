@@ -41,7 +41,7 @@ class TopicsController < ApplicationController
 
   def add_tag
     selected_topics_ids = params[:selected_topics].split(',').uniq
-    Topic.find(selected_topics_ids).each { |topic| topic.add_taggings(params[:tags]) }
+    Topic.find(selected_topics_ids).each { |topic| topic.add_tags(params[:tags]) }
     topics = Topic.find(params[:topics])
 
     render :json => {
@@ -56,17 +56,31 @@ class TopicsController < ApplicationController
   end
 
   def remove_tag
-    topic = Topic.find(params[:topic]).remove_tagging(params[:tag])
+    topic = Topic.find(params[:topic]).remove_tag(params[:tag])
 
     render :json => {
-          :update => {
-                      "tag-container-#{topic.id}" => render_to_string(:partial => 'tags/headline_tags',
-                                                                      :layout => false,
-                                                                      :locals => {
-                                                                          :topic => topic
-                                                                     })
+               :update => {
+                           "tag-container-#{topic.id}" => render_to_string(:partial => 'tags/headline_tags',
+                                                                           :layout => false,
+                                                                           :locals => {
+                                                                               :topic => topic
+                                                                         })
+                          }
                     }
-                }
   end
 
+  def tag_filter
+    topics = current_organization.topics.map { |topic| topic if topic.has_tag?(params[:tag]) }.reject { |t| t.blank? }
+
+      render :json => {
+                :update => {
+                            "topic-list" => render_to_string(:partial => 'topics/topic_list',
+                                                             :layout => false,
+                                                             :locals => {
+                                                                 :topics => topics
+                                                            })
+                          }
+                      }
+
+  end
 end
