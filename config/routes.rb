@@ -41,6 +41,7 @@ LohasWorkCom::Application.routes.draw do
     collection do
       post 'remove_tag'
       post 'add_tag'
+      post 'tag_filter'
     end
   end
 
