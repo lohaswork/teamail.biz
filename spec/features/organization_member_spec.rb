@@ -8,7 +8,7 @@ describe "organization member section" do
       @organization = create(:organization_with_multi_users)
       @user = @organization.users.first
       @new_member = create(:clean_user)
-      login_with(@user.email, @user.password)
+      mock_login_with(@user.email)
       page.should have_content(@user.email)
       visit show_member_path
       page.should have_content @user.email_name
@@ -67,7 +67,7 @@ describe "organization member section" do
   describe "user without an organization", :js => true do
     before do
       @user = create(:clean_user)
-      login_with(@user.email, @user.password)
+      mock_login_with(@user.email)
       page.should have_content(@user.email)
       page.should have_content "请联系团队管理员，让您回到组织怀抱。"
     end

@@ -10,7 +10,7 @@ describe "the topics action" do
       it  "should see the topic title" do
         user = create(:normal_user)
         organization = user.default_organization
-        login_with(user.email, user.password)
+        mock_login_with(user.email)
         page.should have_content(user.email)
         visit organization_topics_path(organization)
         page.should have_content organization.topics.first.title
@@ -29,7 +29,7 @@ describe "the topics action" do
       it "should not saw the topics title" do
         organization = create(:organization_with_topic, name:"new-organization")
         user = create(:normal_user)
-        login_with(user.email, user.password)
+        mock_login_with(user.email)
         visit organization_topics_path(organization)
         page.should_not have_content organization.topics.last.title
       end
@@ -40,7 +40,7 @@ describe "the topics action" do
     before do
       @organization = create(:organization_with_multi_users)
       @user = @organization.users.first
-      login_with(@user.email, @user.password)
+      mock_login_with(@user.email)
       page.should have_content @user.email
       visit organization_topics_path(@organization)
     end
@@ -142,7 +142,7 @@ describe "the topics action" do
     before do
       user = create(:normal_user)
       @organization = user.default_organization
-      login_with(user.email, user.password)
+      mock_login_with(user.email)
       page.should have_content(user.email)
       visit organization_topics_path(@organization)
     end
@@ -187,7 +187,7 @@ describe "the topics action" do
     before do
       @organization = create(:organization_with_multi_users)
       @user = @organization.users.first
-      login_with(@user.email, @user.password)
+      mock_login_with(@user.email)
       page.should have_content @user.email
       visit organization_topics_path(@organization)
     end
@@ -266,7 +266,7 @@ describe "the topics action" do
     describe "user already login" ,:js=>true do
       before do
         @user = create(:normal_user)
-        login_with(@user.email, @user.password)
+        mock_login_with(@user.email)
         page.should have_content @user.email
       end
       context "user go to topics page" do
@@ -298,7 +298,7 @@ describe "the topics action" do
       before do
         @organization = create(:organization_with_multi_users)
         @user = @organization.users.first
-        login_with(@user.email, @user.password)
+        mock_login_with(@user.email)
         page.should have_content @user.email
         visit topics_path
       end
