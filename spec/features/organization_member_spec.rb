@@ -1,9 +1,10 @@
 # encoding: utf-8
 require 'spec_helper'
 require 'helpers'
-describe "organization member section" do
+describe "organization member page" do
+  # 分为3个模块: invite user, delete_member, user without an organization login
   include Helpers
-  describe "member manage page", :js => true do
+  describe "invite user", :js => true do
     before do
       @organization = create(:organization_with_multi_users)
       @user = @organization.users.first
@@ -14,32 +15,21 @@ describe "organization member section" do
       page.should have_content @user.email_name
     end
 
-    it "should see colleagues email_name" do
-      page.should have_content @organization.users.last.email_name
-      page.should_not have_content "删除该成员"
-      page.should_not have_button "邀请"
-    end
-
-    describe "as the admin of the organization" do
+    context "as the admin of the organization" do
       before do
         @organization.membership(@user).update_attribute(:authority_type, 1)
         visit show_member_path
       end
 
-      it "should see 删除用户 button next to colleagues'name" do
-        page.should have_content "删除该成员"
+      # 已激活用户能看到email_name
+      it "should see activated colleagues email_name" do
+        @organization.users.each do |user|
+          page.should have_content user.email_name
+        end
       end
 
       it "should see 邀请 button" do
         page.should have_button "邀请"
-      end
-
-      it "delete member action" do
-        kicked_user = @organization.users.last
-        page.should have_content kicked_user.email_name
-        all(:css, ".member-container a").last.click
-        page.should_not have_content kicked_user.email_name
-        @organization.users.include?(kicked_user).should eq(false)
       end
 
       it "invite using invalid email address" do
@@ -49,6 +39,7 @@ describe "organization member section" do
         page.should have_content "邮件地址不合法"
       end
 
+      # 邀请后，未激活用户仅能看到email地址，不另外测试
       it "invite an exist user, should see email_name" do
         fill_in "user_email", :with => @new_member.email
         click_button "邀请"
@@ -63,7 +54,61 @@ describe "organization member section" do
         User.find_by_email("test@test.com").active_status.should_not eq(1)
       end
     end
+
+    context "non-admin user" do
+      it "should see activated colleagues email_name & not see 邀请 button" do
+        @organization.users.each do |user|
+          page.should have_content user.email_name
+        end
+        page.should_not have_button "邀请"
+      end
+    end
   end
+
+  describe "delete member", :js => true do
+    before do
+      @organization = create(:organization_with_multi_users)
+      @user = @organization.users.first
+      @new_member = create(:clean_user)
+      login_with(@user.email, @user.password)
+      page.should have_content(@user.email)
+      visit show_member_path
+      page.should have_content @user.email_name
+    end
+
+    context "as the admin of the organization" do
+      before do
+        @organization.membership(@user).update_attribute(:authority_type, 1)
+        visit show_member_path
+        @kicked_user = @organization.users.last
+        page.should have_content @kicked_user.email_name
+        all(:css, ".member-container a").last.click
+      end
+
+      it "should see 删除用户 button next to colleagues'name" do
+        page.should have_content "删除该成员"
+      end
+
+      it "delete member action" do
+        page.should_not have_content @kicked_user.email_name
+        @organization.users.include?(@kicked_user).should eq(false)
+      end
+
+      it "create new topic should not see kicked_user in notifier list" do
+        visit organization_topics_path(@organization)
+        click_on "创建新话题"
+        page.should_not have_content @kicked_user.email_name
+      end
+    end
+
+    context "non-admin user" do
+      it "should see activated colleagues email_name & not see 删除 button" do
+        page.should have_content @organization.users.last.email_name
+        page.should_not have_content "删除该成员"
+      end
+    end
+  end
+
   describe "user without an organization", :js => true do
     before do
       @user = create(:clean_user)
@@ -81,6 +126,21 @@ describe "organization member section" do
       visit organization_topics_path(1)
       current_path.should == "/404.html"
     end
+  end
 
+  describe "have other organizations" do
+    before do
+    user = create(:clean_user)
+    @other_organization = create(:organization)
+    @other_organization.users << user
+    user.default_organization = @other_organization
+    user.save
+    login_with(user.email, user.password)
+    end
+
+    it "should directly redirect to other organization page" do
+      visit root_path
+      page.should have_content @other_organization.name
+    end
   end
 end
