@@ -10,7 +10,7 @@ describe "the topics action" do
       it  "should see the topic title" do
         user = create(:normal_user)
         organization = user.default_organization
-        mock_login_with(user.email)
+        login_with(user.email, user.password)
         page.should have_content(user.email)
         visit organization_topics_path(organization)
         page.should have_content organization.topics.first.title
@@ -29,7 +29,7 @@ describe "the topics action" do
       it "should not saw the topics title" do
         organization = create(:organization_with_topic, name:"new-organization")
         user = create(:normal_user)
-        mock_login_with(user.email)
+        login_with(user.email, user.password)
         visit organization_topics_path(organization)
         page.should_not have_content organization.topics.last.title
       end
@@ -142,7 +142,7 @@ describe "the topics action" do
     before do
       user = create(:normal_user)
       @organization = user.default_organization
-      mock_login_with(user.email)
+      login_with(user.email, user.password)
       page.should have_content(user.email)
       visit organization_topics_path(@organization)
     end
@@ -266,7 +266,7 @@ describe "the topics action" do
     describe "user already login" ,:js=>true do
       before do
         @user = create(:normal_user)
-        mock_login_with(@user.email)
+        login_with(@user.email, @user.password)
         page.should have_content @user.email
       end
       context "user go to topics page" do

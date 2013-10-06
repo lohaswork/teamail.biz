@@ -112,7 +112,7 @@ describe "organization member page" do
   describe "user without an organization", :js => true do
     before do
       @user = create(:clean_user)
-      mock_login_with(@user.email)
+      login_with(@user.email, @user.password)
       page.should have_content(@user.email)
       page.should have_content "请联系团队管理员，让您回到组织怀抱。"
     end
@@ -135,7 +135,7 @@ describe "organization member page" do
     @other_organization.users << user
     user.default_organization = @other_organization
     user.save
-    mock_login_with(user.email)
+    login_with(user.email, user.password)
     end
 
     it "should directly redirect to other organization page" do

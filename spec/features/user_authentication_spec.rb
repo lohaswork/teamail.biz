@@ -106,7 +106,7 @@ describe "user authentaction action" do
     context "user login succsess", :js => true do
       before {@user = create(:normal_user)}
       it "should go to the personal sapce page" do
-        mock_login_with(@user.email)
+        login_with(@user.email, @user.password)
         page.should have_content @user.topics.first.title
         current_path.should == '/topics'
       end
@@ -115,7 +115,7 @@ describe "user authentaction action" do
     context "user visit pages after login succsess" do
       before do
         @user = create(:normal_user)
-        mock_login_with(@user.email)
+        login_with(@user.email, @user.password)
       end
 
       it "should redirect to topics page visit login path" do
@@ -167,7 +167,7 @@ describe "user authentaction action" do
       context "an not active user login", :js => true do
         it "should see error message" do
           user = create(:non_activate_user)
-          mock_login_with(user.email)
+          login_with(user.email, user.password)
           page.should have_content '您的账户尚未激活'
         end
       end
