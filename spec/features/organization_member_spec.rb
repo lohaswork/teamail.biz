@@ -43,7 +43,7 @@ describe "organization member page" do
       it "invite an exist user, should see email_name" do
         fill_in "user_email", :with => @new_member.email
         click_button "邀请"
-        page.should have_content @new_member.email
+        page.should have_content @new_member.email_name
         User.find_by_email(@new_member.email).active_status.should eq(1)
       end
 
