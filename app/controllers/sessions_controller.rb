@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
 
   def new
     if authenticated?
-      redirect_to current_user.default_organization.blank? ? no_organizations_path : topics_path
+      redirect_to login_user.default_organization.blank? ? no_organizations_path : topics_path
     end
   end
 

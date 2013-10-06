@@ -13,7 +13,7 @@ class TopicsController < ApplicationController
 
   def create
     selected_emails = params[:selected_users].split(',')
-    new_topic = Topic.create_topic(params[:title], params[:content], selected_emails, current_organization, current_user)
+    new_topic = Topic.create_topic(params[:title], params[:content], selected_emails, current_organization, login_user)
     EmailEngine::TopicNotifier.new(new_topic.id).create_topic_notification
     topics = current_organization.topics
 
