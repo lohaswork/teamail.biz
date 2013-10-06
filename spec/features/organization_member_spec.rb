@@ -2,7 +2,7 @@
 require 'spec_helper'
 require 'helpers'
 describe "organization member page" do
-  # 分为3个模块: invite user, delete_member, user without an organization login
+  # 分为4个模块: invite user, delete_member, user without an organization login, user have other organizations
   include Helpers
   describe "invite user", :js => true do
     before do
@@ -43,7 +43,7 @@ describe "organization member page" do
       it "invite an exist user, should see email_name" do
         fill_in "user_email", :with => @new_member.email
         click_button "邀请"
-        page.should have_content @new_member.email_name
+        page.should have_content @new_member.email
         User.find_by_email(@new_member.email).active_status.should eq(1)
       end
 
@@ -128,7 +128,7 @@ describe "organization member page" do
     end
   end
 
-  describe "have other organizations" do
+  describe "user have other organizations" do
     before do
     user = create(:clean_user)
     @other_organization = create(:organization)
