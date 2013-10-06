@@ -40,7 +40,7 @@ describe "the topics action" do
     before do
       @organization = create(:organization_with_multi_users)
       @user = @organization.users.first
-      login_with(@user.email, @user.password)
+      mock_login_with(@user.email)
       page.should have_content @user.email
       visit organization_topics_path(@organization)
     end
@@ -187,7 +187,7 @@ describe "the topics action" do
     before do
       @organization = create(:organization_with_multi_users)
       @user = @organization.users.first
-      login_with(@user.email, @user.password)
+      mock_login_with(@user.email)
       page.should have_content @user.email
       visit organization_topics_path(@organization)
     end
@@ -298,7 +298,7 @@ describe "the topics action" do
       before do
         @organization = create(:organization_with_multi_users)
         @user = @organization.users.first
-        login_with(@user.email, @user.password)
+        mock_login_with(@user.email)
         page.should have_content @user.email
         visit topics_path
       end
