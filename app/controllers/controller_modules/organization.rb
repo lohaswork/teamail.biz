@@ -12,18 +12,13 @@ module ControllerModules::Organization
 
     def current_organization
       begin
-        @current_organization ||= ::Organization.for_user(current_user).find(session[:organization])
+        @current_organization ||= ::Organization.for_user(login_user).find(session[:organization])
       rescue
         nil
       end
     end
 
-    def get_colleagues
-      organization_users = current_organization.users
-      organization_users.reject { |user| user.email == current_user.email }
-    end
-
-    def current_organization_accessable?
+    def current_organization_accessible?
       !!current_organization
     end
 end

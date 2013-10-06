@@ -21,7 +21,7 @@
           </li>
           <% if authenticated?%>
             <li>
-              <%= content_tag :a, current_user.email %>
+              <%= content_tag :a, login_user.email %>
             </li>
             <li>
               <%= link_to('登出', logout_path) %>
