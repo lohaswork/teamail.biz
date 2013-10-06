@@ -11,6 +11,7 @@ LohasWorkCom::Application.routes.draw do
     post '/reset/:reset_token'                   => :do_reset,                    :as => :reset
     get '/reset_success'                         => :reset_success,               :as => :reset_success
     get '/topics'                                => :topics,                      :as => :topics
+    get '/no_organizations'                      => :no_organizations,            :as => :no_organizations
   end
   get "signup" => "users#new", :as => "signup"
   resources :users, :only =>[:new, :create]
@@ -19,9 +20,15 @@ LohasWorkCom::Application.routes.draw do
   get "login" => "sessions#new", :as => "login"
   resources :sessions, :only => [:new, :create, :destroy]
 
-  resources :organization do
+  resources :organization, :only => [] do
     resources :topics, :only => [:index]
     resources :tags, :only => [:create]
+  end
+
+  controller :organization do
+    get "show_member" => "organizations#show_member"
+    post "delete_member" => "organizations#delete_member"
+    post "add_member" => "organizations#add_member"
   end
 
   resources :tags, :only => [] do
@@ -29,6 +36,7 @@ LohasWorkCom::Application.routes.draw do
       post 'add'
     end
   end
+
   resources :topics, :only => [:create, :show] do
     collection do
       post 'remove_tag'
@@ -36,9 +44,11 @@ LohasWorkCom::Application.routes.draw do
       post 'tag_filter'
     end
   end
+
   resources :topic, :only => [] do
     resources :discussions, :only => [:create]
   end
+
   resources :early_adopters, :only => [:index, :create]
   match "/*other" => redirect('/')
   # The priority is based upon order of creation:

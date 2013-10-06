@@ -22,12 +22,13 @@ class User < ActiveRecord::Base
     def create_with_organization(user, organization_name)
       user = User.new(:email => user[:email], :password => user[:password])
       raise ValidationError.new(user.errors.full_messages) if !user.valid?
-      organ = Organization.new(:name => organization_name)
-      raise ValidationError.new(organ.errors.full_messages)if !organ.valid?
-      organ.save!
-      user.organizations << organ
-      user.default_organization = organ
+      organization = Organization.new(:name => organization_name)
+      raise ValidationError.new(organization.errors.full_messages)if !organization.valid?
+      organization.save!
+      user.organizations << organization
+      user.default_organization = organization
       user.save!
+      organization.membership(user).update_attribute(:authority_type, 1)
       user
     end
 
@@ -58,11 +59,23 @@ class User < ActiveRecord::Base
         user.password = password
         user.save!
         user.update_attribute(:reset_token, nil)
+        user.update_attribute(:active_status, 1) if user.active_status != 1
       rescue
         raise ValidationError.new(user.errors.full_messages)
       end
     end
 
+    def generate_init_password
+      SecureRandom.urlsafe_base64
+    end
+
+    def already_register?(email)
+      !!self.find_by_email(email)
+    end
+  end
+
+  def is_admin?(organization)
+    organization.membership(self).authority_type == 1
   end
 
   def generate_reset_token
