@@ -1,4 +1,5 @@
 # encoding: utf-8
+require 'bcrypt'
 class User < ActiveRecord::Base
   attr_accessible :email, :password
 
@@ -38,7 +39,7 @@ class User < ActiveRecord::Base
         error_message = "没有这个用户"
       elsif !user.active_status?
         error_message = "您的账户尚未激活"
-      elsif user.password != password
+      elsif BCrypt::Password.new(user.password_digest) != password
         error_message = "密码或邮件地址不正确"
       end
       raise(ValidationError.new(error_message)) if error_message
@@ -73,6 +74,17 @@ class User < ActiveRecord::Base
       !!self.find_by_email(email)
     end
   end
+
+  def password
+    @password ||= BCrypt::Password.new(self.password_digest)
+  end
+
+  def password=(unencrypted_password)
+    @password = unencrypted_password
+    unless unencrypted_password.blank?
+      self.password_digest = BCrypt::Password.create(unencrypted_password)
+    end
+end
 
   def is_admin?(organization)
     organization.membership(self).authority_type == 1
