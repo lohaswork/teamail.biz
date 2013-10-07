@@ -1,6 +1,6 @@
 class TagsController < ApplicationController
   before_filter :login_required, :organization_required
-  before_filter :access_organization, :only => [:create]
+  before_filter :require_organization_membership, :only => [:create]
 
   def create
     tag_name = params[:tag_name].strip

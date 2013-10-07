@@ -12,7 +12,6 @@ module ControllerModules::Organization
     end
 
     def current_organization
-
       begin
         @current_organization ||= ::Organization.for_user(login_user).find(session[:organization] || login_user.default_organization_id)
       rescue
