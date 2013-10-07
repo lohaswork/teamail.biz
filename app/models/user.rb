@@ -76,7 +76,7 @@ class User < ActiveRecord::Base
   end
 
   def password
-    @password ||= BCrypt::Password.new(self.password_digest)
+    @password ||= BCrypt::Password.new(password_digest)
   end
 
   def password=(unencrypted_password)
