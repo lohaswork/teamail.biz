@@ -1,10 +1,9 @@
 class TagsController < ApplicationController
   before_filter :login_required, :organization_required
-  before_filter :require_organization_membership, :only => [:create]
 
   def create
     tag_name = params[:tag_name].strip
-    tags = Organization.find(params[:organization_id]).add_tag(tag_name).tags
+    tags = current_organization.add_tag(tag_name).tags
 
     render :json => {
               :update => {

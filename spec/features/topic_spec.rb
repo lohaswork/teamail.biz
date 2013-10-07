@@ -12,7 +12,7 @@ describe "the topics action" do
         organization = user.default_organization
         login_with(user.email, user.password)
         page.should have_content(user.email)
-        visit organization_topics_path(organization)
+        visit topics_path
         page.should have_content organization.topics.first.title
       end
     end
@@ -20,7 +20,7 @@ describe "the topics action" do
     context "user not login go the topic title list page" do
       it "should not see the topic title" do
         organization = create(:normal_user).default_organization
-        visit organization_topics_path(organization)
+        visit topics_path
         page.should_not have_content organization.topics.first.title
       end
     end
@@ -30,7 +30,7 @@ describe "the topics action" do
         organization = create(:organization_with_topic, name:"new-organization")
         user = create(:normal_user)
         login_with(user.email, user.password)
-        visit organization_topics_path(organization)
+        visit topics_path
         page.should_not have_content organization.topics.last.title
       end
     end
@@ -42,7 +42,7 @@ describe "the topics action" do
       @user = @organization.users.first
       mock_login_with(@user.email)
       page.should have_content @user.email
-      visit organization_topics_path(@organization)
+      visit topics_path
     end
 
     describe "user can open a create topic field" do
@@ -144,7 +144,7 @@ describe "the topics action" do
       @organization = user.default_organization
       login_with(user.email, user.password)
       page.should have_content(user.email)
-      visit organization_topics_path(@organization)
+      visit topics_path
     end
 
     context "click the topic title" do
@@ -189,7 +189,7 @@ describe "the topics action" do
       @user = @organization.users.first
       mock_login_with(@user.email)
       page.should have_content @user.email
-      visit organization_topics_path(@organization)
+      visit topics_path
     end
 
     context "user go to discussion page saw the select users" do
@@ -258,7 +258,7 @@ describe "the topics action" do
   describe "user on the own topics" do
     context "user not login in" do
       it "should redirect to the login page" do
-        visit topics_path
+        visit personal_topics_path
         current_path.should == login_path
       end
     end
@@ -271,7 +271,7 @@ describe "the topics action" do
       end
       context "user go to topics page" do
         it "should have the topic title" do
-          visit topics_path
+          visit personal_topics_path
           page.should have_content @user.topics.first.title
         end
       end
@@ -285,7 +285,7 @@ describe "the topics action" do
 
       context "when no colleagues of the user" do
         it "should have no select-all checkbox" do
-          visit topics_path
+          visit personal_topics_path
           click_on "创建新话题"
           page.should have_selector "#new-topic-form"
           find('#select-user').should_not have_content("全选")
@@ -300,7 +300,7 @@ describe "the topics action" do
         @user = @organization.users.first
         mock_login_with(@user.email)
         page.should have_content @user.email
-        visit topics_path
+        visit personal_topics_path
       end
 
       describe "user can open a create topic field" do
@@ -394,15 +394,6 @@ describe "the topics action" do
           end
         end
       end
-    end
-  end
-
-  describe "user go to topic page with a invalid id" do
-    it "should on the 404 page" do
-      user = create(:normal_user)
-      login_with(user.email, user.password)
-      visit organization_topics_path('invalid_id')
-      current_path.should == '/404.html'
     end
   end
 end

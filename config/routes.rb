@@ -10,7 +10,7 @@ LohasWorkCom::Application.routes.draw do
     get  '/reset/:reset_token'                   => :reset,                       :as => :reset
     post '/reset/:reset_token'                   => :do_reset,                    :as => :reset
     get '/reset_success'                         => :reset_success,               :as => :reset_success
-    get '/topics'                                => :topics,                      :as => :topics
+    get '/personal_topics'                       => :topics,                      :as => :personal_topics
     get '/no_organizations'                      => :no_organizations,            :as => :no_organizations
   end
   get "signup" => "users#new", :as => "signup"
@@ -20,10 +20,7 @@ LohasWorkCom::Application.routes.draw do
   get "login" => "sessions#new", :as => "login"
   resources :sessions, :only => [:new, :create, :destroy]
 
-  resources :organization, :only => [] do
-    resources :topics, :only => [:index]
-    resources :tags, :only => [:create]
-  end
+  resources :tags, :only => [:create]
 
   controller :organization do
     get "show_member" => "organizations#show_member"
@@ -31,13 +28,7 @@ LohasWorkCom::Application.routes.draw do
     post "add_member" => "organizations#add_member"
   end
 
-  resources :tags, :only => [] do
-    collection do
-      post 'add'
-    end
-  end
-
-  resources :topics, :only => [:create, :show] do
+  resources :topics, :only => [:index, :create, :show] do
     collection do
       post 'remove_tag'
       post 'add_tag'

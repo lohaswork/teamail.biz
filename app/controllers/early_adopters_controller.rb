@@ -2,7 +2,7 @@
 class EarlyAdoptersController < ApplicationController
   def index
     if is_logged_in?
-      redirect_to login_user.default_organization.blank? ? no_organizations_path : topics_path
+      redirect_to login_user.default_organization.blank? ? no_organizations_path : personal_topics_path
     end
   end
 

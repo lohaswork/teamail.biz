@@ -14,10 +14,6 @@ class ApplicationController < ActionController::Base
     redirect_to no_organizations_path if !current_organization_exist?
   end
 
-  def require_organization_membership
-    redirect_to '/404.html' if !Organization.for_user(login_user).find(params[:organization_id])
-  end
-
   def set_page_id
     @page_id = "#{controller_name.underscore}_#{action_name}_page".camelize
   end

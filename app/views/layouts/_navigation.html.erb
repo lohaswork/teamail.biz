@@ -27,7 +27,7 @@
               <%= link_to('登出', logout_path) %>
             </li>
             <li>
-              <%= link_to('个人空间', topics_path) %>
+              <%= link_to('个人空间', personal_topics_path) %>
             </li>
           <% else  %>
             <li>
@@ -36,7 +36,7 @@
           <%end%>
           <% if current_organization %>
             <li>
-              <%= link_to(current_organization.name, organization_topics_path(current_organization))%>
+              <%= link_to(current_organization.name, topics_path)%>
             </li>
           <% end %>
         </ul>

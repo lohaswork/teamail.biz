@@ -1,7 +1,6 @@
 # encoding: utf-8
 class TopicsController < ApplicationController
   before_filter :login_required, :organization_required
-  before_filter :require_organization_membership, :only => [:index]
 
   def index
     @organization = current_organization
