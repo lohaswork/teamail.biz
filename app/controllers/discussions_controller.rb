@@ -1,6 +1,6 @@
 # encoding: utf-8
 class DiscussionsController < ApplicationController
-  before_filter :access_organization
+  before_filter :login_required, :organization_required
 
   def create
     @topic = Topic.find(params[:topic_id])

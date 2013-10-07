@@ -124,7 +124,7 @@ describe "organization member page" do
 
     it "visit organization topics path should redirect to no_organizations_path" do
       visit organization_topics_path(1)
-      current_path.should == "/404.html"
+      current_path.should == no_organizations_path
     end
   end
 

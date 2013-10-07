@@ -399,6 +399,8 @@ describe "the topics action" do
 
   describe "user go to topic page with a invalid id" do
     it "should on the 404 page" do
+      user = create(:normal_user)
+      login_with(user.email, user.password)
       visit organization_topics_path('invalid_id')
       current_path.should == '/404.html'
     end

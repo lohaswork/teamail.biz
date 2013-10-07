@@ -9,7 +9,7 @@
         <% end %>
       </div>
       <div class="member-container">
-        <%- if currently_admin? %>
+        <%- if login_user_admin? %>
           <%= link_to delete_member_path(:user => user), :method => :post, :remote => true, :class=>"center" do %>
             <span>删除该成员</span>
           <% end %>

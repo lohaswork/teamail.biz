@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
         error_message = "没有这个用户"
       elsif !user.active_status?
         error_message = "您的账户尚未激活"
-      elsif BCrypt::Password.new(user.password_digest) != password
+      elsif user.password != password
         error_message = "密码或邮件地址不正确"
       end
       raise(ValidationError.new(error_message)) if error_message
