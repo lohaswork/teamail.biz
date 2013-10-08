@@ -7,14 +7,7 @@
   App.page.TopicsIndexPage.prototype = {
     init: function(){
       new App.page.TaggingControls
-      $(document).on("click", "#select-topic input[data-item]", function(){
-        if (sumCheckStatus("#select-topic") > 0) {
-          $("#tagging-dropdown").attr("disabled",false);
-        } else {
-          $("#tagging-dropdown").attr("disabled","disabled");
-        }
-      })
-      .on("refreshed", "#topic-list", function () {
+      $(document).on("refreshed", "#topic-list", function () {
         $("#dropdown-tags").hide();
         $("#tagging-dropdown").attr("disabled","disabled");
         $("#tag-list :checkbox").attr('checked', false);
