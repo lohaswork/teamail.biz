@@ -95,7 +95,7 @@ describe "organization member page" do
       end
 
       it "create new topic should not see kicked_user in notifier list" do
-        visit topics_path
+        visit organization_topics_path
         click_on "创建新话题"
         page.should_not have_content @kicked_user.email_name
       end
@@ -123,7 +123,7 @@ describe "organization member page" do
     end
 
     it "visit organization topics path should redirect to no_organizations_path" do
-      visit topics_path
+      visit organization_topics_path
       current_path.should == no_organizations_path
     end
   end

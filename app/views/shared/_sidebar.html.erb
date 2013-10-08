@@ -8,7 +8,7 @@
   </div>
   <div class="organization-inbox">
     <div>
-      <%= link_to("团队空间", topics_path)%>
+      <%= link_to("团队空间", organization_topics_path)%>
     </div>
     <%= render :partial => 'tags/tag_filters', :locals => { :tags => current_organization.tags } %>
   </div>

@@ -28,7 +28,9 @@ LohasWorkCom::Application.routes.draw do
     post "add_member" => "organizations#add_member"
   end
 
-  resources :topics, :only => [:index, :create, :show] do
+  get '/organization_topics' => 'topics#index', :as => :organization_topics
+
+  resources :topics, :only => [:create, :show] do
     collection do
       post 'remove_tag'
       post 'add_tag'
