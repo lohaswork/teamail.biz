@@ -17,14 +17,7 @@
           }
           $('#dropdown-tags').hide(); //点击的不是div或其子元素
       });
-      $(document).on("click", "#select-topic input[data-item]", function(){
-        if (sumCheckStatus("#select-topic") > 0) {
-          $("#tagging-dropdown").attr("disabled",false);
-        } else {
-          $("#tagging-dropdown").attr("disabled","disabled");
-        }
-      })// Enable #tagging-dropdown button
-      .on("click", "#tagging-dropdown", function(){
+      $(document).on("click", "#tagging-dropdown", function(){
         $("#dropdown-tags").toggle();
         return false;
       })
@@ -44,13 +37,6 @@
           $("#tag-input").show();
         }
       })// Enable tags submit button
-      .on("refreshed", "#topic-list", function () {
-        $("#dropdown-tags").hide();
-        $("#tagging-dropdown").attr("disabled","disabled");
-        $("#tag-list :checkbox").attr('checked', false);
-        $("#tagging-submit").hide();
-        $("#tag-input").show();
-      })
       .on("refreshed", "#tag-list", function () {
         $("#tag-input input[type='text']").val("");
       });
