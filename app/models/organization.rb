@@ -25,7 +25,7 @@ class Organization < ActiveRecord::Base
     user = User.find(user_id)
     self.users.delete(user)
     user.default_organization_id = user.organizations.first if user.default_organization_id == self.id
-    user.save
+    user.save!
     self
   end
 
