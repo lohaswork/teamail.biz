@@ -37,6 +37,10 @@ class TopicsController < ApplicationController
     @colleagues = get_colleagues
   end
 
+  def achieved
+    render :nothing => true
+  end
+
   def add_tag
     selected_topics_ids = params[:selected_topics].split(',').uniq
     Topic.find(selected_topics_ids).each { |topic| topic.add_tags(params[:tags]) }

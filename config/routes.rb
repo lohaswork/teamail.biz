@@ -29,6 +29,7 @@ LohasWorkCom::Application.routes.draw do
   end
 
   get '/organization_topics' => 'topics#index', :as => :organization_topics
+  get '/personal_topics_inbox' => 'topics#achieved', :as => :personal_topics_inbox
 
   resources :topics, :only => [:create, :show] do
     collection do

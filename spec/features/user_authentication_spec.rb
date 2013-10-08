@@ -120,14 +120,12 @@ describe "user authentaction action" do
 
       it "should redirect to topics page visit login path" do
         visit login_path
-        current_path.should == '/personal_topics'
-        page.should have_content @user.topics.first.title
+        current_path.should == '/personal_topics_inbox'
       end
 
       it "should redirect to topics page visit signup_path" do
         visit signup_path
-        current_path.should == '/personal_topics'
-        page.should have_content @user.topics.first.title
+        current_path.should == '/personal_topics_inbox'
       end
 
       it "should go to root path after logout" do
