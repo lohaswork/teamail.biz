@@ -1,5 +1,5 @@
-<div id='new-discussion'>
-  <div id='new-discussion-form', class='row top-buffer left-buffer'>
+<div id='new-discussion' class='row'>
+  <div id='new-discussion-form' class='col-xs-12'>
     <%= form_tag topic_discussions_path(@topic), :method => "post", :class=>"form-horizontal", :remote => true do %>
       <div class="control-group">
         <%= text_area_tag :content, nil, :class=>"col-xs-8", :placeholder=>"即时评论"%>

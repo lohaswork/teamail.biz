@@ -38,19 +38,33 @@ class TopicsController < ApplicationController
   end
 
   def add_tag
-    selected_topics_ids = params[:selected_topics].split(',').uniq
-    Topic.find(selected_topics_ids).each { |topic| topic.add_tags(params[:tags]) }
-    topics = current_organization.topics
+    detail_topic_id = params[:topic]
 
-    render :json => {
-              :update => {
-                          "topic-list" => render_to_string(:partial => 'topics/topic_list',
-                                                           :layout => false,
-                                                           :locals => {
-                                                               :topics => topics
-                                                          })
-                        }
-                    }
+    if detail_topic_id.blank?
+      selected_topics_ids = params[:selected_topics].split(',').uniq
+      Topic.find(selected_topics_ids).each { |topic| topic.add_tags(params[:tags]) }
+      topics = current_organization.topics
+      render :json => {
+                :update => {
+                            "topic-list" => render_to_string(:partial => 'topics/topic_list',
+                                                             :layout => false,
+                                                             :locals => {
+                                                                 :topics => topics
+                                                            })
+                          }
+                      }
+    else
+      topic = Topic.find(detail_topic_id).add_tags(params[:tags])
+      render :json => {
+                 :update => {
+                             "tag-container-#{topic.id}" => render_to_string(:partial => 'tags/headline_tags',
+                                                                             :layout => false,
+                                                                             :locals => {
+                                                                                 :topic => topic
+                                                                           })
+                            }
+                      }
+    end
   end
 
   def remove_tag

@@ -16,6 +16,8 @@ class UsersController < ApplicationController
     @organization = current_organization
     @tags = @organization.tags
     @colleagues = get_colleagues
+
+    render layout: "topics"
   end
 
   def create
