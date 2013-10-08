@@ -142,9 +142,9 @@ describe "topic section" do
       end
 
       it "click delete tagging link, should not see the attached tag" do
-        remove_tag_link = find(:css, "a.tag-remove-link")
-        remove_tag_link.click
-        find(:css, "div.topic-show").should_not have_content @organization.tags.first.name
+        find(:xpath, "(//a[@class='tag-remove-link'])[1]").click
+        find(:css, "div.topic-show").should_not have_content @organization.tags[0].name
+        find(:css, "div.topic-show").should have_content @organization.tags[1].name
       end
 
     end
