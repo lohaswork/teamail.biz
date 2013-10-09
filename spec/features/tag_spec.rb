@@ -120,15 +120,21 @@ describe "topic section" do
 
   describe "user in topic detail page", :js => true do
     before do
-      user = create(:normal_user)
-      @organization = user.default_organization
-      login_with(user.email, user.password)
-      page.should have_content user.email
-      visit topic_path(user.topics.first)
+      @user = create(:normal_user)
+      @organization = @user.default_organization
+      login_with(@user.email, @user.password)
+      page.should have_content @user.email
+      visit topic_path(@user.topics.first)
     end
 
-    it  "should not see the organization tags" do
+    it  "should be able to click tagging-dropdown button" do
       find('#tagging-dropdown')[:disabled].should_not eq "disabled"
+    end
+
+    it "should see already exist tag name" do
+      tag = create(:tag)
+      @user.topics.first.tags << tag
+      find(:css, "div.topic-show").should have_content @organization.tags[0].name
     end
 
     context "select topics and tags, click 应用 button" do

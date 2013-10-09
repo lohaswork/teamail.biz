@@ -2,6 +2,6 @@
   <p>团队空间</p>
   <div><%= link_to('成员管理', show_member_path, :class=>"center")%></div>
   <%= render :partial => 'tags/tagging' %>
-  <%= render :partial => 'shared/new_topic', :locals => { :colleagues => @colleagues, :topic => nil } %>
+  <%= render :partial => 'shared/new_topic', :locals => { :colleagues => get_colleagues, :topic => nil } %>
   <%= render :partial => 'topic_list', :locals => { :topics => @topics } %>
 </div>

@@ -3,10 +3,7 @@ class TopicsController < ApplicationController
   before_filter :login_required, :organization_required
 
   def index
-    @organization = current_organization
-    @topics = @organization.topics
-    @colleagues = get_colleagues
-    @tags = @organization.tags
+    @topics = current_organization.topics
   end
 
   def create
@@ -86,17 +83,16 @@ class TopicsController < ApplicationController
   end
 
   def tag_filter
-    topics = current_organization.topics.map { |topic| topic if topic.has_tag?(params[:tag]) }.reject { |t| t.blank? }
+    @topics = current_organization.topics.map { |topic| topic if topic.has_tag?(params[:tag]) }.reject { |t| t.blank? }
 
-      render :json => {
+    render :json => {
                 :update => {
                             "topic-list" => render_to_string(:partial => 'topics/topic_list',
                                                              :layout => false,
                                                              :locals => {
-                                                                 :topics => topics
+                                                                 :topics => @topics
                                                             })
                           }
                       }
-
   end
 end
