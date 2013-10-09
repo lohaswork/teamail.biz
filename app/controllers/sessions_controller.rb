@@ -2,8 +2,8 @@
 class SessionsController < ApplicationController
 
   def new
-    if authenticated?
-      redirect_to login_user.default_organization.blank? ? no_organizations_path : topics_path
+    if is_logged_in?
+      redirect_to login_user.default_organization.blank? ? no_organizations_path : personal_topics_inbox_path
     end
   end
 
@@ -14,11 +14,11 @@ class SessionsController < ApplicationController
     else
       cookies[:login_token]= user.remember_token
     end
-    if user.default_organization.blank?
+    update_current_organization(user.default_organization)
+    if current_organization.blank?
       render :json => { :status => "success", :redirect => no_organizations_path }
     else
-      update_current_organization(user.default_organization)
-      render :json => { :status => "success", :redirect => topics_path }
+      render :json => { :status => "success", :redirect => personal_topics_path }
     end
   end
 

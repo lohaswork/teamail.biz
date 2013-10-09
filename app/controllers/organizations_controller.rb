@@ -1,6 +1,6 @@
 # encoding: utf-8
 class OrganizationsController < ApplicationController
-  before_filter :access_organization
+  before_filter :login_required, :organization_required
 
   def show_member
     @colleagues = get_colleagues

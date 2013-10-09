@@ -1,10 +1,8 @@
 # encoding: utf-8
 class TopicsController < ApplicationController
-  before_filter :access_organization, :except => [:index]
+  before_filter :login_required, :organization_required
 
   def index
-    params[:organization_id] && params[:organization_id] != current_organization.try(:id) && update_current_organization(Organization.find(params[:organization_id]))
-    redirect_to('/404.html') && return if !current_organization_accessible?
     @organization = current_organization
     @topics = @organization.topics
     @colleagues = get_colleagues
@@ -39,10 +37,14 @@ class TopicsController < ApplicationController
     @colleagues = get_colleagues
   end
 
+  def achieved
+    render :nothing => true
+  end
+
   def add_tag
     selected_topics_ids = params[:selected_topics].split(',').uniq
     Topic.find(selected_topics_ids).each { |topic| topic.add_tags(params[:tags]) }
-    topics = Topic.find(params[:topics])
+    topics = current_organization.topics
 
     render :json => {
               :update => {

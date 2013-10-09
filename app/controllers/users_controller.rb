@@ -1,8 +1,10 @@
 # encoding: utf-8
 class UsersController < ApplicationController
+  before_filter :login_required, :organization_required, :only => [:topics]
+
   def new
-    if authenticated?
-      redirect_to login_user.default_organization.blank? ? no_organizations_path : topics_path
+    if is_logged_in?
+      redirect_to login_user.default_organization.blank? ? no_organizations_path : personal_topics_inbox_path
     end
   end
 
@@ -10,10 +12,7 @@ class UsersController < ApplicationController
   end
 
   def topics
-    redirect_to(login_path) && return if !authenticated?
-    redirect_to(no_organizations_path) && return if login_user.default_organization.blank?
     @topics = login_user.topics
-    !current_organization && update_current_organization(login_user.default_organization)
     @organization = current_organization
     @tags = @organization.tags
     @colleagues = get_colleagues
