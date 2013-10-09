@@ -127,6 +127,10 @@ describe "topic section" do
       visit topic_path(user.topics.first)
     end
 
+    it  "should not see the organization tags" do
+      find('#tagging-dropdown')[:disabled].should_not eq "disabled"
+    end
+
     context "select topics and tags, click 应用 button" do
       before do
         # topic should not have any tags before this

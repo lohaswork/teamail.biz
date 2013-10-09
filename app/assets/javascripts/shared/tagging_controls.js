@@ -5,6 +5,15 @@
   }
 
   App.page.TaggingControls.prototype = {
+    refreshTopicList: function(){
+      $(document).on("refreshed", "#topic-list", function () {
+        $("#dropdown-tags").hide();
+        $("#tagging-dropdown").attr("disabled","disabled");
+        $("#tag-list :checkbox").attr('checked', false);
+        $("#tagging-submit").hide();
+        $("#tag-input").show();
+      });
+    },
     init: function(){
       $(document).bind('click',function(e){
           var e = e || window.event; //浏览器兼容性
