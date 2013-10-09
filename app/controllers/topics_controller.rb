@@ -37,6 +37,10 @@ class TopicsController < ApplicationController
     @colleagues = get_colleagues
   end
 
+  def achieve
+
+  end
+
   def achieved
     render :nothing => true
   end

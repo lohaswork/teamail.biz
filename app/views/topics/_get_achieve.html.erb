@@ -1,0 +1,6 @@
+<%= form_tag achieve_topics_path(:topic => @topic), :method => "post", :remote => true do %>
+  <%= submit_tag "应用", :id=>"achieve-submit", :class=>"btn btn-default" do %>
+    <i class="icon-archive"></i>
+  <% end %>
+  <%= hidden_field_tag :selected_topics, '' %>
+<% end %>
