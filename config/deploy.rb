@@ -16,7 +16,7 @@ require 'capistrano_database_yml'
 set :server_name, "121.199.43.92"
 set :user, "deployer"
 set :sudo_user, "deployer"
-set :deploy_to, "/www/teamind_deploy"
+set :deploy_to, "/www/teamail_deploy"
 
 # Repository
 set :application, "LohasWork.com"
