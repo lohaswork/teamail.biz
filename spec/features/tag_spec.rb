@@ -134,6 +134,7 @@ describe "topic section" do
     it "should see already exist tag name" do
       tag = create(:tag)
       @user.topics.first.tags << tag
+      @user.save
       find(:css, "div.topic-show").should have_content @organization.tags[0].name
     end
 
