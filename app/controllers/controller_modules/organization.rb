@@ -8,7 +8,11 @@ module ControllerModules::Organization
   protected
     # 仅在手动切换default_organization时更新current_organization
     def update_current_organization(organization)
-      session[:organization] = organization.id
+      begin
+       session[:organization] = organization.id
+      rescue
+        nil
+      end
     end
 
     def current_organization

@@ -10,7 +10,7 @@ describe "topic section" do
       @organization = user.default_organization
       login_with(user.email, user.password)
       page.should have_content user.email
-      visit topics_path
+      visit organization_topics_path
     end
 
     context "select topics and tags, click 应用 button" do
@@ -156,7 +156,7 @@ describe "topic section" do
       @organization = user.default_organization
       login_with(user.email, user.password)
       page.should have_content user.email
-      visit topics_path
+      visit organization_topics_path
       specific_tag = @organization.tags.first
       specific_topic = @organization.topics.first
       specific_topic.tags << specific_tag

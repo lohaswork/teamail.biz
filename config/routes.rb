@@ -28,7 +28,10 @@ LohasWorkCom::Application.routes.draw do
     post "add_member" => "organizations#add_member"
   end
 
-  resources :topics, :only => [:index, :create, :show] do
+  get '/organization_topics' => 'topics#index', :as => :organization_topics
+  get '/personal_topics_inbox' => 'topics#achieved', :as => :personal_topics_inbox
+
+  resources :topics, :only => [:create, :show] do
     collection do
       post 'remove_tag'
       post 'add_tag'

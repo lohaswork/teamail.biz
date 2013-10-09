@@ -12,7 +12,7 @@ describe "the topics action" do
         organization = user.default_organization
         login_with(user.email, user.password)
         page.should have_content(user.email)
-        visit topics_path
+        visit organization_topics_path
         page.should have_content organization.topics.first.title
       end
     end
@@ -20,7 +20,7 @@ describe "the topics action" do
     context "user not login go the topic title list page" do
       it "should not see the topic title" do
         organization = create(:normal_user).default_organization
-        visit topics_path
+        visit organization_topics_path
         page.should_not have_content organization.topics.first.title
       end
     end
@@ -30,7 +30,7 @@ describe "the topics action" do
         organization = create(:organization_with_topic, name:"new-organization")
         user = create(:normal_user)
         login_with(user.email, user.password)
-        visit topics_path
+        visit organization_topics_path
         page.should_not have_content organization.topics.last.title
       end
     end
@@ -42,7 +42,7 @@ describe "the topics action" do
       @user = @organization.users.first
       mock_login_with(@user.email)
       page.should have_content @user.email
-      visit topics_path
+      visit organization_topics_path
     end
 
     describe "user can open a create topic field" do
@@ -144,7 +144,7 @@ describe "the topics action" do
       @organization = user.default_organization
       login_with(user.email, user.password)
       page.should have_content(user.email)
-      visit topics_path
+      visit organization_topics_path
     end
 
     context "click the topic title" do
@@ -189,7 +189,7 @@ describe "the topics action" do
       @user = @organization.users.first
       mock_login_with(@user.email)
       page.should have_content @user.email
-      visit topics_path
+      visit organization_topics_path
     end
 
     context "user go to discussion page saw the select users" do

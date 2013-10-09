@@ -37,6 +37,10 @@ class TopicsController < ApplicationController
     @colleagues = get_colleagues
   end
 
+  def achieved
+    render :nothing => true
+  end
+
   def add_tag
     detail_topic_id = params[:topic]
 
