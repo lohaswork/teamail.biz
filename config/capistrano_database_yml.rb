@@ -100,13 +100,13 @@ Capistrano::Configuration.instance.load do
             password: #{Capistrano::CLI.password_prompt("Enter database password: ")}
             pool: 5
           development:
-            database: teamind_development
+            database: teamail_development
             <<: *base
           test:
-            database: teamind_test
+            database: teamail_test
             <<: *base
           production:
-            database: teamind_production
+            database: teamail_production
             <<: *base
         EOF
 
