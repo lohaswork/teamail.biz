@@ -37,12 +37,27 @@ class TopicsController < ApplicationController
     @colleagues = get_colleagues
   end
 
-  def achieve
+  def archive
+    selected_topics_ids = params[:selected_topics].split(',').uniq
+    Topic.find(selected_topics_ids).each { |topic| topic.archived_by(login_user) }
+    topics = Topic.get_unarchived(login_user).all
 
+    render :json => {
+              :update => {
+                          "topic-list" => render_to_string(:partial => 'topics/topic_list',
+                                                           :layout => false,
+                                                           :locals => {
+                                                               :topics => topics
+                                                          })
+                        }
+                    }
   end
 
-  def achieved
-    render :nothing => true
+  def unarchived
+    @topics = Topic.get_unarchived(login_user).all
+    @organization = current_organization
+    @tags = current_organization.tags
+    @colleagues = get_colleagues
   end
 
   def add_tag

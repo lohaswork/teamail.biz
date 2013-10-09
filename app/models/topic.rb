@@ -8,7 +8,11 @@ class Topic < ActiveRecord::Base
   has_many :taggings, :as => :taggable
   has_many :tags, :through => :taggings, :uniq => true
   has_many :users, :through => :user_topics, :uniq => true
+
   validates :title, :presence => { :message=>'请输入标题' }
+
+  scope :get_archived, lambda { |user| joins(:user_topics).where( :user_topics => { :user_id => user.id, :archive_status => true } ) }
+  scope :get_unarchived, lambda { |user| joins(:user_topics).where( "user_topics.user_id = ? AND IFNULL( user_topics.archive_status, 0 ) <> ? ", user.id, true ) }
 
   class << self
     def create_topic(title, content, emails, organization, login_user)
@@ -36,6 +40,11 @@ class Topic < ActiveRecord::Base
   def has_tag?(id)
     tag = Tag.find(id)
     self.tags.include?(tag)
+  end
+
+  def archived_by(user)
+    self.user_topics.find_by_user_id(user.id).first.update_attribute!(:archive_status, 1)
+    self
   end
 
   def last_update_time

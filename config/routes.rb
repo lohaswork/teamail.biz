@@ -29,13 +29,14 @@ LohasWorkCom::Application.routes.draw do
   end
 
   get '/organization_topics' => 'topics#index', :as => :organization_topics
-  get '/personal_topics_inbox' => 'topics#achieved', :as => :personal_topics_inbox
+  get '/personal_topics_inbox' => 'topics#unarchived', :as => :personal_topics_inbox
 
   resources :topics, :only => [:create, :show] do
     collection do
       post 'remove_tag'
       post 'add_tag'
       post 'tag_filter'
+      post 'archive'
     end
   end
 
