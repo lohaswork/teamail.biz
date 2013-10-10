@@ -133,9 +133,11 @@ describe "topic section" do
 
     it "should see already exist tag name" do
       tag = create(:tag)
-      @user.topics.first.tags << tag
-      @user.save
-      find(:css, "div.topic-show").should have_content @organization.tags[0].name
+      topic = @user.topics.first
+      topic.tags << tag
+      topic.save
+      visit topic_path(topic)
+      find(:css, "div.topic-show").should have_content tag.name
     end
 
     context "select topics and tags, click 应用 button" do
