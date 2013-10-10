@@ -3,10 +3,7 @@ class TopicsController < ApplicationController
   before_filter :login_required, :organization_required
 
   def index
-    @organization = current_organization
-    @topics = @organization.topics
-    @colleagues = get_colleagues
-    @tags = @organization.tags
+    @topics = current_organization.topics
   end
 
   def create
@@ -42,19 +39,33 @@ class TopicsController < ApplicationController
   end
 
   def add_tag
-    selected_topics_ids = params[:selected_topics].split(',').uniq
-    Topic.find(selected_topics_ids).each { |topic| topic.add_tags(params[:tags]) }
-    topics = current_organization.topics
+    detail_topic_id = params[:topic]
 
-    render :json => {
-              :update => {
-                          "topic-list" => render_to_string(:partial => 'topics/topic_list',
-                                                           :layout => false,
-                                                           :locals => {
-                                                               :topics => topics
-                                                          })
-                        }
-                    }
+    if detail_topic_id.blank?
+      selected_topics_ids = params[:selected_topics].split(',').uniq
+      Topic.find(selected_topics_ids).each { |topic| topic.add_tags(params[:tags]) }
+      topics = current_organization.topics
+      render :json => {
+                :update => {
+                            "topic-list" => render_to_string(:partial => 'topics/topic_list',
+                                                             :layout => false,
+                                                             :locals => {
+                                                                 :topics => topics
+                                                            })
+                          }
+                      }
+    else
+      topic = Topic.find(detail_topic_id).add_tags(params[:tags])
+      render :json => {
+                 :update => {
+                             "tag-container-#{topic.id}" => render_to_string(:partial => 'tags/headline_tags',
+                                                                             :layout => false,
+                                                                             :locals => {
+                                                                                 :topic => topic
+                                                                           })
+                            }
+                      }
+    end
   end
 
   def remove_tag
@@ -72,17 +83,16 @@ class TopicsController < ApplicationController
   end
 
   def tag_filter
-    topics = current_organization.topics.map { |topic| topic if topic.has_tag?(params[:tag]) }.reject { |t| t.blank? }
+    @topics = current_organization.topics.map { |topic| topic if topic.has_tag?(params[:tag]) }.reject { |t| t.blank? }
 
-      render :json => {
+    render :json => {
                 :update => {
                             "topic-list" => render_to_string(:partial => 'topics/topic_list',
                                                              :layout => false,
                                                              :locals => {
-                                                                 :topics => topics
+                                                                 :topics => @topics
                                                             })
                           }
                       }
-
   end
 end

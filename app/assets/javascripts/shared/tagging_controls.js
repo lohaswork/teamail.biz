@@ -5,6 +5,7 @@
   }
 
   App.page.TaggingControls.prototype = {
+
     init: function(){
       $(document).bind('click',function(e){
           var e = e || window.event; //浏览器兼容性
@@ -23,7 +24,7 @@
         } else {
           $("#tagging-dropdown").attr("disabled","disabled");
         }
-      })// Enable #tagging-dropdown button
+      })
       .on("click", "#tagging-dropdown", function(){
         $("#dropdown-tags").toggle();
         return false;
@@ -44,13 +45,6 @@
           $("#tag-input").show();
         }
       })// Enable tags submit button
-      .on("refreshed", "#topic-list", function () {
-        $("#dropdown-tags").hide();
-        $("#tagging-dropdown").attr("disabled","disabled");
-        $("#tag-list :checkbox").attr('checked', false);
-        $("#tagging-submit").hide();
-        $("#tag-input").show();
-      })
       .on("refreshed", "#tag-list", function () {
         $("#tag-input input[type='text']").val("");
       });
@@ -65,6 +59,15 @@
         });
         return check_status;
       };
+    },
+    refreshTopicList: function(){
+      $(document).on("refreshed", "#topic-list", function () {
+        $("#dropdown-tags").hide();
+        $("#tagging-dropdown").attr("disabled","disabled");
+        $("#tag-list :checkbox").attr('checked', false);
+        $("#tagging-submit").hide();
+        $("#tag-input").show();
+      });
     }
   }
 }(window.jQuery);

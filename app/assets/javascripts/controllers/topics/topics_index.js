@@ -6,8 +6,8 @@
   }
   App.page.TopicsIndexPage.prototype = {
     init: function(){
-      new App.page.TaggingControls
+      var page = new App.page.TaggingControls;
+      page.refreshTopicList();
     }
   }
-
 }(window.jQuery);

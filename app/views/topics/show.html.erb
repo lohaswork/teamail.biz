@@ -1,6 +1,8 @@
+<%= render :partial => 'tags/tagging' %>
 <div class='topic-show'>
   <div class='title'>
     <%= @topic.title%>
+    <%= render :partial => 'tags/headline_tags', :locals => {:topic => @topic} %>
   </div>
   <%= render :partial => 'discussion_list', :locals => { :discussions => @discussions } %>
   <%= render :partial => 'new_discussion', :locals => { :colleagues => @colleagues, :topic => @topic } %>
