@@ -52,9 +52,6 @@ class TopicsController < ApplicationController
 
   def unarchived
     @topics = Topic.get_unarchived(login_user).all
-    @organization = current_organization
-    @tags = current_organization.tags
-    @colleagues = get_colleagues
   end
 
   def add_tag
