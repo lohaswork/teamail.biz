@@ -395,5 +395,33 @@ describe "the topics action" do
         end
       end
     end
+
+    describe "user in personal_topics_inbox_path", :js => true do
+      before do
+        @user = create(:normal_user)
+        @organization = @user.default_organization
+        login_with(@user.email, @user.password)
+        page.should have_content @user.email
+        visit personal_topics_inbox_path
+      end
+
+      it "should see archive button disabled" do
+        find('#archive-submit')[:disabled].should eq "disabled"
+      end
+
+      it "should be able to click archive button when topics are selected" do
+        find(:xpath, "(//div[@id='topic-list']//input[@type='checkbox'])[1]").set(true)
+        find(:css, '#archive-submit')[:disabled].should_not eq "disabled"
+      end
+
+      it "archive a topic should not see it immediatelly" do
+        find(:xpath, "(//div[@id='topic-list']//input[@type='checkbox'])[1]").set(true)
+        button = find(:css, '#archive-submit')
+        page.should have_content @user.topics.last.title
+        button.click
+        page.should_not have_content @user.topics.last.title
+      end
+
+    end
   end
 end

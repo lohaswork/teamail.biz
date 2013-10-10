@@ -58,7 +58,7 @@ class TopicsController < ApplicationController
     detail_topic_id = params[:topic]
 
     if detail_topic_id.blank?
-      selected_topics_ids = params[:selected_topics].split(',')
+      selected_topics_ids = params[:selected_topics_to_tagging].split(',')
       Topic.find(selected_topics_ids).each { |topic| topic.add_tags(params[:tags]) }
       topics = current_organization.topics
       render :json => {
