@@ -43,7 +43,7 @@ class Topic < ActiveRecord::Base
   end
 
   def archived_by(user)
-    self.user_topics.find_by_user_id(user.id).first.update_attribute!(:archive_status, 1)
+    self.user_topics.find_by_user_id(user.id).update_attribute(:archive_status, 1)
     self
   end
 

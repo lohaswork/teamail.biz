@@ -19,7 +19,7 @@
       创建时间：
     </div>
   </div>
-  <div class='checkbox-group' id="select-topic" data-update='["#selected_topics"]' data-reload=true data-page="CheckBoxGroup">
+  <div class='checkbox-group' id="select-topic" data-update="#selected_topics_to_archive" data-reload=true data-page="CheckBoxGroup">
     <%- order_by_updator(topics).try(:each) do |topic| %>
       <div class="row topic-headline">
         <div class='col-xs-2'>

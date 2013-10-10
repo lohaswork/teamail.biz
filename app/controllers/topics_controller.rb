@@ -35,7 +35,7 @@ class TopicsController < ApplicationController
   end
 
   def archive
-    selected_topics_ids = params[:selected_topics].split(',').uniq
+    selected_topics_ids = params[:selected_topics_to_archive].split(',').uniq
     Topic.find(selected_topics_ids).each { |topic| topic.archived_by(login_user) }
     topics = Topic.get_unarchived(login_user).all
 
