@@ -399,7 +399,6 @@ describe "the topics action" do
     describe "user in personal_topics_inbox_path", :js => true do
       before do
         @user = create(:normal_user)
-        @organization = @user.default_organization
         login_with(@user.email, @user.password)
         page.should have_content @user.email
         visit personal_topics_inbox_path
@@ -422,6 +421,29 @@ describe "the topics action" do
         page.should_not have_content @user.topics.last.title
       end
 
+    end
+
+    describe "user in personal_topics_inbox_path", :js => true do
+      before do
+        @user = create(:normal_user)
+        login_with(@user.email, @user.password)
+        page.should have_content @user.email
+        @topic = @user.topics.first
+        visit topic_path(@topic)
+      end
+
+      it "should see archive button clickable" do
+        find('#archive-submit')[:disabled].should_not eq "disabled"
+      end
+
+      it "archive a topic and it should be archived" do
+        button = find(:css, '#archive-submit')
+        @topic.user_topics.find_by_user_id(@user.id).archive_status.should_not eq(true)
+        button.click
+        sleep 0.01
+        page.should have_content @topic.title
+        @topic.user_topics.find_by_user_id(@user.id).archive_status.should eq(1)
+      end
     end
   end
 end

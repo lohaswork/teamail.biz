@@ -35,19 +35,26 @@ class TopicsController < ApplicationController
   end
 
   def archive
-    selected_topics_ids = params[:selected_topics_to_archive].split(',')
-    Topic.find(selected_topics_ids).each { |topic| topic.archived_by(login_user) }
-    topics = Topic.get_unarchived(login_user).all
+    detail_topic_id = params[:topic]
 
-    render :json => {
-              :update => {
-                          "topic-list" => render_to_string(:partial => 'topics/topic_list',
-                                                           :layout => false,
-                                                           :locals => {
-                                                               :topics => topics
-                                                          })
-                        }
-                    }
+    if detail_topic_id.blank?
+      selected_topics_ids = params[:selected_topics_to_archive].split(',')
+      Topic.find(selected_topics_ids).each { |topic| topic.archived_by(login_user) }
+      topics = Topic.get_unarchived(login_user).all
+
+      render :json => {
+                :update => {
+                            "topic-list" => render_to_string(:partial => 'topics/topic_list',
+                                                             :layout => false,
+                                                             :locals => {
+                                                                 :topics => topics
+                                                            })
+                          }
+                      }
+    else
+      Topic.find(detail_topic_id).archived_by(login_user)
+      render :nothing => true
+    end
   end
 
   def unarchived
