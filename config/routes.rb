@@ -44,6 +44,8 @@ LohasWorkCom::Application.routes.draw do
   end
 
   resources :early_adopters, :only => [:index, :create]
+
+  post "emails/recieve" => "email_recivers#email"
   match "/*other" => redirect('/')
   # The priority is based upon order of creation:
   # first created -> highest priority.
