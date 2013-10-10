@@ -9,6 +9,15 @@ module Helpers
     click_button '注册'
   end
 
+  # Since bcrypt is a one-way hash function,
+  # have to hardcode password in factory_girls mockup data.
+  def mock_login_with(email)
+    visit login_path
+    fill_in 'email', :with => email
+    fill_in 'password', :with => 'password'
+    click_button '登录'
+  end
+
   def login_with(email, password)
     visit login_path
     fill_in 'email', :with => email

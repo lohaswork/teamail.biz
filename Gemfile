@@ -48,6 +48,7 @@ group :test, :development do
   gem 'guard-rspec'
   gem 'metric_fu'
   gem 'poltergeist'
+  gem "rails_best_practices"
 end
 
 # Use ActiveModel has_secure_password

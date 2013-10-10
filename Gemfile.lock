@@ -311,6 +311,7 @@ DEPENDENCIES
   mysql2
   poltergeist
   rails (= 4.0.0)
+  rails_best_practices
   reek
   rest-client
   rspec-rails

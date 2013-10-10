@@ -1,11 +1,11 @@
 # encoding: utf-8
 class DiscussionsController < ApplicationController
-  before_filter :access_organization
+  before_filter :login_required, :organization_required
 
   def create
     @topic = Topic.find(params[:topic_id])
     selected_emails = params[:selected_users].split(',')
-    discussion = Discussion.create_discussion(current_user, @topic, selected_emails, params[:content])
+    discussion = Discussion.create_discussion(login_user, @topic, selected_emails, params[:content])
     EmailEngine::DiscussionNotifier.new(discussion.id).create_discussion_notification
 
     render :json => {

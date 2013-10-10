@@ -1,6 +1,6 @@
 FactoryGirl.define do
   sequence :email do |n|
-    "person#{n}@test.com"
+    "person#{n}person@test.com"
   end
 
   sequence :active_code do
@@ -28,7 +28,7 @@ FactoryGirl.define do
           user.topics << topic
         end
         user.organizations << organization
-        user.default_organization_id = organization.id
+        user.default_organization = organization
         user.save
       end
       active_status 1

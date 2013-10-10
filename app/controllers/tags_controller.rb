@@ -1,22 +1,23 @@
 class TagsController < ApplicationController
-  before_filter :access_organization
+  before_filter :login_required, :organization_required
 
   def create
-    organization = current_organization
     tag_name = params[:tag_name].strip
-    tags = organization.add_tag(tag_name).tags
+    tags = current_organization.add_tag(tag_name).tags
 
     render :json => {
               :update => {
                 "tag-list" => render_to_string(:partial => 'tags/tag_list',
-                                              :layout => false,
-                                              :locals => {
-                                                :tags => tags
+                                               :layout => false,
+                                               :locals => {
+                                                   :tags => tags
+                                              }),
+                "tag-filters" => render_to_string(:partial => 'tags/tag_filters',
+                                                  :layout => false,
+                                                  :locals => {
+                                                      :tags => tags
                                               })
                         }
                     }
-  end
-
-  def add
   end
 end

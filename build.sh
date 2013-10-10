@@ -7,7 +7,8 @@ else
   echo 'tailor check has passed.'
 fi
 
-bundle exec rake metrics:all
+#metric_fu -r
+bundle exec rails_best_practices .
 
 if [ -f config/database.yml ]; then
   echo 'config/database.yml already exists, so we will not replace it with config/database.yml.template'

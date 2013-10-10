@@ -10,7 +10,8 @@ LohasWorkCom::Application.routes.draw do
     get  '/reset/:reset_token'                   => :reset,                       :as => :reset
     post '/reset/:reset_token'                   => :do_reset,                    :as => :reset
     get '/reset_success'                         => :reset_success,               :as => :reset_success
-    get '/topics'                                => :topics,                      :as => :topics
+    get '/personal_topics'                       => :topics,                      :as => :personal_topics
+    get '/no_organizations'                      => :no_organizations,            :as => :no_organizations
   end
   get "signup" => "users#new", :as => "signup"
   resources :users, :only =>[:new, :create]
@@ -19,18 +20,30 @@ LohasWorkCom::Application.routes.draw do
   get "login" => "sessions#new", :as => "login"
   resources :sessions, :only => [:new, :create, :destroy]
 
-  resources :organization do
-    resources :topics, :only => [:index]
-    resources :tags, :only => [:create]
+  resources :tags, :only => [:create]
+
+  controller :organization do
+    get "show_member" => "organizations#show_member"
+    post "delete_member" => "organizations#delete_member"
+    post "add_member" => "organizations#add_member"
   end
 
-  get "add-taggings" => "tags#add", :as=> "add_taggings"
+  get '/organization_topics' => 'topics#index', :as => :organization_topics
+  get '/personal_topics_inbox' => 'topics#achieved', :as => :personal_topics_inbox
 
-  resources :topics, :only => [:create, :show]
-  resources :topic do
+  resources :topics, :only => [:create, :show] do
+    collection do
+      post 'remove_tag'
+      post 'add_tag'
+      post 'tag_filter'
+    end
+  end
+
+  resources :topic, :only => [] do
     resources :discussions, :only => [:create]
   end
-  resources :early_adopters
+
+  resources :early_adopters, :only => [:index, :create]
   match "/*other" => redirect('/')
   # The priority is based upon order of creation:
   # first created -> highest priority.
