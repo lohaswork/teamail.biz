@@ -20,7 +20,7 @@
             value =target.val();
 
         value = value.split(',');
-        value.push(me.val());
+        if ($.inArray(me.val(), value) == -1) value.push(me.val());
         //remove the empity value for first element
         target.val(value.filter(function(e){return e}));
       })
@@ -31,7 +31,8 @@
             value =target.val();
 
         value = value.split(',');
-        value.splice( $.inArray(me.val(), value), 1 );
+        var arrayIndex = $.inArray(me.val(), value);
+        if (arrayIndex != -1) value.splice( arrayIndex, 1 );
         target.val(value);
       })
       .on('change', '.checkbox-group input[data-all]', function(){

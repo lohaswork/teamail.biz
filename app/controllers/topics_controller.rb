@@ -35,7 +35,7 @@ class TopicsController < ApplicationController
   end
 
   def archive
-    selected_topics_ids = params[:selected_topics_to_archive].split(',').uniq
+    selected_topics_ids = params[:selected_topics_to_archive].split(',')
     Topic.find(selected_topics_ids).each { |topic| topic.archived_by(login_user) }
     topics = Topic.get_unarchived(login_user).all
 
@@ -58,7 +58,7 @@ class TopicsController < ApplicationController
     detail_topic_id = params[:topic]
 
     if detail_topic_id.blank?
-      selected_topics_ids = params[:selected_topics].split(',').uniq
+      selected_topics_ids = params[:selected_topics].split(',')
       Topic.find(selected_topics_ids).each { |topic| topic.add_tags(params[:tags]) }
       topics = current_organization.topics
       render :json => {
