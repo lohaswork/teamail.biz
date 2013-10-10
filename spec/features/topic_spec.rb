@@ -200,7 +200,7 @@ describe "the topics action" do
         click_button "创建"
         page.should have_content("test title")
         click_on "test title"
-        find(:xpath, "(//input[@type='checkbox'])[10]").should be_checked
+        all(:css, "div#select-user input[type='checkbox']").last.should be_checked
       end
     end
 
@@ -217,7 +217,7 @@ describe "the topics action" do
       context "select a user manully" do
         it "should add the user to the discussion" do
           fill_in "content", :with => "user create a discussion for discussion users"
-          checkbox = find(:xpath, "(//input[@type='checkbox'])[10]")
+          checkbox = find(:xpath, "(//div[@id='select-user']//input[@type='checkbox'])[10]")
           checkbox.set(true)
           click_button "回复"
           page.should have_content "user create a discussion for discussion users"
@@ -227,7 +227,7 @@ describe "the topics action" do
         it "should add the user to the topic member" do
           Topic.last.users.should_not include(@organization.users.last)
           fill_in "content", :with => "user create a discussion for topic users"
-          checkbox = find(:xpath, "(//input[@type='checkbox'])[9]")
+          checkbox = find(:xpath, "(//div[@id='select-user']//input[@type='checkbox'])[9]")
           checkbox.set(true)
           click_button "回复"
           page.should have_content "user create a discussion for topic users"
@@ -237,7 +237,7 @@ describe "the topics action" do
         it "should add all users by select all" do
           Topic.last.users.size.should == 1
           fill_in "content", :with => "user create a discussion for topic users"
-          checkbox = find(:xpath, "(//input[@class='all'])")
+          checkbox = find(:xpath, "(//div[@id='select-user']//input[@class='all'])")
           checkbox.set(true)
           click_button "回复"
           page.should have_content "user create a discussion for topic users"
@@ -246,11 +246,11 @@ describe "the topics action" do
 
         it "should add set the last created user as default checked" do
           fill_in "content", :with => "user create a discussion for discussion users"
-          checkbox = find(:xpath, "(//input[@type='checkbox'])[10]")
+          checkbox = find(:xpath, "(//div[@id='select-user']//input[@type='checkbox'])[10]")
           checkbox.set(true)
           click_button "回复"
           page.should have_content "user create a discussion for discussion users"
-          find(:xpath, "(//input[@type='checkbox'])[10]").should be_checked
+          find(:xpath, "(//div[@id='select-user']//input[@type='checkbox'])[10]").should be_checked
         end
       end
     end

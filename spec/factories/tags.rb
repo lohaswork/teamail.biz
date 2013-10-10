@@ -6,9 +6,9 @@ FactoryGirl.define do
     color
   end
   sequence :name do |n|
-    "tag#{n}"
+    "tag#{n}tag"
   end
   sequence :color do |n|
-    "color#{n}"
+    "color#{n}color"
   end
 end
