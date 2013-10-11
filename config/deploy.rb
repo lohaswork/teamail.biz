@@ -21,7 +21,7 @@ set :deploy_to, "/www/teamail_deploy"
 # Repository
 set :application, "LohasWork.com"
 set :scm, :git
-set :repository,  "git@github.com:lohaswork/TeaMail.biz.git"
+set :repository,  "git@github.com:lohaswork/teamail.biz.git"
 set :branch, "master"  # Need changge to master
 
 # Configurations
