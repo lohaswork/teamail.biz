@@ -423,7 +423,7 @@ describe "the topics action" do
 
     end
 
-    describe "user in personal_topics_inbox_path", :js => true do
+    describe "user in topic detail page", :js => true do
       before do
         @user = create(:normal_user)
         login_with(@user.email, @user.password)
