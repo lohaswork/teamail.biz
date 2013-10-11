@@ -2,10 +2,13 @@
 class EmailReciversController < ApplicationController
   def email
     #should set the route for mailgun manully for development
-    subject   = request.POST['subject']
-    sender    = request.POST['sender']
-    recipient = request.POST['recipient']
-    body_plain = request.POST['body-plain']
+    email = EmailEngine::EmailReciver::Email.new request.POST
+
+    subject = email.subject
+    sender = email.sender
+    recipient = email.recipient
+    body_plain = email.body_plain
+
     creator = User.find_by_email sender
     title = subject.blank? ? "此主题标题为空" : subject
     emails = creator.default_organization.users.map(&:email)
