@@ -1,12 +1,12 @@
 # encoding: utf-8
-class EarlyAdoptersController < ApplicationController
+class WelcomeController < ApplicationController
   def index
     if is_logged_in?
       redirect_to login_user.default_organization.blank? ? no_organizations_path : personal_topics_path
     end
   end
 
-  def create
+  def early_adotpers
     email = params[:email]
     EarlyAdopter.create_early_adopter(email)
     render :json => {
