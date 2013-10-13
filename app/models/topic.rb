@@ -12,7 +12,7 @@ class Topic < ActiveRecord::Base
   validates :title, :presence => { :message=>'请输入标题' }
 
   scope :get_archived, lambda { |user| joins(:user_topics).where( :user_topics => { :user_id => user.id, :archive_status => true } ) }
-  scope :get_unarchived, lambda { |user| joins(:user_topics).where( "user_topics.user_id = ? AND IFNULL( user_topics.archive_status, 0 ) <> ? ", user.id, true ) }
+  scope :get_unarchived, lambda { |user| joins(:user_topics).where( "user_topics.user_id = ? AND IFNULL( user_topics.archive_status, 0 ) <> 1 ", user.id ) }
 
   class << self
     def create_topic(title, content, emails, organization, login_user)
