@@ -9,7 +9,6 @@
       new App.page.TaggingControls;
       $(document).ready(function(){
         $("#tagging-dropdown").attr("disabled",false);
-        $("#archive-submit").attr("disabled",false);
       });
       $(document).on("refreshed", ".headline-tag-container", function () {
         $("#dropdown-tags").hide();

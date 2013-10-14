@@ -48,6 +48,7 @@ class Topic < ActiveRecord::Base
     rescue
       nil
     end
+    self
   end
 
   def unarchived_caused_by_update

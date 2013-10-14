@@ -8,4 +8,8 @@ module TopicsHelper
       topics.sort_by { |topic| topic.last_update_time }.reverse
     end
   end
+
+  def login_user_has_archived?(topic)
+    topic && topic.user_topics.find_by_user_id(login_user.id).archive_status == 1
+  end
 end

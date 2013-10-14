@@ -52,8 +52,8 @@ class TopicsController < ApplicationController
                           }
                       }
     else
-      Topic.find(detail_topic_id).archived_by(login_user)
-      render :nothing => true
+      @topic = Topic.find(detail_topic_id).archived_by(login_user)
+      render :action => :show
     end
   end
 
