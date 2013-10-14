@@ -1,5 +1,5 @@
 <p>个人空间</p>
 <%= render :partial => 'tags/tagging' %>
-<%= render :partial => 'archive_form' %>
+<%= render :partial => 'archive_form', :locals => {:topic => nil} %>
 <%= render :partial => 'shared/new_topic', :locals => {:colleagues => get_colleagues, :topic => nil} %>
 <%= render :partial => 'topics/topic_list', :locals => {:topics => @topics} %>

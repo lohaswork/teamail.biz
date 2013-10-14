@@ -9,7 +9,11 @@ module TopicsHelper
     end
   end
 
-  def login_user_has_archived?(topic)
-    topic && topic.user_topics.find_by_user_id(login_user.id).archive_status == 1
+  def archive_disabled?(topic)
+    if topic && topic.relations_with(login_user) && topic.relations_with(login_user).archive_status !=1
+      false
+    else
+      true
+    end
   end
 end

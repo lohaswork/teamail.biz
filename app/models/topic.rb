@@ -25,6 +25,10 @@ class Topic < ActiveRecord::Base
     end
   end
 
+  def relations_with(user)
+    self.user_topics.find_by_user_id(user.id)
+  end
+
   def add_tags(ids)
     tags = ids.map { |id| Tag.find(id) }
     tags.map { |tag| self.tags << tag }
@@ -45,10 +49,10 @@ class Topic < ActiveRecord::Base
   def archived_by(user)
     begin
       self.user_topics.find_by_user_id(user.id).update_attribute(:archive_status, true)
+      self
     rescue
       nil
     end
-    self
   end
 
   def unarchived_caused_by_update

@@ -52,8 +52,16 @@ class TopicsController < ApplicationController
                           }
                       }
     else
-      @topic = Topic.find(detail_topic_id).archived_by(login_user)
-      render :action => :show
+      topic = Topic.find(detail_topic_id).archived_by(login_user)
+      render :json => {
+                :update => {
+                            "archive-form" => render_to_string(:partial => 'topics/archive_form',
+                                                               :layout => false,
+                                                               :locals => {
+                                                                   :topic => topic
+                                                              })
+                          }
+                      }
     end
   end
 
