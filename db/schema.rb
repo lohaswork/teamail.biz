@@ -11,16 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131014021703) do
+ActiveRecord::Schema.define(:version => 20131014092516) do
 
   create_table "discussions", :force => true do |t|
     t.integer  "discussable_id"
     t.integer  "type"
     t.text     "content"
     t.integer  "user_from"
-    t.integer  "user_to"
-    t.integer  "user_cc"
-    t.integer  "user_bcc"
+    t.string   "user_to"
+    t.string   "user_cc"
+    t.string   "user_bcc"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
     t.string   "discussable_type"
