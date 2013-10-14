@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131002051554) do
+ActiveRecord::Schema.define(:version => 20131014021703) do
 
   create_table "discussions", :force => true do |t|
     t.integer  "discussable_id"
@@ -82,7 +82,7 @@ ActiveRecord::Schema.define(:version => 20131002051554) do
 
   add_index "topics", ["organization_id"], :name => "index_topics_on_organization_id"
 
-  create_table "user_discussions", :id => false, :force => true do |t|
+  create_table "user_discussions", :force => true do |t|
     t.integer  "user_id"
     t.integer  "discussion_id"
     t.integer  "read_status"
