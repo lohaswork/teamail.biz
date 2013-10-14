@@ -43,7 +43,8 @@ describe "archived topics have new discussion" do
       find('#archive-submit')[:disabled].should_not eq "disabled"
       unarchived_topic.user_topics.find_by_user_id(@user.id).archive_status.should_not eq(1)
       click_button 'archive-submit'
-      sleep 0.01
+      # Wait for page loading, need refactor later
+      sleep 0.1
       find('#archive-submit')[:disabled].should eq "disabled"
       unarchived_topic.user_topics.find_by_user_id(@user.id).archive_status.should eq(1)
     end
