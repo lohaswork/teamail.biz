@@ -1,10 +1,10 @@
 !function($) {
 
-  App.page.EarlyAdoptersIndexPage = function (element){
+  App.page.WelcomeIndexPage = function (element){
     this.el = element;
     this.init();
   }
-  App.page.EarlyAdoptersIndexPage.prototype = {
+  App.page.WelcomeIndexPage.prototype = {
     navbar: $(".navbar.navbar-fixed-top"),
     scrollTop: $('.scrolltop'),
     back2top: $('.back2top'),

@@ -1,5 +1,5 @@
 LohasWorkCom::Application.routes.draw do
-  root :to => 'early_adopters#index'
+  root :to => 'welcome#index'
 
   controller :users do
     get '/signup-success'                        => :signup_success,              :as => :signup_success
@@ -29,13 +29,14 @@ LohasWorkCom::Application.routes.draw do
   end
 
   get '/organization_topics' => 'topics#index', :as => :organization_topics
-  get '/personal_topics_inbox' => 'topics#achieved', :as => :personal_topics_inbox
+  get '/personal_topics_inbox' => 'topics#unarchived', :as => :personal_topics_inbox
 
   resources :topics, :only => [:create, :show] do
     collection do
       post 'remove_tag'
       post 'add_tag'
       post 'tag_filter'
+      post 'archive'
     end
   end
 
@@ -43,7 +44,13 @@ LohasWorkCom::Application.routes.draw do
     resources :discussions, :only => [:create]
   end
 
-  resources :early_adopters, :only => [:index, :create]
+  resources :welcome, :only => [] do
+    collection do
+      post 'add_early_adotpers' => :add_early_adotpers
+      get 'index'
+    end
+  end
+
   match "/*other" => redirect('/')
   # The priority is based upon order of creation:
   # first created -> highest priority.

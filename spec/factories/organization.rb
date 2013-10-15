@@ -13,8 +13,12 @@ FactoryGirl.define do
         10.times do
           user = create(:clean_user)
           tag = create(:tag)
+          topic = create(:topic)
+          create_first_discussion(user, topic)
+          user.topics << topic
           user.default_organization = organization
           user.save
+          organization.topics << topic
           organization.users << user
           organization.tags << tag
         end
@@ -23,3 +27,6 @@ FactoryGirl.define do
   end
 end
 
+def create_first_discussion(user, topic)
+      discussion = create(:discussion, user_from: user.id, discussable: topic)
+end

@@ -13,16 +13,27 @@ class Discussion < ActiveRecord::Base
       discussion = Discussion.new(:content=>content)
       raise ValidationError.new(discussion.errors.full_messages) if !discussion.valid?
       selected_users = emails.map { |email| User.find_by_email email }
+      discussion.notify_party = selected_users
       discussion.creator = login_user
       discussion.users << (selected_users << login_user)
       topic.discussions << discussion
       topic.save!
+      topic.unarchived_by_update
       discussion
     end
   end
 
   def creator
     User.find(user_from)
+  end
+
+  def notify_party=(users)
+    self.user_to = users.map { |user| user.id }.join(',')
+    users
+  end
+
+  def notify_party
+    self.user_to.split(',').map { |id| User.find id }
   end
 
   def creator=(user)

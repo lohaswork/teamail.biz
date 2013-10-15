@@ -6,7 +6,7 @@
   }
   App.page.UsersTopicsPage.prototype = {
     init: function(){
-      var page = new App.page.TaggingControls;
+      var page = new App.page.TopicCheckControls;
       page.refreshTopicList();
     }
   }

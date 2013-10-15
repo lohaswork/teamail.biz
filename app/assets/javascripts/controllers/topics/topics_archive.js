@@ -1,10 +1,10 @@
 !function($) {
 
-  App.page.TopicsIndexPage = function (element){
+  App.page.TopicsUnarchivedPage = function (element){
     this.el = element;
     this.init();
   }
-  App.page.TopicsIndexPage.prototype = {
+  App.page.TopicsUnarchivedPage.prototype = {
     init: function(){
       var page = new App.page.TopicCheckControls;
       page.refreshTopicList();
