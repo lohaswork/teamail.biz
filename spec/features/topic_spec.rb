@@ -413,7 +413,7 @@ describe "the topics action" do
         find(:css, '#archive-submit')[:disabled].should_not eq "disabled"
       end
 
-      it "archive a topic should not see it immediatelly" do
+      it "should disappeared when the topic is archived" do
         find(:xpath, "(//div[@id='topic-list']//input[@type='checkbox'])[1]").set(true)
         button = find(:css, '#archive-submit')
         page.should have_content @user.topics.last.title
