@@ -26,7 +26,7 @@
           <%= check_box_tag 'topics[]', topic.id, false, :class=>"item", :'data-item'=>true %>
         </div>
         <div class='col-xs-2'>
-          <%= topic.last_updator.email_name%>
+          <%= topic.creator.email_name%>
         </div>
         <div class='col-xs-2'>
           <%= topic.discussions.size > 0 ? topic.discussions.size : ''%>
