@@ -6,7 +6,7 @@
   }
   App.page.TopicsShowPage.prototype = {
     init: function(){
-      new App.page.TaggingControls;
+      new App.page.TopicCheckControls;
       $(document).ready(function(){
         $("#tagging-dropdown").attr("disabled",false);
       });

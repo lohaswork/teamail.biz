@@ -1,4 +1,5 @@
 <%= render :partial => 'tags/tagging' %>
+<%= render :partial => 'archive_form', :locals => {:topic => @topic} %>
 <div class='topic-show'>
   <div class='title'>
     <%= @topic.title%>

@@ -4,6 +4,16 @@ module TopicsHelper
   end
 
   def order_by_updator(topics)
-    topics.sort_by { |topic| topic.last_update_time }.reverse if !topics.blank?
+    unless topics.blank?
+      topics.sort_by { |topic| topic.last_update_time }.reverse
+    end
+  end
+
+  def archive_disabled?(topic)
+    if topic && topic.relations_with(login_user) && topic.relations_with(login_user).archive_status !=1
+      false
+    else
+      true
+    end
   end
 end

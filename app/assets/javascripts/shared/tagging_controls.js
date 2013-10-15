@@ -1,10 +1,10 @@
 !function($) {
 
-  App.page.TaggingControls = function (){
+  App.page.TopicCheckControls = function (){
     this.init();
   }
 
-  App.page.TaggingControls.prototype = {
+  App.page.TopicCheckControls.prototype = {
 
     init: function(){
       $(document).bind('click',function(e){
@@ -20,9 +20,11 @@
       });
       $(document).on("click", "#select-topic input[data-item]", function(){
         if (sumCheckStatus("#select-topic") > 0) {
+          $("#archive-submit").attr("disabled",false);
           $("#tagging-dropdown").attr("disabled",false);
         } else {
           $("#tagging-dropdown").attr("disabled","disabled");
+          $("#archive-submit").attr("disabled","disabled");
         }
       })
       .on("click", "#tagging-dropdown", function(){
