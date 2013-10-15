@@ -11,8 +11,8 @@ module EmailEngine
       @gateway = gateway
     end
 
-    def invitation_notification(email_status)
-      notification_text = email_status ? on_board_text : invitation_notification_text
+    def invitation_notification
+      notification_text = User.already_register?(user.email) ? on_board_text : invitation_notification_text
       gateway.send_batch_message(
         to: user.email,
         subject: "[TeaMail]邀请加入#{organization.name}",
