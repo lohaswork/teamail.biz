@@ -74,17 +74,14 @@ class TopicsController < ApplicationController
 
     if detail_topic_id.blank?
       selected_topics_ids = params[:selected_topics_to_tagging].split(',')
-      Topic.find(selected_topics_ids).each { |topic| topic.add_tags(params[:tags]) }
-      topics = current_organization.topics
-      render :json => {
-                :update => {
-                            "topic-list" => render_to_string(:partial => 'topics/topic_list',
-                                                             :layout => false,
-                                                             :locals => {
-                                                                 :topics => topics
-                                                            })
-                          }
-                      }
+      topics = Topic.find(selected_topics_ids).map { |topic| topic.add_tags(params[:tags]) }
+      respond_array = topics.map { |topic| {"tag-container-#{topic.id}" => render_to_string(:partial => 'tags/headline_tags',
+                                                                             :layout => false,
+                                                                             :locals => {
+                                                                                 :topic => topic
+                                                                           }) } }
+      render :json => {update: Hash[respond_array]}
+
     else
       topic = Topic.find(detail_topic_id).add_tags(params[:tags])
       render :json => {
