@@ -3,8 +3,14 @@
     <div>
       <%= link_to('个人空间', personal_topics_path) %>
     </div>
-    <div><%= link_to('未处理', personal_topics_inbox_path) %></div>
-    <div>所有</div>
+    <ul>
+      <div>
+        <%= link_to('未处理', personal_topics_inbox_path) %>
+      </div>
+      <div>
+        <%= link_to('所有', personal_topics_path) %>
+      </div>
+    </ul>
   </div>
   <div class="organization-inbox">
     <div>

@@ -18,7 +18,7 @@ class Discussion < ActiveRecord::Base
       discussion.users << (selected_users << login_user)
       topic.discussions << discussion
       topic.save!
-      topic.unarchived_caused_by_update
+      topic.unarchived_by_update
       discussion
     end
   end

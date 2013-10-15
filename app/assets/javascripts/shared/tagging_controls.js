@@ -1,10 +1,10 @@
 !function($) {
 
-  App.page.TaggingControls = function (){
+  App.page.TopicCheckControls = function (){
     this.init();
   }
 
-  App.page.TaggingControls.prototype = {
+  App.page.TopicCheckControls.prototype = {
 
     init: function(){
       $(document).bind('click',function(e){
