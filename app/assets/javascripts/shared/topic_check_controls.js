@@ -23,8 +23,8 @@
           $("#archive-submit").attr("disabled",false);
           $("#tagging-dropdown").attr("disabled",false);
         } else {
-          $("#tagging-dropdown").attr("disabled","disabled");
           $("#archive-submit").attr("disabled","disabled");
+          $("#tagging-dropdown").attr("disabled","disabled");
         }
       })
       .on("click", "#tagging-dropdown", function(){
@@ -66,7 +66,11 @@
       $(document).on("refreshed", "#topic-list", function () {
         $("#dropdown-tags").hide();
         $("#tagging-dropdown").attr("disabled","disabled");
+        if ($("#archive-submit")) {
+          $("#archive-submit").attr("disabled","disabled");
+        }
         $("#tag-list :checkbox").attr('checked', false);
+        $("#topic-list :checkbox").attr('checked', false);
         $("#tagging-submit").hide();
         $("#tag-input").show();
       });
