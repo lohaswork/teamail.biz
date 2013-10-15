@@ -413,36 +413,12 @@ describe "the topics action" do
         find(:css, '#archive-submit')[:disabled].should_not eq "disabled"
       end
 
-      it "archive a topic should not see it immediatelly" do
+      it "should disappeared when the topic is archived" do
         find(:xpath, "(//div[@id='topic-list']//input[@type='checkbox'])[1]").set(true)
         button = find(:css, '#archive-submit')
         page.should have_content @user.topics.last.title
         button.click
         page.should_not have_content @user.topics.last.title
-      end
-
-    end
-
-    describe "user in topic detail page", :js => true do
-      before do
-        @user = create(:normal_user)
-        login_with(@user.email, @user.password)
-        page.should have_content @user.email
-        @topic = @user.topics.first
-        visit topic_path(@topic)
-      end
-
-      it "should see archive button clickable" do
-        find('#archive-submit')[:disabled].should_not eq "disabled"
-      end
-
-      it "archive a topic and it should be archived" do
-        button = find(:css, '#archive-submit')
-        @topic.user_topics.find_by_user_id(@user.id).archive_status.should_not eq(true)
-        button.click
-        sleep 0.01
-        page.should have_content @topic.title
-        @topic.user_topics.find_by_user_id(@user.id).archive_status.should eq(1)
       end
     end
   end

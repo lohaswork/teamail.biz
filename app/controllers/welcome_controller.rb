@@ -6,7 +6,7 @@ class WelcomeController < ApplicationController
     end
   end
 
-  def early_adotpers
+  def add_early_adotpers
     EarlyAdopter.create_early_adopter(params[:email])
     render :json => {
                     :update => {

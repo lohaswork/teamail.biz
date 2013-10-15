@@ -46,7 +46,7 @@ LohasWorkCom::Application.routes.draw do
 
   resources :welcome, :only => [] do
     collection do
-      post 'early_adotpers' => :early_adotpers
+      post 'add_early_adotpers' => :add_early_adotpers
       get 'index'
     end
   end

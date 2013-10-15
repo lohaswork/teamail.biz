@@ -55,7 +55,7 @@ class Topic < ActiveRecord::Base
     self
   end
 
-  def unarchived_caused_by_update
+  def unarchived_by_update
     self.users.reject { |user| user.id == self.last_updator.id }
               .each { |user| self.user_topics.find_by_user_id(user.id).update_attribute(:archive_status, false) }
   end
