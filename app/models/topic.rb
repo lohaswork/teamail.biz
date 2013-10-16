@@ -11,8 +11,7 @@ class Topic < ActiveRecord::Base
 
   validates :title, :presence => { :message=>'请输入标题' }
 
-  scope :get_archived, lambda { |user| joins(:user_topics).where( :user_topics => { :user_id => user.id, :archive_status => true } ) }
-  scope :get_unarchived, lambda { |user| joins(:user_topics).where( "user_topics.user_id = ? AND IFNULL( user_topics.archive_status, 0 ) <> 1 ", user.id ) }
+  scope :get_unarchived, lambda { |user| joins(:user_topics).where("user_topics.user_id = ? AND IFNULL( user_topics.archive_status, 0 ) <> 1 ", user.id) }
 
   class << self
     def create_topic(title, content, emails, organization, login_user)
@@ -57,7 +56,8 @@ class Topic < ActiveRecord::Base
 
   def unarchived_by_update
     self.users.reject { |user| user.id == self.last_updator.id }
-              .each { |user| self.user_topics.find_by_user_id(user.id).update_attribute(:archive_status, false) }
+              .each { |user| self.user_topics.find_by_user_id(user.id)
+              .update_attribute(:archive_status, false) }
   end
 
   def last_update_time

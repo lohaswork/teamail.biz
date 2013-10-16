@@ -81,7 +81,7 @@ class TopicsController < ApplicationController
                                                                              :locals => {
                                                                                  :topic => topic
                                                                            }) }
-      render :json => {update: Hash[*respond_array]}
+      render :json => { update: Hash[*respond_array] }
 
     else
       topic = Topic.find(detail_topic_id).add_tags(params[:tags])

@@ -31,14 +31,14 @@ LohasWorkCom::Application.routes.draw do
   get '/organization_topics' => 'topics#index', :as => :organization_topics
   get '/personal_topics_inbox' => 'topics#unarchived', :as => :personal_topics_inbox
 
-  resources :topics, :only => [:create, :show] do
-    collection do
-      post 'remove_tag'
-      post 'add_tag'
-      post 'tag_filter'
-      post 'archive'
-    end
+  controller :topics do
+    post 'remove_tag' => :remove_tag, :as => :topics_remove_tag
+    post 'add_tag' => :add_tag, :as => :topics_add_tag
+    post 'tag_filter' => :tag_filter, :as => :topics_filter_with_tag
+    post 'archive' => :archive, :as => :archive_topics
   end
+
+  resources :topics, :only => [:create, :show]
 
   resources :topic, :only => [] do
     resources :discussions, :only => [:create]
