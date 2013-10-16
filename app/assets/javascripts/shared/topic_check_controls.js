@@ -47,8 +47,9 @@
           $("#tag-input").show();
         }
       })// Enable tags submit button
-      .on("refreshed", "#tag-list", function () {
+      .on("refreshed", "#tag-list", function() {
         $("#tag-input input[type='text']").val("");
+        return false;
       });
 
       var sumCheckStatus = function(check_element) {
@@ -73,6 +74,7 @@
         $("#topic-list :checkbox").attr('checked', false);
         $("#tagging-submit").hide();
         $("#tag-input").show();
+        return false;
       });
     }
   }

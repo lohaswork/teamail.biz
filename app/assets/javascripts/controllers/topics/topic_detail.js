@@ -15,9 +15,10 @@
         $("#tag-list :checkbox").attr('checked', false);
         $("#tagging-submit").hide();
         $("#tag-input").show();
+        return false;
       })
-      .on("refreshed", "#discussion-list",function(e){
-        e.stopPropagation();
+      .on("refreshed", "#discussion-list", function(){
+        return false;
       })
       .on("refreshed", "#topic-area", function () {
         window.history.pushState({}, "TeaMail.biz", "/organization_topics");
@@ -32,6 +33,7 @@
             $("#tagging-dropdown").attr("disabled","disabled");
           }
         })
+        return false;
       });
     }
   }

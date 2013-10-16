@@ -169,45 +169,95 @@ describe "topic section" do
       @organization = user.default_organization
       login_with(user.email, user.password)
       page.should have_content user.email
-      visit organization_topics_path
-      specific_tag = @organization.tags.first
-      specific_topic = @organization.topics.first
-      specific_topic.tags << specific_tag
     end
 
-    it "should see all organization tags" do
-      find(:css, "div#tag-filters").should have_content @organization.tags.first.name
-      find(:css, "div#tag-filters").should have_content @organization.tags.last.name
+    context "topic list page filter" do
+      before do
+        visit organization_topics_path
+        specific_tag = @organization.tags.first
+        specific_topic = @organization.topics.first
+        specific_topic.tags << specific_tag
+      end
+
+      it "should see all organization tags" do
+        find(:css, "div#tag-filters").should have_content @organization.tags.first.name
+        find(:css, "div#tag-filters").should have_content @organization.tags.last.name
+      end
+
+      it "filter using tags and topics under the tag show" do
+        link = all(:css, "div#tag-filters :link").first
+        link.click
+        page.should have_content @organization.topics.first.title
+        page.should_not have_content @organization.topics.last.title
+      end
+
+      it "filter using tags when no topic shows" do
+        link = all(:css, "div#tag-filters :link").last
+        link.click
+        page.should_not have_css("div.topic-headline")
+      end
+
+      it "click tag and it turns active and others become inactive" do
+        first_link = all(:css, "div#tag-filters :link").first
+        last_link = all(:css, "div#tag-filters :link").last
+        first_link.click
+        all(:css, "div#tag-filters li").first.should have_css(":link.active-tag")
+        last_link.click
+        all(:css, "div#tag-filters li").last.should have_css(":link.active-tag")
+        all(:css, "div#tag-filters li").first.should_not have_css(":link.active-tag")
+      end
     end
 
-    it "filter using tags and topics under the tag show" do
-      link = all(:css, "div#tag-filters :link").first
-      link.click
-      page.should have_content @organization.topics.first.title
-      page.should_not have_content @organization.topics.last.title
+    context "topic detail page filter" do
+      before do
+        specific_tag = @organization.tags.first
+        specific_topic = @organization.topics.first
+        specific_topic.tags << specific_tag
+        visit topic_path(specific_topic)
+      end
+
+      it "should see all organization tags" do
+        find(:css, "div#tag-filters").should have_content @organization.tags.first.name
+        find(:css, "div#tag-filters").should have_content @organization.tags.last.name
+      end
+
+      it "filter using tags and topics under the tag show" do
+        link = all(:css, "div#tag-filters :link").first
+        link.click
+        page.should have_content @organization.topics.first.title
+        page.should_not have_content @organization.topics.last.title
+      end
+
+      it "filter using tags when no topic shows" do
+        link = all(:css, "div#tag-filters :link").last
+        link.click
+        page.should_not have_css("div.topic-headline")
+      end
+
+      it "click tag and it turns active and others become inactive" do
+        first_link = all(:css, "div#tag-filters :link").first
+        last_link = all(:css, "div#tag-filters :link").last
+        first_link.click
+        all(:css, "div#tag-filters li").first.should have_css(":link.active-tag")
+        last_link.click
+        all(:css, "div#tag-filters li").last.should have_css(":link.active-tag")
+        all(:css, "div#tag-filters li").first.should_not have_css(":link.active-tag")
+      end
     end
 
-    it "filter using tags when no topic shows" do
-      link = all(:css, "div#tag-filters :link").last
-      link.click
-      page.should_not have_css("div.topic-headline")
-    end
-
-    it "click tag and it turns active and others become inactive" do
-      first_link = all(:css, "div#tag-filters :link").first
-      last_link = all(:css, "div#tag-filters :link").last
-      first_link.click
-      all(:css, "div#tag-filters li").first.should have_css(":link.active-tag")
-      last_link.click
-      all(:css, "div#tag-filters li").last.should have_css(":link.active-tag")
-      all(:css, "div#tag-filters li").first.should_not have_css(":link.active-tag")
-    end
   end
 
   describe "user in unarchived topic list page", :js => true do
     before do
       user = create(:normal_user)
       @organization = user.default_organization
+      # create an topic that not belongs to user's inbox
+      @unrelated_topic = create(:topic)
+      another_user = create(:clean_user)
+      discussion = create(:discussion, user_from: another_user.id, discussable: @unrelated_topic)
+      @organization.topics << @unrelated_topic
+      @organization.users << another_user
+      # login
       login_with(user.email, user.password)
       page.should have_content user.email
       visit personal_topics_inbox_path
@@ -223,8 +273,14 @@ describe "topic section" do
         click_button "应用"
       end
 
+      it "should see unrelated_topic in organization_topics_path" do
+        visit organization_topics_path
+        find(:css, "div#select-topic").should have_content @unrelated_topic.title
+      end
+
       it "should see already exist tags attached to the selected topics" do
         find(:css, "div#select-topic").should have_content @organization.tags.first.name
+        find(:css, "div#select-topic").should_not have_content @unrelated_topic.title
       end
 
       it "click delete tagging link, should not see the attached tag" do

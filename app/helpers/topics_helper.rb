@@ -4,8 +4,10 @@ module TopicsHelper
   end
 
   def order_by_updator(topics)
-    unless topics.blank?
+    begin
       topics.sort_by { |topic| topic.last_update_time }.reverse
+    rescue
+      nil
     end
   end
 
