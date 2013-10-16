@@ -21,7 +21,7 @@
   </div>
   <div class='checkbox-group' id="select-topic" data-update="#selected_topics_to_archive, #selected_topics_to_tagging" data-reload=true data-page="CheckBoxGroup">
     <%- order_by_updator(topics).try(:each) do |topic| %>
-      <div class="row topic-headline">
+      <div class="row topic-row">
         <div class='col-xs-2'>
           <%= check_box_tag 'topics[]', topic.id, false, :class=>"item", :'data-item'=>true %>
         </div>

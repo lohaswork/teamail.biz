@@ -184,17 +184,17 @@ describe "topic section" do
         find(:css, "div#tag-filters").should have_content @organization.tags.last.name
       end
 
-      it "filter using tags and topics under the tag show" do
+      it "filter using tag and should see topic list refreshed" do
         link = all(:css, "div#tag-filters :link").first
         link.click
         page.should have_content @organization.topics.first.title
         page.should_not have_content @organization.topics.last.title
       end
 
-      it "filter using tags when no topic shows" do
+      it "filter using tag that does not have any topics should not see any topics" do
         link = all(:css, "div#tag-filters :link").last
         link.click
-        page.should_not have_css("div.topic-headline")
+        page.should_not have_css("div.topic-row")
       end
 
       it "click tag and it turns active and others become inactive" do
@@ -221,17 +221,17 @@ describe "topic section" do
         find(:css, "div#tag-filters").should have_content @organization.tags.last.name
       end
 
-      it "filter using tags and topics under the tag show" do
+      it "filter using tag and should see topic list refreshed" do
         link = all(:css, "div#tag-filters :link").first
         link.click
         page.should have_content @organization.topics.first.title
         page.should_not have_content @organization.topics.last.title
       end
 
-      it "filter using tags when no topic shows" do
+      it "filter using tag that does not have any topics should not see any topics" do
         link = all(:css, "div#tag-filters :link").last
         link.click
-        page.should_not have_css("div.topic-headline")
+        page.should_not have_css("div.topic-row")
       end
 
       it "click tag and it turns active and others become inactive" do

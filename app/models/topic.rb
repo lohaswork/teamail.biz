@@ -48,7 +48,7 @@ class Topic < ActiveRecord::Base
   def archived_by(user)
     begin
       self.user_topics.find_by_user_id(user.id).update_attribute(:archive_status, true)
-    rescue
+    rescue ActiveRecord::RecordNotFound
       nil
     end
     self
@@ -56,8 +56,7 @@ class Topic < ActiveRecord::Base
 
   def unarchived_by_update
     self.users.reject { |user| user.id == self.last_updator.id }
-              .each { |user| self.user_topics.find_by_user_id(user.id)
-              .update_attribute(:archive_status, false) }
+              .each { |user| self.user_topics.find_by_user_id(user.id).update_attribute(:archive_status, false) }
   end
 
   def last_update_time

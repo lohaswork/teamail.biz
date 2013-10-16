@@ -21,7 +21,7 @@
         return false;
       })
       .on("refreshed", "#topic-area", function () {
-        window.history.pushState({}, "TeaMail.biz", "/organization_topics");
+        window.history.pushState({}, "teamail.biz", "/organization_topics");
         $("#tagging-dropdown").attr("disabled","disabled");
         $("#archive-form").remove();
         $(document).on("click", "#select-topic input[data-item]", function(){

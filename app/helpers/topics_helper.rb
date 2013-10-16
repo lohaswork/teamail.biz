@@ -6,7 +6,7 @@ module TopicsHelper
   def order_by_updator(topics)
     begin
       topics.sort_by { |topic| topic.last_update_time }.reverse
-    rescue
+    rescue NoMethodError
       nil
     end
   end
