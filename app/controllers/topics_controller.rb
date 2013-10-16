@@ -112,16 +112,30 @@ class TopicsController < ApplicationController
   end
 
   def tag_filter
+    detail_topic_id = params[:topic]
     @topics = current_organization.topics.map { |topic| topic if topic.has_tag?(params[:tag]) }.reject { |t| t.blank? }
 
-    render :json => {
-                :update => {
-                            "topic-list" => render_to_string(:partial => 'topics/topic_list',
-                                                             :layout => false,
-                                                             :locals => {
-                                                                 :topics => @topics
-                                                            })
-                          }
-                      }
+    if detail_topic_id.blank?
+      render :json => {
+                  :update => {
+                              "topic-list" => render_to_string(:partial => 'topics/topic_list',
+                                                               :layout => false,
+                                                               :locals => {
+                                                                   :topics => @topics
+                                                              })
+                            }
+                        }
+    else
+      render :json => {
+                  :update => {
+                              "topic-area" => render_to_string(:partial => 'topics/topic_area',
+                                                               :layout => false,
+                                                               :locals => {
+                                                                   :topics => @topics,
+                                                                   :topic => nil
+                                                              })
+                            }
+                        }
+    end
   end
 end
