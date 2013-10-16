@@ -32,9 +32,10 @@ class Discussion < ActiveRecord::Base
     users
   end
 
-  def notify_party
-    self.user_to.split(',').map { |id| User.find id }
-  end
+  # Not used for now until email receiver features add
+  #def notify_party
+  #  self.user_to.split(',').map { |id| User.find id }
+  #end
 
   def creator=(user)
     self.user_from = user.id

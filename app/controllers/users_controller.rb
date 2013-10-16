@@ -13,8 +13,6 @@ class UsersController < ApplicationController
 
   def topics
     @topics = login_user.topics
-    @organization = current_organization
-    @tags = @organization.tags
     @colleagues = get_colleagues
 
     render layout: "topics"

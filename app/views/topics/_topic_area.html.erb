@@ -1,0 +1,15 @@
+<div id="topic-area">
+  <% if @topic.blank? %>
+    <%= render :partial => 'shared/new_topic' %>
+    <%= render :partial => 'topics/topic_list', :locals => {:topics => @topics} %>
+  <% else %>
+    <div class='topic-show'>
+      <div class='title'>
+        <%= @topic.title%>
+        <%= render :partial => 'tags/headline_tags', :locals => {:topic => @topic} %>
+      </div>
+      <%= render :partial => 'discussion_list', :locals => { :discussions => @discussions } %>
+      <%= render :partial => 'new_discussion', :locals => { :topic => @topic } %>
+    </div>
+  <% end %>
+</div>
