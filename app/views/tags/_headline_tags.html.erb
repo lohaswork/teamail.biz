@@ -3,7 +3,7 @@
   <%- topic.tags.each do |tag| %>
     <div>
       <span><%= tag.name %><span>
-      <%= link_to remove_tag_topics_path(:topic => topic, :tag => tag), :method => :post, :remote => true, :class => "tag-remove-link" do %>
+      <%= link_to topic_remove_tag_path(:topic => topic, :tag => tag), :method => :post, :remote => true, :class => "tag-remove-link" do %>
         <i class="icon-remove remove-tag"></i>
       <% end %>
     </div>
