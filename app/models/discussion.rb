@@ -18,6 +18,7 @@ class Discussion < ActiveRecord::Base
       discussion.users << (selected_users << login_user)
       topic.discussions << discussion
       topic.save!
+      discussion.mark_as_read_by(login_user)
       topic.unarchived_by_update
       topic.mark_as_unread_by_update
       discussion
@@ -35,15 +36,15 @@ class Discussion < ActiveRecord::Base
   def read_status_of(user)
     begin
       self.user_discussions.find_by_user_id(user.id).read_status
-    rescue ActiveRecord::RecordNotFound
-      true
+    rescue ActiveRecord::RecordNotFound, NoMethodError
+      false
     end
   end
 
   def mark_as_read_by(user)
     begin
       self.user_discussions.find_by_user_id(user.id).update_attribute(:read_status, true)
-    rescue ActiveRecord::RecordNotFound
+    rescue ActiveRecord::RecordNotFound, NoMethodError
       nil
     end
     self
@@ -52,7 +53,7 @@ class Discussion < ActiveRecord::Base
   def mark_as_unread_by(user)
     begin
       self.user_discussions.find_by_user_id(user.id).update_attribute(:read_status, false)
-    rescue ActiveRecord::RecordNotFound
+    rescue ActiveRecord::RecordNotFound, NoMethodError
       nil
     end
     self
