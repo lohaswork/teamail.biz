@@ -55,14 +55,14 @@ describe "topics have new discussion" do
   end
 
   describe "read_status_feature", :js => true do
-    it "should see topics with unread css class in personal_topics_path" do
+    it "should see unread topics in personal_topics_path" do
       visit personal_topics_path
       page.should have_content @user.topics.first.title
       page.should have_css('div.unread')
       page.should_not have_css('div.read')
     end
 
-    it "should see topics with unread css class in personal_topics_inbox_path" do
+    it "should see unread topics in personal_topics_inbox_path" do
       visit personal_topics_inbox_path
       page.should have_content @user.topics.first.title
       page.should have_css('div.unread')

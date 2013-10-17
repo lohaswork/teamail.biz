@@ -41,12 +41,12 @@ class Topic < ActiveRecord::Base
     self.tags.include?(tag)
   end
 
-  def relations_with(user)
+  def get_relation_with(user)
     self.user_topics.find_by_user_id(user.id)
   end
 
   def archive_status_of(user)
-    self.relations_with(user).archive_status
+    self.get_relation_with(user).archive_status
   end
 
   def archived_by(user)
