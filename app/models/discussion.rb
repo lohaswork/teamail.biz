@@ -19,8 +19,8 @@ class Discussion < ActiveRecord::Base
       topic.discussions << discussion
       topic.save!
       discussion.mark_as_read_by(login_user)
-      topic.unarchived_by_update
-      topic.mark_as_unread_by_update
+      topic.unarchived_by_others
+      topic.mark_as_unread_to_others
       discussion
     end
   end

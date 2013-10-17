@@ -54,12 +54,12 @@ class Topic < ActiveRecord::Base
     self
   end
 
-  def unarchived_by_update
+  def unarchived_by_others
     self.users.reject { |user| user.id == self.last_updator.id }
               .each { |user| self.user_topics.find_by_user_id(user.id).update_attribute(:archive_status, false) }
   end
 
-  def mark_as_unread_by_update
+  def mark_as_unread_to_others
     self.users.reject { |user| user.id == self.last_updator.id }
               .each { |user| self.discussions.last.mark_as_unread_by(user) }
   end
