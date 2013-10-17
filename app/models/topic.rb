@@ -24,10 +24,6 @@ class Topic < ActiveRecord::Base
     end
   end
 
-  def relations_with(user)
-    self.user_topics.find_by_user_id(user.id)
-  end
-
   def add_tags(ids)
     tags = ids.map { |id| Tag.find(id) }
     tags.map { |tag| self.tags << tag }
@@ -43,6 +39,14 @@ class Topic < ActiveRecord::Base
   def has_tag?(id)
     tag = Tag.find(id)
     self.tags.include?(tag)
+  end
+
+  def relations_with(user)
+    self.user_topics.find_by_user_id(user.id)
+  end
+
+  def archive_status_of(user)
+    self.relations_with(user).archive_status
   end
 
   def archived_by(user)

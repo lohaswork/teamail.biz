@@ -12,7 +12,7 @@ module TopicsHelper
   end
 
   def archive_disabled?(topic)
-    if topic && topic.relations_with(login_user) && topic.relations_with(login_user).archive_status !=1
+    if topic && topic.relations_with(login_user) && topic.archive_status_of(login_user) !=1
       false
     else
       true
@@ -21,6 +21,12 @@ module TopicsHelper
 
   def display_unread_style?(topic)
     in_personal_topics_page? && topic.read_status_of(login_user) != 1 || false
+  end
+
+  def unread_topic_num
+    login_user.topics.reject { |topic| topic.archive_status_of(login_user) == 1 }
+                     .reject { |topic| topic.read_status_of(login_user) == 1 }
+                     .length
   end
 
   private

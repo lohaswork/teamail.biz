@@ -70,11 +70,14 @@ describe "topics have new discussion" do
     end
 
     it "should becomes read after visit topic detail page" do
+      unread_num = @user.topics.length
+      find(:css,"div.personal-inbox").should have_content unread_num.to_s
       visit personal_topics_path
       click_on @user.topics.first.title
       page.should have_content @user.topics.first.title
       click_on "未处理"
       page.should have_css('div.read')
+      find(:css,"div.personal-inbox").should have_content (unread_num - 1).to_s
     end
 
     it "should be unread for other users when a new topic created" do
