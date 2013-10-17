@@ -59,6 +59,15 @@ class Topic < ActiveRecord::Base
               .each { |user| self.user_topics.find_by_user_id(user.id).update_attribute(:archive_status, false) }
   end
 
+  def mark_as_unread_by_update
+    self.users.reject { |user| user.id == self.last_updator.id }
+              .each { |user| self.discussions.last.mark_as_unread_by(user) }
+  end
+
+  def read_status_of(user)
+    self.discussions.last.read_status_of(user)
+  end
+
   def last_update_time
     discussions.last.updated_at
   end
