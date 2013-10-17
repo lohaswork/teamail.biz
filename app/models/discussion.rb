@@ -18,13 +18,45 @@ class Discussion < ActiveRecord::Base
       discussion.users << (selected_users << login_user)
       topic.discussions << discussion
       topic.save!
-      topic.unarchived_by_update
+      discussion.mark_as_read_by(login_user)
+      topic.unarchived_by_others
+      topic.mark_as_unread_to_others
       discussion
     end
   end
 
   def creator
     User.find(user_from)
+  end
+
+  def creator=(user)
+    self.user_from = user.id
+  end
+
+  def read_status_of(user)
+    begin
+      self.user_discussions.find_by_user_id(user.id).read_status
+    rescue ActiveRecord::RecordNotFound, NoMethodError
+      false
+    end
+  end
+
+  def mark_as_read_by(user)
+    begin
+      self.user_discussions.find_by_user_id(user.id).update_attribute(:read_status, true)
+    rescue ActiveRecord::RecordNotFound, NoMethodError
+      nil
+    end
+    self
+  end
+
+  def mark_as_unread_by(user)
+    begin
+      self.user_discussions.find_by_user_id(user.id).update_attribute(:read_status, false)
+    rescue ActiveRecord::RecordNotFound, NoMethodError
+      nil
+    end
+    self
   end
 
   def notify_party=(users)
@@ -36,10 +68,6 @@ class Discussion < ActiveRecord::Base
   #def notify_party
   #  self.user_to.split(',').map { |id| User.find id }
   #end
-
-  def creator=(user)
-    self.user_from = user.id
-  end
 
   private
 

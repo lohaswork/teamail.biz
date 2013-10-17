@@ -30,6 +30,7 @@ class TopicsController < ApplicationController
 
   def show
     @topic = Topic.find(params[:id])
+    @topic.discussions.last.mark_as_read_by(login_user)
     @discussions = @topic.discussions
     @colleagues = get_colleagues
   end
