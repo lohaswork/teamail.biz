@@ -87,6 +87,7 @@ describe "the topics action" do
           fill_in "title", :with => "test title"
           click_button "创建"
           page.should_not have_selector "#new-topic-form"
+          page.should have_content "话题创建成功"
           visit organization_topics_path
           page.should have_content "test title"
         end
@@ -97,6 +98,7 @@ describe "the topics action" do
           all(:css, "div#select-user input[type='checkbox']").last.set(true)
           click_button "创建"
           page.should_not have_selector "#new-topic-form"
+          page.should have_content "话题创建成功"
           visit organization_topics_path
           page.should have_content "test title"
           @organization.topics.last.users.should include(@organization.users.last)
@@ -107,6 +109,7 @@ describe "the topics action" do
           fill_in "title", :with => "test title"
           click_button "创建"
           page.should_not have_selector "#new-topic-form"
+          page.should have_content "话题创建成功"
           visit organization_topics_path
           page.should have_content "test title"
           @organization.topics.last.users.should include(@user)
@@ -118,6 +121,7 @@ describe "the topics action" do
           find(:xpath, "//input[@class='all']").set(true)
           click_button "创建"
           page.should_not have_selector "#new-topic-form"
+          page.should have_content "话题创建成功"
           visit organization_topics_path
           page.should have_content "test title"
           @organization.topics.last.users.size.should == @organization.users.size
@@ -131,6 +135,7 @@ describe "the topics action" do
           fill_in "content", :with => "this is test discussion"
           click_button "创建"
           page.should_not have_selector "#new-topic-form"
+          page.should have_content "话题创建成功"
           visit organization_topics_path
           page.should have_content "test title"
           page.should have_content 1
@@ -187,6 +192,7 @@ describe "the topics action" do
         fill_in "title", :with => "test title"
         click_button "创建"
         page.should_not have_selector "#new-topic-form"
+        page.should have_content "话题创建成功"
         visit organization_topics_path
         page.should have_content "test title"
         click_on @organization.topics.last.title
@@ -210,6 +216,7 @@ describe "the topics action" do
         all(:css, "div#select-user input[type='checkbox']").last.set(true)
         click_button "创建"
         page.should_not have_selector "#new-topic-form"
+        page.should have_content "话题创建成功"
         visit organization_topics_path
         page.should have_content("test title")
         click_on "test title"
@@ -223,6 +230,7 @@ describe "the topics action" do
         fill_in "title", :with => "test select user"
         click_button "创建"
         page.should_not have_selector "#new-topic-form"
+        page.should have_content "话题创建成功"
         visit organization_topics_path
         page.should have_content("test select user")
         click_on "test select user"
@@ -360,6 +368,7 @@ describe "the topics action" do
             fill_in "title", :with => "test title"
             click_button "创建"
             page.should_not have_selector "#new-topic-form"
+            page.should have_content "话题创建成功"
             visit personal_topics_path
             page.should have_content "test title"
             page.should_not have_selector "#new-topic-form"
@@ -371,6 +380,7 @@ describe "the topics action" do
             all(:css, "div#select-user input[type='checkbox']").last.set(true)
             click_button "创建"
             page.should_not have_selector "#new-topic-form"
+            page.should have_content "话题创建成功"
             visit personal_topics_path
             page.should have_content "test title"
             @organization.topics.last.users.should include(@organization.users.last)
@@ -381,6 +391,7 @@ describe "the topics action" do
             fill_in "title", :with => "test title"
             click_button "创建"
             page.should_not have_selector "#new-topic-form"
+            page.should have_content "话题创建成功"
             visit personal_topics_path
             page.should have_content "test title"
             @organization.topics.last.users.should include(@user)
@@ -392,6 +403,7 @@ describe "the topics action" do
             find(:xpath, "//input[@class='all']").set(true)
             click_button "创建"
             page.should_not have_selector "#new-topic-form"
+            page.should have_content "话题创建成功"
             visit personal_topics_path
             page.should have_content "test title"
             @organization.topics.last.users.size.should == @organization.users.size
@@ -405,6 +417,7 @@ describe "the topics action" do
             fill_in "content", :with => "this is test discussion"
             click_button "创建"
             page.should_not have_selector "#new-topic-form"
+            page.should have_content "话题创建成功"
             visit personal_topics_path
             page.should have_content "test title"
             page.should have_content 1
