@@ -1,6 +1,6 @@
 .modal {
   font-family:"Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
-  .modal-dialog {
+  #early_adotpers_add_success_msg {
 
     .modal-content {
 
@@ -24,5 +24,17 @@
         }
       }
     }
-  }
+  } // End of #early_adotpers_add_success_msg
+  #new-topic-form {
+    position: fixed;
+    right: 0px;
+    bottom: 0px;
+    .modal-footer .btn {
+      margin-right: 20px;
+    }
+  } // End of #new-topic-form
+} // End of .modal
+
+.select-user {
+  margin-left:30px;
 }

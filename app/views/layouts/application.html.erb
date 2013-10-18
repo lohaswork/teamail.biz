@@ -19,10 +19,10 @@
     <%= yield(:head) %>
   </head>
   <body class="<%= controller_name %>" data-page="<%= @page_id %>">
-    <div id='myModal', class='modal fade'>
+    <div id='myModal' class='modal fade'>
     </div>
     <%= render 'layouts/navigation' %>
-    <%= render 'shared/messages' %>
+    <%= render 'shared/error_and_notification' %>
     <div class='wrapper'>
       <section class="content">
         <div class="container">

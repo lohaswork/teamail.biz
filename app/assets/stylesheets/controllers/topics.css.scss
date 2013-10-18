@@ -32,25 +32,8 @@ hr.double-line {
   padding-left: 50px;
   min-height: 510px;
 }
-.topic-list-container {
-  position:relative;
-  min-width: 300px;
-  height: 100%;
-  padding-left:35px;
-  background-color: #FBFBFB;
-}
 
 /* Topic Area */
-#new-topic {
-  .new-topic-line {
-  }
-  #new-topic-form {
-    display: none;
-    .form-content {
-      height: 61px;
-    }
-  }
-}
 .topic-show {
   padding-left:35px;
 }

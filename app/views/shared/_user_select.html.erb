@@ -1,12 +1,10 @@
-<div class="row checkbox-group" id="select-user" data-update="#selected_users", data-page="CheckBoxGroup", data-reload=true>
+<div class="col-xs-8 checkbox-group" id="select-user" data-update="#selected_users", data-page="CheckBoxGroup", data-reload=true>
   <%- if !get_colleagues.blank?%>
-    <div class='col-xs-12'>
-      <input type="checkbox", class='all', data-all=true>
-      <span>全选</span>
-      <%- show_for_checkbox(get_colleagues, topic).each do |user| %>
-          <%= check_box_tag nil, user[:email], false, :class=>"item", :'data-item'=>true, :'data-selected'=>user[:is_in_topic] %>
-          <span><%=user[:email_name]%></span>
-      <% end %>
-    </div>
+    <input type="checkbox", class='all', data-all=true>
+    <span>全选</span>
+    <%- show_for_checkbox(get_colleagues, topic).each do |user| %>
+        <%= check_box_tag nil, user[:email], false, :class=>"item", :'data-item'=>true, :'data-selected'=>user[:is_in_topic] %>
+        <span><%=user[:email_name]%></span>
+    <% end %>
   <% end %>
 </div>

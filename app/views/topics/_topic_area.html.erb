@@ -1,6 +1,5 @@
 <div id="topic-area">
   <% if @topic.blank? %>
-    <%= render :partial => 'shared/new_topic' %>
     <%= render :partial => 'topics/topic_list', :locals => {:topics => @topics} %>
   <% else %>
     <div class='topic-show'>
