@@ -14,7 +14,7 @@ class WelcomeController < ApplicationController
                                                                           :layout => false)
                                 },
                     :modal => render_to_string(:partial => 'create_success',
-                                                :layout => false)
+                                               :layout => false)
                     }
   end
 end
