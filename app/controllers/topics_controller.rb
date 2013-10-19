@@ -41,7 +41,7 @@ class TopicsController < ApplicationController
     if detail_topic_id.blank? # 判断是否在 topic detail 页面
       selected_topics_ids = params[:selected_topics_to_archive].split(',')
       Topic.find(selected_topics_ids).each { |topic| topic.archived_by(login_user) }
-      topics = Topic.get_unarchived(login_user).all
+      topics = Topic.get_unarchived(login_user).to_a
       # 刷新 topic list
       render :json => {
                 :update => {
@@ -68,7 +68,7 @@ class TopicsController < ApplicationController
   end
 
   def unarchived
-    @topics = Topic.get_unarchived(login_user).all
+    @topics = Topic.get_unarchived(login_user).to_a
   end
 
   def add_tags

@@ -27,12 +27,17 @@ gem 'jquery-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 1.2'
 
-gem 'compass-rails'
+gem 'compass-rails', '~> 2.0.alpha.0'
 gem 'anjlab-bootstrap-rails', '>= 3.0.0.0', :require => 'bootstrap-rails'
-# gem 'video-js-rails'
 gem 'font-awesome-rails'
 gem 'rest-client'
 gem 'multimap'
+
+# To use ActiveModel has_secure_password
+gem 'bcrypt-ruby'
+
+# In order to compatible with old rails 3 style code
+gem 'protected_attributes'
 
 group :test, :development do
   gem 'selenium-webdriver', '~> 2.35.1'
