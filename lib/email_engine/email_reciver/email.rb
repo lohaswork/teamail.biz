@@ -2,9 +2,9 @@
 module EmailEngine
   module EmailReciver
 
-    attr_reader :topic
-
     class Email
+      attr_reader :topic
+
       def initialize(hash={}, gateway=EmailEngine::MailgunGateway.new)
         hash.each do |k, v|
           k = k.underscore
@@ -31,7 +31,7 @@ module EmailEngine
 
       def create_from_email
         resolve_email
-        nvalid_creator_inotification && return if !@creator
+        invalid_creator_inotification && return if !@creator
         if @topic
           #create discussion here
         else
@@ -41,7 +41,7 @@ module EmailEngine
         end
       end
 
-      def invalid_creator_inotification_text
+      def invalid_creator_inotification
         @gateway.send_batch_message(
           to: sender,
           subject: "您的账户不合法",
@@ -52,15 +52,17 @@ module EmailEngine
       def set_notifiers
         email_regex = /\b[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\b/i
         @notifiers = []
+        cc = self.methods.include?(:cc) ? self.cc : ''
         all_recipient_emails = to + "," + cc
-        all_recipient_emails.split(',').each{ |address| @notifiers.concat( address.scan(email_regex) ) }
+        all_recipient_emails.split(',').map{ |address| @notifiers.concat( address.scan(email_regex) ) }
+        @notifiers.delete $config.default_email_reciver
       end
 
       def resolve_notifiers
         set_notifiers
         @notifiers.each do |email|
           if !@organization.has_member?(email)
-            organization.invite_user(email)
+            @organization.invite_user(email)
             EmailEngine::InvitationNotifier.new(email, @organization, @creator).invitation_notification
           end
         end
