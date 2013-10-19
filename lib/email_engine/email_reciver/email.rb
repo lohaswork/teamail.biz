@@ -22,7 +22,7 @@ module EmailEngine
 
       def resolve_email
         #resolve the email here
-        @topic = nil #set it as nil for now
+        @topic = nil #set it as nil for now, it will depend on resolve the topic token later
         @creator = User.find_by_email sender
         @creator = @creator.default_organization && @creator if @creator
         @organization = @creator.default_organization
@@ -36,7 +36,7 @@ module EmailEngine
           #create discussion here
         else
           title = subject.blank? ? "此主题标题为空" : subject
-          @topic = Topic.create_topic(title, body_plain, @notifiers, @organization, @creator)
+          @topic = Topic.create_topic(title, stripped_text, @notifiers, @organization, @creator)
           EmailEngine::TopicNotifier.new(topic.id).create_topic_notification
         end
       end
@@ -52,8 +52,7 @@ module EmailEngine
       def set_notifiers
         email_regex = /\b[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\b/i
         @notifiers = []
-        cc = self.methods.include?(:cc) ? self.cc : ''
-        all_recipient_emails = to + "," + cc
+        all_recipient_emails = to + "," + (self.methods.include?(:cc) ? self.cc : '')
         all_recipient_emails.split(',').map{ |address| @notifiers.concat( address.scan(email_regex) ) }
         @notifiers.delete $config.default_email_reciver
       end
