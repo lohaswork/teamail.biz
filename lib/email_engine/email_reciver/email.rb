@@ -24,8 +24,9 @@ module EmailEngine
         #resolve the email here
         @topic = nil #set it as nil for now, it will depend on resolve the topic token later
         @creator = User.find_by_email sender
-        @creator = @creator.default_organization && @creator if @creator
-        @organization = @creator.default_organization
+        @organization = @creator && @creator.default_organization
+        #set the creator to nil if the creator has no organization
+        @creator = nil if !@creator || !@organization
         resolve_notifiers
       end
 
@@ -61,8 +62,9 @@ module EmailEngine
         set_notifiers
         @notifiers.each do |email|
           if !@organization.has_member?(email)
+            is_registered_user = User.already_register?(email)
             @organization.invite_user(email)
-            EmailEngine::InvitationNotifier.new(email, @organization, @creator).invitation_notification
+            EmailEngine::InvitationNotifier.new(email, @organization, @creator, is_registered_user).invitation_notification
           end
         end
       end

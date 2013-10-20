@@ -25,8 +25,9 @@ class OrganizationsController < ApplicationController
     new_member_email = params[:user_email]
     organization = current_organization
     unless organization.has_member?(new_member_email)
+      is_registered_user = User.already_register?(new_member_email)
       organization.invite_user(new_member_email)
-      EmailEngine::InvitationNotifier.new(new_member_email, organization, login_user).invitation_notification
+      EmailEngine::InvitationNotifier.new(new_member_email, organization, login_user, is_registered_user).invitation_notification
     end
     colleagues = get_colleagues
 
