@@ -1,10 +1,10 @@
 !function($) {
 
-  App.page.TaggingControls = function (){
+  App.page.TopicCheckControls = function (){
     this.init();
   }
 
-  App.page.TaggingControls.prototype = {
+  App.page.TopicCheckControls.prototype = {
 
     init: function(){
       $(document).bind('click',function(e){
@@ -20,8 +20,10 @@
       });
       $(document).on("click", "#select-topic input[data-item]", function(){
         if (sumCheckStatus("#select-topic") > 0) {
+          $("#archive-submit").attr("disabled",false);
           $("#tagging-dropdown").attr("disabled",false);
         } else {
+          $("#archive-submit").attr("disabled","disabled");
           $("#tagging-dropdown").attr("disabled","disabled");
         }
       })
@@ -45,8 +47,9 @@
           $("#tag-input").show();
         }
       })// Enable tags submit button
-      .on("refreshed", "#tag-list", function () {
+      .on("refreshed", "#tag-list", function() {
         $("#tag-input input[type='text']").val("");
+        return false;
       });
 
       var sumCheckStatus = function(check_element) {
@@ -64,9 +67,14 @@
       $(document).on("refreshed", "#topic-list", function () {
         $("#dropdown-tags").hide();
         $("#tagging-dropdown").attr("disabled","disabled");
+        if ($("#archive-submit")) {
+          $("#archive-submit").attr("disabled","disabled");
+        }
         $("#tag-list :checkbox").attr('checked', false);
+        $("#topic-list :checkbox").attr('checked', false);
         $("#tagging-submit").hide();
         $("#tag-input").show();
+        return false;
       });
     }
   }

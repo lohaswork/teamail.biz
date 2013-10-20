@@ -6,10 +6,10 @@
   <ul id="dropdown-tags" class="dropdown-menu" role="menu">
     <div id="tag-list-container">
       <lable>标记为：</lable>
-      <%= form_tag add_tag_topics_path(:topic => @topic), :method => "post", :remote => true do %>
+      <%= form_tag topics_add_tags_path(:topic => @topic), :method => "post", :remote => true do %>
         <%= render :partial => 'tags/tag_list', :locals => { :tags => current_organization.tags } %>
         <li class="divider"></li>
-        <%= hidden_field_tag :selected_topics, '' %>
+        <%= hidden_field_tag :selected_topics_to_tagging, '' %>
         <%= hidden_field_tag :selected_tags, '' %>
         <li>
           <%= submit_tag "应用", :id=>"tagging-submit", :class=>"btn btn-default" %>

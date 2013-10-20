@@ -8,7 +8,10 @@ class Topic < ActiveRecord::Base
   has_many :taggings, :as => :taggable
   has_many :tags, :through => :taggings, :uniq => true
   has_many :users, :through => :user_topics, :uniq => true
+
   validates :title, :presence => { :message=>'请输入标题' }
+
+  scope :get_unarchived, lambda { |user| joins(:user_topics).where("user_topics.user_id = ? AND IFNULL( user_topics.archive_status, 0 ) <> 1 ", user.id) }
 
   class << self
     def create_topic(title, content, emails, organization, login_user)
@@ -36,6 +39,37 @@ class Topic < ActiveRecord::Base
   def has_tag?(id)
     tag = Tag.find(id)
     self.tags.include?(tag)
+  end
+
+  def get_relation_with(user)
+    self.user_topics.find_by_user_id(user.id)
+  end
+
+  def archive_status_of(user)
+    self.get_relation_with(user).archive_status
+  end
+
+  def archived_by(user)
+    begin
+      self.user_topics.find_by_user_id(user.id).update_attribute(:archive_status, true)
+    rescue ActiveRecord::RecordNotFound
+      nil
+    end
+    self
+  end
+
+  def unarchived_by_others
+    self.users.reject { |user| user.id == self.last_updator.id }
+              .each { |user| self.user_topics.find_by_user_id(user.id).update_attribute(:archive_status, false) }
+  end
+
+  def mark_as_unread_to_others
+    self.users.reject { |user| user.id == self.last_updator.id }
+              .each { |user| self.discussions.last.mark_as_unread_by(user) }
+  end
+
+  def read_status_of(user)
+    self.discussions.last.read_status_of(user)
   end
 
   def last_update_time

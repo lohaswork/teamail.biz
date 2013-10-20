@@ -13,10 +13,14 @@ class Discussion < ActiveRecord::Base
       discussion = Discussion.new(:content=>content)
       raise ValidationError.new(discussion.errors.full_messages) if !discussion.valid?
       selected_users = emails.map { |email| User.find_by_email email }
+      discussion.notify_party = selected_users
       discussion.creator = login_user
       discussion.users << (selected_users << login_user)
       topic.discussions << discussion
       topic.save!
+      discussion.mark_as_read_by(login_user)
+      topic.unarchived_by_others
+      topic.mark_as_unread_to_others
       discussion
     end
   end
@@ -28,6 +32,42 @@ class Discussion < ActiveRecord::Base
   def creator=(user)
     self.user_from = user.id
   end
+
+  def read_status_of(user)
+    begin
+      self.user_discussions.find_by_user_id(user.id).read_status
+    rescue ActiveRecord::RecordNotFound, NoMethodError
+      false
+    end
+  end
+
+  def mark_as_read_by(user)
+    begin
+      self.user_discussions.find_by_user_id(user.id).update_attribute(:read_status, true)
+    rescue ActiveRecord::RecordNotFound, NoMethodError
+      nil
+    end
+    self
+  end
+
+  def mark_as_unread_by(user)
+    begin
+      self.user_discussions.find_by_user_id(user.id).update_attribute(:read_status, false)
+    rescue ActiveRecord::RecordNotFound, NoMethodError
+      nil
+    end
+    self
+  end
+
+  def notify_party=(users)
+    self.user_to = users.map { |user| user.id }.join(',')
+    users
+  end
+
+  # Not used for now until email receiver features add
+  #def notify_party
+  #  self.user_to.split(',').map { |id| User.find id }
+  #end
 
   private
 
