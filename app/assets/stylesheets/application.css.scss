@@ -9,7 +9,6 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require fontdiao
  *= require font-awesome
  *= require_directory ./shared
  *= require_directory ./controllers

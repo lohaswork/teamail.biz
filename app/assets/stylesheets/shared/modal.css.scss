@@ -1,30 +1,4 @@
 .modal {
-  font-family:"Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
-  #early_adotpers_add_success_msg {
-
-    .modal-content {
-
-      .modal-header {
-        h4 {
-          padding-left: 10px;
-        }
-      }
-
-      .modal-body {
-        p {
-        padding-left: 15px;
-        }
-      }
-
-
-      .modal-footer {
-        button {
-          background-color: #1ABC9C;
-          border-color: #1ABC9C;
-        }
-      }
-    }
-  } // End of #early_adotpers_add_success_msg
   #new-topic-form {
     position: fixed;
     right: 0px;

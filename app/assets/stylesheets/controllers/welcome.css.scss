@@ -11,6 +11,39 @@ teamind navbar: #8E958A;
 */
 
 body.welcome {
+  // modal
+  .modal {
+    font-family:"Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    #early_adotpers_add_success_msg {
+
+      .modal-content {
+
+        .modal-header {
+          h4 {
+            padding-left: 10px;
+          }
+        }
+
+        .modal-body {
+          p {
+          padding-left: 15px;
+          }
+        }
+
+
+        .modal-footer {
+          button {
+            background-color: #1ABC9C;
+            border-color: #1ABC9C;
+          }
+        }
+      }
+    } // End of #early_adotpers_add_success_msg
+  } // End of .modal
+
+  .scroll {
+    opacity: 0.85;
+  }
   .scrolltop {
     background-color: #F1F1F1;
     border: 1px solid #8E958A;
@@ -39,6 +72,40 @@ body.welcome {
       top:-3px;
     }
   }
+
+.navbar-toggle {
+  margin-top: 12px;
+  border: 2px solid #fff;
+  z-index: 999;
+}
+.icon-bar {
+  background-color:#fff;
+}
+.navbar {
+  min-height: 40px;
+  margin-bottom: 0;
+}
+.logo-container {
+  position: relative;
+  top: -12px;
+  margin-left: 18px;
+  h1 {
+    font-family: 'Lobster Two', cursive;
+    color: #fff!important;
+    font-weight: 700;
+    float: left;
+  }
+  h3 {
+    font-family: 'Lobster Two', cursive;
+    color: #fff!important;
+    font-weight: 700;
+    float: left;
+    position: relative;
+    left: 7px;
+    top: 9px;
+  }
+}
+
   .nav-brand img {
     position:relative;
     top: 15px;
@@ -52,10 +119,6 @@ body.welcome {
     filter: none;
     padding: 0 auto;
     background-color: #F6F6F6;
-  }
-  .logo-container {
-    position: relative;
-    top: -12px;
   }
   .navbar-teamind {
     font-size: 17px;
