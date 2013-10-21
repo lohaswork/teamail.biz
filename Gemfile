@@ -32,6 +32,7 @@ gem 'anjlab-bootstrap-rails', '>= 3.0.0.0', :require => 'bootstrap-rails'
 gem 'font-awesome-rails'
 gem 'rest-client'
 gem 'multimap'
+gem 'sidekiq'
 
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby'
