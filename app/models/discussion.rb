@@ -4,7 +4,7 @@ class Discussion < ActiveRecord::Base
 
   belongs_to :discussable, :polymorphic => true
   has_many :user_discussions
-  has_many :users, :through => :user_discussions, :uniq => true
+  has_many :users, -> { uniq }, :through => :user_discussions
   validates :content, :presence => { :message => "请输入回复内容" }
   after_create :update_topic_members
 
