@@ -20,9 +20,7 @@
   </head>
   <body class="<%= controller_name %>" data-page="<%= @page_id %>">
     <div id='myModal' class='modal fade'>
-      <% unless action_name == 'show' %>
-        <%= render :partial => 'shared/new_topic' %>
-      <% end %>
+      <%= render :partial => 'shared/new_topic' %>
     </div>
     <%= render 'layouts/navigation' %>
     <%= render 'shared/error_and_notification'%>

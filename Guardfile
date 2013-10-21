@@ -11,7 +11,7 @@ guard 'spork', :rspec_env => { 'RAILS_ENV' => 'test' }, :test_unit => false do
   watch('spec/requests/')
 end
 
-guard 'rspec', :version => 2, :all_after_pass => false, :cli => '--drb' do
+guard 'rspec', cmd: 'rspec' do
     watch(%r{^config/(.+)\.rb$})                        { ["spec"] }
     watch(%r{^spec/(.+)\.rb$$})                         { ["spec"] }
     watch(%r{^app/(.+)$})                               { ["spec"] }
