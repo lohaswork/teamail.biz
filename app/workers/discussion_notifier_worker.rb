@@ -1,5 +1,5 @@
 # encoding: utf-8
-class DisscussionNotifierWorker
+class DiscussionNotifierWorker
   include Sidekiq::Worker
   sidekiq_options retry: false
 
