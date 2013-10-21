@@ -10,7 +10,7 @@ development:
   adapter: mysql2
   encoding: utf8
   database: lohaswork_development
-  pool: 5
+  pool: 25
   username: change_to_your_name
   password: change_to_your_password
 
@@ -37,7 +37,7 @@ test:
   adapter: mysql2
   encoding: utf8
   database: lohaswork_test
-  pool: 5
+  pool: 25
   username: change_to_your_name
   password: change_to_your_password
 
@@ -46,6 +46,6 @@ production:
   adapter: mysql2
   encoding: utf8
   database: lohaswork_production
-  pool: 5
+  pool: 25
   username: change_to_your_name
   password: change_to_your_password

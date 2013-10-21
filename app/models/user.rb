@@ -50,7 +50,7 @@ class User < ActiveRecord::Base
       user = self.find_by_email(email) if !email.blank?
       raise ValidationError.new('您的邮件地址不正确') if !user
       user.generate_reset_token
-      EmailEngine::ResetPasswordNotifier.new(user.id).reset_password_notification
+      ResetPasswordNotifierWorker.perform_async(user.id)
       user
     end
 
