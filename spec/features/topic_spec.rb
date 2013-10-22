@@ -131,6 +131,26 @@ describe "the topics action" do
           page.should have_content "test title"
           @organization.topics.last.users.size.should == @organization.users.size
         end
+
+        it "should add the invite user into topic members" do
+          click_on "创建新话题"
+          fill_in "title", :with => "test title"
+          fill_in "invited_emails", with: "test@example.com"
+          click_button "创建"
+          page.should_not have_selector "#new-topic-form"
+          page.should have_content "话题创建成功"
+          visit personal_topics_path
+          page.should have_content "test title"
+          @organization.topics.last.users.last.email.should == "test@example.com"
+        end
+
+        it "should see error message when add the invalid invite user into topic members" do
+          click_on "创建新话题"
+          fill_in "title", :with => "test title"
+          fill_in "invited_emails", with: "testexample.com"
+          click_button "创建"
+          page.should have_content "邮件地址不合法"
+        end
       end
 
       context "user create success with a discussion" do
@@ -351,6 +371,12 @@ describe "the topics action" do
             click_on "创建新话题"
             find('#select-user').should_not have_content(@user.email_name)
           end
+
+          it "should see the invited emails text field" do
+            click_button "创建新话题"
+            page.should have_selector('#invited_emails', text: "")
+          end
+
         end
 
         context "user reopen the field" do
@@ -412,6 +438,18 @@ describe "the topics action" do
             visit personal_topics_path
             page.should have_content "test title"
             @organization.topics.last.users.size.should == @organization.users.size
+          end
+
+          it "should add the invite user into topic members" do
+            click_on "创建新话题"
+            fill_in "title", :with => "test title"
+            fill_in "invited_emails", with: "test@example.com"
+            click_button "创建"
+            page.should_not have_selector "#new-topic-form"
+            page.should have_content "话题创建成功"
+            visit personal_topics_path
+            page.should have_content "test title"
+            @organization.topics.last.users.last.email.should == "test@example.com"
           end
         end
 
