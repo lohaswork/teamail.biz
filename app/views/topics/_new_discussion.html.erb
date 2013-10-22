@@ -3,6 +3,7 @@
     <%= form_tag topic_discussions_path(@topic), :method => "post", :class=>"form-horizontal", :remote => true do %>
       <div class="control-group">
         <%= text_area_tag :content, nil, :class=>"col-xs-8", :placeholder=>"即时评论"%>
+        <%= text_field_tag :invited_emails, nil, class: 'col-xs-8', placeholder: '输入电子邮件邀请成员...' %>
         <%= hidden_field_tag :selected_users_for_discussion, '' %>
       </div>
       <div>

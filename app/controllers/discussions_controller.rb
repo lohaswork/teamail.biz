@@ -5,17 +5,41 @@ class DiscussionsController < ApplicationController
   def create
     @topic = Topic.find(params[:topic_id])
     selected_emails = (params[:selected_users_for_topic] || params[:selected_users_for_discussion]).split(',')
+
+    invited_emails = params[:invited_emails].split(',')
+
+    invited_emails.each do |invited_email|
+      invited_email.downcase!
+
+      unless User.already_register?(invited_email)
+        user = User.new(:email => invited_email, :password => User.generate_init_password)
+        raise ValidationError.new(user.errors.full_messages) unless user.valid?
+      end
+    end
+
+    invited_emails.each do |invited_email|
+      unless current_organization.has_member?(invited_email)
+        email_status = User.already_register?(invited_email)
+        current_organization.invite_user(invited_email)
+        InvitationNotifierWorker.perform_async(
+          invited_email, current_organization.name, login_user.email,
+          email_status)
+      end
+
+      selected_emails << invited_email unless selected_emails.include? invited_email
+    end
+
     discussion = Discussion.create_discussion(login_user, @topic, selected_emails, params[:content])
     DiscussionNotifierWorker.perform_async(discussion.id, selected_emails)
 
     render :json => {
-              :update => {
-                          "discussion-list" => render_to_string(:partial => 'topics/discussion_list',
-                                                                :layout => false,
-                                                                :locals => {
-                                                                    :discussions => @topic.discussions
-                                                                })
-                         }
-                 }
+      :update => {
+        "discussion-list" => render_to_string(:partial => 'topics/discussion_list',
+                                              :layout => false,
+                                              :locals => {
+                                                :discussions => @topic.discussions
+                                              })
+      }
+    }
   end
 end

@@ -12,13 +12,15 @@ class TopicsController < ApplicationController
     invited_emails = params[:invited_emails].split(',')
 
     invited_emails.each do |invited_email|
-      user = User.new(:email => invited_email, :password => User.generate_init_password)
-      raise ValidationError.new(user.errors.full_messages) unless user.valid?
+      invited_email.downcase!
+
+      unless User.already_register?(invited_email)
+        user = User.new(:email => invited_email, :password => User.generate_init_password)
+        raise ValidationError.new(user.errors.full_messages) unless user.valid?
+      end
     end
 
     invited_emails.each do |invited_email|
-      invited_email.downcase!
-
       unless current_organization.has_member?(invited_email)
         email_status = User.already_register?(invited_email)
         current_organization.invite_user(invited_email)
