@@ -12,13 +12,19 @@ class TopicsController < ApplicationController
     invited_emails = params[:invited_emails].split(',')
 
     invited_emails.each do |invited_email|
+      user = User.new(:email => invited_email, :password => User.generate_init_password)
+      raise ValidationError.new(user.errors.full_messages) unless user.valid?
+    end
+
+    invited_emails.each do |invited_email|
       invited_email.downcase!
 
       unless current_organization.has_member?(invited_email)
+        email_status = User.already_register?(invited_email)
         current_organization.invite_user(invited_email)
         InvitationNotifierWorker.perform_async(
           invited_email, current_organization.name, login_user.email,
-          User.already_register?(invited_email))
+          email_status)
       end
 
       selected_emails << invited_email unless selected_emails.include? invited_email
