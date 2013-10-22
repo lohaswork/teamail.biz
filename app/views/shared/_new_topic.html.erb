@@ -9,7 +9,7 @@
       <div class="modal-body">
         <label for="inputContent">内容</label>
         <%= text_area_tag :content, nil, :class=>"form-control form-content", :rows=>"3", :placeholder=>"内容"%>
-        <%= hidden_field_tag :selected_users, '' %>
+        <%= hidden_field_tag :selected_users_for_topic, '' %>
       </div>
       <div class="modal-footer">
         <%= render :partial=> 'shared/user_select', :locals => {:topic => nil} %>
