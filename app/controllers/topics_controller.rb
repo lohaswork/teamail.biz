@@ -7,7 +7,7 @@ class TopicsController < ApplicationController
   end
 
   def create
-    selected_emails = params[:selected_users].split(',')
+    selected_emails = params[:selected_users_for_topic].split(',')
     new_topic = Topic.create_topic(params[:title], params[:content], selected_emails, current_organization, login_user)
     TopicNotifierWorker.perform_async(new_topic.id)
     notice = "话题创建成功"
