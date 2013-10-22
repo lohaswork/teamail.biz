@@ -65,6 +65,11 @@ describe "the topics action" do
           click_on "创建新话题"
           find('#select-user').should_not have_content(@user.email_name)
         end
+
+        it "should see the invited emails text field" do
+          click_button "创建新话题"
+          page.should have_selector('#invited_emails', text: "")
+        end
       end
 
       context "user reopen the field" do

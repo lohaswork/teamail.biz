@@ -12,6 +12,7 @@
         <%= hidden_field_tag :selected_users_for_topic, '' %>
       </div>
       <div class="modal-footer">
+        <%= text_field_tag :invited_emails, nil, class: 'form-control form-content', placeholder: '输入电子邮件邀请成员...' %>
         <%= render :partial=> 'shared/user_select', :locals => {:topic => nil} %>
         <%= submit_tag "创建", :class=>"btn btn-primary"%>
       </div>
