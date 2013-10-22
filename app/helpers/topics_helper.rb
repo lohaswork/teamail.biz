@@ -1,6 +1,9 @@
 module TopicsHelper
   def show_for_checkbox(users, topic)
-    users.map { |user| { :email => user.email, :email_name => user.email_name, :is_in_topic => topic && topic.default_notify_members.include?(user) || false } }
+    users.map { |user| {
+      :email => user.email,
+      :email_name => user.active_status ? user.email_name : user.email,
+      :is_in_topic => topic && topic.default_notify_members.include?(user) || false } }
   end
 
   def order_by_updator(topics)
@@ -25,8 +28,8 @@ module TopicsHelper
 
   def unread_topic_number
     login_user.topics.reject { |topic| topic.archive_status_of(login_user) == 1 }
-                     .reject { |topic| topic.read_status_of(login_user) == 1 }
-                     .length
+    .reject { |topic| topic.read_status_of(login_user) == 1 }
+    .length
   end
 
   private
