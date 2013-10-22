@@ -98,7 +98,7 @@ Capistrano::Configuration.instance.load do
             host: rdsjabziajabzia.mysql.rds.aliyuncs.com
             username: #{Capistrano::CLI.ui.ask("Enter database username: ")}
             password: #{Capistrano::CLI.password_prompt("Enter database password: ")}
-            pool: 5
+            pool: 25
           development:
             database: teamail_development
             <<: *base

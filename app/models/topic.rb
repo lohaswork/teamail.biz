@@ -88,7 +88,8 @@ class Topic < ActiveRecord::Base
     discussions.first.content
   end
 
-  def active_members
-    discussions.last.users
+  def default_notify_members
+    members = discussions.last.notify_party.compact
+    members << discussions.last.creator
   end
 end

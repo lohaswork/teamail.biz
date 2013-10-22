@@ -64,10 +64,13 @@ class Discussion < ActiveRecord::Base
     users
   end
 
-  # Not used for now until email receiver features add
-  #def notify_party
-  #  self.user_to.split(',').map { |id| User.find id }
-  #end
+  def notify_party
+    if self.user_to.blank?
+      []
+    else
+      self.user_to.split(',').map { |id| User.find id }
+    end
+  end
 
   private
 

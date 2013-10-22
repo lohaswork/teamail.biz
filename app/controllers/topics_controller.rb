@@ -7,25 +7,18 @@ class TopicsController < ApplicationController
   end
 
   def create
-    selected_emails = params[:selected_users].split(',')
+    selected_emails = params[:selected_users_for_topic].split(',')
     new_topic = Topic.create_topic(params[:title], params[:content], selected_emails, current_organization, login_user)
     TopicNotifierWorker.perform_async(new_topic.id)
-    topics = current_organization.topics
+    notice = "话题创建成功"
 
     render :json => {
-              :update => {
-                          "topic-list" => render_to_string(:partial => 'topic_list',
-                                                           :layout => false,
-                                                           :locals => {
-                                                               :topics => topics
-                                                                }),
-                           "new-topic" => render_to_string(:partial => 'shared/new_topic',
-                                                           :layout => false,
-                                                           :locals => {
-                                                               :colleagues => get_colleagues
-                                                              })
-                         }
-                 }
+               :notice => render_to_string(:partial => 'shared/notifications',
+                                           :layout => false,
+                                           :locals => {
+                                               :notice => notice
+                                          })
+                    }
   end
 
   def show

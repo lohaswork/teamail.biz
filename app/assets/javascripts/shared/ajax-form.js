@@ -9,7 +9,11 @@
       var $errorBar = $('.error');
       $errorBar.html(data.message).show();
     },
-
+    showNotification: function(data){
+      var $noticeBar = $('.notification');
+      $noticeBar.html(data.notice).show();
+      $('#myModal').modal('hide');
+    },
     init: function(){
     var self = this;
     $(document).on( 'ajax:before', 'form[data-remote], a[data-remote]', function (e) {
@@ -39,6 +43,9 @@
             for (var id in data.remove) {
               $('#' + data.remove[id]).remove();
             }
+          }
+          else if (data.notice) {
+            self.showNotification(data);
           }
           else if (data.reload) {
             window.location.reload(true);

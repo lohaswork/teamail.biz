@@ -20,9 +20,10 @@
   </head>
   <body class="<%= controller_name %>" data-page="<%= @page_id %>">
     <div id='myModal' class='modal fade'>
+      <%= render :partial => 'shared/new_topic' %>
     </div>
     <%= render 'layouts/navigation' %>
-    <%= render 'shared/messages'%>
+    <%= render 'shared/error_and_notification'%>
     <div class='wrapper-bg'>
       <div class="page-wrapper">
         <div class="page-relative-wrapper">
