@@ -6,16 +6,9 @@ class DiscussionsController < ApplicationController
     @topic = Topic.find(params[:topic_id])
     selected_emails = (params[:selected_users_for_topic] || params[:selected_users_for_discussion]).split(',')
 
-    invited_emails = params[:invited_emails].split(',')
+    invited_emails = params[:invited_emails].rstrip.split(/[\,\;]/)
 
-    invited_emails.each do |invited_email|
-      invited_email.downcase!
-
-      unless User.already_register?(invited_email)
-        user = User.new(:email => invited_email, :password => User.generate_init_password)
-        raise ValidationError.new(user.errors.full_messages) unless user.valid?
-      end
-    end
+    User.check_emails_validation(invited_emails)
 
     invited_emails.each do |invited_email|
       unless current_organization.has_member?(invited_email)
@@ -26,7 +19,7 @@ class DiscussionsController < ApplicationController
           email_status)
       end
 
-      selected_emails << invited_email unless selected_emails.include? invited_email
+      selected_emails << invited_email unless selected_emails.include? invited_email.downcase
     end
 
     discussion = Discussion.create_discussion(login_user, @topic, selected_emails, params[:content])
