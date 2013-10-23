@@ -31,8 +31,6 @@ if [ $? -ne 0 ]; then
 fi
 echo 'bundle exec rake db:migrate success.'
 
-bundle exec sidekiq
-
 bundle exec rake spec
 if [ $? -ne 0 ]; then
   echo 'bundle exec rake spec error!'
