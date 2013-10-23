@@ -25,14 +25,20 @@ class DiscussionsController < ApplicationController
     discussion = Discussion.create_discussion(login_user, @topic, selected_emails, params[:content])
     DiscussionNotifierWorker.perform_async(discussion.id, selected_emails)
 
-    render :json => {
-      :update => {
-        "discussion-list" => render_to_string(:partial => 'topics/discussion_list',
-                                              :layout => false,
-                                              :locals => {
-                                                :discussions => @topic.discussions
-                                              })
-      }
-    }
+    respond_array = []
+
+    respond_array << "select-user" << render_to_string(partial: 'shared/user_select',
+                                                       layout: false,
+                                                       locals: {
+                                                         topic: @topic
+                                                       })
+
+    respond_array << "discussion-list" << render_to_string(partial: 'topics/discussion_list',
+                                                           layout: false,
+                                                           locals: {
+                                                             discussions: @topic.discussions
+                                                           })
+
+    render :json => { update: Hash[*respond_array] }
   end
 end
