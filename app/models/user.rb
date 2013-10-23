@@ -76,10 +76,7 @@ class User < ActiveRecord::Base
 
     def check_emails_validation(invited_emails)
       invited_emails.each do |invited_email|
-        unless User.already_register?(invited_email)
-          user = User.new(:email => invited_email, :password => User.generate_init_password)
-          raise ValidationError.new(user.errors.full_messages) unless user.valid?
-        end
+        raise ValidationError.new('Email 邮件地址不合法') unless User::VALID_EMAIL_REGEX =~ invited_email
       end
     end
   end
