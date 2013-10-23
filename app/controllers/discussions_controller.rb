@@ -6,7 +6,7 @@ class DiscussionsController < ApplicationController
     @topic = Topic.find(params[:topic_id])
     selected_emails = (params[:selected_users_for_topic] || params[:selected_users_for_discussion]).split(',')
 
-    invited_emails = params[:invited_emails].rstrip.split(/[\,\;]/)
+    invited_emails = params[:invited_emails].strip.split(/[\,\;]/)
 
     User.check_emails_validation(invited_emails)
 
