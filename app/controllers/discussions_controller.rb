@@ -27,7 +27,13 @@ class DiscussionsController < ApplicationController
 
     respond_array = []
 
-    respond_array << "select-user" << render_to_string(partial: 'shared/user_select',
+    respond_array << "select-user-for-topic" << render_to_string(partial: 'shared/user_select',
+                                                       layout: false,
+                                                       locals: {
+                                                         topic: nil
+                                                       })
+
+    respond_array << "select-user-for-discussion" << render_to_string(partial: 'shared/user_select',
                                                        layout: false,
                                                        locals: {
                                                          topic: @topic
