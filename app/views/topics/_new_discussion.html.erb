@@ -10,9 +10,7 @@
         <%= submit_tag "回复", :class=>"btn"%>
       </div>
     <% end %>
-      <div class="col-xs-8 checkbox-group" id="select-user-for-discussion" data-update="#selected_users_for_topic, #selected_users_for_discussion", data-page="CheckBoxGroup", data-reload=true>
-        <%= render :partial => 'shared/user_select', :locals => { :topic => @topic} %>
-      </div>
+    <%= render :partial => 'shared/user_select_for_discussion', :locals => { :topic => @topic} %>
   </div>
 </div>
 

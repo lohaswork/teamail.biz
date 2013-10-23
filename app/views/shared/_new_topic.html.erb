@@ -13,9 +13,7 @@
       </div>
       <div class="modal-footer">
         <%= text_field_tag :invited_emails, nil, class: 'form-control form-content', placeholder: '输入电子邮件邀请成员...' %>
-        <div class="col-xs-8 checkbox-group" id="select-user-for-topic" data-update="#selected_users_for_topic, #selected_users_for_discussion", data-page="CheckBoxGroup", data-reload=true>
-          <%= render :partial=> 'shared/user_select', :locals => {:topic => nil} %>
-        </div>
+        <%= render :partial=> 'shared/user_select_for_topic', :locals => {:topic => nil} %>
         <%= submit_tag "创建", :class=>"btn btn-primary"%>
       </div>
     <% end %>
