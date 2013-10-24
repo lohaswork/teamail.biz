@@ -20,18 +20,15 @@
   </head>
   <body class="<%= controller_name %>" data-page="<%= @page_id %>">
     <div id='myModal' class='modal fade'>
+      <%= render :partial => 'shared/new_topic' %>
     </div>
     <%= render 'layouts/navigation' %>
-    <%= render 'shared/messages'%>
-    <div class='wrapper-bg'>
-      <div class="page-wrapper">
-        <div class="page-relative-wrapper">
-          <%= render 'shared/sidebar'%>
-          <section id="major-content">
-            <%= yield %>
-          </section>
-        </div>
-      </div>
+    <%= render 'shared/error_and_notification'%>
+    <div class='container'>
+      <%= render 'shared/sidebar'%>
+      <section class="major-content col-xs-10">
+        <%= yield %>
+      </section>
     </div>
     <%= render 'layouts/footer' %>
   <%= javascript_include_tag "application" %>

@@ -4,18 +4,18 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password
 
   has_many :organization_memberships
-  has_many :organizations, :through => :organization_memberships, :uniq => true
+  has_many :organizations, -> { uniq }, :through => :organization_memberships
   has_many :user_topics
-  has_many :topics, :through => :user_topics, :uniq => true
+  has_many :topics, -> { uniq }, :through => :user_topics
   has_many :user_discussions
-  has_many :discussions, :through => :user_discussions, :uniq => true
+  has_many :discussions, -> { uniq }, :through => :user_discussions
   before_create :add_active_code, :create_remember_token
 
   before_validation(:on=>:create) { |user| user.email = email.downcase }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, :presence => { :message=>'请输入邮件地址' },
-                    :format => { :with => VALID_EMAIL_REGEX, :message=>'邮件地址不合法', :allow_blank => true },
-                    :uniqueness => { :message=>'邮件地址已使用' }
+    :format => { :with => VALID_EMAIL_REGEX, :message=>'邮件地址不合法', :allow_blank => true },
+    :uniqueness => { :message=>'邮件地址已使用' }
 
   validates :password, :length => { :minimum => 6, :message => '密码至少需要六位' }
 
@@ -50,7 +50,7 @@ class User < ActiveRecord::Base
       user = self.find_by_email(email) if !email.blank?
       raise ValidationError.new('您的邮件地址不正确') if !user
       user.generate_reset_token
-      EmailEngine::ResetPasswordNotifier.new(user.id).reset_password_notification
+      ResetPasswordNotifierWorker.perform_async(user.id)
       user
     end
 
@@ -84,7 +84,7 @@ class User < ActiveRecord::Base
     unless unencrypted_password.blank?
       self.password_digest = BCrypt::Password.create(unencrypted_password)
     end
-end
+  end
 
   def is_admin?(organization)
     organization.membership(self).authority_type == 1
@@ -96,7 +96,7 @@ end
   end
 
   def activate!
-   active_status? ? false : update_attribute(:active_status, true)
+    active_status? ? false : update_attribute(:active_status, true)
   end
 
   def email_name

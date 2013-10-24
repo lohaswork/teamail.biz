@@ -1,28 +1,14 @@
 .modal {
-  font-family:"Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
-  .modal-dialog {
-
-    .modal-content {
-
-      .modal-header {
-        h4 {
-          padding-left: 10px;
-        }
-      }
-
-      .modal-body {
-        p {
-        padding-left: 15px;
-        }
-      }
-
-
-      .modal-footer {
-        button {
-          background-color: #1ABC9C;
-          border-color: #1ABC9C;
-        }
-      }
+  #new-topic-form {
+    position: fixed;
+    right: 0px;
+    bottom: 0px;
+    .modal-footer .btn {
+      margin-right: 20px;
     }
-  }
+  } // End of #new-topic-form
+} // End of .modal
+
+.select-user {
+  margin-left:30px;
 }

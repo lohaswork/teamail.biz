@@ -87,6 +87,8 @@ describe "topics have new discussion" do
       checkbox = find(:xpath, "(//div[@id='select-user']//input[@type='checkbox'])[10]")
       checkbox.set(true)
       click_button "创建"
+      page.should have_content "话题创建成功"
+      visit personal_topics_path
       page.should have_content "test title"
       topic = @user.topics.last
       topic.read_status_of(@user).should eq(1)

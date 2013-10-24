@@ -15,8 +15,6 @@ config/secrets.rb
 bin
 .bundle
 .rvmrc
-.ruby-version
-.ruby-gemset
 .sass-cache/
 db/*.sqlite3
 *.DS_Store

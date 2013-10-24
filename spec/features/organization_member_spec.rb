@@ -91,7 +91,7 @@ describe "organization member page" do
 
       it "delete member action" do
         page.should_not have_content @kicked_user.email_name
-        @organization.users.include?(@kicked_user).should eq(false)
+        Organization.find(@organization.id).users.to_a.include?(@kicked_user).should eq(false)
       end
 
       it "create new topic should not see kicked_user in notifier list" do

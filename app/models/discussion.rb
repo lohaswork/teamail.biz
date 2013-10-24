@@ -4,7 +4,7 @@ class Discussion < ActiveRecord::Base
 
   belongs_to :discussable, :polymorphic => true
   has_many :user_discussions
-  has_many :users, :through => :user_discussions, :uniq => true
+  has_many :users, -> { uniq }, :through => :user_discussions
   validates :content, :presence => { :message => "请输入回复内容" }
   after_create :update_topic_members
 
@@ -64,10 +64,13 @@ class Discussion < ActiveRecord::Base
     users
   end
 
-  # Not used for now until email receiver features add
-  #def notify_party
-  #  self.user_to.split(',').map { |id| User.find id }
-  #end
+  def notify_party
+    if self.user_to.blank?
+      []
+    else
+      self.user_to.split(',').map { |id| User.find id }
+    end
+  end
 
   private
 

@@ -1,33 +1,21 @@
-<div class="row" data-page="NewTopicPage">
-  <%- if current_organization %>
-    <div id='new-topic'>
-      <div class="new-topic-line">
-        <%= link_to('创建新话题', '#', :id => 'new-topic-button', :class=>"btn offset6")%>
+<div class="modal-dialog" id="new-topic-form">
+  <div class="modal-content">
+    <%= form_tag topics_path, :method => "post", :class=>"form-horizontal", :remote => true do %>
+      <div class="modal-header">
+        <label for="inputTitle">标题</label>
+        <%= text_field_tag :title, nil, :placeholder=>"标题"%>
+        <button type="button" id="modal-close" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
       </div>
-      <div id='new-topic-form', class="row">
-        <%= form_tag topics_path, :method => "post", :class=>"form-horizontal", :remote => true do %>
-          <div class="form-group">
-            <label for="inputTitle" class="col-md-1 control-label">标题</label>
-            <div class="col-md-6">
-              <%= text_field_tag :title, nil, :class=>"form-control", :placeholder=>"标题"%>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="inputContent" class="col-md-1 control-label">内容</label>
-            <div class="col-md-6">
-              <%= text_area_tag :content, nil, :class=>"form-control form-content", :rows=>"3", :placeholder=>"内容"%>
-            </div>
-          </div>
-          <%= hidden_field_tag :selected_users, '' %>
-          <div>
-            <%= submit_tag "创建", :class=>"btn"%>
-          </div>
-          <div>
-            <%= link_to('取消', '#', :id => 'cancel-create-button', :class=>"btn")%>
-          </div>
-        <% end %>
+      <div class="modal-body">
+        <label for="inputContent">内容</label>
+        <%= text_area_tag :content, nil, :class=>"form-control form-content", :rows=>"3", :placeholder=>"内容"%>
+        <%= hidden_field_tag :selected_users_for_topic, '' %>
+      </div>
+      <div class="modal-footer">
         <%= render :partial=> 'shared/user_select', :locals => {:topic => nil} %>
+        <%= submit_tag "创建", :class=>"btn btn-primary"%>
       </div>
-    </div>
-  <%- end %>
-</div>
+    <% end %>
+  </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+

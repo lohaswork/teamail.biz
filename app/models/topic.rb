@@ -3,11 +3,11 @@ class Topic < ActiveRecord::Base
   attr_accessible :title
 
   belongs_to :organization
-  has_many :discussions, :as => :discussable, :order => "updated_at asc", :uniq => true
+  has_many :discussions, -> { order('updated_at asc').uniq }, :as => :discussable
   has_many :user_topics
   has_many :taggings, :as => :taggable
-  has_many :tags, :through => :taggings, :uniq => true
-  has_many :users, :through => :user_topics, :uniq => true
+  has_many :tags, -> { uniq }, :through => :taggings
+  has_many :users, -> { uniq }, :through => :user_topics
 
   validates :title, :presence => { :message=>'请输入标题' }
 
@@ -88,7 +88,8 @@ class Topic < ActiveRecord::Base
     discussions.first.content
   end
 
-  def active_members
-    discussions.last.users
+  def default_notify_members
+    members = discussions.last.notify_party.compact
+    members << discussions.last.creator
   end
 end

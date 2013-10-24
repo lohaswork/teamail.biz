@@ -4,9 +4,9 @@ class DiscussionsController < ApplicationController
 
   def create
     @topic = Topic.find(params[:topic_id])
-    selected_emails = params[:selected_users].split(',')
+    selected_emails = (params[:selected_users_for_topic] || params[:selected_users_for_discussion]).split(',')
     discussion = Discussion.create_discussion(login_user, @topic, selected_emails, params[:content])
-    EmailEngine::DiscussionNotifier.new(discussion.id, selected_emails).create_discussion_notification
+    DiscussionNotifierWorker.perform_async(discussion.id, selected_emails)
 
     render :json => {
               :update => {

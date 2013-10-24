@@ -7,14 +7,15 @@
   App.page.NewTopicPage.prototype = {
     init: function(){
       var self = this;
-      self.el.on('click', '#new-topic-button', function(){
-        $('#new-topic-form').show();
-        return false;
-      })
-      .on('click', '#cancel-create-button', function(){
-        $('#new-topic-form').hide();
-        return false;
-      })
+      self.el.on('click', '#create-new-topic', function(){
+        $('#myModal').modal();
+        $('#myModal').on('shown.bs.modal', function () {
+          $('#myModal .modal-header :text').focus();
+        });
+      });
+      $(document).on('hidden.bs.modal', '#myModal', function (){
+        $('#myModal :text').val("");
+      });
     }
   }
 
