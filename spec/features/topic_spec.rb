@@ -132,7 +132,7 @@ describe "the topics action" do
           @organization.topics.last.users.size.should == @organization.users.size
         end
 
-        it "should add the invite user into topic members" do
+        it "should be able to invite user to topic" do
           click_on "创建新话题"
           fill_in "title", :with => "test title"
           fill_in "invited_emails", with: "test@example.com"
@@ -144,15 +144,30 @@ describe "the topics action" do
           @organization.topics.last.users.last.email.should == "test@example.com"
         end
 
-        it "should be able to add multiple invited user into topic members" do
+        it "should be able to invite multiple users to topic" do
           click_on "创建新话题"
           fill_in "title", :with => "test title"
-          fill_in "invited_emails", with: "test@example.com; aad@aa.com"
+          fill_in "invited_emails", with: "test@example.com; test2@example2.com"
           click_button "创建"
           page.should_not have_selector "#new-topic-form"
           page.should have_content "话题创建成功"
           visit personal_topics_path
           page.should have_content "test title"
+          page.should have_content "test@example.com"
+          page.should have_content "test2@example2.com"
+        end
+
+
+        it "should add user to topic when inputs member's email instead of check the checkbox" do
+          click_on "创建新话题"
+          fill_in "title", :with => "test title"
+          fill_in "invited_emails", with: @organization.users.last.email
+          click_button "创建"
+          page.should_not have_selector "#new-topic-form"
+          page.should have_content "话题创建成功"
+          visit personal_topics_path
+          page.should have_content "test title"
+          @organization.topics.last.users.should include @organization.users.last
         end
 
         it "should see error message when add the invalid invite user into topic members" do
@@ -451,7 +466,7 @@ describe "the topics action" do
             @organization.topics.last.users.size.should == @organization.users.size
           end
 
-          it "should add the invite user into topic members" do
+          it "should be able to invite user to topic" do
             click_on "创建新话题"
             fill_in "title", :with => "test title"
             fill_in "invited_emails", with: "test@example.com"

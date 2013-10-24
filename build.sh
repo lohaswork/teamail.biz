@@ -1,14 +1,5 @@
 #!/bin/bash
 #reek -n app
-bundle exec rake tailor
-if [ $? -ne 0 ]; then
-  echo 'tailor has warning or error!'
-else
-  echo 'tailor check has passed.'
-fi
-
-#metric_fu -r
-bundle exec rails_best_practices .
 
 if [ -f config/database.yml ]; then
   echo 'config/database.yml already exists, so we will not replace it with config/database.yml.template'
@@ -37,3 +28,12 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 echo 'bundle exec rake spec success.'
+
+bundle exec tailor
+if [ $? -ne 0 ]; then
+  echo 'tailor has warning or error!'
+  exit 1
+else
+  echo 'tailor check has passed.'
+fi
+
