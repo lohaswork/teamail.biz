@@ -123,7 +123,7 @@ describe "the topics action" do
         it "should select all of the users by select all checkbox" do
           click_on "创建新话题"
           fill_in "title", :with => "test title"
-          find(:xpath, "//input[@class='all']").set(true)
+          find(:xpath, "//div[@id='select-user-for-topic']//input[@class='all']").set(true)
           click_button "创建"
           page.should_not have_selector "#new-topic-form"
           page.should have_content "话题创建成功"
@@ -442,7 +442,7 @@ describe "the topics action" do
           it "should select all of the users by select all checkbox" do
             click_on "创建新话题"
             fill_in "title", :with => "test title"
-            find(:xpath, "//input[@class='all']").set(true)
+            find(:xpath, "//div[@id='select-user-for-topic']//input[@class='all']").set(true)
             click_button "创建"
             page.should_not have_selector "#new-topic-form"
             page.should have_content "话题创建成功"

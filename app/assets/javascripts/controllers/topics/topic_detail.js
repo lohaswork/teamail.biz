@@ -20,6 +20,14 @@
       .on("refreshed", "#discussion-list", function(){
         return false;
       })
+      .on("refreshed", "#select-user-for-topic", function(){
+        return false;
+      })
+      .on("refreshed", "#select-user-for-discussion", function(){
+        $("#new-discussion #invited_emails").val("");
+        $("#new-discussion #content").val("");
+        return false;
+      })
       .on("refreshed", "#topic-area", function () {
         window.history.pushState({}, "teamail.biz", "/organization_topics");
         $("#tagging-dropdown").attr("disabled","disabled");
