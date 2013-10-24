@@ -144,6 +144,17 @@ describe "the topics action" do
           @organization.topics.last.users.last.email.should == "test@example.com"
         end
 
+        it "should be able to add multiple invited user into topic members" do
+          click_on "创建新话题"
+          fill_in "title", :with => "test title"
+          fill_in "invited_emails", with: "test@example.com; aad@aa.com"
+          click_button "创建"
+          page.should_not have_selector "#new-topic-form"
+          page.should have_content "话题创建成功"
+          visit personal_topics_path
+          page.should have_content "test title"
+        end
+
         it "should see error message when add the invalid invite user into topic members" do
           click_on "创建新话题"
           fill_in "title", :with => "test title"

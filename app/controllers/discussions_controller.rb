@@ -4,9 +4,9 @@ class DiscussionsController < ApplicationController
 
   def create
     @topic = Topic.find(params[:topic_id])
-    selected_emails = (params[:selected_users_for_topic] || params[:selected_users_for_discussion]).split(',')
+    selected_emails = params[:selected_users_for_discussion].split(',')
 
-    invited_emails = params[:invited_emails].strip.split(/[\,\;]/)
+    invited_emails = params[:invited_emails].split(/[\,\;]/).map { |email| email.strip }
 
     User.check_emails_validation(invited_emails)
 

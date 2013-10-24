@@ -9,7 +9,7 @@ class TopicsController < ApplicationController
   def create
     selected_emails = params[:selected_users_for_topic].split(',')
 
-    invited_emails = params[:invited_emails].strip.split(/[\,\;]/)
+    invited_emails = params[:invited_emails].split(/[\,\;]/).map { |email| email.strip }
 
     User.check_emails_validation(invited_emails)
 
