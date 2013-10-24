@@ -57,13 +57,13 @@ describe "the topics action" do
         it "should saw the user select checkbox" do
           page.should have_button "创建新话题"
           click_on "创建新话题"
-          find('#select-user').should have_content(@organization.users.last.email_name)
+          find('#select-user-for-topic').should have_content(@organization.users.last.email_name)
         end
 
         it "should not have current user name in the select user checkbox" do
           page.should have_button "创建新话题"
           click_on "创建新话题"
-          find('#select-user').should_not have_content(@user.email_name)
+          find('#select-user-for-topic').should_not have_content(@user.email_name)
         end
 
         it "should see the invited emails text field" do
@@ -100,7 +100,7 @@ describe "the topics action" do
         it "should add the selected user into topic members" do
           click_on "创建新话题"
           fill_in "title", :with => "test title"
-          all(:css, "div#select-user input[type='checkbox']").last.set(true)
+          all(:css, "div#select-user-for-topic input[type='checkbox']").last.set(true)
           click_button "创建"
           page.should_not have_selector "#new-topic-form"
           page.should have_content "话题创建成功"
@@ -249,14 +249,14 @@ describe "the topics action" do
       it "should see the last discussion member default selected " do
         click_on "创建新话题"
         fill_in "title", :with => "test title"
-        all(:css, "div#select-user input[type='checkbox']").last.set(true)
+        all(:css, "div#select-user-for-topic input[type='checkbox']").last.set(true)
         click_button "创建"
         page.should_not have_selector "#new-topic-form"
         page.should have_content "话题创建成功"
         visit organization_topics_path
         page.should have_content("test title")
         click_on "test title"
-        all(:css, "div#select-user input[type='checkbox']").last.should be_checked
+        all(:css, "div#select-user-for-discussion input[type='checkbox']").last.should be_checked
       end
     end
 
@@ -347,7 +347,7 @@ describe "the topics action" do
           visit personal_topics_path
           click_on "创建新话题"
           page.should have_selector "#new-topic-form"
-          find('#select-user').should_not have_content("全选")
+          find('#select-user-for-topic').should_not have_content("全选")
         end
       end
 
@@ -374,13 +374,13 @@ describe "the topics action" do
           it "should saw the user select checkbox" do
             page.should have_button "创建新话题"
             click_on "创建新话题"
-            find('#select-user').should have_content(@organization.users.last.email_name)
+            find('#select-user-for-topic').should have_content(@organization.users.last.email_name)
           end
 
           it "should not have current user name in the select user checkbox" do
             page.should have_button "创建新话题"
             click_on "创建新话题"
-            find('#select-user').should_not have_content(@user.email_name)
+            find('#select-user-for-topic').should_not have_content(@user.email_name)
           end
 
           it "should see the invited emails text field" do
@@ -419,7 +419,7 @@ describe "the topics action" do
           it "should add the selected user into topic members" do
             click_on "创建新话题"
             fill_in "title", :with => "test title"
-            all(:css, "div#select-user input[type='checkbox']").last.set(true)
+            all(:css, "div#select-user-for-topic input[type='checkbox']").last.set(true)
             click_button "创建"
             page.should_not have_selector "#new-topic-form"
             page.should have_content "话题创建成功"
