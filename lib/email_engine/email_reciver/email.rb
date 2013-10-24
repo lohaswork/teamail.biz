@@ -40,7 +40,7 @@ module EmailEngine
       end
 
       def resolve_topic_of_email
-        topic_id = body_html[/\/topics\/(.*?)\"/m, 1]
+        topic_id = body_html[/#{Regexp.escape(@gateway.host_name)}\/topics\/(.*?)\"/m, 1]
         topic_id = topic_id.blank? ? nil : topic_id.to_i
         topic_id && Topic.find(topic_id)
       end
