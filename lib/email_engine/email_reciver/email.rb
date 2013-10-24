@@ -23,10 +23,10 @@ module EmailEngine
         #resolve the email here
         @topic = resolve_topic_of_email
         @creator = User.find_by_email sender
-        if is_creatre_discussion?
+        if is_creator_discussion?
           @organization = @topic.organization
           #set the creator to nil as invalid if the organization has not the creator
-          @creator = nil if !@organization.has_member?(@creator)
+          @creator = nil if !@organization.has_member?(sender)
         else
           @organization = @creator && @creator.default_organization
           #set the creator to nil as invalid if the creator has no organization
@@ -35,7 +35,7 @@ module EmailEngine
         resolve_notifiers
       end
 
-      def is_creatre_discussion?
+      def is_creator_discussion?
         !!@topic
       end
 
@@ -48,14 +48,14 @@ module EmailEngine
       def create_from_email
         resolve_email
         invalid_creator_inotification && return if !@creator
-        if is_creatre_discussion?
+        if is_creator_discussion?
           content = stripped_text.blank? ? "此封内容为空" : stripped_text
           discussion = Discussion.create_discussion(@creator, @topic, @notifiers, content)
           EmailEngine::DiscussionNotifier.new(discussion.id, @notifiers).create_discussion_notification
         else
           title = subject.blank? ? "此主题标题为空" : subject
           @topic = Topic.create_topic(title, stripped_text, @notifiers, @organization, @creator)
-          EmailEngine::TopicNotifier.new(topic.id).create_topic_notification
+          EmailEngine::TopicNotifier.new(@topic.id).create_topic_notification
         end
       end
 
@@ -72,7 +72,7 @@ module EmailEngine
         @notifiers = []
         all_recipient_emails = to + "," + (self.methods.include?(:cc) ? self.cc : '')
         all_recipient_emails.split(',').map{ |address| @notifiers.concat( address.scan(email_regex) ) }
-        @notifiers = (@topic.users.map(&:email) + @notifiers).uniq if is_creatre_discussion?
+        @notifiers = (@topic.users.map(&:email) + @notifiers).uniq if is_creator_discussion?
         @notifiers.delete $config.default_email_reciver
       end
 

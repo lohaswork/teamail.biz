@@ -12,6 +12,8 @@ module EmailEngine
           subject: options[:subject],
           html: options[:body]
           ) if send_email?
+
+      Rails.logger.debug "Use #{default_sender} send email to #{delivery_filter(options[:to])} with subject: #{options[:subject]}\n And the content is: options[:body]"
     end
 
     private
