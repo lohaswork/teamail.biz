@@ -129,7 +129,7 @@ describe "the topics action" do
           page.should have_content "话题创建成功"
           visit organization_topics_path
           page.should have_content "test title"
-          @organization.topics.last.users.size.should == @organization.users.size
+          @organization.topics.last.users.length.should == @organization.users.length
         end
 
         it "should be able to invite user to topic" do
@@ -152,6 +152,7 @@ describe "the topics action" do
           page.should_not have_selector "#new-topic-form"
           page.should have_content "话题创建成功"
           visit personal_topics_path
+          click_on "test title"
           page.should have_content "test title"
           page.should have_content "test@example.com"
           page.should have_content "test2@example2.com"
