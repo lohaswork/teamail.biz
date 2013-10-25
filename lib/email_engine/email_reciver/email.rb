@@ -3,6 +3,7 @@ module EmailEngine
   module EmailReciver
 
     class Email
+      include EmailEngine::EmailReciver::EmailContentResolution
 
       def initialize(hash={}, gateway=EmailEngine::MailgunGateway.new)
         hash.each do |k, v|
@@ -53,10 +54,11 @@ module EmailEngine
           discussion = Discussion.create_discussion(@creator, @topic, @notifiers, content)
           EmailEngine::DiscussionNotifier.new(discussion.id, @notifiers).create_discussion_notification
         else
-          title = subject.blank? ? "此主题标题为空" : subject
+          title = subject.blank? ? "此主题标题为空" : analyzed_title
           @topic = Topic.create_topic(title, stripped_text, @notifiers, @organization, @creator)
           EmailEngine::TopicNotifier.new(@topic.id).create_topic_notification
         end
+        add_tags_to_topic
       end
 
       def invalid_creator_inotification
@@ -77,6 +79,7 @@ module EmailEngine
       end
 
       def resolve_notifiers
+        return if !@creator
         set_notifiers
         @notifiers.each do |email|
           if !@organization.has_member?(email)
