@@ -73,6 +73,12 @@ class User < ActiveRecord::Base
     def already_register?(email)
       !!self.find_by_email(email)
     end
+
+    def check_emails_validation(invited_emails)
+      invited_emails.each do |invited_email|
+        raise ValidationError.new('Email 邮件地址不合法') unless User::VALID_EMAIL_REGEX =~ invited_email
+      end
+    end
   end
 
   def password

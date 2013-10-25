@@ -84,7 +84,7 @@ describe "topics have new discussion" do
       visit personal_topics_path
       click_on "创建新话题"
       fill_in "title", :with => "test title"
-      checkbox = find(:xpath, "(//div[@id='select-user']//input[@type='checkbox'])[10]")
+      checkbox = find(:xpath, "(//div[@id='select-user-for-topic']//input[@type='checkbox'])[10]")
       checkbox.set(true)
       click_button "创建"
       page.should have_content "话题创建成功"
