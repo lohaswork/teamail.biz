@@ -4,6 +4,7 @@ module EmailEngine
 
     class Email
       include EmailEngine::EmailReciver::EmailContentResolution
+      include EmailEngine::EmailReciver::AttachmentHandler
 
       def initialize(hash={}, gateway=EmailEngine::MailgunGateway.new)
         hash.each do |k, v|
@@ -52,13 +53,15 @@ module EmailEngine
         if is_creator_discussion?
           content = stripped_text.blank? ? "此封内容为空" : stripped_text
           discussion = Discussion.create_discussion(@creator, @topic, @notifiers, content)
+          post_attachments_to_oss(discussion) if self.has_attachments?
           EmailEngine::DiscussionNotifier.new(discussion.id, @notifiers).create_discussion_notification
         else
           title = subject.blank? ? "此主题标题为空" : analyzed_title
           @topic = Topic.create_topic(title, stripped_text, @notifiers, @organization, @creator)
+          add_tags_to(@topic)
+          post_attachments_to_oss(@topic.discussions.first) if self.has_attachments?
           EmailEngine::TopicNotifier.new(@topic.id).create_topic_notification
         end
-        add_tags_to_topic
       end
 
       def invalid_creator_inotification

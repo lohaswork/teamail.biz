@@ -6,10 +6,10 @@
       email: true
     },
   test:{
-    email: false
+      email: false
   },
   development:{
-
+      default_email_reciver: "test@mail.teamail.biz"
   },
   production:{
 

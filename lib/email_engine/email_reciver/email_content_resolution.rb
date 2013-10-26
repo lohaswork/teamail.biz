@@ -8,20 +8,20 @@ module EmailEngine
         tag_set = Set.new
         title_array.map { |segment| tag_set.add? segment if /^#/.match segment }
         @tags = tag_set.to_a.map { |tag| tag[1..-1] }
-        debugger
         title_content = (title_array - tag_set.to_a).join(' ')
       end
 
-      def add_tags_to_topic
+      def add_tags_to(topic)
         valid_tags = @tags.map do |tag|
-          unless @topic.organization.tags.include? tag
+          if topic.organization.tags.include?(tag) || !Tag::VALID_TAGNAME_TEGEX.match(tag)
+            nil
+          else
             tag = Tag.new(:name => tag)
-            next if !tag.valid?
-            @topic.organization.tags << tag
+            topic.organization.tags << tag
             tag.id
           end
         end
-        @topic.add_tags(valid_tags)
+        topic.add_tags(valid_tags.compact)
       end
 
     end
