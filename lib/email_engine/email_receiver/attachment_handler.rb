@@ -1,8 +1,10 @@
 # encoding: utf-8
 module EmailEngine
-  module Emailreceiver
+  module EmailReceiver
 
     module AttachmentHandler
+      extend ActiveSupport::Concern
+
       def post_attachments_to_oss(discussion)
         methods.grep(/^attachment_\d+$/) do |file_key|
           file = self.send file_key
