@@ -1,10 +1,10 @@
   # encoding: utf-8
 module EmailEngine
-  module EmailReciver
+  module Emailreceiver
 
     class Email
-      include EmailEngine::EmailReciver::EmailContentResolution
-      include EmailEngine::EmailReciver::AttachmentHandler
+      include EmailEngine::Emailreceiver::EmailContentResolution
+      include EmailEngine::Emailreceiver::AttachmentHandler
 
       def initialize(hash={}, gateway=EmailEngine::MailgunGateway.new)
         hash.each do |k, v|
@@ -78,7 +78,7 @@ module EmailEngine
         all_recipient_emails = to + "," + (self.methods.include?(:cc) ? self.cc : '')
         all_recipient_emails.split(',').map{ |address| @notifiers.concat( address.scan(email_regex) ) }
         @notifiers = (@topic.users.map(&:email) + @notifiers).uniq if is_creator_discussion?
-        @notifiers.delete $config.default_email_reciver
+        @notifiers.delete $config.default_email_receiver
       end
 
       def resolve_notifiers

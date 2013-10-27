@@ -1,6 +1,6 @@
 # encoding: utf-8
 module EmailEngine
-  module EmailReciver
+  module Emailreceiver
 
     module AttachmentHandler
       def post_attachments_to_oss(discussion)

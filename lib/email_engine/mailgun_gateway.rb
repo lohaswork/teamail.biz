@@ -23,7 +23,7 @@ module EmailEngine
     end
 
     def default_sender
-      "teamail <notifications@mail.teamail.biz>"
+      "teamail #{$config.default_email_receiver}"
     end
 
     def api_key
@@ -35,7 +35,7 @@ module EmailEngine
     end
 
     def delivery_filter(emails)
-      Rails.env.production? ? emails : $config.recieve_test_email
+      Rails.env.production? ? emails : $config.receive_test_email
     end
   end
 end

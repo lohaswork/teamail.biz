@@ -1,6 +1,6 @@
   # encoding: utf-8
 module EmailEngine
-  module EmailReciver
+  module Emailreceiver
     module EmailContentResolution
 
       def analyzed_title

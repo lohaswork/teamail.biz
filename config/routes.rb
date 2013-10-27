@@ -44,7 +44,7 @@ LohasWorkCom::Application.routes.draw do
     resources :discussions, only: [:create]
   end
 
-  post "emails/recieve" => "email_recivers#email"
+  post "emails/receive" => "email_receivers#email"
   resources :welcome, only: [] do
     collection do
       post 'add_early_adotpers' => :add_early_adotpers
