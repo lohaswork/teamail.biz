@@ -23,7 +23,7 @@ module EmailEngine
     end
 
     def default_sender
-      "teamail #{$config.default_email_receiver}"
+      "teamail #{$config.default_system_email}"
     end
 
     def api_key

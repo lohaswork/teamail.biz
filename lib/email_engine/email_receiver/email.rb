@@ -78,7 +78,7 @@ module EmailEngine
         all_recipient_emails = to + "," + (self.methods.include?(:cc) ? self.cc : '')
         all_recipient_emails.split(',').map{ |address| @notifiers.concat( address.scan(email_regex) ) }
         @notifiers = (@topic.users.map(&:email) + @notifiers).uniq if is_creator_discussion?
-        @notifiers.delete $config.default_email_receiver
+        @notifiers.delete $config.default_system_email
       end
 
       def resolve_notifiers
