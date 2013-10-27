@@ -26,6 +26,7 @@ module EmailEngine
 
       def create_from_email
         resolve_email
+        invalid_creator_notification && return if !@organization || is_creating_discussion && !@organization.has_member?(sender)
         invite_notifiers
         if is_creating_discussion
           content = stripped_text.blank? ? "此封内容为空" : stripped_text

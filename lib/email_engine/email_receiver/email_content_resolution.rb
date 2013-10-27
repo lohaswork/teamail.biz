@@ -23,7 +23,6 @@ module EmailEngine
         else
           @organization = @creator && @creator.default_organization
         end
-        invalid_creator_notification && return if !@organization || is_creating_discussion && !@organization.has_member?(sender)
         set_notifiers
       end
 
