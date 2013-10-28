@@ -129,7 +129,7 @@ describe "the topics action" do
           page.should have_content "话题创建成功"
           visit organization_topics_path
           page.should have_content "test title"
-          @organization.topics.last.users.length.should == @organization.users.length
+          expect(@organization.topics.last.users.length).to eq(@organization.users.length)
         end
 
         it "should be able to invite user to topic" do
@@ -464,7 +464,7 @@ describe "the topics action" do
             page.should have_content "话题创建成功"
             visit personal_topics_path
             page.should have_content "test title"
-            @organization.topics.last.users.length.should == @organization.users.length
+            expect(@organization.topics.last.users.length).to eq(@organization.users.length)
           end
 
           it "should be able to invite user to topic" do

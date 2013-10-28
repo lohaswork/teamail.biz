@@ -33,6 +33,7 @@ gem 'font-awesome-rails'
 gem 'rest-client'
 gem 'multimap'
 gem 'sidekiq'
+gem 'kaminari'
 
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby'

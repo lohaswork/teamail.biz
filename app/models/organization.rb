@@ -3,7 +3,7 @@ class Organization < ActiveRecord::Base
   attr_accessible :name
 
   has_many :organization_memberships
-  has_many :users, -> { uniq }, :through => :organization_memberships
+  has_many :users, lambda { uniq }, :through => :organization_memberships
   has_many :topics
   has_many :tags
   validates :name, presence: true, :uniqueness => { :case_sensitive => false, :message => "组织名已使用" }
