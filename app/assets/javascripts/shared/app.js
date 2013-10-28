@@ -23,9 +23,11 @@ App = (function (){
           name = $this.attr('data-page');
       self.util.exec( name, $this );
     });
-    for (var k in self.lib){
-      new self.lib[k]();
-    };
+    if (typeof reload == 'undefined') {
+      for (var k in self.lib){
+        new self.lib[k]();
+      };
+    }
   }
 
   return self;
