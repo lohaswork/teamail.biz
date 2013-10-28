@@ -11,7 +11,7 @@
         <%= discussion.created_at%>
       </div>
       <div>
-        <%= render :partial => 'discussion_attachments', :locals => {:discussion => discussion} %>
+        <%= render :partial => 'topics/discussion_attachments', :locals => {:discussion => discussion} %>
       </div>
     </div>
   <% end %>
