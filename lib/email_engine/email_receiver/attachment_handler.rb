@@ -10,7 +10,6 @@ module EmailEngine
           file = self.send file_key
           uploadfile = UploadFile.new
           uploadfile.file = file
-          uploadfile.name = file.original_filename
           discussion.upload_files << uploadfile
         end
         discussion.save!

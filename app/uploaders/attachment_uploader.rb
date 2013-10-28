@@ -1,7 +1,19 @@
 # encoding: utf-8
+require 'carrierwave/processing/mime_types'
 class AttachmentUploader < CarrierWave::Uploader::Base
+  include CarrierWave::MimeTypes
 
   CarrierWave::SanitizedFile.sanitize_regexp = /[^[:word:]\.\-\+]/
+
+  process :set_content_type
+  process :save_content_type_and_file_name_in_model
+
+  def save_content_type_and_file_name_in_model
+    model.content_type = file.content_type if file.content_type
+    model.name = file.original_filename if file.original_filename
+    #model.file_size = file.size
+  end
+
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick

@@ -22,6 +22,9 @@ LohasWorkCom::Application.routes.draw do
 
   resources :tags, only: [:create]
 
+  get 'files/download' => "files#download"
+  delete 'files/delete' => "files#delete"
+
   controller :organizations do
     get 'show_member' => :show_member
     post 'delete_member' => :delete_member
