@@ -16,14 +16,14 @@
       标题：
     </div>
     <div class='col-xs-3'>
-      创建时间：
+      最后回复时间：
     </div>
   </div>
   <div class='checkbox-group' id="select-topic" data-update="#selected_topics_to_archive, #selected_topics_to_tagging" data-reload=true data-page="CheckBoxGroup">
-    <%- order_by_updator(topics).try(:each) do |topic| %>
+    <%- topics.try(:each) do |topic| %>
       <div class="row topic-row <%= display_unread_style?(topic) ? 'unread' : 'read' %>">
         <div class='col-xs-2'>
-          <%= check_box_tag 'topics[]', topic.id, false, :class=>"item", :'data-item'=>true %>
+          <%= check_box_tag nil, topic.id, false, :class=>"item", :'data-item'=>true %>
         </div>
         <div class='col-xs-2'>
           <%= topic.creator.email_name%>
@@ -40,5 +40,6 @@
         </div>
       </div>
     <% end %>
+    <%= paginate topics %>
   </div>
 </div>

@@ -11,6 +11,7 @@ LohasWorkCom::Application.routes.draw do
     post 'reset/:reset_token' => :do_reset, as: :do_reset
     get 'reset_success' => :reset_success
     get 'personal_topics' => :topics
+    get 'personal_topics/page/:page' => :topics
     get 'no_organizations' => :no_organizations
   end
   get 'signup' => 'users#new', as: 'signup'
@@ -29,13 +30,17 @@ LohasWorkCom::Application.routes.draw do
   end
 
   get '/organization_topics' => 'topics#index', as: :organization_topics
+  get '/organization_topics/page/:page' => 'topics#index'
   get '/personal_topics_inbox' => 'topics#unarchived', as: :personal_topics_inbox
+  get '/personal_topics_inbox/page/:page' => 'topics#unarchived'
 
   controller :topics do
     post 'remove_tag' => :remove_tag, as: :topic_remove_tag
     post 'add_tag' => :add_tags, as: :topics_add_tags
     post 'filter_with_tag' => :filter_with_tag, as: :topics_filter_with_tag
+    post 'filter_with_tag/page/:page' => :filter_with_tag
     post 'archive' => :archive, as: :archive_topics
+    post 'archive/page/:page' => :archive
   end
 
   resources :topics, only: [:create, :show]

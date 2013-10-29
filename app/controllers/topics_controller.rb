@@ -3,14 +3,12 @@ class TopicsController < ApplicationController
   before_filter :login_required, :organization_required
 
   def index
-    @topics = current_organization.topics
+    @topics = current_organization.topics.order_by_update.page(params[:page])
   end
 
   def create
     selected_emails = params[:selected_users_for_topic].split(',')
-
     invited_emails = params[:invited_emails].split(/[\,\;]/).map { |email| email.strip }
-
     User.check_emails_validation(invited_emails)
 
     invited_emails.each do |invited_email|
@@ -42,7 +40,6 @@ class TopicsController < ApplicationController
     @topic = Topic.find(params[:id])
     @topic.discussions.last.mark_as_read_by(login_user)
     @discussions = @topic.discussions
-    @colleagues = get_colleagues
   end
 
   def archive
@@ -51,7 +48,7 @@ class TopicsController < ApplicationController
     if detail_topic_id.blank? # 判断是否在 topic detail 页面
       selected_topics_ids = params[:selected_topics_to_archive].split(',')
       Topic.find(selected_topics_ids).each { |topic| topic.archived_by(login_user) }
-      topics = Topic.get_unarchived(login_user).to_a
+      topics = Topic.order_by_update.get_unarchived(login_user).page(params[:page])
       # 刷新 topic list
       render :json => {
         :update => {
@@ -78,7 +75,7 @@ class TopicsController < ApplicationController
   end
 
   def unarchived
-    @topics = Topic.get_unarchived(login_user).to_a
+    @topics = Topic.get_unarchived(login_user).order_by_update.page(params[:page])
   end
 
   def add_tags
@@ -127,7 +124,8 @@ class TopicsController < ApplicationController
 
   def filter_with_tag
     detail_topic_id = params[:topic]
-    @topics = current_organization.topics.map { |topic| topic if topic.has_tag?(params[:tag]) }.reject { |t| t.blank? }
+    @topics = current_organization.topics.order_by_update.map { |topic| topic if topic.has_tag?(params[:tag]) }.reject { |t| t.blank? }
+    @topics = Kaminari.paginate_array(@topics).page(params[:page])
 
     if detail_topic_id.blank? # 判断是否在 topic detail 页面
       # 刷新 topic list

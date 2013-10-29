@@ -4,7 +4,7 @@ class Discussion < ActiveRecord::Base
 
   belongs_to :discussable, :polymorphic => true
   has_many :user_discussions
-  has_many :users, -> { uniq }, :through => :user_discussions
+  has_many :users, lambda { uniq }, :through => :user_discussions
   validates :content, :presence => { :message => "请输入回复内容" }
   after_create :update_topic_members
 
@@ -17,7 +17,7 @@ class Discussion < ActiveRecord::Base
       discussion.creator = login_user
       discussion.users << (selected_users << login_user)
       topic.discussions << discussion
-      topic.save!
+      topic.new_record? ? topic.save! : topic.touch
       discussion.mark_as_read_by(login_user)
       topic.unarchived_by_others
       topic.mark_as_unread_to_others
