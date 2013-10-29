@@ -26,6 +26,7 @@
       <%= render 'layouts/footer_index' %>
     </div>
     <%= javascript_include_tag "application" %>
+    <%= javascript_tag '$.fx.off = true;' if Rails.env.test? %>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
         <%= javascript_include_tag "ie" %>

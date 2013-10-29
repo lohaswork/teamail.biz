@@ -10,4 +10,13 @@ class Tag < ActiveRecord::Base
                    :format => { :with => VALID_TAGNAME_TEGEX, :message=>"名称不合法，标签名只能包含汉字、字母、数字、下划线'_'和连接号'-'，且不能以下划线和连接号开头或结尾", :allow_blank => true },
                    :uniqueness => { :case_sensitive => true, :message => "标签名已使用" }
 
+  before_create :add_color
+
+  private
+  def add_color
+    # Default shipping with 16 colors
+    #   take random number
+    random_color_number = rand(1..16)
+    self.color ||= random_color_number.to_s
+  end
 end

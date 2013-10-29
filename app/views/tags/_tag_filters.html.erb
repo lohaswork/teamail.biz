@@ -2,7 +2,8 @@
   <ul>
     <%- tags.try(:each) do |tag|%>
       <li id="tag-link-#{tag.id}">
-        <%= link_to topics_filter_with_tag_path(:tag => tag, :topic => @topic), :method => :post, :remote => true do %>
+        <%- tag_color = tag.color || "1" %>
+        <%= link_to topics_filter_with_tag_path(:tag => tag, :topic => @topic), :method => :post, :remote => true, :class => "tag-color-#{tag_color}" do %>
           <%= tag.name %>
         <% end %>
       </li>
