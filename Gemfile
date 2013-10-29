@@ -34,6 +34,7 @@ gem 'rest-client'
 gem 'carrierwave-aliyun'
 gem 'multimap'
 gem 'sidekiq'
+gem 'kaminari'
 
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby'

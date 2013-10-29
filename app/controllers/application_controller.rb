@@ -17,4 +17,10 @@ class ApplicationController < ActionController::Base
   def set_page_id
     @page_id = "#{controller_name.underscore}_#{action_name}_page".camelize
   end
+
+  def get_rendered_string(partial, locals= {})
+    render_to_string(partial: partial,
+                     layout: false,
+                     locals: locals)
+  end
 end

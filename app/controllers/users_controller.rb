@@ -12,8 +12,7 @@ class UsersController < ApplicationController
   end
 
   def topics
-    @topics = login_user.topics
-    @colleagues = get_colleagues
+    @topics = login_user.topics.order_by_update.page(params[:page])
 
     render layout: "topics"
   end

@@ -4,11 +4,11 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password
 
   has_many :organization_memberships
-  has_many :organizations, -> { uniq }, :through => :organization_memberships
+  has_many :organizations, lambda { uniq }, :through => :organization_memberships
   has_many :user_topics
-  has_many :topics, -> { uniq }, :through => :user_topics
+  has_many :topics, lambda { uniq }, :through => :user_topics
   has_many :user_discussions
-  has_many :discussions, -> { uniq }, :through => :user_discussions
+  has_many :discussions, lambda { uniq }, :through => :user_discussions
   before_create :add_active_code, :create_remember_token
 
   before_validation(:on=>:create) { |user| user.email = email.downcase }
@@ -72,6 +72,12 @@ class User < ActiveRecord::Base
 
     def already_register?(email)
       !!self.find_by_email(email)
+    end
+
+    def check_emails_validation(invited_emails)
+      invited_emails.each do |invited_email|
+        raise ValidationError.new('Email 邮件地址不合法') unless User::VALID_EMAIL_REGEX =~ invited_email
+      end
     end
   end
 
