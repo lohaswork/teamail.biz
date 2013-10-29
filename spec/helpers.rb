@@ -24,4 +24,12 @@ module Helpers
     fill_in 'password', :with => password
     click_button '登录'
   end
+
+  def wait_until
+    require "timeout"
+    Timeout.timeout(Capybara.default_wait_time) do
+      sleep(0.1) until value = yield
+      value
+    end
+  end
 end
