@@ -187,7 +187,7 @@ describe "topic section" do
       it "filter using tag and should see topic list refreshed" do
         link = all(:css, "div#tag-filters :link").first
         link.click
-        page.should have_content @organization.topics.first.title
+        wait_until { page.should have_content @organization.topics.first.title }
         page.should_not have_content @organization.topics.last.title
       end
 
@@ -224,7 +224,7 @@ describe "topic section" do
       it "filter using tag and should see topic list refreshed" do
         link = all(:css, "div#tag-filters :link").first
         link.click
-        page.should have_content @organization.topics.first.title
+        wait_until { page.should have_content @organization.topics.first.title }
         page.should_not have_content @organization.topics.last.title
       end
 

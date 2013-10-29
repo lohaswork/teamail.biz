@@ -1,0 +1,7 @@
+<div id="attachments-in-discussion">
+  <%- discussion.upload_files.try(:each) do |file| %>
+    <%= file.name %>
+    <%= link_to('下载', files_download_path(id: file.id), method: :get) %>
+    <%= link_to('删除', files_delete_path(id: file.id), method: :delete, remote: true) %>
+  <% end %>
+</div>

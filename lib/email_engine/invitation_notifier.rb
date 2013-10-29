@@ -4,15 +4,16 @@ module EmailEngine
 
     attr_reader :user, :gateway, :from, :organization_name
 
-    def initialize(email, organization_name, invitation_from, gateway=EmailEngine::MailgunGateway.new)
+    def initialize(email, organization, invitation_from, is_registered_user, gateway=EmailEngine::MailgunGateway.new)
       @user = User.find_by_email email
       @organization_name = organization_name
       @from = invitation_from
       @gateway = gateway
+      @is_registered_user = is_registered_user
     end
 
-    def invitation_notification(email_status)
-      notification_text = email_status ? on_board_text : invitation_notification_text
+    def invitation_notification
+      notification_text = @is_registered_user ? on_board_text : invitation_notification_text
       gateway.send_batch_message(
         to: user.email,
         subject: "[TeaMail]邀请加入#{organization_name}",

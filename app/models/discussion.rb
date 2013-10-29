@@ -3,6 +3,7 @@ class Discussion < ActiveRecord::Base
   attr_accessible :content
 
   belongs_to :discussable, :polymorphic => true
+  has_many :upload_files
   has_many :user_discussions
   has_many :users, lambda { uniq }, :through => :user_discussions
   validates :content, :presence => { :message => "请输入回复内容" }

@@ -23,6 +23,9 @@ LohasWorkCom::Application.routes.draw do
 
   resources :tags, only: [:create]
 
+  get 'files/download' => "files#download"
+  delete 'files/delete' => "files#delete"
+
   controller :organizations do
     get 'show_member' => :show_member
     post 'delete_member' => :delete_member
@@ -49,6 +52,7 @@ LohasWorkCom::Application.routes.draw do
     resources :discussions, only: [:create]
   end
 
+  post "emails/receive" => "email_receivers#email"
   resources :welcome, only: [] do
     collection do
       post 'add_early_adotpers' => :add_early_adotpers

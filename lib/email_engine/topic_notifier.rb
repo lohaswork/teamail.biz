@@ -31,6 +31,10 @@ module EmailEngine
       <p>#{topic.title}</p>
       <div>内容：</div>
       <div>#{topic.content}<div>
+      <br/>
+      点击查看：
+      <a href='http://#{@gateway.host_name}/topics/#{topic.id}'>
+      http://#{@gateway.host_name}/topics/#{topic.id}</a>
       </body></html>
       EMAIL
     end

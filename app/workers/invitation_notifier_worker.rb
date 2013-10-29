@@ -3,8 +3,8 @@ class InvitationNotifierWorker
   include Sidekiq::Worker
   sidekiq_options retry: false
 
-  def perform(email, organization, invitation_from, email_status)
-    EmailEngine::InvitationNotifier.new(email, organization, invitation_from)
-      .invitation_notification(email_status)
+  def perform(email, organization, invitation_from, is_registered_user)
+    EmailEngine::InvitationNotifier.new(email, organization, invitation_from, is_registered_user)
+      .invitation_notification
   end
 end
