@@ -522,11 +522,12 @@ describe "the topics action" do
       end
 
       it "should disappeared when the topic is archived" do
-        find(:xpath, "(//div[@id='topic-list']//input[@type='checkbox'])[1]").set(true)
-        button = find(:css, '#archive-submit')
-        page.should have_content @user.topics.last.title
-        button.click
-        page.should_not have_content @user.topics.last.title
+        checkbox = find(:xpath, "(//div[@id='topic-list']//input[@type='checkbox'])[1]")
+        checkbox.set(true)
+        topic = Topic.find(checkbox.value)
+        page.should have_content topic.title
+        click_button '归档'
+        page.should_not have_content topic.title
       end
     end
   end

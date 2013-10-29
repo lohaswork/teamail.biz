@@ -2,7 +2,7 @@
 <% disabled = archive_disabled?(topic) ? 'disabled' : false %>
 <%= form_tag archive_topics_path(:topic => topic), :method => "post", :remote => true do %>
   <%= button_tag(type: "submit", id: "archive-submit", class: "btn btn-default", disabled: disabled) do %>
-    <i class="icon-archive"></i>
+    <i class="icon-archive">归档</i>
   <% end %>
   <%= hidden_field_tag :selected_topics_to_archive, '' %>
 <% end %>

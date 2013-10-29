@@ -23,7 +23,7 @@
     <%- topics.try(:each) do |topic| %>
       <div class="row topic-row <%= display_unread_style?(topic) ? 'unread' : 'read' %>">
         <div class='col-xs-2'>
-          <%= check_box_tag 'topics[]', topic.id, false, :class=>"item", :'data-item'=>true %>
+          <%= check_box_tag nil, topic.id, false, :class=>"item", :'data-item'=>true %>
         </div>
         <div class='col-xs-2'>
           <%= topic.creator.email_name%>

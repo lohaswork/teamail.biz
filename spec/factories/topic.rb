@@ -4,6 +4,6 @@ FactoryGirl.define do
   end
 
   sequence :title do |n|
-    "this is test topic#{n}"
+    "this is test topic#{n}, for test"
   end
 end
