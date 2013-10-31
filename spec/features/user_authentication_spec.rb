@@ -131,7 +131,7 @@ describe "user authentaction action" do
       it "should go to root path after logout" do
         visit root_path
         click_on("登出")
-        current_path.should == "/"
+        current_path.should == "/login"
         page.should_not have_content(@user.email)
       end
     end

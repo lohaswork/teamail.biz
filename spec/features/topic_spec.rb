@@ -130,7 +130,7 @@ describe "the topics action" do
           visit organization_topics_path
           page.should have_content "test title"
           wait_for_ajax
-          expect(@organization.topics.last.users.length).to equal(@organization.users.length)
+          expect(@organization.topics.last.users.length).to eq(@organization.users.length)
         end
 
         it "should be able to invite user to topic" do
