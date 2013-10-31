@@ -18,13 +18,13 @@
             <%= topic.discussions.size > 0 ? topic.discussions.size : ''%>
           </div>
           <div class='topic-title-with-tag'>
+            <%= render :partial => 'tags/headline_tags', :locals => {:topic => topic} %>
             <div class='title'>
               <%= link_to(topic.title, topic_path(topic)) %>
             </div>
-            <%= render :partial => 'tags/headline_tags', :locals => {:topic => topic} %>
           </div>
           <div class='topic-update-time'>
-            <%= topic.last_update_time.strftime("%Y年%m月%d日 %H:%M") %>
+            <time class="timeago" datetime="<%= topic.last_update_time %>"></time>
           </div>
         </li>
       <% end %>

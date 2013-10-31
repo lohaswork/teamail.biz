@@ -57,17 +57,23 @@
     .topic-title-with-tag {
       float: left;
       font-size: 14px;
-      width: 50%;
+      width: 60%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
       .title {
-        float: left;
-        text-overflow: ellipsis;
         margin-right: 5px;
+      }
+      .headline-tag-container {
+        margin-right: 5px;
+        float: left;
       }
     }
     .topic-update-time {
       float: right;
+      text-align: right;
       clear: right;
-      min-width: 150px;
+      min-width: 120px;
     }
   }
 }

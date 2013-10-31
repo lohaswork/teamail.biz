@@ -7,6 +7,7 @@
   App.page.TopicCheckControls.prototype = {
 
     init: function(){
+      $('.timeago').timeago();
       $(document).bind('click',function(e){
           var e = e || window.event; //浏览器兼容性
           var elem = e.target || e.srcElement;
