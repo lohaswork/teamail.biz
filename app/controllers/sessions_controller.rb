@@ -24,6 +24,6 @@ class SessionsController < ApplicationController
 
   def destroy
     cookies.delete(:login_token)
-    redirect_to root_url, :notice => "登出！"
+    redirect_to login_path
   end
 end
