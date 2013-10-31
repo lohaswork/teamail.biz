@@ -1,19 +1,21 @@
-  <div class='row' id="member-list">
-    <div><%= login_user.email_name %></div>
+  <ul class='col-xs-12 list-unstyled' id="member-list">
+    <li>
+      <i class="fa fa-user"></i>
+      <%= login_user.email_name %>
+    </li>
     <%- colleagues.try(:each) do |user|%>
-      <div class="member-name">
+      <li class="member-name">
+        <i class="fa fa-user"></i>
         <%- if user.active_status %>
           <%= user.email_name %>
         <%- else %>
           <%= user.email %>
         <% end %>
-      </div>
-      <div class="member-container">
         <%- if login_user_admin? %>
           <%= link_to delete_member_path(:user => user), :method => :post, :remote => true, :class=>"center" do %>
-            <span>删除该成员</span>
+            删除该成员
           <% end %>
         <% end %>
-      </div>
+      </li>
     <% end %>
-  </div>
+  </ul>

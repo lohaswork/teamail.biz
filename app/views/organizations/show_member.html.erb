@@ -1,4 +1,5 @@
-<div>成员管理
-  <%= render :partial => 'invite_member', :locals => {:colleagues => @colleagues} %>
+<div>
+  <h3><i class="fa fa-group"></i>&nbsp&nbsp成员管理</h3>
   <%= render :partial => 'member_list', :locals => {:colleagues => @colleagues} %>
+  <%= render :partial => 'invite_member', :locals => {:colleagues => @colleagues} %>
 </div>
