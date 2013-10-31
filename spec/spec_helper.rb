@@ -57,7 +57,7 @@ def setup_spec_helper
 
     #TODO: ignore the js error for now
     Capybara.register_driver :poltergeist do |app|
-      Capybara::Poltergeist::Driver.new(app, options = {:js_errors => false })
+      Capybara::Poltergeist::Driver.new(app, options = { js_errors: false, phantomjs_logger: WarningSuppressor })
     end
 
     #clean DB after every test case
@@ -85,4 +85,39 @@ end
 Spork.each_run do
   # This code will be run each time you run your specs.
 
+end
+
+# Following code is used to suppress annoying warnings due to an issue related
+#   with Phantomjs and CoreText in Mavericks Runtime Lib.
+# These code will be removed when the issue is fixed.
+# Thread URL: https://github.com/ariya/phantomjs/issues/11418
+module Capybara::Poltergeist
+  class Client
+    private
+    def redirect_stdout
+      prev = STDOUT.dup
+      prev.autoclose = false
+      $stdout = @write_io
+      STDOUT.reopen(@write_io)
+
+      prev = STDERR.dup
+      prev.autoclose = false
+      $stderr = @write_io
+      STDERR.reopen(@write_io)
+      yield
+    ensure
+      STDOUT.reopen(prev)
+      $stdout = STDOUT
+      STDERR.reopen(prev)
+      $stderr = STDERR
+    end
+  end
+end
+
+class WarningSuppressor
+  class << self
+    def write(message)
+      if message =~ /QFont::setPixelSize: Pixel size <= 0/ || message =~/CoreText performance note:/ then 0 else puts(message);1;end
+    end
+  end
 end

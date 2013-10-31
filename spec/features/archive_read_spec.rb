@@ -58,15 +58,15 @@ describe "topics have new discussion" do
     it "should see unread topics in personal_topics_path" do
       visit personal_topics_path
       page.should have_content @user.topics.first.title
-      page.should have_css('div.unread')
-      page.should_not have_css('div.read')
+      page.should have_css('li.unread')
+      page.should_not have_css('li.read')
     end
 
     it "should see unread topics in personal_topics_inbox_path" do
       visit personal_topics_inbox_path
       page.should have_content @user.topics.first.title
-      page.should have_css('div.unread')
-      page.should_not have_css('div.read')
+      page.should have_css('li.unread')
+      page.should_not have_css('li.read')
     end
 
     it "should becomes read after visit topic detail page" do
@@ -76,7 +76,7 @@ describe "topics have new discussion" do
       click_on @user.topics.first.title
       page.should have_content @user.topics.first.title
       click_on "未处理"
-      page.should have_css('div.read')
+      page.should have_css('li.read')
       find(:css,"div.personal-inbox").should have_content (unread_num - 1).to_s
     end
 

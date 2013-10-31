@@ -326,7 +326,7 @@ describe "the topics action" do
           checkbox.set(true)
           click_button "回复"
           page.should have_content "user create a discussion for discussion users"
-          wait_until { find(:xpath, "(//div[@id='new-discussion']//input[@type='checkbox'])[10]").checked? }
+          find(:xpath, "(//div[@id='new-discussion']//input[@type='checkbox'])[10]").should be_checked
         end
       end
     end
@@ -466,7 +466,7 @@ describe "the topics action" do
             visit personal_topics_path
             page.should have_content "test title"
             wait_for_ajax
-            expect(@organization.topics.last.users.length).to equal(@organization.users.length)
+            expect(@organization.topics.last.users.length).to eq(@organization.users.length)
           end
 
           it "should be able to invite user to topic" do
