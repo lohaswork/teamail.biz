@@ -1,0 +1,9 @@
+<div class="topiclist-buttongroup">
+  <%= render :partial => 'tags/tagging' %>
+  <% if controller_name == 'topics' && action_name == 'show' || action_name == 'unarchived' %>
+    <%= render :partial => 'archive_form', :locals => {:topic => topic} %>
+  <% end %>
+  <% if controller_name == 'topics' && action_name == 'index' %>
+    <%= link_to('成员管理', show_member_path, :class=>"center")%>
+  <% end %>
+</div>

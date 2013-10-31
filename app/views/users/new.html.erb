@@ -1,16 +1,27 @@
-<div class="sign-up">
+<div class="sign-up container">
   <%= form_tag users_path, :method => "post", :class=>"form-horizontal", :remote => true do %>
-    <div class="center control-group">
-      <%= text_field_tag :'user[email]', nil, :class=>"input-large", :placeholder=>"邮箱"%>
+    <div class="form-group">
+      <label for="inputEmail" class="col-sm-3 control-label">Email 地址</label>
+      <div class="col-sm-9">
+        <%= text_field_tag :'user[email]', nil, :class=>"form-control", :placeholder=>"邮箱"%>
+      </div>
     </div>
-    <div class="center control-group">
-      <%= password_field_tag :'user[password]', nil, :class=>"input-large", :placeholder=>"密码"%>
+    <div class="form-group">
+      <label for="inputPassword" class="col-sm-3 control-label">密码</label>
+      <div class="col-sm-9">
+        <%= password_field_tag :'user[password]', nil, :class=>"form-control", :placeholder=>"密码"%>
+      </div>
     </div>
-    <div class="center control-group">
-      <%= text_field_tag :organization_name, nil, :class=>"input-large", :placeholder=>"公司或团体名称"%>
+    <div class="form-group">
+      <label for="inputOrganization" class="col-sm-3 control-label">团队名称</label>
+      <div class="col-sm-9">
+        <%= text_field_tag :organization_name, nil, :class=>"form-control", :placeholder=>"公司或团体名称"%>
+      </div>
     </div>
-    <div class="center">
-      <%= submit_tag "注册", :class=>"btn"%>
+    <div class="form-group">
+      <div class="col-sm-offset-3 col-sm-9">
+        <%= submit_tag "注册", :class=>"btn btn-default"%>
+      </div>
     </div>
   <% end %>
 </div>

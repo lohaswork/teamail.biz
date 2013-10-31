@@ -29,7 +29,7 @@ gem 'jquery-rails'
 
 gem 'compass-rails', '~> 2.0.alpha.0'
 gem 'anjlab-bootstrap-rails', '>= 3.0.0.0', :require => 'bootstrap-rails'
-gem 'font-awesome-rails'
+gem 'font-awesome-sass'
 gem 'rest-client'
 gem 'carrierwave-aliyun'
 gem 'multimap'

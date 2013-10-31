@@ -1,5 +1,5 @@
 <div id="tag-filters" data-page="SidebarTags">
-  <ul>
+  <ul class="list-unstyled">
     <%- tags.try(:each) do |tag|%>
       <li id="tag-link-#{tag.id}">
         <%- tag_color = tag.color || "1" %>

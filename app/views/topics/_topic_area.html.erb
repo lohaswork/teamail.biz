@@ -4,7 +4,7 @@
   <% else %>
     <div class='topic-show'>
       <div class='title'>
-        <%= @topic.title%>
+        <h2><%= @topic.title%></h2>
         <%= render :partial => 'tags/headline_tags', :locals => {:topic => @topic} %>
       </div>
       <%= render :partial => 'discussion_list', :locals => { :discussions => @discussions } %>

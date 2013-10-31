@@ -2,23 +2,23 @@
   <div data-page="NewTopicPage">
     <button type="button" id="create-new-topic" class="btn btn-default">创建新话题</button>
   </div>
+  <hr>
   <div class="personal-inbox">
-    <div>
+    <h4>
       <%= link_to('个人空间', personal_topics_path) %>
-    </div>
-    <ul>
-      <div>
-        <%= link_to('未处理' + unread_topic_number.to_s, personal_topics_inbox_path) %>
-      </div>
-      <div>
-        <%= link_to('所有', personal_topics_path) %>
-      </div>
-    </ul>
+    </h4>
+    <h5>
+      <%= link_to('未处理' + unread_topic_number.to_s, personal_topics_inbox_path) %>
+    </h5>
+    <h5>
+      <%= link_to('所有', personal_topics_path) %>
+    </h5>
   </div>
+  <hr>
   <div class="organization-inbox">
-    <div>
+    <h4>
       <%= link_to("团队空间", organization_topics_path)%>
-    </div>
+    </h4>
     <%= render :partial => 'tags/tag_filters', :locals => { :tags => current_organization.tags } %>
   </div>
 </div>
