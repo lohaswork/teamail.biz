@@ -35,7 +35,13 @@
   <div class="container">
     <div class="row">
       <div class="col-xs-12 video-player">
-        <video class="vplayer-box" src="videos/LohasWork-bestshow.mp4" controls="controls" preload="none"></video>
+        <div class="vplayer-box">
+          <video class="video-js vjs-default-skin" id="demo-video"
+            controls preload="none" width="640" height="360"
+            data-setup='true'>
+            <source src="videos/teamail-concept.mp4" type='video/mp4' />
+          </video>
+        </div>
       </div>
     </div>
   </div>

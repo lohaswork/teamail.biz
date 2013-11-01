@@ -1,5 +1,8 @@
 <div>
   <h3><i class="fa fa-group"></i>&nbsp&nbsp成员管理</h3>
+  <div class="return-link">
+    <%= link_to('返回话题列表', personal_topics_inbox_path) %>
+  </div>
   <%= render :partial => 'member_list', :locals => {:colleagues => @colleagues} %>
   <%= render :partial => 'invite_member', :locals => {:colleagues => @colleagues} %>
 </div>
