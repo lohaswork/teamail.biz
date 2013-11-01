@@ -49,6 +49,7 @@ before_fork do |server, worker|
 end
 
 after_fork do |server, worker|
+  ENV["REDIS_PROVIDER"] = "redis://127.0.0.1:6379/}"
   # 禁止GC，配合后续的OOB，来减少请求的执行时间
   GC.disable
   # the following is *required* for Rails + "preload_app true",
