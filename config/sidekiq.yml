@@ -4,7 +4,7 @@
 ---
 :verbose: false
 :pidfile: ./tmp/pids/sidekiq.pid
-:concurrency:  14
+:concurrency:  50
 :queues:
   - [often, 7]
   - [default, 5]
