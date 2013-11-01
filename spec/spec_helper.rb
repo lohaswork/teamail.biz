@@ -34,6 +34,9 @@ def setup_spec_helper
     # instead of true.
     config.use_transactional_fixtures = false
 
+    # Default_wait_time is 2 sec
+    Capybara.default_wait_time = 7
+
     # If true, the base class of anonymous controllers will be inferred
     # automatically. This will be the default behavior in future versions of
     # rspec-rails.
