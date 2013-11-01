@@ -31,7 +31,7 @@ set :deploy_via, :remote_cache
 set :use_sudo, false
 set :normalize_asset_timestamps, false
 default_run_options[:pty] = true
-set :rbenv_version, ENV['RBENV_VERSION'] || "1.9.3-p448"
+set :rbenv_version, ENV['RBENV_VERSION'] || "2.0.0-p247"
 set :default_environment, {
   'PATH' => "/home/#{user}/.rbenv/shims:/home/#{user}/.rbenv/bin:$PATH",
   'RBENV_VERSION' => "#{rbenv_version}",
