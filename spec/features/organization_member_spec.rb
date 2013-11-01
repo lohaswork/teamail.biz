@@ -82,7 +82,7 @@ describe "organization member page" do
         visit show_member_path
         @kicked_user = @organization.users.last
         page.should have_content @kicked_user.email_name
-        all(:css, ".member-container a").last.click
+        all(:css, ".member-name a").last.click
       end
 
       it "should see 删除用户 button next to colleagues'name" do
@@ -139,8 +139,8 @@ describe "organization member page" do
     end
 
     it "should directly redirect to other organization page" do
-      visit root_path
-      page.should have_content @other_organization.name
+      visit organization_topics_path
+      page.should have_content @other_organization.topics.first.title
     end
   end
 end

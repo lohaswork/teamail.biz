@@ -1,4 +1,5 @@
 require 'bundler/capistrano'
+require 'sidekiq/capistrano'
 $:.unshift('./config')
 require 'capistrano-db-rollback'
 require 'capistrano_database_yml'
@@ -41,11 +42,33 @@ role :web, "121.199.43.92"                          # Your HTTP server, Apache/e
 role :app, "121.199.43.92"                          # This may be the same as your `Web` server
 role :db,  "121.199.43.92", :primary => true        # This is where Rails migrations will run
 
+# For sidekiq
+set(:sidekiq_cmd) { "bundle exec sidekiq" }
+set(:sidekiqctl_cmd) { "bundle exec sidekiqctl" }
+set(:sidekiq_timeout) { 10 }
+set(:sidekiq_role) { :app }
+set(:sidekiq_pid) { "#{current_path}/tmp/pids/sidekiq.pid" }
+set(:sidekiq_processes) { 1 }
+
 # For Unicorn service
 set :unicorn_config, "#{current_path}/config/unicorn.rb"
 set :unicorn_pid, "#{current_path}/tmp/pids/unicorn.pid"
 
 namespace :deploy do
+
+  # redis
+  namespace :redis do
+    desc "Start the Redis server"
+    task :start do
+      run "#{sudo} /etc/init.d/redis-server start"
+    end
+
+    desc "Stop the Redis server"
+    task :stop do
+      run '#{sudo} /etc/init.d/redis-server stop'
+    end
+
+  end
 
   task :cold do       # Overriding the default deploy:cold
     update
