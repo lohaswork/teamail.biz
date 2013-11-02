@@ -43,7 +43,7 @@ role :app, "121.199.43.92"                          # This may be the same as yo
 role :db,  "121.199.43.92", :primary => true        # This is where Rails migrations will run
 
 # For sidekiq
-set(:sidekiq_cmd) { "bundle exec sidekiq" }
+set(:sidekiq_cmd) { "bundle exec sidekiq -e #{rails_env} -C #{current_path}/config/sidekiq.yml -P #{current_path}/tmp/pids/sidekiq.pid >> #{current_path}/log/sidekiq.log 2>&1 " }
 set(:sidekiqctl_cmd) { "bundle exec sidekiqctl" }
 set(:sidekiq_timeout) { 10 }
 set(:sidekiq_role) { :app }

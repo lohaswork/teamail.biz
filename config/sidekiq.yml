@@ -4,6 +4,7 @@
 ---
 :verbose: false
 :pidfile: ./tmp/pids/sidekiq.pid
+:logfile: ./log/sidekiq.log
 :concurrency:  50
 :queues:
   - [often, 7]

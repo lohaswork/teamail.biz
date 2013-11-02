@@ -49,10 +49,34 @@ before_fork do |server, worker|
 end
 
 after_fork do |server, worker|
-  ENV["REDIS_PROVIDER"] = "redis://127.0.0.1:6379/}"
   # 禁止GC，配合后续的OOB，来减少请求的执行时间
   GC.disable
   # the following is *required* for Rails + "preload_app true",
   defined?(ActiveRecord::Base) and
     ActiveRecord::Base.establish_connection
+end
+
+worker_processes Integer(ENV["WEB_CONCURRENCY"] || 5)
+timeout 15
+preload_app true
+
+before_fork do |server, worker|
+  Signal.trap 'TERM' do
+    puts 'Unicorn master intercepting TERM and sending myself QUIT instead'
+    Process.kill 'QUIT', Process.pid
+  end
+
+  defined?(ActiveRecord::Base) and ActiveRecord::Base.connection.disconnect!
+end
+
+after_fork do |server, worker|
+  Signal.trap 'TERM' do
+    puts 'Unicorn worker intercepting TERM and doing nothing. Wait for master to send QUIT'
+  end
+
+  defined?(ActiveRecord::Base) and ActiveRecord::Base.establish_connection
+
+  Sidekiq.configure_client do |config|
+    config.redis = { size: 1, namespace: 'sidekiq' }
+  end
 end
