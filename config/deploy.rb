@@ -43,7 +43,7 @@ role :app, "121.199.43.92"                          # This may be the same as yo
 role :db,  "121.199.43.92", :primary => true        # This is where Rails migrations will run
 
 # For sidekiq
-set(:sidekiq_cmd) { "bundle exec sidekiq -e #{rails_env} -C #{current_path}/config/sidekiq.yml" }
+set(:sidekiq_cmd) { "bundle exec sidekiq -e #{rails_env}" }
 set(:sidekiqctl_cmd) { "bundle exec sidekiqctl" }
 set(:sidekiq_timeout) { 10 }
 set(:sidekiq_role) { :app }
@@ -146,5 +146,6 @@ namespace :deploy do
 end
 
 after 'deploy:setup', 'deploy:add_shared'
+after "deploy:update_code", "deploy:migrate"
 after 'deploy:create_symlink', 'deploy:housekeeping'
 after 'deploy:restart', 'deploy:cleanup'
