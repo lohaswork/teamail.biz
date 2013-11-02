@@ -31,10 +31,6 @@ before_exec do |_|
 end
 
 before_fork do |server, worker|
-  Signal.trap 'TERM' do
-    puts 'Unicorn master intercepting TERM and sending myself QUIT instead'
-    Process.kill 'QUIT', Process.pid
-  end
   # 参考 http://unicorn.bogomips.org/SIGNALS.html
   # 使用USR2信号，以及在进程完成后用QUIT信号来实现无缝重启
   old_pid = app_root + '/tmp/pids/unicorn.pid.oldbin'
@@ -53,16 +49,9 @@ before_fork do |server, worker|
 end
 
 after_fork do |server, worker|
-  Signal.trap 'TERM' do
-    puts 'Unicorn worker intercepting TERM and doing nothing. Wait for master to send QUIT'
-  end
   # 禁止GC，配合后续的OOB，来减少请求的执行时间
   GC.disable
   # the following is *required* for Rails + "preload_app true",
   defined?(ActiveRecord::Base) and
     ActiveRecord::Base.establish_connection
-
-  Sidekiq.configure_client do |config|
-    config.redis = { size: 1, namespace: 'sidekiq' }
-  end
 end
