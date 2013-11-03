@@ -266,14 +266,15 @@ describe "the topics action" do
       it "should see the last discussion member default selected " do
         click_on "创建新话题"
         fill_in "title", :with => "test title"
-        all(:css, "div#select-user-for-topic input[type='checkbox']").last.set(true)
+        find(:xpath, '//*[@id="select-user-for-topic"]/input[9]').set(true)
         click_button "创建"
         page.should_not have_selector "#new-topic-form"
         page.should have_content "话题创建成功"
         visit organization_topics_path
         page.should have_content("test title")
         click_on "test title"
-        all(:css, "div#select-user-for-discussion input[type='checkbox']").last.should be_checked
+        page.should have_button "回复"
+        find(:xpath, '//*[@id="select-user-for-discussion"]/input[9]').should be_checked
       end
     end
 
@@ -325,7 +326,7 @@ describe "the topics action" do
           page.should have_selector(:xpath, "//*[@id='select-user-for-discussion']/input[10]")
           find(:xpath, "//*[@id='select-user-for-discussion']/input[10]").set(true)
           click_button "回复"
-          page.should have_content "user create a discussion for discussion users"
+          find(:xpath, '//*[@id="content"]').should_not have_content "user create a discussion for discussion users"
           expect(find(:xpath, "//*[@id='select-user-for-discussion']/input[10]")).to be_checked
         end
       end
