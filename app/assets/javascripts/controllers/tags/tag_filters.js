@@ -7,7 +7,7 @@
   App.page.SidebarTags.prototype = {
     init: function(){
       var self = this;
-        $('#tag-filters li').click(function(){
+        $(document).on("click", "#tag-filters li", function(){
           if ($(this).hasClass("active-tag")){
             $(this).find(':checkbox').prop("checked", false);
             $(this).removeClass("active-tag");
