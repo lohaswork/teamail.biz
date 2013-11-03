@@ -123,13 +123,13 @@ describe "the topics action" do
         it "should select all of the users by select all checkbox" do
           click_on "创建新话题"
           fill_in "title", :with => "test title"
+          page.should have_selector(:xpath, "//div[@id='select-user-for-topic']//input[@class='all']")
           find(:xpath, "//div[@id='select-user-for-topic']//input[@class='all']").set(true)
           click_button "创建"
           page.should_not have_selector "#new-topic-form"
           page.should have_content "话题创建成功"
           visit organization_topics_path
           page.should have_content "test title"
-          wait_for_ajax
           expect(@organization.topics.last.users.length).to eq(@organization.users.length)
         end
 
@@ -287,7 +287,7 @@ describe "the topics action" do
         visit organization_topics_path
         page.should have_content("test select user")
         click_on "test select user"
-        page.should have_content("test select user")
+        page.should have_button("回复")
       end
 
       context "select a user manully" do
@@ -322,11 +322,11 @@ describe "the topics action" do
 
         it "should add set the last created user as default checked" do
           fill_in "content", :with => "user create a discussion for discussion users"
-          checkbox = find(:xpath, "(//div[@id='new-discussion']//input[@type='checkbox'])[10]")
-          checkbox.set(true)
+          page.should have_selector(:xpath, "//*[@id='select-user-for-discussion']/input[10]")
+          find(:xpath, "//*[@id='select-user-for-discussion']/input[10]").set(true)
           click_button "回复"
           page.should have_content "user create a discussion for discussion users"
-          find(:xpath, "(//div[@id='new-discussion']//input[@type='checkbox'])[10]").should be_checked
+          expect(find(:xpath, "//*[@id='select-user-for-discussion']/input[10]")).to be_checked
         end
       end
     end
@@ -375,8 +375,7 @@ describe "the topics action" do
         @organization = create(:organization_with_multi_users)
         @user = @organization.users.first
         mock_login_with(@user.email)
-        page.should have_content @user.email
-        visit personal_topics_path
+        page.should have_content "登出"
       end
 
       describe "user can open a create topic field" do
@@ -459,13 +458,13 @@ describe "the topics action" do
           it "should select all of the users by select all checkbox" do
             click_on "创建新话题"
             fill_in "title", :with => "test title"
+            page.should have_selector(:xpath, "//div[@id='select-user-for-topic']//input[@class='all']")
             find(:xpath, "//div[@id='select-user-for-topic']//input[@class='all']").set(true)
             click_button "创建"
             page.should_not have_selector "#new-topic-form"
             page.should have_content "话题创建成功"
             visit personal_topics_path
             page.should have_content "test title"
-            wait_for_ajax
             expect(@organization.topics.last.users.length).to eq(@organization.users.length)
           end
 
