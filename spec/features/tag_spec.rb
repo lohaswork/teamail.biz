@@ -185,7 +185,7 @@ describe "topic section" do
       end
 
       it "filter using tag and should see topic list refreshed" do
-        link = all(:css, "div#tag-filters :link").first
+        link = all(:css, "div#tag-filters a").first
         link.click
         wait_for_ajax
         page.should have_content @organization.topics.first.title
@@ -193,19 +193,19 @@ describe "topic section" do
       end
 
       it "filter using tag that does not have any topics should not see any topics" do
-        link = all(:css, "div#tag-filters :link").last
+        link = all(:css, "div#tag-filters a").last
         link.click
         page.should_not have_css("div.topic-row")
       end
 
       it "click tag and it turns active and others become inactive" do
-        first_link = all(:css, "div#tag-filters :link").first
-        last_link = all(:css, "div#tag-filters :link").last
+        first_link = all(:css, "div#tag-filters a").first
+        last_link = all(:css, "div#tag-filters a").last
         first_link.click
-        all(:css, "div#tag-filters li").first.should have_css(":link.active-tag")
+        all(:css, "div#tag-filters").first.should have_css("li.active-tag")
         last_link.click
-        all(:css, "div#tag-filters li").last.should have_css(":link.active-tag")
-        all(:css, "div#tag-filters li").first.should_not have_css(":link.active-tag")
+        all(:css, "div#tag-filters").last.should have_css("li.active-tag")
+        all(:css, "div#tag-filters").first.should_not have_css("li.active-tag")
       end
     end
 
@@ -223,7 +223,7 @@ describe "topic section" do
       end
 
       it "filter using tag and should see topic list refreshed" do
-        link = all(:css, "div#tag-filters :link").first
+        link = all(:css, "div#tag-filters a").first
         link.click
         wait_for_ajax
         page.should have_content @organization.topics.first.title
@@ -231,19 +231,19 @@ describe "topic section" do
       end
 
       it "filter using tag that does not have any topics should not see any topics" do
-        link = all(:css, "div#tag-filters :link").last
+        link = all(:css, "div#tag-filters a").last
         link.click
         page.should_not have_css("div.topic-row")
       end
 
       it "click tag and it turns active and others become inactive" do
-        first_link = all(:css, "div#tag-filters :link").first
-        last_link = all(:css, "div#tag-filters :link").last
+        first_link = all(:css, "div#tag-filters a").first
+        last_link = all(:css, "div#tag-filters a").last
         first_link.click
-        all(:css, "div#tag-filters li").first.should have_css(":link.active-tag")
+        all(:css, "div#tag-filters").first.should have_css("li.active-tag")
         last_link.click
-        all(:css, "div#tag-filters li").last.should have_css(":link.active-tag")
-        all(:css, "div#tag-filters li").first.should_not have_css(":link.active-tag")
+        all(:css, "div#tag-filters").last.should have_css("li.active-tag")
+        all(:css, "div#tag-filters").first.should_not have_css("li.active-tag")
       end
     end
 

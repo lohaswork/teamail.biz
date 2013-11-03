@@ -2,6 +2,7 @@
   text-align: center;
   border-right: 1px #EEEEEE solid;
   h4 {
+    margin-left: 15%;
     a {
     color: #000;
     }
@@ -25,19 +26,25 @@
   border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
 }
 .personal-inbox {
+  text-align: left;
   margin-top: 10px;
+}
+.organization-inbox {
+  text-align: left;
 }
 #tag-filters {
   text-align: left;
-  position: relative;
-  left: 35%;
-  li a {
-    color: #999;
-    &:hover {
-      color: #000;
-    }
+  a {
+    cursor: pointer;
   }
-}
-#tag-filters .active-tag {
-  background-color: #35914c;
+  li {
+    margin: 4px 10%;
+    padding: 2px 20%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  li [type=checkbox] {
+    width: 0;
+  }
 }

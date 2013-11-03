@@ -1,9 +1,11 @@
 <div id="tag-input">
   <%= form_tag tags_path, :method => "post", :class => "form-inline", :remote => true do %>
-    <div class="form-group">
+    <div class="input-group">
       <%= text_field_tag :tag_name, nil, :placeholder=>"输入新标签名", :class=>"form-control" %>
+      <span class="input-group-btn">
+        <%= submit_tag "新建", :id=>"tag-submit", :class=>"btn btn-default", :disabled=>"disabled" %>
+      </span>
     </div>
-    <%= submit_tag "新建", :id=>"tag-submit", :class=>"btn btn-default btn-block", :disabled=>"disabled" %>
   <% end %>
 </div>
 

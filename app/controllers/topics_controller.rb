@@ -122,9 +122,9 @@ class TopicsController < ApplicationController
     }
   end
 
-  def filter_with_tag
+  def filter_with_tags
     detail_topic_id = params[:topic]
-    @topics = current_organization.topics.order_by_update.map { |topic| topic if topic.has_tag?(params[:tag]) }.reject { |t| t.blank? }
+    @topics = current_organization.topics.order_by_update.map { |topic| topic if topic.has_tags?(params[:tags].to_a) }.reject { |t| t.blank? }
     @topics = Kaminari.paginate_array(@topics).page(params[:page])
 
     if detail_topic_id.blank? # 判断是否在 topic detail 页面

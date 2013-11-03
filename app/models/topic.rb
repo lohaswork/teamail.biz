@@ -40,9 +40,11 @@ class Topic < ActiveRecord::Base
     self
   end
 
-  def has_tag?(id)
-    tag = Tag.find(id)
-    self.tags.include?(tag)
+  def has_tags?(ids)
+    return true if ids.each do |id|
+      tag = Tag.find(id)
+      break unless self.tags.include?(tag)
+    end
   end
 
   def get_relation_with(user)

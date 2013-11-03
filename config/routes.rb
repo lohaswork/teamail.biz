@@ -40,8 +40,8 @@ LohasWorkCom::Application.routes.draw do
   controller :topics do
     post 'remove_tag' => :remove_tag, as: :topic_remove_tag
     post 'add_tag' => :add_tags, as: :topics_add_tags
-    post 'filter_with_tag' => :filter_with_tag, as: :topics_filter_with_tag
-    post 'filter_with_tag/page/:page' => :filter_with_tag
+    post 'filter_with_tags' => :filter_with_tags, as: :topics_filter_with_tags
+    post 'filter_with_tags/page/:page' => :filter_with_tags
     post 'archive' => :archive, as: :archive_topics
     post 'archive/page/:page' => :archive
   end
