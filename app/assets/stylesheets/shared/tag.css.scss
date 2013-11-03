@@ -5,16 +5,17 @@ $list-colors : #e11d21, #eb6420, #fbca04, #009800,
 
 @for $i from 1 to 16 {
   .tag-color-#{$i} {
-    color: #999;
+    a { color: #999; }
     i {
       color: nth($list-colors,$i);
     }
     &:hover {
+    a { color: nth($list-colors,$i); }
     background-color: #eee;
     }
   }
   .tag-color-#{$i}.active-tag {
-    i {
+    a, i {
       color: #fff;
     }
     font-weight: bold;
