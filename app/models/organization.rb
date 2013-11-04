@@ -15,9 +15,10 @@ class Organization < ActiveRecord::Base
   end
 
   def add_tag(tag_name)
-    tag = Tag.new(:name => tag_name)
+    tag = Tag.new(:name => tag_name, :organization_id => self.id)
     raise ValidationError.new(tag.errors.full_messages) if !tag.valid?
-    tags << tag
+    tag.save!
+    self.save!
     self
   end
 

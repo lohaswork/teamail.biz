@@ -53,7 +53,7 @@ class Discussion < ActiveRecord::Base
 
   def mark_as_unread_by(user)
     begin
-      self.user_discussions.find_by_user_id(user.id).update_attribute(:read_status, false)
+      self.user_discussions.where(:user_id => user.id).first_or_create.update_attribute(:read_status, false)
     rescue ActiveRecord::RecordNotFound, NoMethodError
       nil
     end
@@ -78,5 +78,4 @@ class Discussion < ActiveRecord::Base
   def update_topic_members
     discussable.users << users
   end
-
 end

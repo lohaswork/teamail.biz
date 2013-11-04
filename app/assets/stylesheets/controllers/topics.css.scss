@@ -29,6 +29,9 @@
 .unread {
   font-weight: bold;
 }
+.read {
+  background-color: #eee;
+}
 
 #topic-list .headline {
   h4 {
@@ -36,11 +39,14 @@
   }
 }
 #topic-list {
-  li {
+  li.topic-row {
     line-height: 48px;
     height: 48px;
+    width: 105%;
+    padding-left: 3%;
+    padding-right: 3%;
     padding-bottom: 4px;
-    border-bottom: 1px #ccc dashed;
+    border-bottom: 1px #ccc solid;
     .topic-checkbox {
       float: left;
       min-width: 30px;
@@ -58,11 +64,11 @@
       float: left;
       font-size: 14px;
       width: 60%;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
       .title {
         margin-right: 5px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
       .headline-tag-container {
         margin-right: 5px;

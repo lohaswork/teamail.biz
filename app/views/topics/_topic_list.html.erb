@@ -7,7 +7,8 @@
   <div class='checkbox-group' id="select-topic" data-update="#selected_topics_to_archive, #selected_topics_to_tagging" data-reload=true data-page="CheckBoxGroup">
     <ul class="list-unstyled">
       <%- topics.try(:each) do |topic| %>
-        <li class="topic-row <%= display_unread_style?(topic) ? 'unread' : 'read' %>">
+        <%- read_style = display_unread_style?(topic) ? 'unread' : 'read' if in_personal_topics_page? %>
+        <li class="topic-row <%= read_style %>">
           <div class='topic-checkbox'>
             <%= check_box_tag nil, topic.id, false, :class=>"item", :'data-item'=>true %>
           </div>
@@ -15,7 +16,7 @@
             创建人:&nbsp<%= topic.creator.email_name%>
           </div>
           <div class='topic-reply-num'>
-            <%= topic.discussions.size > 0 ? topic.discussions.size : ''%>
+            &nbsp(<%= topic.discussions.size %>)
           </div>
           <div class='topic-title-with-tag'>
             <%= render :partial => 'tags/headline_tags', :locals => {:topic => topic} %>

@@ -1,5 +1,5 @@
 <div id="tag-filters" data-page="SidebarTags">
-  <%= form_tag topics_filter_with_tags_path, :method => "post", :remote => true do %>
+  <%= form_tag topics_filter_with_tags_path(:topic => @topic), :method => "post", :remote => true do %>
     <ul class="list-unstyled">
       <%- tags.try(:each) do |tag|%>
         <%- tag_color = tag.color || "1" %>

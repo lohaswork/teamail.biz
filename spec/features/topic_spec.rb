@@ -287,7 +287,6 @@ describe "the topics action" do
         page.should have_content "话题创建成功"
         page.should_not have_selector "#new-topic-form"
         visit organization_topics_path
-        wait_for_ajax
         click_on "test select user"
         page.should have_button("回复")
       end

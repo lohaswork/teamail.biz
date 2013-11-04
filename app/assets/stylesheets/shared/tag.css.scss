@@ -4,22 +4,36 @@ $list-colors : #e11d21, #eb6420, #fbca04, #009800,
                #bfdadc, #c7def8, #bfd4f2, #d4c5f9;
 
 @for $i from 1 to 16 {
-  .tag-color-#{$i} {
-    a { color: #999; }
-    i {
-      color: nth($list-colors,$i);
+  #tag-filters {
+    .tag-color-#{$i} {
+      a { color: #999; }
+      i {
+        color: nth($list-colors,$i);
+      }
+      &:hover {
+      a { color: nth($list-colors,$i); }
+      background-color: #eee;
+      }
     }
-    &:hover {
-    a { color: nth($list-colors,$i); }
-    background-color: #eee;
+    .tag-color-#{$i}.active-tag {
+      a, i {
+        color: #fff;
+      }
+      font-weight: bold;
+      color: #fff!important;
+      background-color: nth($list-colors,$i);
     }
   }
-  .tag-color-#{$i}.active-tag {
-    a, i {
+  .headline-tag-container {
+    .tag-color-#{$i} {
+      line-height: 24px!important;
+      height: 24px!important;
       color: #fff;
+      font-weight: bold;
+      background-color: nth($list-colors,$i);
+      i {
+        color: #fff;
+      }
     }
-    font-weight: bold;
-    color: #fff!important;
-    background-color: nth($list-colors,$i);
   }
 }

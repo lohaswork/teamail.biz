@@ -12,6 +12,7 @@ module EmailEngine
 
     def create_topic_notification(emails=deliver_emails)
       gateway.send_batch_message(
+        from: topic.creator.email_name,
         to: emails,
         subject: topic.title,
         body: new_topic_notification_text

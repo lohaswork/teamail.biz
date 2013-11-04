@@ -48,7 +48,7 @@ class TopicsController < ApplicationController
     if detail_topic_id.blank? # 判断是否在 topic detail 页面
       selected_topics_ids = params[:selected_topics_to_archive].split(',')
       Topic.find(selected_topics_ids).each { |topic| topic.archived_by(login_user) }
-      topics = Topic.order_by_update.get_unarchived(login_user).page(params[:page])
+      topics = Topic.get_unarchived(login_user).order_by_update.page(params[:page])
       # 刷新 topic list
       render :json => {
         :update => {

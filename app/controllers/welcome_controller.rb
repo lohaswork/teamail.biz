@@ -1,9 +1,9 @@
 # encoding: utf-8
 class WelcomeController < ApplicationController
   def index
-    # if is_logged_in?
-    #   redirect_to login_user.default_organization.blank? ? no_organizations_path : personal_topics_path
-    # end
+    if is_logged_in?
+       redirect_to login_user.default_organization.blank? ? no_organizations_path : personal_topics_path
+    end
   end
 
   def add_early_adotpers

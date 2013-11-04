@@ -66,6 +66,7 @@
     },
     refreshTopicList: function(){
       $(document).on("refreshed", "#topic-list", function () {
+        $('.timeago').timeago();
         $("#dropdown-tags").hide();
         $("#tagging-dropdown").attr("disabled","disabled");
         if ($("#archive-submit")) {
