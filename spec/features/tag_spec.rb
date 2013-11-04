@@ -202,10 +202,9 @@ describe "topic section" do
         first_link = all(:css, "div#tag-filters a").first
         last_link = all(:css, "div#tag-filters a").last
         first_link.click
-        all(:css, "div#tag-filters").first.should have_css("li.active-tag")
+        all(:css, "div#tag-filters li.active-tag").length.should eq 1
         last_link.click
-        all(:css, "div#tag-filters").last.should have_css("li.active-tag")
-        all(:css, "div#tag-filters").first.should have_css("li.active-tag")
+        all(:css, "div#tag-filters li.active-tag").length.should eq 2
       end
     end
 
