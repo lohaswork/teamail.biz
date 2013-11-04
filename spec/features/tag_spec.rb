@@ -173,10 +173,10 @@ describe "topic section" do
 
     context "topic list page filter" do
       before do
-        visit organization_topics_path
         specific_tag = @organization.tags.first
         specific_topic = @organization.topics.first
         specific_topic.tags << specific_tag
+        visit organization_topics_path
       end
 
       it "should see all organization tags" do
