@@ -100,13 +100,14 @@ describe "the topics action" do
         it "should add the selected user into topic members" do
           click_on "创建新话题"
           fill_in "title", :with => "test title"
-          all(:css, "div#select-user-for-topic input[type='checkbox']").last.set(true)
+          find(:xpath, '//*[@id="select-user-for-topic"]/input[10]').set(true)
           click_button "创建"
           page.should_not have_selector "#new-topic-form"
           page.should have_content "话题创建成功"
           visit organization_topics_path
           page.should have_content "test title"
-          @organization.topics.last.users.should include(@organization.users.last)
+          wait_for_ajax
+          @organization.reload.topics.last.users.should include(@organization.users.last)
         end
 
         it "should default add the current user as member" do
@@ -123,14 +124,12 @@ describe "the topics action" do
         it "should select all of the users by select all checkbox" do
           click_on "创建新话题"
           fill_in "title", :with => "test title"
+          sleep 1
           page.should have_selector(:xpath, "//div[@id='select-user-for-topic']//input[@class='all']")
           find(:xpath, "//div[@id='select-user-for-topic']//input[@class='all']").set(true)
           click_button "创建"
-          page.should_not have_selector "#new-topic-form"
-          page.should have_content "话题创建成功"
-          visit organization_topics_path
-          page.should have_content "test title"
-          expect(@organization.topics.last.users.length).to eq(@organization.users.length)
+          wait_for_ajax
+          expect(@organization.reload.topics.last.users.length).to eq 10
         end
 
         it "should be able to invite user to topic" do
@@ -260,12 +259,14 @@ describe "the topics action" do
       mock_login_with(@user.email)
       page.should have_content @user.email
       visit organization_topics_path
+      wait_for_ajax
     end
 
     context "user go to discussion page saw the select users" do
       it "should see the last discussion member default selected " do
         click_on "创建新话题"
         fill_in "title", :with => "test title"
+        page.should have_selector(:xpath, '//*[@id="select-user-for-topic"]/input[9]')
         find(:xpath, '//*[@id="select-user-for-topic"]/input[9]').set(true)
         click_button "创建"
         page.should_not have_selector "#new-topic-form"
@@ -286,7 +287,7 @@ describe "the topics action" do
         page.should have_content "话题创建成功"
         page.should_not have_selector "#new-topic-form"
         visit organization_topics_path
-        page.should have_content("test select user")
+        wait_for_ajax
         click_on "test select user"
         page.should have_button("回复")
       end
@@ -322,12 +323,14 @@ describe "the topics action" do
         end
 
         it "should add set the last created user as default checked" do
+          Topic.last.users.size.should == 1
           fill_in "content", :with => "user create a discussion for discussion users"
-          page.should have_selector(:xpath, "//*[@id='select-user-for-discussion']/input[10]")
-          find(:xpath, "//*[@id='select-user-for-discussion']/input[10]").set(true)
+          checkbox = find(:xpath, "//*[@id='select-user-for-discussion']/input[10]")
+          checkbox.set(true)
           click_button "回复"
-          find(:xpath, '//*[@id="content"]').should_not have_content "user create a discussion for discussion users"
-          expect(find(:xpath, "//*[@id='select-user-for-discussion']/input[10]")).to be_checked
+          page.should have_content "user create a discussion for discussion users"
+          Topic.last.users.size.should == 2
+          #expect(find(:xpath, "//*[@id='select-user-for-discussion']/input[10]")).to be_checked
         end
       end
     end
@@ -436,13 +439,14 @@ describe "the topics action" do
           it "should add the selected user into topic members" do
             click_on "创建新话题"
             fill_in "title", :with => "test title"
-            all(:css, "div#select-user-for-topic input[type='checkbox']").last.set(true)
+            sleep 1
+            find(:xpath, '//*[@id="select-user-for-topic"]/input[10]').set(true)
             click_button "创建"
             page.should_not have_selector "#new-topic-form"
             page.should have_content "话题创建成功"
             visit personal_topics_path
             page.should have_content "test title"
-            @organization.topics.last.users.should include(@organization.users.last)
+            @organization.reload.topics.last.users.should include(@organization.users.last)
           end
 
           it "should default add the current user as member" do
@@ -459,14 +463,13 @@ describe "the topics action" do
           it "should select all of the users by select all checkbox" do
             click_on "创建新话题"
             fill_in "title", :with => "test title"
+            sleep 1
             page.should have_selector(:xpath, "//div[@id='select-user-for-topic']//input[@class='all']")
             find(:xpath, "//div[@id='select-user-for-topic']//input[@class='all']").set(true)
             click_button "创建"
-            page.should_not have_selector "#new-topic-form"
-            page.should have_content "话题创建成功"
-            visit personal_topics_path
-            page.should have_content "test title"
-            expect(@organization.topics.last.users.length).to eq(@organization.users.length)
+            wait_for_ajax
+            expect(@organization.reload.topics.last.users.length).to eq 10
+            #expect(@organization.reload.topics.last.users.length).to eq(@organization.reload.users.length)
           end
 
           it "should be able to invite user to topic" do
