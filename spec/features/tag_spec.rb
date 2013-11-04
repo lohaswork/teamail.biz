@@ -122,9 +122,10 @@ describe "topic section" do
     before do
       @user = create(:normal_user)
       @organization = @user.default_organization
+      topic_id = @user.topics.first.id
       login_with(@user.email, @user.password)
-      page.should have_content @user.email
-      visit topic_path(@user.topics.first)
+      page.should have_content "登出"
+      visit topic_path(topic_id)
     end
 
     it  "should be able to click tagging-dropdown button" do
