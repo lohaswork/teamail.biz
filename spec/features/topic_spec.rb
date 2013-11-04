@@ -266,7 +266,7 @@ describe "the topics action" do
       it "should see the last discussion member default selected " do
         click_on "创建新话题"
         fill_in "title", :with => "test title"
-        page.should have_selector(:xpath, '//*[@id="select-user-for-topic"]/input[9]')
+        sleep 1
         find(:xpath, '//*[@id="select-user-for-topic"]/input[9]').set(true)
         click_button "创建"
         page.should_not have_selector "#new-topic-form"
