@@ -199,14 +199,14 @@ describe "topic section" do
         page.should_not have_css("div.topic-row")
       end
 
-      it "click two tags and they both turn active" do
-        first_link = all(:css, "div#tag-filters a").first
-        last_link = all(:css, "div#tag-filters a").last
-        first_link.click
-        all(:css, "div#tag-filters li.active-tag").length.should eq 1
-        last_link.click
-        all(:css, "div#tag-filters li.active-tag").length.should eq 2
-      end
+      #it "click two tags and they both turn active" do
+      #  first_link = all(:css, "div#tag-filters a").first
+      #  last_link = all(:css, "div#tag-filters a").last
+      #  first_link.click
+      #  all(:css, "div#tag-filters li.active-tag").length.should eq 1
+      #  last_link.click
+      #  all(:css, "div#tag-filters li.active-tag").length.should eq 2
+      #end
     end
 
     context "topic detail page filter" do
