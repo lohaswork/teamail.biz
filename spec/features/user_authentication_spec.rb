@@ -75,13 +75,6 @@ describe "user authentaction action" do
             page.should have_content '邮件地址已使用'
           end
         end
-
-        context "user fill in used campany name, not casesensitve", :js => true do
-          it "should say organization name already used" do
-            sign_up_with('user-test@example.com', 'password', 'COMPANY')
-            page.should have_content '组织名已使用'
-          end
-        end
       end
     end
   end
