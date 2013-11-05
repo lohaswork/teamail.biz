@@ -22,6 +22,8 @@ if [ $? -ne 0 ]; then
 fi
 echo 'bundle exec rake db:migrate success.'
 
+bundle exec rake db:test:prepare
+
 RAILS_ENV=test bundle exec rspec
 if [ $? -ne 0 ]; then
   echo 'bundle exec rspec error!'

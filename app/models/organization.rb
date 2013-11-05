@@ -6,7 +6,8 @@ class Organization < ActiveRecord::Base
   has_many :users, lambda { uniq }, :through => :organization_memberships
   has_many :topics
   has_many :tags
-  validates :name, presence: true, :uniqueness => { :case_sensitive => false, :message => "组织名已使用" }
+  # Cancel validation of uniqueness of name
+  validates :name, presence: true # :uniqueness => { :case_sensitive => false, :message => "组织名已使用" }
 
   scope :for_user, lambda { |user| joins(:users).where("user_id = ?", user.id).readonly(false) }
 

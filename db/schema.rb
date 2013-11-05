@@ -34,6 +34,8 @@ ActiveRecord::Schema.define(version: 20131105031942) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "early_adopters", ["email"], name: "index_early_adopters_on_email", unique: true, using: :btree
+
   create_table "organization_memberships", force: true do |t|
     t.integer  "organization_id"
     t.integer  "user_id"
@@ -128,6 +130,6 @@ ActiveRecord::Schema.define(version: 20131105031942) do
     t.integer  "default_organization_id"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
 end
