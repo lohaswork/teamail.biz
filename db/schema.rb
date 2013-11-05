@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131028062400) do
+ActiveRecord::Schema.define(version: 20131105031942) do
 
   create_table "discussions", force: true do |t|
     t.integer  "discussable_id"
@@ -127,5 +127,7 @@ ActiveRecord::Schema.define(version: 20131028062400) do
     t.string   "reset_token"
     t.integer  "default_organization_id"
   end
+
+  add_index "users", ["email"], name: "index_users_on_email", using: :btree
 
 end
