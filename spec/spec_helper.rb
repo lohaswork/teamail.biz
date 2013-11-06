@@ -9,6 +9,11 @@ def setup_spec_helper
   require 'capybara/rails'
   require 'capybara/poltergeist'
 
+  require 'sidekiq/testing'
+  # A test fake that pushes all jobs into a jobs array,
+  #   so redis-server is not used when test
+  Sidekiq::Testing.fake!
+
   # Requires supporting ruby files with custom matchers and macros, etc,
   # in spec/support/ and its subdirectories.
   Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
