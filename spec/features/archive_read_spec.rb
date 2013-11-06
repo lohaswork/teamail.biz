@@ -4,19 +4,20 @@ require 'helpers'
 
 describe "topics have new discussion" do
   include Helpers
+  let(:organization) { create(:organization_with_multi_users) }
+
   before do
-      @organization = create(:organization_with_multi_users)
-      @user = @organization.users.first
-      @another_user = @organization.users.last
+      @user = organization.users.first
+      @another_user = organization.users.last
       mock_login_with(@user.email)
       page.should have_content(@user.email)
-      @topic = @organization.topics.first
+      @topic = organization.topics.first
       @topic.users << @another_user
       @topic.discussions.last.users << @user
       @topic.save
   end
 
-  describe "archive_feature", :js => true do
+  describe "archive_feature" do
     before do
       @topic.archived_by(@user)
       @topic.archived_by(@another_user)
@@ -29,7 +30,7 @@ describe "topics have new discussion" do
       find('#archive-submit')[:disabled].should eq "disabled"
     end
 
-    it "should see archive_status change when a new reply added" do
+    it "should see archive_status change when a new reply added", :js => true do
       visit topic_path(@topic)
       fill_in "content", :with => "user create a new discussion"
       click_button "回复"
@@ -39,8 +40,8 @@ describe "topics have new discussion" do
       @topic.user_topics.find_by_user_id(@another_user.id).archive_status.should_not eq(1)
     end
 
-    it "visit unarchived topic detail page should see archive button clickable" do
-      unarchived_topic = @organization.topics.last
+    it "visit unarchived topic detail page should see archive button clickable", :js => true do
+      unarchived_topic = organization.topics.last
       @user.topics << unarchived_topic
       @user.save
       visit topic_path(unarchived_topic)
@@ -54,7 +55,7 @@ describe "topics have new discussion" do
     end
   end
 
-  describe "read_status_feature", :js => true do
+  describe "read_status_feature" do
     it "should see unread topics in personal_topics_path" do
       visit personal_topics_path
       page.should have_content @user.topics.first.title
@@ -69,7 +70,7 @@ describe "topics have new discussion" do
       page.should_not have_css('li.read')
     end
 
-    it "should becomes read after visit topic detail page" do
+    it "should becomes read after visit topic detail page", :js => true do
       unread_num = @user.topics.length
       find(:css,"div.personal-inbox").should have_content unread_num.to_s
       visit personal_topics_path
@@ -80,7 +81,7 @@ describe "topics have new discussion" do
       find(:css,"div.personal-inbox").should have_content (unread_num - 1).to_s
     end
 
-    it "should be unread for other users when a new topic created" do
+    it "should be unread for other users when a new topic created", :js => true do
       visit personal_topics_path
       click_on "创建新话题"
       fill_in "title", :with => "test title"
@@ -95,7 +96,7 @@ describe "topics have new discussion" do
       topic.read_status_of(@another_user).should_not eq(1)
     end
 
-    it "should change read status when add a discussion to the read topic" do
+    it "should change read status when add a discussion to the read topic", :js => true do
       @topic.discussions.last.mark_as_read_by(@another_user)
       visit topic_path(@topic)
       fill_in "content", :with => "discussion from user himself"

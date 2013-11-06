@@ -100,6 +100,7 @@ describe "the topics action" do
         it "should add the selected user into topic members" do
           click_on "创建新话题"
           fill_in "title", :with => "test title"
+          sleep 1
           find(:xpath, '//*[@id="select-user-for-topic"]/input[10]').set(true)
           click_button "创建"
           page.should_not have_selector "#new-topic-form"

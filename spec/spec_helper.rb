@@ -64,15 +64,16 @@ def setup_spec_helper
     end
 
     #clean DB after every test case
-    config.before :each do
-      if Capybara.current_driver == :rack_test
-        DatabaseCleaner.strategy = :transaction
+    config.before(:each) do
+      DatabaseCleaner.strategy = if example.metadata[:js]
+        :truncation
       else
-        DatabaseCleaner.strategy = :truncation
+        :transaction
       end
       DatabaseCleaner.start
     end
-    config.after :each do
+
+    config.after(:each) do
       DatabaseCleaner.clean
     end
   end
