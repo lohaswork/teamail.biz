@@ -6,7 +6,7 @@ require 'helpers'
 describe "the topics action" do
   include Helpers
   describe "user on topic list page" do
-    context "user on the topic list page", :js => true do
+    context "user on the topic list page" do
       it  "should see the topic title" do
         user = create(:normal_user)
         organization = user.default_organization
@@ -36,7 +36,7 @@ describe "the topics action" do
     end
   end
 
-  describe "user create new topic", :js => true do
+  describe "user create new topic" do
     before do
       @organization = create(:organization_with_multi_users)
       @user = @organization.users.first
@@ -45,7 +45,7 @@ describe "the topics action" do
       visit organization_topics_path
     end
 
-    describe "user can open a create topic field" do
+    describe "user can open a create topic field", :js => true do
       context "user click the new topic buttion" do
         it "should have a field for new topic" do
           page.should have_button "创建新话题"
@@ -82,10 +82,9 @@ describe "the topics action" do
           find_field('title').value == "test title"
         end
       end
-
     end
 
-    describe "user create new topic" do
+    describe "user create new topic", :js => true do
       context "user create success" do
         it "should see the new topic on the list" do
           click_on "创建新话题"
@@ -205,7 +204,7 @@ describe "the topics action" do
     end
   end
 
-  describe "user on topic detail page", :js => true do
+  describe "user on topic detail page" do
     before do
       user = create(:normal_user)
       @organization = user.default_organization
@@ -214,7 +213,7 @@ describe "the topics action" do
       visit organization_topics_path
     end
 
-    context "click the topic title" do
+    context "click the topic title", :js => true do
       it "should go to the topic detail page" do
         click_on @organization.topics.first.title
         current_path.should == topic_path(@organization.topics.first)
@@ -222,7 +221,7 @@ describe "the topics action" do
       end
     end
 
-    context "user create a new discussions" do
+    context "user create a new discussions", :js => true do
       it "should see the content on the page" do
         visit topic_path(@organization.topics.first)
         fill_in "content", :with => "user create a discussion"
@@ -239,7 +238,7 @@ describe "the topics action" do
       end
     end
 
-    context "user create topic with blank content success" do
+    context "user create topic with blank content success", :js => true do
       it "should see the R.T for content" do
         click_on "创建新话题"
         fill_in "title", :with => "test title"
@@ -253,17 +252,17 @@ describe "the topics action" do
       end
     end
   end
-  describe "go to discussion page with selected user", :js => true do
+
+  describe "go to discussion page with selected user" do
     before do
       @organization = create(:organization_with_multi_users)
       @user = @organization.users.first
       mock_login_with(@user.email)
       page.should have_content @user.email
       visit organization_topics_path
-      wait_for_ajax
     end
 
-    context "user go to discussion page saw the select users" do
+    context "user go to discussion page saw the select users", :js => true do
       it "should see the last discussion member default selected " do
         click_on "创建新话题"
         fill_in "title", :with => "test title"
@@ -280,7 +279,7 @@ describe "the topics action" do
       end
     end
 
-    describe "user create discussion with select user" do
+    describe "user create discussion with select user", :js => true do
       before do
         click_on "创建新话题"
         fill_in "title", :with => "test select user"
@@ -335,6 +334,7 @@ describe "the topics action" do
       end
     end
   end
+
   describe "user on the own topics" do
     context "user not login in" do
       it "should redirect to the login page" do
@@ -343,7 +343,7 @@ describe "the topics action" do
       end
     end
 
-    describe "user already login" ,:js=>true do
+    describe "user already login" do
       before do
         @user = create(:normal_user)
         login_with(@user.email, @user.password)
@@ -364,7 +364,7 @@ describe "the topics action" do
       end
 
       context "when no colleagues of the user" do
-        it "should have no select-all checkbox" do
+        it "should have no select-all checkbox", :js => true do
           visit personal_topics_path
           click_on "创建新话题"
           page.should have_selector "#new-topic-form"
@@ -374,7 +374,7 @@ describe "the topics action" do
 
     end
 
-    describe "user create new topic on the personal space page", :js => true  do
+    describe "user create new topic on the personal space page" do
       before do
         @organization = create(:organization_with_multi_users)
         @user = @organization.users.first
@@ -382,7 +382,7 @@ describe "the topics action" do
         page.should have_content "登出"
       end
 
-      describe "user can open a create topic field" do
+      describe "user can open a create topic field", :js => true do
         context "user click the new topic buttion" do
           it "should have a field for new topic" do
             page.should have_button "创建新话题"
@@ -407,7 +407,6 @@ describe "the topics action" do
             click_button "创建新话题"
             page.should have_selector('#invited_emails', text: "")
           end
-
         end
 
         context "user reopen the field" do
@@ -420,11 +419,10 @@ describe "the topics action" do
             find_field('title').value == "test title"
           end
         end
-
       end
 
       describe "user create new topic on personal space" do
-        context "user create success" do
+        context "user create success", :js => true do
           it "should see the new topic on the list" do
             click_on "创建新话题"
             fill_in "title", :with => "test title"
@@ -485,7 +483,7 @@ describe "the topics action" do
           end
         end
 
-        context "user create success with a discussion" do
+        context "user create success with a discussion", :js => true do
           it "shold see the discussion size change" do
             click_on "创建新话题"
             fill_in "title", :with => "test title"
