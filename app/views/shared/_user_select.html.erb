@@ -1,8 +1,11 @@
 <%- if !get_colleagues.blank?%>
-  <input type="checkbox", class='all', data-all=true>
-  <span>全选</span>
+  <label>
+    <input type="checkbox", class='all', data-all=true> 全选
+  </label>
   <%- show_for_checkbox(get_colleagues, topic).each do |user| %>
+    <label>
       <%= check_box_tag nil, user[:email], false, :class=>"item", :'data-item'=>true, :'data-selected'=>user[:is_in_topic] %>
-      <span><%=user[:email_name]%></span>
+      <%=user[:email_name]%>
+    </label>
   <% end %>
 <% end %>

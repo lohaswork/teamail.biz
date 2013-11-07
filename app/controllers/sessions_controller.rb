@@ -16,9 +16,9 @@ class SessionsController < ApplicationController
     end
     update_current_organization(user.default_organization)
     if current_organization.blank?
-      redirect_to no_organizations_path
+      render :json => { :status => "success", :redirect => no_organizations_path }
     else
-      redirect_to personal_topics_inbox_path
+      render :json => { :status => "success", :redirect => personal_topics_inbox_path }
     end
   end
 

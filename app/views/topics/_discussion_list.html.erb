@@ -2,7 +2,7 @@
   <%- discussions.try(:each) do |discussion|%>
     <li>
       <div class='content'>
-        <%= discussion.content%>
+        <%=  raw safe_content(discussion.content) %>
       </div>
       <div class='attachment'>
         <%= render :partial => 'topics/discussion_attachments', :locals => {:discussion => discussion} %>

@@ -13,6 +13,15 @@ module EmailEngine
         title_content = (title_array - tag_set.to_a).join(' ')
       end
 
+      def analyzed_content
+        if self.respond_to? :body_html
+          body_html
+        elsif self.respond_to? :stripped_text
+          stripped_text
+        else
+          "此封内容为空"
+        end
+      end
 
       def resolve_email
         @topic = resolve_topic_of_email
@@ -37,7 +46,8 @@ module EmailEngine
         @notifiers = []
         all_recipient_emails = to + "," + (self.methods.include?(:cc) ? self.cc : '')
         all_recipient_emails.split(',').map{ |address| @notifiers.concat( address.scan(email_regex) ) }
-        @notifiers = (@topic.default_notify_members.map(&:email) + @notifiers - @creator.email).uniq if is_creating_discussion
+        @notifiers = (@topic.default_notify_members.map(&:email) + @notifiers).uniq if is_creating_discussion
+        @notifiers.delete @creator.email
         @notifiers.delete $config.default_system_email
       end
     end

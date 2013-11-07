@@ -98,17 +98,18 @@ describe "user authentaction action" do
 
     context "user login succsess" do
       let(:user) { create(:normal_user) }
-      it "should go to the personal sapce page" do
+      it "should go to the personal sapce page", :js => true do
         login_with(user.email, user.password)
         page.should have_content user.topics.first.title
         current_path.should == '/personal_topics_inbox'
       end
     end
 
-    context "user visit pages after login succsess" do
+    context "user visit pages after login succsess", :js => true do
+      let(:user) { create(:normal_user) }
       before do
-        @user = create(:normal_user)
-        login_with(@user.email, @user.password)
+        login_with(user.email, user.password)
+        page.should have_content("登出")
       end
 
       it "should redirect to topics page visit login path" do
@@ -125,14 +126,14 @@ describe "user authentaction action" do
         visit organization_topics_path
         click_on("登出")
         current_path.should == "/login"
-        page.should_not have_content(@user.email)
+        page.should_not have_content(user.email)
       end
     end
 
     describe "user login failed" do
       before {@user = create(:normal_user)}
 
-      context "user miss email or password" do
+      context "user miss email or password", :js => true do
         it "should see error message" do
           login_with(nil, "password")
           page.should have_content '没有这个用户'
@@ -143,7 +144,7 @@ describe "user authentaction action" do
           page.should have_content '没有这个用户'
         end
       end
-      context "user enter error message" do
+      context "user enter error message", :js => true do
         it "should see error message" do
           login_with("error@email.com", "password")
           page.should have_content '没有这个用户'
@@ -155,7 +156,7 @@ describe "user authentaction action" do
         end
       end
 
-      context "an not active user login" do
+      context "an not active user login", :js => true do
         it "should see error message" do
           user = create(:non_activate_user)
           login_with(user.email, user.password)

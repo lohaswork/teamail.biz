@@ -2,19 +2,28 @@
   <div class="modal-content">
     <%= form_tag topics_path, :method => "post", :class=>"form-horizontal", :remote => true do %>
       <div class="modal-header">
-        <label for="inputTitle">标题</label>
-        <%= text_field_tag :title, nil, :placeholder=>"标题"%>
         <button type="button" id="modal-close" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">新话题</h4>
       </div>
       <div class="modal-body">
-        <label for="inputContent">内容</label>
-        <%= text_area_tag :content, nil, :class=>"form-control form-content", :rows=>"3", :placeholder=>"内容"%>
-        <%= hidden_field_tag :selected_users_for_topic, '' %>
+        <div class="form-group">
+          <div class="col-xs-12">
+            <%= text_field_tag :title, nil, :class => 'form-control', :placeholder=>"主题"%>
+            <%= render :partial=> 'shared/user_select_for_topic', :locals => {:topic => nil} %>
+            <%= text_field_tag :invited_emails, nil, :class => 'form-control', :placeholder => '输入电子邮件邀请成员...' %>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-xs-12">
+            <%= render :partial => 'shared/editor' %>
+            <%= hidden_field_tag :selected_users_for_topic, '' %>
+          </div>
+        </div>
       </div>
       <div class="modal-footer">
-        <%= text_field_tag :invited_emails, nil, class: 'form-control form-content', placeholder: '输入电子邮件邀请成员...' %>
-        <%= render :partial=> 'shared/user_select_for_topic', :locals => {:topic => nil} %>
-        <%= submit_tag "创建", :class=>"btn btn-primary"%>
+        <div class="pull-left">
+          <%= submit_tag "创建", :class=>"btn btn-default"%>
+        </div>
       </div>
     <% end %>
   </div><!-- /.modal-content -->

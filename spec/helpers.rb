@@ -25,6 +25,16 @@ module Helpers
     click_button '登录'
   end
 
+  def editor_fill_in(options)
+    if options[:in]
+      parent = "('#{options[:in]}').find"
+    else
+      parent = ""
+    end
+    page.execute_script( "$#{parent}('textarea.qeditor').css('display','block');" )
+    page.execute_script( "$#{parent}('textarea.qeditor').val('#{options[:with]}');" )
+  end
+
   def wait_for_ajax
     counter = 0
     while page.evaluate_script("$.active").to_i > 0

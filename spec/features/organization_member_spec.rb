@@ -9,7 +9,7 @@ describe "organization member page" do
   let(:user) { organization.users.first }
   let(:new_member) { create(:clean_user) }
 
-  describe "invite user" do
+  describe "invite user", :js => true do
     before do
       mock_login_with(user.email)
       page.should have_content(user.email)
@@ -34,7 +34,7 @@ describe "organization member page" do
         page.should have_button "邀请"
       end
 
-      it "invite using invalid email address", :js => true do
+      it "invite using invalid email address" do
         fill_in "user_email", :with => "test"
         click_button "邀请"
         page.should_not have_content "test@test.com"
@@ -42,14 +42,14 @@ describe "organization member page" do
       end
 
       # 邀请后，未激活用户仅能看到email地址，不另外测试
-      it "invite an exist user, should see email_name", :js => true do
+      it "invite an exist user, should see email_name" do
         fill_in "user_email", :with => new_member.email
         click_button "邀请"
         page.should have_content new_member.email_name
         User.find_by_email(new_member.email).active_status.should eq(1)
       end
 
-      it "invite a non-exist user, should see email_address", :js => true do
+      it "invite a non-exist user, should see email_address" do
         fill_in "user_email", :with => "test@test.com"
         click_button "邀请"
         page.should have_content "test@test.com"
@@ -67,7 +67,7 @@ describe "organization member page" do
     end
   end
 
-  describe "delete member" do
+  describe "delete member", :js => true do
     before do
       mock_login_with(user.email)
       page.should have_content(user.email)
@@ -75,7 +75,7 @@ describe "organization member page" do
       page.should have_content user.email_name
     end
 
-    context "as the admin of the organization", :js => true do
+    context "as the admin of the organization" do
       let(:kicked_user) { organization.users.last }
       before do
         organization.membership(user).update_attribute(:authority_type, 1)
@@ -108,7 +108,7 @@ describe "organization member page" do
     end
   end
 
-  describe "user without an organization" do
+  describe "user without an organization", :js => true do
     let(:user) { create(:clean_user) }
     before do
       login_with(user.email, user.password)

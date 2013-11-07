@@ -4,7 +4,7 @@ require 'helpers'
 
 describe "topic section" do
   include Helpers
-  describe "user in topic list page" do
+  describe "user in topic list page", :js => true do
     before do
       user = create(:normal_user)
       @organization = user.default_organization
@@ -13,7 +13,7 @@ describe "topic section" do
       visit organization_topics_path
     end
 
-    context "select topics and tags, click 应用 button", :js => true do
+    context "select topics and tags, click 应用 button" do
       before do
         # topics should not have any tags before this
         find(:css, "div#select-topic").should_not have_content @organization.tags.first.name
@@ -40,7 +40,7 @@ describe "topic section" do
       end
     end
 
-    context "select some topics, click the tagging-group control", :js => true do
+    context "select some topics, click the tagging-group control" do
       before do
         first(:css, "div#select-topic input[type='checkbox']").set(true)
         click_button "tagging-dropdown"
@@ -118,7 +118,7 @@ describe "topic section" do
     end
   end
 
-  describe "user in topic detail page" do
+  describe "user in topic detail page", :js => true do
     before do
       @user = create(:normal_user)
       @organization = @user.default_organization
@@ -128,7 +128,7 @@ describe "topic section" do
       visit topic_path(topic_id)
     end
 
-    it  "should be able to click tagging-dropdown button", :js => true do
+    it  "should be able to click tagging-dropdown button" do
       find('#tagging-dropdown')[:disabled].should_not eq "disabled"
     end
 
@@ -141,7 +141,7 @@ describe "topic section" do
       find(:css, "div.topic-show").should have_content tag.name
     end
 
-    context "select topics and tags, click 应用 button", :js => true do
+    context "select topics and tags, click 应用 button" do
       before do
         # topic should not have any tags before this
         click_button "tagging-dropdown"
@@ -164,7 +164,7 @@ describe "topic section" do
     end
   end
 
-  describe "left bar" do
+  describe "left bar", :js => true do
     before do
       user = create(:normal_user)
       @organization = user.default_organization
@@ -185,7 +185,7 @@ describe "topic section" do
         find(:css, "div#tag-filters").should have_content @organization.tags.last.name
       end
 
-      it "filter using tag and should see topic list refreshed", :js => true do
+      it "filter using tag and should see topic list refreshed" do
         link = all(:css, "div#tag-filters a").first
         link.click
         wait_for_ajax
@@ -193,7 +193,7 @@ describe "topic section" do
         page.should_not have_content @organization.topics.last.title
       end
 
-      it "filter using tag that does not have any topics should not see any topics", :js => true do
+      it "filter using tag that does not have any topics should not see any topics" do
         link = all(:css, "div#tag-filters a").last
         link.click
         page.should_not have_css("div.topic-row")
@@ -222,7 +222,7 @@ describe "topic section" do
         find(:css, "div#tag-filters").should have_content @organization.tags.last.name
       end
 
-      it "filter using tag and should see topic list refreshed", :js => true do
+      it "filter using tag and should see topic list refreshed" do
         link = all(:css, "div#tag-filters a").first
         link.click
         wait_for_ajax
@@ -230,7 +230,7 @@ describe "topic section" do
         page.should_not have_content @organization.topics.last.title
       end
 
-      it "filter using tag that does not have any topics should not see any topics", :js => true do
+      it "filter using tag that does not have any topics should not see any topics" do
         link = all(:css, "div#tag-filters a").last
         link.click
         page.should_not have_css("div.topic-row")
@@ -248,7 +248,7 @@ describe "topic section" do
     end
   end
 
-  describe "user in unarchived topic list page" do
+  describe "user in unarchived topic list page", :js => true do
     before do
       user = create(:normal_user)
       @organization = user.default_organization
@@ -264,7 +264,7 @@ describe "topic section" do
       visit personal_topics_inbox_path
     end
 
-    context "select topics and tags, click 应用 button", :js => true do
+    context "select topics and tags, click 应用 button" do
       before do
         # topics should not have any tags before this
         find(:css, "div#select-topic").should_not have_content @organization.tags.first.name
@@ -297,7 +297,7 @@ describe "topic section" do
       end
     end
 
-    context "select some topics, click the tagging-group control", :js => true do
+    context "select some topics, click the tagging-group control" do
       before do
         first(:css, "div#select-topic input[type='checkbox']").set(true)
         click_button "tagging-dropdown"

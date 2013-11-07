@@ -29,13 +29,13 @@ module EmailEngine
         invalid_creator_notification && return if !@organization || is_creating_discussion && !@organization.has_member?(sender)
         invite_notifiers
         if is_creating_discussion
-          content = stripped_text.blank? ? "此封内容为空" : stripped_text
+          content = analyzed_content
           discussion = Discussion.create_discussion(@creator, @topic, @notifiers, content)
           post_attachments_to_oss(discussion) if self.has_attachments?
           EmailEngine::DiscussionNotifier.new(discussion.id, @notifiers).create_discussion_notification
         else
           title = subject.blank? ? "此主题标题为空" : analyzed_title
-          @topic = Topic.create_topic(title, stripped_text, @notifiers, @organization, @creator)
+          @topic = Topic.create_topic(title, analyzed_content, @notifiers, @organization, @creator)
           add_tags_to(@topic)
           post_attachments_to_oss(@topic.discussions.first) if self.has_attachments?
           EmailEngine::TopicNotifier.new(@topic.id).create_topic_notification

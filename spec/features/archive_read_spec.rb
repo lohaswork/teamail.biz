@@ -2,7 +2,7 @@
 require 'spec_helper'
 require 'helpers'
 
-describe "topics have new discussion" do
+describe "topics have new discussion", :js => true do
   include Helpers
   let(:organization) { create(:organization_with_multi_users) }
   let(:user) { organization.users.first }
@@ -30,9 +30,9 @@ describe "topics have new discussion" do
       find('#archive-submit')[:disabled].should eq "disabled"
     end
 
-    it "should see archive_status change when a new reply added", :js => true do
+    it "should see archive_status change when a new reply added" do
       visit topic_path(topic)
-      fill_in "content", :with => "user create a new discussion"
+      editor_fill_in :in => '#new-discussion-form', :with => "user create a new discussion"
       click_button "回复"
       page.should have_content "user create a new discussion"
       topic.user_topics.find_by_user_id(user.id).archive_status.should eq(1)
@@ -40,7 +40,7 @@ describe "topics have new discussion" do
       topic.user_topics.find_by_user_id(another_user.id).archive_status.should_not eq(1)
     end
 
-    it "visit unarchived topic detail page should see archive button clickable", :js => true do
+    it "visit unarchived topic detail page should see archive button clickable" do
       unarchived_topic = organization.topics.last
       user.topics << unarchived_topic
       user.save
@@ -70,7 +70,7 @@ describe "topics have new discussion" do
       page.should_not have_css('li.read')
     end
 
-    it "should becomes read after visit topic detail page", :js => true do
+    it "should becomes read after visit topic detail page" do
       unread_num = user.topics.length
       find(:css,"div.personal-inbox").should have_content unread_num.to_s
       visit personal_topics_path
@@ -81,11 +81,11 @@ describe "topics have new discussion" do
       find(:css,"div.personal-inbox").should have_content (unread_num - 1).to_s
     end
 
-    it "should be unread for other users when a new topic created", :js => true do
+    it "should be unread for other users when a new topic created" do
       visit personal_topics_path
       click_on "创建新话题"
       fill_in "title", :with => "test title"
-      checkbox = find(:xpath, "(//div[@id='select-user-for-topic']//input[@type='checkbox'])[10]")
+      checkbox = find(:xpath, "//*[@id='select-user-for-topic']/label[10]/input")
       checkbox.set(true)
       click_button "创建"
       page.should have_content "话题创建成功"
@@ -96,10 +96,10 @@ describe "topics have new discussion" do
       topic.read_status_of(another_user).should_not eq(1)
     end
 
-    it "should change read status when add a discussion to the read topic", :js => true do
+    it "should change read status when add a discussion to the read topic" do
       topic.discussions.last.mark_as_read_by(another_user)
       visit topic_path(topic)
-      fill_in "content", :with => "discussion from user himself"
+      editor_fill_in :in => '#new-discussion-form', :with => "discussion from user himself"
       click_button "回复"
       page.should have_content "discussion from user himself"
       topic.read_status_of(user).should eq(1)

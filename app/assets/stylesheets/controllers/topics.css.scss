@@ -115,7 +115,8 @@
   .content {
     padding: 5px 0 5px 0;
     color: #000;
-    overflow-x: auto;
+    word-wrap:break-word;
+    overflow:hidden;
   }
   .attachment {
     margin: 10px 0;
@@ -144,32 +145,5 @@
 }
 #new-discussion {
   margin-top: 20px;
-  .input-area textarea {
-    width: 100%;
-    border: 1px solid #999;
-    border-radius: 5px;
-    overflow-y:visible;
-  }
-  .discussion-user-pick {
-    margin: 10px 0;
-    height: 35px;
-  }
-  #select-user-for-discussion {
-    float: left;
-    margin-top: 5px;
-    margin-right: 15px;
-  }
-  .invite-email-input input {
-    height: 31px;
-    padding: 0 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
-    box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
-    -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-  }
-  .reply-submit {
-    clear: both;
-  }
+
 }
