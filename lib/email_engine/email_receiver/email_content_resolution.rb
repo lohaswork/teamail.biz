@@ -14,9 +14,9 @@ module EmailEngine
       end
 
       def analyzed_content
-        if self.respond_to? :body_html
-          body_html
-        elsif self.respond_to? :stripped_text
+        if self.respond_to?(:stripped_html) && !stripped_html.blank?
+          stripped_html
+        elsif self.respond_to?(:stripped_text) && !stripped_text.blank?
           stripped_text
         else
           "此封内容为空"

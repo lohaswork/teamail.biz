@@ -49,7 +49,7 @@ module EmailEngine
           if !@organization.has_member?(email)
             is_registered_user = User.already_register?(email)
             @organization.invite_user(email)
-            EmailEngine::InvitationNotifier.new(email, @organization, @creator, is_registered_user).invitation_notification
+            EmailEngine::InvitationNotifier.new(email, @organization, @creator.email, is_registered_user).invitation_notification
           end
         end
       end
