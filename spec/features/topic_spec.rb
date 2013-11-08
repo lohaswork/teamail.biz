@@ -446,6 +446,7 @@ describe "the topics action" do
 
           it "should default add the current user as member" do
             click_on "创建新话题"
+            sleep 0.5
             fill_in "title", :with => "test title"
             click_button "创建"
             page.should have_content "话题创建成功"
@@ -495,6 +496,7 @@ describe "the topics action" do
         context "user create failed" do
           it "should see error message" do
             click_on "创建新话题"
+            sleep 0.5
             click_button "创建"
             page.should have_content "请输入标题"
           end
