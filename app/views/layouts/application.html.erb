@@ -24,9 +24,11 @@
     <%= render 'layouts/navigation' %>
     <%= render 'shared/error_and_notification' %>
     <div class='container'>
-      <section class="content col-xs-12">
-        <%= yield %>
-      </section>
+      <div class='page-container row'>
+        <section class="major-content col-xs-12">
+          <%= yield %>
+        </section>
+      </div>
     </div>
     <%= render 'layouts/footer' %>
     <%= javascript_include_tag "application" %>

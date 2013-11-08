@@ -1,3 +1,6 @@
+# Run sidekiq inside rails process
+#    bundle exec sidekiq is not needed when in development
+require 'sidekiq/testing/inline'
 LohasWorkCom::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 

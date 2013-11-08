@@ -18,12 +18,12 @@ class SessionsController < ApplicationController
     if current_organization.blank?
       render :json => { :status => "success", :redirect => no_organizations_path }
     else
-      render :json => { :status => "success", :redirect => personal_topics_path }
+      render :json => { :status => "success", :redirect => personal_topics_inbox_path }
     end
   end
 
   def destroy
     cookies.delete(:login_token)
-    redirect_to root_url, :notice => "登出！"
+    redirect_to login_path
   end
 end

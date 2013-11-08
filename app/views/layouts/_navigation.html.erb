@@ -1,12 +1,17 @@
 <header class="navbar navbar-static-top">
-  <nav class="navbar-inner">
-    <ul class="list-inline">
-      <li>
-        <%= link_to "首页", root_path %>
-      </li>
+  <nav class="navbar-inner container">
+    <div class="pull-left logo">
+      <%= link_to root_path do %>
+        <%= image_tag('teamail-logo-green.png') %>
+      <% end %>
+    </div>
+    <ul class="list-inline pull-right">
       <% if is_logged_in?%>
         <li>
-          <%= content_tag :a, login_user.email %>
+          <%= login_user.email %>
+        </li>
+        <li>
+          <%= link_to('成员管理', show_member_path)%>
         </li>
         <li>
           <%= link_to('登出', logout_path) %>
@@ -16,11 +21,13 @@
           <%= link_to('登录', login_path) %>
         </li>
       <%end%>
+      <!--
       <% if current_organization %>
         <li>
           <%= link_to(current_organization.name, organization_topics_path)%>
         </li>
       <% end %>
+      -->
     </ul>
   </nav>
 </header>

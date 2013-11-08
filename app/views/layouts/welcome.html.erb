@@ -9,6 +9,7 @@
     <meta name="author" content="LohasWork">
     <%= favicon_link_tag 'favicon.ico' %>
     <%= stylesheet_link_tag "application", :media => "all" %>
+    <link href="http://vjs.zencdn.net/4.1/video-js.css" rel="stylesheet">
     <!--[if lt IE 8]>
         <%= stylesheet_link_tag "ie/font-awesome-ie7.min.css", media: "all" %>
     <![endif]-->
@@ -27,7 +28,7 @@
     </div>
     <%= javascript_include_tag "application" %>
     <%= javascript_tag '$.fx.off = true;' if Rails.env.test? %>
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <script src="http://vjs.zencdn.net/4.1/video.js"></script>
     <!--[if lt IE 9]>
         <%= javascript_include_tag "ie" %>
     <![endif]-->

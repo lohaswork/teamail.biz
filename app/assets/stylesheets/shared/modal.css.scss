@@ -3,12 +3,30 @@
     position: fixed;
     right: 0px;
     bottom: 0px;
-    .modal-footer .btn {
-      margin-right: 20px;
+    .modal-header {
+      padding: 10px 15px;
+      background-color: #73AE5C;
+      color: #fff;
+      button {
+        padding-top: 2px;
+        color: #fff;
+      }
+    }
+    .modal-body {
+      padding-bottom: 0!important;
+    }
+    .modal-footer {
+      background-color: #F5F5F5;
+      padding: 5px 20px;
+      .btn {
+        width: 72px;
+      }
+    }
+    #select-user-for-topic {
+      margin: 10px auto;
+      label {
+        font-weight: normal;
+      }
     }
   } // End of #new-topic-form
 } // End of .modal
-
-.select-user {
-  margin-left:30px;
-}

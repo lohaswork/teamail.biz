@@ -1,21 +1,36 @@
-<div class="login">
-  <%= form_tag sessions_path, :method => "post", :class=>"form-horizontal" , :remote => true do %>
-    <div class="center control-group">
-      <%= text_field_tag :email, nil, :class=>"input-large", :placeholder=>"邮箱"%>
+<div class="login container">
+  <%= form_tag sessions_path, :method => "post", :class=>"form-horizontal", :remote => true do %>
+    <div class="form-group">
+      <label for="inputEmail" class="col-sm-3 control-label">Email 地址</label>
+      <div class="col-sm-9">
+      <%= text_field_tag :email, nil, :class => "form-control", :placeholder=>"邮箱"%>
+      </div>
     </div>
-    <div class="center control-group">
-      <%= password_field_tag :password, nil, :class=>"input-large", :placeholder=>"密码"%>
+    <div class="form-group">
+      <label for="inputPassword" class="col-sm-3 control-label">密码</label>
+      <div class="col-sm-9">
+      <%= password_field_tag :password, nil, :class => "form-control", :placeholder=>"密码"%>
+      </div>
     </div>
-    <div class="center control-group row">
-      <span>记住我</span>
-      <%= check_box_tag :remember_me, "remember", false, :class=>"checkbox span1"%>
-      <%= submit_tag "登录", :class=>"btn"%>
+    <div class="form-group">
+      <div class="col-sm-offset-3 col-sm-9">
+        <div class="checkbox">
+          <label>
+            <%= check_box_tag :remember_me, "remember", false %> 记住我
+          </label>
+        </div>
+      </div>
     </div>
-    <div class="center control-group">
-      <%= link_to("忘记密码", forgot_path)%>
+    <div class="form-group">
+      <div class="col-sm-offset-3 col-sm-9">
+        <%= submit_tag "登录", :class=>"btn btn-default"%>
+      </div>
     </div>
-    <div class="center control-group">
-      <%= link_to("注册", new_user_path)%>
+    <div class="form-group">
+      <div class="col-sm-offset-3 col-sm-9">
+        <%= link_to("忘记密码", forgot_path)%>
+        <%= link_to("注册", new_user_path)%>
+      </div>
     </div>
   <% end %>
 </div>

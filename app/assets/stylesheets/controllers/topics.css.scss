@@ -1,9 +1,149 @@
 /* Topic Area */
-.topic-show {
-  padding-left:35px;
+.major-content {
+  padding-left: 5%;
+  min-height: 100%;
+}
+.topiclist-buttongroup {
+  max-width: 300px;
+  height: 53px;
+  button {
+    width: 85px;
+  }
+  #tagging-controls {
+    float: left;
+    margin-right: 5px;
+  }
+}
+.topic-area-gap {
+  width: 110%;
+  position: relative;
+  left: -2%;
+  clear: both;
+  border-top: 5px solid #eee;
+}
+#topic-area {
+  padding-top: 15px;
+  padding-left: 3%;
 }
 
 .unread {
   font-weight: bold;
 }
+.read {
+  background-color: #eee;
+}
 
+#topic-list .headline {
+  h4 {
+    color: #588CC7;
+  }
+}
+#topic-list {
+  li.topic-row {
+    line-height: 48px;
+    height: 48px;
+    width: 105%;
+    padding-left: 3%;
+    padding-right: 3%;
+    padding-bottom: 4px;
+    border-bottom: 1px #ccc solid;
+    .topic-checkbox {
+      float: left;
+      min-width: 30px;
+      clear: left;
+    }
+    .topic-creator {
+      float: left;
+      min-width: 70x;
+    }
+    .topic-reply-num {
+      float: left;
+      min-width: 30px;
+    }
+    .topic-title-with-tag {
+      float: left;
+      font-size: 14px;
+      width: 60%;
+      .title {
+        margin-right: 5px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .headline-tag-container {
+        margin-right: 5px;
+        float: left;
+      }
+    }
+    .topic-update-time {
+      float: right;
+      text-align: right;
+      clear: right;
+      min-width: 120px;
+    }
+  }
+}
+
+.topic-show {
+  .title {
+    h2 {
+      float: left;
+      color: #000;
+      font-weight: 600;
+      margin-left: 30px;
+      margin-right: 20px;
+    }
+    .headline-tag-container {
+      padding-top:30px;
+    }
+  }
+}
+
+#discussion-list {
+  clear: left;
+  padding-top: 10px;
+  li {
+    border-radius: 3px;
+    border: 1px solid #eee;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    margin-left: 50px;
+    &:first-child {
+      margin-left: 0px;
+    }
+  }
+  .content {
+    padding: 5px 0 5px 0;
+    color: #000;
+    word-wrap:break-word;
+    overflow:hidden;
+  }
+  .attachment {
+    margin: 10px 0;
+    span {
+      margin-left: 30px;
+      padding: 3px 5px;
+      display: inline-block;
+      background-color: #eee;
+    }
+  }
+  .discussion-info {
+    line-height: 35px;
+    height: 35px;
+  }
+  .discussion-creator {
+    color: #588CC7;
+    float: left;
+    margin-right: 20px;
+  }
+  .update-time {
+    margin-right: 20px;
+    float: right;
+    color: #999;
+  }
+
+}
+#new-discussion {
+  margin-top: 20px;
+
+}

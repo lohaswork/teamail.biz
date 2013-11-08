@@ -9,6 +9,11 @@ def setup_spec_helper
   require 'capybara/rails'
   require 'capybara/poltergeist'
 
+  require 'sidekiq/testing'
+  # A test fake that pushes all jobs into a jobs array,
+  #   so redis-server is not used when test
+  Sidekiq::Testing.fake!
+
   # Requires supporting ruby files with custom matchers and macros, etc,
   # in spec/support/ and its subdirectories.
   Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
@@ -34,6 +39,9 @@ def setup_spec_helper
     # instead of true.
     config.use_transactional_fixtures = false
 
+    # Default_wait_time is 2 sec
+    Capybara.default_wait_time = 7
+
     # If true, the base class of anonymous controllers will be inferred
     # automatically. This will be the default behavior in future versions of
     # rspec-rails.
@@ -57,19 +65,20 @@ def setup_spec_helper
 
     #TODO: ignore the js error for now
     Capybara.register_driver :poltergeist do |app|
-      Capybara::Poltergeist::Driver.new(app, options = {:js_errors => false })
+      Capybara::Poltergeist::Driver.new(app, options = { js_errors: false, phantomjs_logger: WarningSuppressor })
     end
 
     #clean DB after every test case
-    config.before :each do
-      if Capybara.current_driver == :rack_test
-        DatabaseCleaner.strategy = :transaction
+    config.before(:each) do
+      DatabaseCleaner.strategy = if example.metadata[:js]
+        :truncation
       else
-        DatabaseCleaner.strategy = :truncation
+        :transaction
       end
       DatabaseCleaner.start
     end
-    config.after :each do
+
+    config.after(:each) do
       DatabaseCleaner.clean
     end
   end
@@ -85,4 +94,39 @@ end
 Spork.each_run do
   # This code will be run each time you run your specs.
 
+end
+
+# Following code is used to suppress annoying warnings due to an issue related
+#   with Phantomjs and CoreText in Mavericks Runtime Lib.
+# These code will be removed when the issue is fixed.
+# Thread URL: https://github.com/ariya/phantomjs/issues/11418
+module Capybara::Poltergeist
+  class Client
+    private
+    def redirect_stdout
+      prev = STDOUT.dup
+      prev.autoclose = false
+      $stdout = @write_io
+      STDOUT.reopen(@write_io)
+
+      prev = STDERR.dup
+      prev.autoclose = false
+      $stderr = @write_io
+      STDERR.reopen(@write_io)
+      yield
+    ensure
+      STDOUT.reopen(prev)
+      $stdout = STDOUT
+      STDERR.reopen(prev)
+      $stderr = STDERR
+    end
+  end
+end
+
+class WarningSuppressor
+  class << self
+    def write(message)
+      if message =~ /QFont::setPixelSize: Pixel size <= 0/ || message =~/CoreText performance note:/ then 0 else puts(message);1;end
+    end
+  end
 end

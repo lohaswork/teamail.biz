@@ -1,19 +1,21 @@
-<div id='discussion-list'>
+<ul id='discussion-list' class="list-unstyled">
   <%- discussions.try(:each) do |discussion|%>
-    <div class='row'>
-      <div class='col-xs-2'>
-        <%= discussion.creator.email%>
+    <li>
+      <div class='content'>
+        <%=  raw safe_content(discussion.content) %>
       </div>
-      <div class='col-xs-3'>
-        <%= discussion.content%>
-      </div>
-      <div class='col-xs-3'>
-        <%= discussion.created_at%>
-      </div>
-      <div>
+      <div class='attachment'>
         <%= render :partial => 'topics/discussion_attachments', :locals => {:discussion => discussion} %>
       </div>
-    </div>
+      <div class='discussion-info'>
+        <div class='discussion-creator'>
+          <%= discussion.creator.email%>
+        </div>
+        <div class='update-time'>
+          <%= discussion.created_at.strftime("%Y年%m月%d日 %H:%M")%>
+        </div>
+      </div>
+    </li>
   <% end %>
-</div>
+</ul>
 

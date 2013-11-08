@@ -7,7 +7,7 @@ module EmailEngine
     def initialize(email, organization, invitation_from, is_registered_user, gateway=EmailEngine::MailgunGateway.new)
       @user = User.find_by_email email
       @organization_name = organization_name
-      @from = invitation_from
+      @from = User.find_by_email invitation_from
       @gateway = gateway
       @is_registered_user = is_registered_user
     end
@@ -15,6 +15,7 @@ module EmailEngine
     def invitation_notification
       notification_text = @is_registered_user ? on_board_text : invitation_notification_text
       gateway.send_batch_message(
+        from: from.email_name,
         to: user.email,
         subject: "[TeaMail]邀请加入#{organization_name}",
         body: notification_text

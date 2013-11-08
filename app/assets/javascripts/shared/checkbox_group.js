@@ -45,7 +45,7 @@
       })
       .on('change', '.checkbox-group input[data-all]', function(){
         var selectAll = $(this);
-        selectAll.siblings("input[data-item]").prop('checked', function(){
+        selectAll.parents(".checkbox-group").find("input[data-item]").prop('checked', function(){
           var me = $(this),
               checkStatus = selectAll.is(':checked'),
               checkEvent = checkStatus ? 'checked' : 'unchecked';

@@ -74,14 +74,14 @@ describe "topic section" do
         page.should_not have_button "应用"
       end
 
-      it "should see the newly created tag", :js => true do
+      it "should see the newly created tag" do
         fill_in "tag_name", :with => "新标签"
         click_button "新建"
         find(:css, "div#tag-list").should have_content "新标签"
         find(:css, "div#tag-filters").should have_content "新标签"
       end
 
-      it "should be able to create tags with upper-case name & down-case name", :js => true do
+      it "should be able to create tags with upper-case name & down-case name" do
         fill_in "tag_name", :with => "ABCTag"
         click_button "新建"
         page.should have_content "ABCTag"
@@ -95,7 +95,7 @@ describe "topic section" do
         find('#tag-submit')[:disabled].should eq "disabled"
       end
 
-      it "cannot create same tag twice", :js => true do
+      it "cannot create same tag twice" do
         fill_in "tag_name", :with => "同一个标签"
         click_button "新建"
         page.should have_content "同一个标签"
@@ -104,13 +104,13 @@ describe "topic section" do
         page.should have_content "标签名已使用"
       end
 
-      it "cannot create blank tag", :js => true do
+      it "cannot create blank tag" do
         fill_in "tag_name", :with => " "
         click_button "新建"
         page.should have_content "标签名不能为空"
       end
 
-      it "cannot create tag with mark other than dash and underscore", :js => true do
+      it "cannot create tag with mark other than dash and underscore" do
         fill_in "tag_name", :with => "错误%标签"
         click_button "新建"
         page.should have_content "名称不合法"
@@ -122,9 +122,10 @@ describe "topic section" do
     before do
       @user = create(:normal_user)
       @organization = @user.default_organization
+      topic_id = @user.topics.first.id
       login_with(@user.email, @user.password)
-      page.should have_content @user.email
-      visit topic_path(@user.topics.first)
+      page.should have_content "登出"
+      visit topic_path(topic_id)
     end
 
     it  "should be able to click tagging-dropdown button" do
@@ -173,10 +174,10 @@ describe "topic section" do
 
     context "topic list page filter" do
       before do
-        visit organization_topics_path
         specific_tag = @organization.tags.first
         specific_topic = @organization.topics.first
         specific_topic.tags << specific_tag
+        visit organization_topics_path
       end
 
       it "should see all organization tags" do
@@ -185,7 +186,7 @@ describe "topic section" do
       end
 
       it "filter using tag and should see topic list refreshed" do
-        link = all(:css, "div#tag-filters :link").first
+        link = all(:css, "div#tag-filters a").first
         link.click
         wait_for_ajax
         page.should have_content @organization.topics.first.title
@@ -193,20 +194,19 @@ describe "topic section" do
       end
 
       it "filter using tag that does not have any topics should not see any topics" do
-        link = all(:css, "div#tag-filters :link").last
+        link = all(:css, "div#tag-filters a").last
         link.click
         page.should_not have_css("div.topic-row")
       end
 
-      it "click tag and it turns active and others become inactive" do
-        first_link = all(:css, "div#tag-filters :link").first
-        last_link = all(:css, "div#tag-filters :link").last
-        first_link.click
-        all(:css, "div#tag-filters li").first.should have_css(":link.active-tag")
-        last_link.click
-        all(:css, "div#tag-filters li").last.should have_css(":link.active-tag")
-        all(:css, "div#tag-filters li").first.should_not have_css(":link.active-tag")
-      end
+      #it "click two tags and they both turn active" do
+      #  first_link = all(:css, "div#tag-filters a").first
+      #  last_link = all(:css, "div#tag-filters a").last
+      #  first_link.click
+      #  all(:css, "div#tag-filters li.active-tag").length.should eq 1
+      #  last_link.click
+      #  all(:css, "div#tag-filters li.active-tag").length.should eq 2
+      #end
     end
 
     context "topic detail page filter" do
@@ -223,7 +223,7 @@ describe "topic section" do
       end
 
       it "filter using tag and should see topic list refreshed" do
-        link = all(:css, "div#tag-filters :link").first
+        link = all(:css, "div#tag-filters a").first
         link.click
         wait_for_ajax
         page.should have_content @organization.topics.first.title
@@ -231,22 +231,21 @@ describe "topic section" do
       end
 
       it "filter using tag that does not have any topics should not see any topics" do
-        link = all(:css, "div#tag-filters :link").last
+        link = all(:css, "div#tag-filters a").last
         link.click
         page.should_not have_css("div.topic-row")
       end
 
-      it "click tag and it turns active and others become inactive" do
-        first_link = all(:css, "div#tag-filters :link").first
-        last_link = all(:css, "div#tag-filters :link").last
-        first_link.click
-        all(:css, "div#tag-filters li").first.should have_css(":link.active-tag")
-        last_link.click
-        all(:css, "div#tag-filters li").last.should have_css(":link.active-tag")
-        all(:css, "div#tag-filters li").first.should_not have_css(":link.active-tag")
-      end
+      #it "click two tags and they both turn active" do
+      #  first_link = all(:css, "div#tag-filters a").first
+      #  last_link = all(:css, "div#tag-filters a").last
+      #  first_link.click
+      #  all(:css, "div#tag-filters").first.should have_css("li.active-tag")
+      #  last_link.click
+      #  all(:css, "div#tag-filters").last.should have_css("li.active-tag")
+      #  all(:css, "div#tag-filters").first.should have_css("li.active-tag")
+      #end
     end
-
   end
 
   describe "user in unarchived topic list page", :js => true do
@@ -332,14 +331,14 @@ describe "topic section" do
         page.should_not have_button "应用"
       end
 
-      it "should see the newly created tag", :js => true do
+      it "should see the newly created tag" do
         fill_in "tag_name", :with => "新标签"
         click_button "新建"
         find(:css, "div#tag-list").should have_content "新标签"
         find(:css, "div#tag-filters").should have_content "新标签"
       end
 
-      it "should be able to create tags with upper-case name & down-case name", :js => true do
+      it "should be able to create tags with upper-case name & down-case name" do
         fill_in "tag_name", :with => "ABCTag"
         click_button "新建"
         page.should have_content "ABCTag"
@@ -353,7 +352,7 @@ describe "topic section" do
         find('#tag-submit')[:disabled].should eq "disabled"
       end
 
-      it "cannot create same tag twice", :js => true do
+      it "cannot create same tag twice" do
         fill_in "tag_name", :with => "同一个标签"
         click_button "新建"
         page.should have_content "同一个标签"
@@ -362,13 +361,13 @@ describe "topic section" do
         page.should have_content "标签名已使用"
       end
 
-      it "cannot create blank tag", :js => true do
+      it "cannot create blank tag" do
         fill_in "tag_name", :with => " "
         click_button "新建"
         page.should have_content "标签名不能为空"
       end
 
-      it "cannot create tag with mark other than dash and underscore", :js => true do
+      it "cannot create tag with mark other than dash and underscore" do
         fill_in "tag_name", :with => "错误%标签"
         click_button "新建"
         page.should have_content "名称不合法"

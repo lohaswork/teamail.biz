@@ -1,4 +1,10 @@
+
+require 'sanitize'
 module TopicsHelper
+  def safe_content(content)
+    Sanitize.clean(content, Sanitize::Config::RELAXED)
+  end
+
   def show_for_checkbox(users, topic)
     users.map { |user| {
       :email => user.email,
@@ -23,7 +29,7 @@ module TopicsHelper
   end
 
   def display_unread_style?(topic)
-    in_personal_topics_page? && topic.read_status_of(login_user) != 1 || false
+    topic.read_status_of(login_user) != 1 || false
   end
 
   def unread_topic_number
@@ -32,7 +38,6 @@ module TopicsHelper
     .length
   end
 
-  private
   def in_personal_topics_page?
     current_page?(:controller => 'topics', :action => 'unarchived') || current_page?(:controller => 'users', :action => 'topics') || false
   end

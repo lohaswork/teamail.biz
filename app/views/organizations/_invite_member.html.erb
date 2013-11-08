@@ -1,12 +1,10 @@
-<div>
+<div class="member-invite">
   <%- if login_user_admin? %>
-    <%= form_tag add_member_path, :method => :post, :remote => true do %>
-      <div class="control-group">
-        <%= text_field_tag :user_email, nil, :placeholder=>"请输入Email"%>
+    <%= form_tag add_member_path, :method => :post, :class => "form-inline", :remote => true do %>
+      <div class="form-group">
+        <%= text_field_tag :user_email, nil, :class => "form-control", :placeholder=>"请输入Email"%>
       </div>
-      <div>
-        <%= submit_tag "邀请", :class=>"btn btn-default"%>
-      </div>
+      <%= submit_tag "邀请", :class=>"btn btn-default"%>
     <% end %>
   <% end %>
 </div>

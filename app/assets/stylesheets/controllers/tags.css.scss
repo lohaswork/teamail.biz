@@ -1,3 +1,26 @@
 #tagging-submit {
   display: none;
+  margin-top: 10px;
+}
+#tag-input {
+  margin: 10px 15px;
+  input[type=text] {
+    min-width: 120px;
+  }
+  padding-left: 5px;
+}
+#tag-list-container {
+  margin: 10px 15px;
+  lable {
+    padding-bottom: 10px;
+    width: 100%;
+    border-bottom: 1px dashed #666;
+  }
+  li {
+    margin-bottom: 3px;
+    margin-left: 5px;
+    &:first-child {
+      margin-top: 15px;
+    }
+  }
 }

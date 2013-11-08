@@ -29,12 +29,13 @@ gem 'jquery-rails'
 
 gem 'compass-rails', '~> 2.0.alpha.0'
 gem 'anjlab-bootstrap-rails', '>= 3.0.0.0', :require => 'bootstrap-rails'
-gem 'font-awesome-rails'
+gem 'font-awesome-sass'
 gem 'rest-client'
 gem 'carrierwave-aliyun'
 gem 'multimap'
 gem 'sidekiq'
 gem 'kaminari'
+gem 'sanitize'
 
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby'
@@ -68,7 +69,7 @@ gem 'unicorn'
 gem 'unicorn-worker-killer'
 
 # Use Capistrano for deployment
-gem 'capistrano', group: :development
+gem 'capistrano', '~> 2.15.5', group: :development
 
 # group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

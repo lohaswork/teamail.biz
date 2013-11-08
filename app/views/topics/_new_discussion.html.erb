@@ -1,16 +1,18 @@
-<div id='new-discussion' class='row'>
-  <div id='new-discussion-form' class='col-xs-12'>
+<div id='new-discussion'>
+  <div id='new-discussion-form'>
     <%= form_tag topic_discussions_path(@topic), :method => "post", :class=>"form-horizontal", :remote => true do %>
-      <div class="control-group">
-        <%= text_area_tag :content, nil, :class=>"col-xs-8", :placeholder=>"即时评论"%>
-        <%= text_field_tag :invited_emails, nil, class: 'col-xs-8', placeholder: '输入电子邮件邀请成员...' %>
-        <%= hidden_field_tag :selected_users_for_discussion, '' %>
+      <div class="input-area form-group">
+        <div class="col-xs-12">
+          <%= render :partial => 'shared/editor' %>
+          <%= render :partial => 'shared/user_select_for_discussion', :locals => { :topic => @topic} %>
+          <%= text_field_tag :invited_emails, nil, :class => 'form-control', placeholder: '输入电子邮件邀请成员...' %>
+          <%= hidden_field_tag :selected_users_for_discussion, '' %>
+        </div>
       </div>
-      <div>
-        <%= submit_tag "回复", :class=>"btn"%>
+      <div class="reply-submit">
+        <%= submit_tag "回复", :class=>"btn btn-primary"%>
       </div>
     <% end %>
-    <%= render :partial => 'shared/user_select_for_discussion', :locals => { :topic => @topic} %>
   </div>
 </div>
 

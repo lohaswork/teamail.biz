@@ -13,6 +13,7 @@ module EmailEngine
 
     def create_discussion_notification(emails=@emails)
       gateway.send_batch_message(
+        from: discussion.creator.email_name,
         to: emails,
         subject: topic.title,
         body: new_discussion_notification_text

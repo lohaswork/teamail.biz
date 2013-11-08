@@ -1,4 +1,5 @@
 require 'bundler/capistrano'
+require 'sidekiq/capistrano'
 $:.unshift('./config')
 require 'capistrano-db-rollback'
 require 'capistrano_database_yml'
@@ -26,11 +27,11 @@ set :branch, "master"  # Need changge to master
 
 # Configurations
 set :rails_env, "production"
-set :deploy_via, :remote_cache
+#set :deploy_via, :remote_cache
 set :use_sudo, false
 set :normalize_asset_timestamps, false
 default_run_options[:pty] = true
-set :rbenv_version, ENV['RBENV_VERSION'] || "1.9.3-p448"
+set :rbenv_version, ENV['RBENV_VERSION'] || "2.0.0-p247"
 set :default_environment, {
   'PATH' => "/home/#{user}/.rbenv/shims:/home/#{user}/.rbenv/bin:$PATH",
   'RBENV_VERSION' => "#{rbenv_version}",
@@ -41,11 +42,33 @@ role :web, "121.199.43.92"                          # Your HTTP server, Apache/e
 role :app, "121.199.43.92"                          # This may be the same as your `Web` server
 role :db,  "121.199.43.92", :primary => true        # This is where Rails migrations will run
 
+# For sidekiq
+set(:sidekiq_cmd) { "bundle exec sidekiq -e #{rails_env}" }
+set(:sidekiqctl_cmd) { "bundle exec sidekiqctl" }
+set(:sidekiq_timeout) { 10 }
+set(:sidekiq_role) { :app }
+set(:sidekiq_pid) { "#{current_path}/tmp/pids/sidekiq.pid" }
+set(:sidekiq_processes) { 1 }
+
 # For Unicorn service
 set :unicorn_config, "#{current_path}/config/unicorn.rb"
 set :unicorn_pid, "#{current_path}/tmp/pids/unicorn.pid"
 
 namespace :deploy do
+
+  # redis
+  namespace :redis do
+    desc "Start the Redis server"
+    task :start do
+      run "#{sudo} /etc/init.d/redis-server start"
+    end
+
+    desc "Stop the Redis server"
+    task :stop do
+      run '#{sudo} /etc/init.d/redis-server stop'
+    end
+
+  end
 
   task :cold do       # Overriding the default deploy:cold
     update
@@ -123,5 +146,6 @@ namespace :deploy do
 end
 
 after 'deploy:setup', 'deploy:add_shared'
+after "deploy:update_code", "deploy:migrate"
 after 'deploy:create_symlink', 'deploy:housekeeping'
 after 'deploy:restart', 'deploy:cleanup'

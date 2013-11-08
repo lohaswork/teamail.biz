@@ -1,10 +1,8 @@
-<div class="forgot">
-  <%= form_tag forgot_path, :method => "post", :class=>"form-horizontal", :remote => true do %>
-    <div class="center control-group">
-      <%= text_field_tag :email, nil, :class=>"input-large", :placeholder=>"邮箱"%>
+<div class="forgot container">
+  <%= form_tag forgot_path, :method => "post", :class => "form-inline", :remote => true do %>
+    <div class="form-group">
+      <%= text_field_tag :email, nil, :class=>"form-control", :placeholder=>"邮箱"%>
     </div>
-    <div class="center">
-      <%= submit_tag "发送邮件重置密码", :class=>"btn"%>
-    </div>
+    <%= submit_tag "发送邮件重置密码", :class=>"btn btn-default"%>
   <% end %>
 </div>

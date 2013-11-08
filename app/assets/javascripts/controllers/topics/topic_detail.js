@@ -29,6 +29,7 @@
         return false;
       })
       .on("refreshed", "#topic-area", function () {
+        $('.timeago').timeago();
         window.history.pushState({}, "teamail.biz", "/organization_topics");
         $("#tagging-dropdown").attr("disabled","disabled");
         $("#archive-form").remove();

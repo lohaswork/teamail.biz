@@ -7,13 +7,16 @@
   App.page.SidebarTags.prototype = {
     init: function(){
       var self = this;
-        $('#tag-filters a').click(function(){
+        $(document).on("click", "#tag-filters li", function(){
           if ($(this).hasClass("active-tag")){
-            return false;
+            $(this).find(':checkbox').prop("checked", false);
+            $(this).removeClass("active-tag");
           } else {
-            $('#tag-filters a').removeClass("active-tag");
+            $(this).find(':checkbox').prop("checked", "checked");
             $(this).addClass("active-tag");
           }
+          $('#tag-filters-submit').trigger("click");
+          return false;
         });
     }
   }

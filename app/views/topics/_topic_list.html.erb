@@ -1,45 +1,35 @@
 <div id='topic-list'>
-  <div class="row">
-    <div>
-      您的话题有：
-    </div>
-    <div class='col-xs-2'>
-      选择框：
-    </div>
-    <div class='col-xs-2'>
-      创建者：
-    </div>
-    <div class='col-xs-2'>
-      回复数：
-    </div>
-    <div class='col-xs-3'>
-      标题：
-    </div>
-    <div class='col-xs-3'>
-      最后回复时间：
-    </div>
+  <div class="row headline">
+    <h4>
+      话题列表
+    </h4>
   </div>
   <div class='checkbox-group' id="select-topic" data-update="#selected_topics_to_archive, #selected_topics_to_tagging" data-reload=true data-page="CheckBoxGroup">
-    <%- topics.try(:each) do |topic| %>
-      <div class="row topic-row <%= display_unread_style?(topic) ? 'unread' : 'read' %>">
-        <div class='col-xs-2'>
-          <%= check_box_tag nil, topic.id, false, :class=>"item", :'data-item'=>true %>
-        </div>
-        <div class='col-xs-2'>
-          <%= topic.creator.email_name%>
-        </div>
-        <div class='col-xs-2'>
-          <%= topic.discussions.size > 0 ? topic.discussions.size : ''%>
-        </div>
-        <div class='col-xs-3'>
-          <%= link_to(topic.title, topic_path(topic)) %>
-          <%= render :partial => 'tags/headline_tags', :locals => {:topic => topic} %>
-        </div>
-        <div class='col-xs-3'>
-          <%= topic.last_update_time %>
-        </div>
-      </div>
-    <% end %>
+    <ul class="list-unstyled">
+      <%- topics.try(:each) do |topic| %>
+        <%- read_style = display_unread_style?(topic) ? 'unread' : 'read' if in_personal_topics_page? %>
+        <li class="topic-row <%= read_style %>">
+          <div class='topic-checkbox'>
+            <%= check_box_tag nil, topic.id, false, :class=>"item", :'data-item'=>true %>
+          </div>
+          <div class='topic-creator'>
+            创建人:&nbsp<%= topic.creator.email_name%>
+          </div>
+          <div class='topic-reply-num'>
+            &nbsp(<%= topic.discussions.size %>)
+          </div>
+          <div class='topic-title-with-tag'>
+            <%= render :partial => 'tags/headline_tags', :locals => {:topic => topic} %>
+            <div class='title'>
+              <%= link_to(topic.title, topic_path(topic)) %>
+            </div>
+          </div>
+          <div class='topic-update-time'>
+            <time class="timeago" datetime="<%= topic.last_update_time %>"></time>
+          </div>
+        </li>
+      <% end %>
+    </ul>
     <%= paginate topics %>
   </div>
 </div>

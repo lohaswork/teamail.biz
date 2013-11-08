@@ -1,7 +1,9 @@
 /*
-green 1: #49BF67;
-green 2: #3eb05b;
-green 3: #35914c;
+green 1: #34422C
+green 2: #678358
+green 3: #9BC584
+green 4: #BAEC9E
+green 5: #CFFFB0
 */
 
 /* to make test pass */
@@ -9,10 +11,57 @@ html, body {
   height: 100%;
 }
 body {
-  font-family:Helvetica, Arial, "Hiragino Sans GB", "WenQuanYi Micro Hei", sans-serif;
+  font-family:"Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
   -webkit-font-smoothing: antialiased;
-
+  background-color: #EEEEEE;
+  color: #333;
   a:hover {
+    color: #32649c;
     text-decoration: none;
+  }
+}
+
+.page-container {
+  margin-top: 10px;
+  background-color: #fff;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+  border-radius: 8px;
+  -webkit-box-shadow: rgba(0,0,0,0.1) 1px 1px 10px;
+  -moz-box-shadow: rgba(0,0,0,0.1) 1px 1px 10px;
+  box-shadow: rgba(0,0,0,0.1) 1px 1px 10px;
+  padding-top: 35px;
+  padding-bottom: 15px;
+  margin-bottom: 50px;
+}
+body.sessions {
+  .login {
+    max-width: 500px;
+  }
+}
+body.users {
+  .page-container {
+    background-color: !important;
+  }
+  .sign-up {
+    max-width: 500px;
+  }
+  .forgot {
+    max-width: 500px;
+    margin-bottom: 25px;
+  }
+  .reset {
+    max-width: 500px;
+    margin-bottom: 25px;
+  }
+  .forgot-success, .active, .reset-success, .signup-success {
+    li {
+      margin-bottom: 4px;
+    }
+  }
+  .forgot-success li.user-email {
+      color: #588CC7;
   }
 }

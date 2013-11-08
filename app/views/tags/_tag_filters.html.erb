@@ -1,12 +1,17 @@
 <div id="tag-filters" data-page="SidebarTags">
-  <ul>
-    <%- tags.try(:each) do |tag|%>
-      <li id="tag-link-#{tag.id}">
+  <%= form_tag topics_filter_with_tags_path(:topic => @topic), :method => "post", :remote => true do %>
+    <ul class="list-unstyled">
+      <%- tags.try(:each) do |tag|%>
         <%- tag_color = tag.color || "1" %>
-        <%= link_to topics_filter_with_tag_path(:tag => tag, :topic => @topic), :method => :post, :remote => true, :class => "tag-color-#{tag_color}" do %>
-          <%= tag.name %>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
+        <li id="tag-link-<%= tag.id %>" class="tag-color-<%= tag_color %>">
+          <a>
+            <%= check_box_tag 'tags[]', tag.id, false, :style => 'visibility: hidden; position: absolute;' %>
+            <i class="fa fa-circle"></i>
+            <%= tag.name %>
+          </a>
+        </li>
+      <% end %>
+    </ul>
+    <%= submit_tag "筛选", :id => "tag-filters-submit", :style => "display:none;" %>
+  <% end %>
 </div>
