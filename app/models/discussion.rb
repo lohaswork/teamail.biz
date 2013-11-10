@@ -44,7 +44,7 @@ class Discussion < ActiveRecord::Base
 
   def mark_as_read_by(user)
     begin
-      self.user_discussions.find_by_user_id(user.id).update_attribute(:read_status, true)
+      self.user_discussions.where(:user_id => user.id).first_or_create.update_attribute(:read_status, true)
     rescue ActiveRecord::RecordNotFound, NoMethodError
       nil
     end

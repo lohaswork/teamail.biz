@@ -1,4 +1,7 @@
 <div class="topiclist-buttongroup">
+  <span class="topic-check-all">
+    <input type="checkbox", class='all', data-all=true>
+  </span>
   <%= render :partial => 'tags/tagging' %>
   <% if controller_name == 'topics' && action_name == 'show' || action_name == 'unarchived' %>
     <%= render :partial => 'archive_form', :locals => {:topic => topic} %>

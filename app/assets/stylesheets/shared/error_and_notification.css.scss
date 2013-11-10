@@ -1,3 +1,13 @@
+.top-message-container {
+  position: fixed;
+  top:80px;
+  text-align: center;
+  left:50%;
+  margin-left:-210px;
+  *margin-left:-210px;
+  _margin-left:-210px;
+  z-index: 1000;
+}
 .error {
   display: none;
   font-size: 14px;

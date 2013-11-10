@@ -14,10 +14,10 @@ module EmailEngine
       end
 
       def analyzed_content
-        if self.respond_to?(:stripped_html) && !stripped_html.blank?
-          stripped_html
-        elsif self.respond_to?(:stripped_text) && !stripped_text.blank?
-          stripped_text
+        if self.respond_to?(:body_html) && !body_html.blank?
+          body_html
+        elsif self.respond_to?(:body_plain) && !body_plain.blank?
+          simple_format_with_quote body_plain
         else
           "此封内容为空"
         end
@@ -36,7 +36,12 @@ module EmailEngine
       end
 
       def resolve_topic_of_email
-        topic_id = body_html[/#{Regexp.escape(@gateway.host_name)}\/topics\/(.*?)\"/m, 1]
+        if self.respond_to?(:body_html) && !body_html.blank?
+          exp_body = body_html
+        else
+          exp_body = body_plain
+        end
+        topic_id = exp_body[/#{Regexp.escape(@gateway.host_name)}\/topics\/(\d+)/m, 1]
         topic_id = topic_id.blank? ? nil : topic_id.to_i
         topic_id && Topic.find(topic_id)
       end
@@ -47,8 +52,22 @@ module EmailEngine
         all_recipient_emails = to + "," + (self.methods.include?(:cc) ? self.cc : '')
         all_recipient_emails.split(',').map{ |address| @notifiers.concat( address.scan(email_regex) ) }
         @notifiers = (@topic.default_notify_members.map(&:email) + @notifiers).uniq if is_creating_discussion
-        @notifiers.delete @creator.email
+        @notifiers.delete sender
         @notifiers.delete $config.default_system_email
+      end
+
+      private
+      # Need to add blockquote to reference
+      def simple_format_with_quote(text)
+        text = '' if text.nil?
+        text = text.dup
+        start_tag = "<p>"
+        text = text.to_str
+        text.gsub!(/\r\n?/, "\n")                    # \r\n and \r -> \n
+        text.gsub!(/\n\n+/, "</p>\n\n#{start_tag}")  # 2+ newline  -> paragraph
+        text.gsub!(/([^\n]\n)(?=[^\n])/, '\1<br />') # 1 newline   -> br
+        text.insert 0, start_tag
+        text.concat("</p>")
       end
     end
 

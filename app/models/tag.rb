@@ -16,7 +16,7 @@ class Tag < ActiveRecord::Base
   def add_color
     # Default shipping with 16 colors
     #   take random number
-    random_color_number = rand(1..16)
+    random_color_number = rand(1..8)
     self.color ||= random_color_number.to_s
   end
 end

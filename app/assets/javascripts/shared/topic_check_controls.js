@@ -51,6 +51,26 @@
       .on("refreshed", "#tag-list", function() {
         $("#tag-input input[type='text']").val("");
         return false;
+      })
+      .on('change', '.topic-check-all input[data-all]', function(){
+        var selectAll = $(this);
+        $("#select-topic").find("input[data-item]").prop('checked', function(){
+          var me = $(this),
+              checkStatus = selectAll.is(':checked'),
+              checkEvent = checkStatus ? 'checked' : 'unchecked';
+          //if the checkbox status is not same as the select-all, then change and trigger the event
+          if (me.is(':checked') !== checkStatus) {
+            me.trigger(checkEvent);
+          }
+          if (checkStatus) {
+            $("#archive-submit").attr("disabled",false);
+            $("#tagging-dropdown").attr("disabled",false);
+          } else {
+            $("#archive-submit").attr("disabled","disabled");
+            $("#tagging-dropdown").attr("disabled","disabled");
+          }
+          return checkStatus;
+        });
       });
 
       var sumCheckStatus = function(check_element) {
@@ -74,6 +94,7 @@
         }
         $("#tag-list :checkbox").attr('checked', false);
         $("#topic-list :checkbox").attr('checked', false);
+        $('.topic-check-all input[data-all]').attr('checked', false);
         $("#tagging-submit").hide();
         $("#tag-input").show();
         return false;

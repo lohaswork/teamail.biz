@@ -1,22 +1,14 @@
 <div id='topic-list'>
-  <div class="row headline">
-    <h4>
-      话题列表
-    </h4>
-  </div>
   <div class='checkbox-group' id="select-topic" data-update="#selected_topics_to_archive, #selected_topics_to_tagging" data-reload=true data-page="CheckBoxGroup">
     <ul class="list-unstyled">
       <%- topics.try(:each) do |topic| %>
-        <%- read_style = display_unread_style?(topic) ? 'unread' : 'read' if in_personal_topics_page? %>
-        <li class="topic-row <%= read_style %>">
+        <li class="topic-row <%= read_style(topic) %>">
           <div class='topic-checkbox'>
             <%= check_box_tag nil, topic.id, false, :class=>"item", :'data-item'=>true %>
           </div>
           <div class='topic-creator'>
-            创建人:&nbsp<%= topic.creator.email_name%>
-          </div>
-          <div class='topic-reply-num'>
-            &nbsp(<%= topic.discussions.size %>)
+            <%= topic.creator.email_name%>
+            (<%= topic.discussions.size %>)
           </div>
           <div class='topic-title-with-tag'>
             <%= render :partial => 'tags/headline_tags', :locals => {:topic => topic} %>
@@ -25,6 +17,9 @@
             </div>
           </div>
           <div class='topic-update-time'>
+            <%- if has_attachments?(topic) %>
+              <i class="fa fa-paperclip fa-lg"></i>
+            <% end %>
             <time class="timeago" datetime="<%= topic.last_update_time %>"></time>
           </div>
         </li>

@@ -4,15 +4,29 @@
   min-height: 100%;
 }
 .topiclist-buttongroup {
+  padding-left: 3%;
   max-width: 300px;
-  height: 53px;
+  margin-top: 15px;
+  height: 30px;
+  margin-bottom: 20px;
   button {
     width: 85px;
+  }
+  .topic-check-all {
+    float: left;
+    text-align: center;
+    width: 55px;
+    height: 34px;
+    border: 1px #dedede solid;
+    padding-top: 5px;
+    border-radius: 4px;
+    margin-right: 5px;
   }
   #tagging-controls {
     float: left;
     margin-right: 5px;
   }
+
 }
 .topic-area-gap {
   width: 110%;
@@ -22,7 +36,6 @@
   border-top: 5px solid #eee;
 }
 #topic-area {
-  padding-top: 15px;
   padding-left: 3%;
 }
 
@@ -30,40 +43,47 @@
   font-weight: bold;
 }
 .read {
-  background-color: #eee;
 }
 
-#topic-list .headline {
+.headline {
+  margin-top: 12px;
+  margin-left: 15px;
   h4 {
     color: #588CC7;
   }
 }
 #topic-list {
+  li.topic-row:first-child {
+    border-top: 1px #ccc solid;
+  }
   li.topic-row {
+    overflow: hidden;
+    white-space: nowrap;
+    word-break: keep-all;
     line-height: 48px;
     height: 48px;
     width: 105%;
     padding-left: 3%;
     padding-right: 3%;
     padding-bottom: 4px;
-    border-bottom: 1px #ccc solid;
+    border-bottom: 1px #ccc dashed;
     .topic-checkbox {
       float: left;
-      min-width: 30px;
+      min-width: 20px;
+      width: 3%;
       clear: left;
     }
     .topic-creator {
       float: left;
-      min-width: 70x;
-    }
-    .topic-reply-num {
-      float: left;
-      min-width: 30px;
+      min-width: 120px;
+      width: 15%;
     }
     .topic-title-with-tag {
       float: left;
       font-size: 14px;
-      width: 60%;
+      width: auto;
+      max-width: 65%;
+      overflow: hidden;
       .title {
         margin-right: 5px;
         white-space: nowrap;
@@ -79,7 +99,7 @@
       float: right;
       text-align: right;
       clear: right;
-      min-width: 120px;
+      max-width: 120px;
     }
   }
 }
