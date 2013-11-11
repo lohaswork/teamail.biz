@@ -13,8 +13,8 @@ class WelcomeController < ApplicationController
                                   'early-adopter-form' => render_to_string(:partial => 'apply_form',
                                                                           :layout => false)
                                 },
-                    :modal => render_to_string(:partial => 'create_success',
-                                               :layout => false)
+                    :modal => 'early_adotpers_add_success_msg' => render_to_string(:partial => 'create_success',
+                                                                          :layout => false)
                     }
   end
 end

@@ -483,6 +483,7 @@ describe "the topics action" do
         context "user create success with a discussion" do
           it "shold see the discussion size change" do
             click_on "创建新话题"
+            sleep 0.5
             fill_in "title", :with => "test title"
             editor_fill_in :in => '#new-topic-form', :with => "this is test discussion"
             click_button "创建"

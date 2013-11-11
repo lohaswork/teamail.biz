@@ -28,11 +28,14 @@ class TopicsController < ApplicationController
     notice = "话题创建成功"
 
     render :json => {
-      :notice => render_to_string(:partial => 'shared/notifications',
-                                  :layout => false,
-                                  :locals => {
-                                    :notice => notice
-                                  })
+      :dismiss => "myModal",
+      :modal => {
+        "message-dialog" => render_to_string(:partial => 'shared/error_and_notification',
+                                             :layout => false,
+                                             :locals => {
+                                               :notice => notice
+                                            })
+      }
     }
   end
 

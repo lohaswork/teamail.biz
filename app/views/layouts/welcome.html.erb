@@ -20,8 +20,7 @@
     <%= yield(:head) %>
   </head>
   <body class="<%= controller_name %>" data-page="<%= @page_id %>">
-    <div id='myModal', class='modal fade'>
-    </div>
+    <div class="modal fade" id="top-message-container"></div>
     <div class='wrapper'>
       <%= yield %>
       <%= render 'layouts/footer_index' %>

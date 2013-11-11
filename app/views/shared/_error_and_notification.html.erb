@@ -1,7 +1,23 @@
-<div class="top-message-container">
-  <div class="error">
-  </div>
-  <div class="notification">
-    <%= display_notice_and_alert %>
-  </div>
-</div>
+<div class="modal-dialog" id="message-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h4>系统消息</h4>
+    </div>
+    <div class="modal-body">
+      <% if defined? error_messages and error_messages.any? %>
+        <div class="error alert alert-danger">
+          <% error_messages.each do |msg| %>
+            <p><%= msg %></p>
+          <% end %>
+        </div>
+      <% end %>
+      <% if notice %>
+        <div class="notification alert alert-success">
+          <p><%= notice %></p>
+        </div>
+      <% end %>
+    </div>
+  </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+
