@@ -1,19 +1,25 @@
 <ul id='discussion-list' class="list-unstyled">
-  <%- discussions.try(:each) do |discussion|%>
-    <li>
-      <div class='content'>
-        <%=  raw safe_content(discussion.content) %>
-      </div>
-      <div class='attachment'>
-        <%= render :partial => 'topics/discussion_attachments', :locals => {:discussion => discussion} %>
-      </div>
+  <%- discussions.try(:each) do |discussion| %>
+    <li class="discussion-li">
       <div class='discussion-info'>
+        <span class="reply-span">&nbsp</span>
         <div class='discussion-creator'>
           <%= discussion.creator.email%>
         </div>
         <div class='update-time'>
           <%= discussion.created_at.strftime("%Y年%m月%d日 %H:%M")%>
         </div>
+      </div>
+      <div class='notify-party'>
+        <%- discussion.notify_party.try(:each) do |user| %>
+          发送至: <%= user.email %>
+        <% end %>
+      </div>
+      <div class='content'>
+        <%=  raw safe_content(discussion.content) %>
+      </div>
+      <div class='attachment'>
+        <%= render :partial => 'topics/discussion_attachments', :locals => {:discussion => discussion} %>
       </div>
     </li>
   <% end %>

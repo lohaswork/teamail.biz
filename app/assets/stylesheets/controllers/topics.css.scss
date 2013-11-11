@@ -108,9 +108,9 @@
   .title {
     h2 {
       float: left;
-      color: #000;
+      color: #5C8AC0;
       font-weight: 600;
-      margin-left: 30px;
+      margin-left: 5px;
       margin-right: 20px;
     }
     .headline-tag-container {
@@ -122,18 +122,21 @@
 #discussion-list {
   clear: left;
   padding-top: 10px;
-  li {
-    border-radius: 3px;
-    border: 1px solid #eee;
-    padding: 15px 20px;
-    margin-bottom: 20px;
-    margin-left: 50px;
-    &:first-child {
-      margin-left: 0px;
+  li.discussion-li {
+    padding: 10px 0;
+    margin-left: 0;
+    margin-bottom: 5px;
+    &:first-child .discussion-info {
+      .reply-span {
+        float: left;
+        margin-right: 5px;
+        padding: 0 20px 0 0;
+        background-color: #f7f0d1;
+      }
     }
   }
   .content {
-    padding: 5px 0 5px 0;
+    padding: 10px 0 0 7px;
     color: #000;
     word-wrap:break-word;
     overflow:hidden;
@@ -142,14 +145,25 @@
     margin: 10px 0;
     span {
       margin-left: 30px;
-      padding: 3px 5px;
+      padding: 5px 5px;
       display: inline-block;
       background-color: #eee;
     }
   }
   .discussion-info {
+    background-color: #F4FAF2;
     line-height: 35px;
     height: 35px;
+    .reply-span {
+      float: left;
+      margin-right: 5px;
+      padding: 0 5px 0 0;
+      background-color: #bfd1aa;
+    }
+  }
+  .notify-party {
+    padding: 10px 0 0 7px;
+    color: #777;
   }
   .discussion-creator {
     color: #588CC7;
@@ -157,13 +171,14 @@
     margin-right: 20px;
   }
   .update-time {
-    margin-right: 20px;
-    float: right;
+    float: left;
+    clear: right;
     color: #999;
   }
-
 }
 #new-discussion {
-  margin-top: 20px;
+  margin-top: 10px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
 
 }
