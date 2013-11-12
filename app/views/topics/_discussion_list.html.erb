@@ -11,16 +11,19 @@
         </div>
       </div>
       <div class='notify-party'>
+        发送至:
         <%- discussion.notify_party.try(:each) do |user| %>
-          发送至: <%= user.email %>
+          <span><%= user.active_status ? user.email_name : user.email %></span>
         <% end %>
       </div>
       <div class='content'>
         <%=  raw safe_content(discussion.content) %>
       </div>
-      <div class='attachment'>
-        <%= render :partial => 'topics/discussion_attachments', :locals => {:discussion => discussion} %>
-      </div>
+      <% unless discussion.upload_files.blank? %>
+        <div class='attachment'>
+          <%= render :partial => 'topics/discussion_attachments', :locals => {:discussion => discussion} %>
+        </div>
+      <% end %>
     </li>
   <% end %>
 </ul>

@@ -1,7 +1,7 @@
 require 'sanitize'
 module TopicsHelper
   def safe_content(content)
-    Sanitize.clean(content, Sanitize::Config::RELAXED)
+    content = Sanitize.clean(content, Sanitize::Config::RELAXED)
   end
 
   def show_for_checkbox(users, topic)

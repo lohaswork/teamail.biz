@@ -7,8 +7,12 @@
   App.page.TopicsShowPage.prototype = {
     init: function(){
       new App.page.TopicCheckControls;
-      $(document).ready(function(){
+      $(document).ready(function() {
         $("#tagging-dropdown").attr("disabled",false);
+        $(".content blockquote").hide();
+        $.each($(".content"), function() {
+          $("<button class='toggle-quote'></button>").insertBefore($(this).find("blockquote").first());
+        });
       });
       $(document).on("refreshed", ".headline-tag-container", function () {
         $("#dropdown-tags").hide();
@@ -16,6 +20,9 @@
         $("#tagging-submit").hide();
         $("#tag-input").show();
         return false;
+      })
+      .on("click", ".toggle-quote", function(){
+        $(this).parents('.content').find('blockquote').toggle();
       })
       .on("refreshed", "#discussion-list", function(){
         return false;

@@ -123,9 +123,8 @@
   clear: left;
   padding-top: 10px;
   li.discussion-li {
-    padding: 10px 0;
+    padding: 5px 0;
     margin-left: 0;
-    margin-bottom: 5px;
     &:first-child .discussion-info {
       .reply-span {
         float: left;
@@ -140,9 +139,33 @@
     color: #000;
     word-wrap:break-word;
     overflow:hidden;
+    .toggle-quote {
+      background: image-url("ellipsis.png") no-repeat;
+      padding: 0;
+      opacity: .5;
+      width: 22px;
+      background-color: #f1f1f1;
+      border: 1px solid #ddd;
+      clear: both;
+      height: 10px;
+      border-radius: 0;
+      line-height: 6px;
+      outline: none;
+    }
+    blockquote {
+      margin-bottom: 0;
+      background: #f9f9f9;
+      border-left: 10px solid #ccc;
+      margin: 1.5em 10px;
+      padding: 0.5em 10px;
+      quotes: "\201C""\201D""\2018""\2019";
+      p {
+        font-size: 14px;
+      }
+    }
   }
   .attachment {
-    margin: 10px 0;
+    margin: 10px 0 0 0;
     span {
       margin-left: 30px;
       padding: 5px 5px;
@@ -164,6 +187,9 @@
   .notify-party {
     padding: 10px 0 0 7px;
     color: #777;
+    span {
+      margin-right: 7px;
+    }
   }
   .discussion-creator {
     color: #588CC7;
