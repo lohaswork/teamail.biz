@@ -1,29 +1,34 @@
+@import "custom_mixins";
 .sidebar {
   text-align: center;
   border-right: 1px #EEEEEE solid;
   h4 {
-    margin-left: 15%;
+    background-color: #F4FAF2;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    height: 38px;
+    line-height: 35px;
+    text-align: center;
     a {
     color: #000;
     }
   }
   h5 {
     text-align: left;
-    position: relative;
-    left: 35%;
-    a {
-      color: #999;
-      &:hover {
-        color: #000;
-      }
+    padding-left: 20px;
+    height: 28px;
+    line-height: 28px;
+    color: #999;
+    &:hover {
+      background-color: #eee;
+      color: #000;
     }
   }
+  h5.selected { color: #000!important; }
 }
 #create-new-topic {
-  color: #fff;
-  text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
-  background-color: #5bb65b;
-  border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
+  width: 124px;
+  @include green-button();
 }
 .personal-inbox {
   text-align: left;
@@ -36,13 +41,12 @@
   text-align: left;
   a {
     cursor: pointer;
+    display:block;
+    @include get-rid-of-long-words();
   }
   li {
-    margin: 4px 10%;
-    padding: 2px 20%;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
+    margin: 4px 0;
+    padding: 2px 0 2px 20px;
   }
   li [type=checkbox] {
     width: 0;

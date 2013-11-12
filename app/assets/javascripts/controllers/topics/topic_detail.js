@@ -38,6 +38,7 @@
       .on("refreshed", "#topic-area", function () {
         $('.timeago').timeago();
         window.history.pushState({}, "teamail.biz", "/organization_topics");
+        $('.headline h4').html('话题列表');
         $("#tagging-dropdown").attr("disabled","disabled");
         $("#archive-form").remove();
         $(document).on("click", "#select-topic input[data-item]", function(){

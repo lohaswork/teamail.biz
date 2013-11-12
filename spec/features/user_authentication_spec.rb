@@ -126,7 +126,7 @@ describe "user authentaction action" do
         visit organization_topics_path
         click_on("登出")
         current_path.should == "/login"
-        page.should_not have_content(user.email)
+        page.should_not have_content '登出'
       end
     end
 

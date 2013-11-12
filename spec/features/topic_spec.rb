@@ -11,7 +11,7 @@ describe "the topics action" do
         user = create(:normal_user)
         organization = user.default_organization
         login_with(user.email, user.password)
-        page.should have_content(user.email)
+        page.should have_content '登出'
         visit organization_topics_path
         page.should have_content organization.topics.first.title
       end
@@ -41,7 +41,7 @@ describe "the topics action" do
       @organization = create(:organization_with_multi_users)
       @user = @organization.users.first
       mock_login_with(@user.email)
-      page.should have_content @user.email
+      page.should have_content '登出'
       visit organization_topics_path
     end
 
@@ -209,7 +209,7 @@ describe "the topics action" do
       user = create(:normal_user)
       @organization = user.default_organization
       login_with(user.email, user.password)
-      page.should have_content(user.email)
+      page.should have_content '登出'
       visit organization_topics_path
     end
 
@@ -257,7 +257,7 @@ describe "the topics action" do
       @organization = create(:organization_with_multi_users)
       @user = @organization.users.first
       mock_login_with(@user.email)
-      page.should have_content @user.email
+      page.should have_content '登出'
       visit organization_topics_path
     end
 
@@ -345,7 +345,7 @@ describe "the topics action" do
       before do
         @user = create(:normal_user)
         login_with(@user.email, @user.password)
-        page.should have_content @user.email
+        page.should have_content '登出'
       end
       context "user go to topics page" do
         it "should have the topic title" do
@@ -356,7 +356,9 @@ describe "the topics action" do
 
       context "user click on the navybar" do
         it "should have the topic title" do
-          click_on "个人空间"
+          within('.personal-inbox') do
+            click_on "所有"
+          end
           page.should have_content @user.topics.first.title
         end
       end
@@ -509,7 +511,7 @@ describe "the topics action" do
       before do
         @user = create(:normal_user)
         login_with(@user.email, @user.password)
-        page.should have_content @user.email
+        page.should have_content '登出'
         visit personal_topics_inbox_path
       end
 

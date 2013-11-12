@@ -4,24 +4,31 @@
   </div>
   <hr>
   <div class="personal-inbox">
-    <h4>
-      <%= link_to('个人空间', personal_topics_path) %>
+    <h4 class="name-space">
+      个人空间
     </h4>
-    <h5>
-      <%= link_to personal_topics_inbox_path do %>
-        未处理
-        <span class="badge"><%= unread_topic_number.to_s %></span>
-      <%end %>
-    </h5>
-    <h5>
-      <%= link_to('所有', personal_topics_path) %>
-    </h5>
+    <%= link_to personal_topics_inbox_path do %>
+      <h5 class="<%= 'selected' if current_page?(:controller => 'topics', :action => 'unarchived') %>">
+          未处理
+          <span class="badge"><%= unread_topic_number.to_s %></span>
+      </h5>
+    <%end %>
+    <%= link_to personal_topics_path do %>
+      <h5 class="<%= 'selected' if current_page?(:controller => 'users', :action => 'topics') %>">
+        所有
+      </h5>
+    <% end %>
   </div>
   <hr>
-  <div class="organization-inbox">
-    <h4>
-      <%= link_to("团队空间", organization_topics_path)%>
+  <div>
+    <h4 class="name-space">
+      团队空间
     </h4>
+    <%= link_to organization_topics_path do %>
+      <h5 class="<%= 'selected' if current_page?(:controller => 'topics', :action => 'index') %>">
+        所有
+      </h5>
+    <% end %>
     <%= render :partial => 'tags/tag_filters', :locals => { :tags => current_organization.tags } %>
   </div>
 </div>

@@ -11,7 +11,7 @@ describe "topics have new discussion", :js => true do
 
   before do
       mock_login_with(user.email)
-      page.should have_content(user.email)
+      page.should have_content '登出'
       topic.users << another_user
       topic.discussions.last.user_discussions.where(:user_id => user.id).first_or_create.update_attribute(:read_status, false)
   end

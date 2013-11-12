@@ -1,4 +1,5 @@
 /* Topic Area */
+@import "custom_mixins";
 .major-content {
   padding-left: 5%;
   min-height: 100%;
@@ -47,9 +48,12 @@
 
 .headline {
   margin-top: 12px;
-  margin-left: 15px;
+  margin-left: 3%;
+  .breadcrumb {
+    margin-bottom: 16px;
+  }
   h4 {
-    color: #588CC7;
+    color: #000;
   }
 }
 #topic-list {
@@ -86,9 +90,7 @@
       overflow: hidden;
       .title {
         margin-right: 5px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        @include get-rid-of-long-words();
       }
       .headline-tag-container {
         margin-right: 5px;
@@ -108,7 +110,7 @@
   .title {
     h2 {
       float: left;
-      color: #5C8AC0;
+      color: #000;
       font-weight: 600;
       margin-left: 5px;
       margin-right: 20px;
@@ -144,7 +146,7 @@
       padding: 0;
       opacity: .5;
       width: 22px;
-      background-color: #f1f1f1;
+      background-color: #999;
       border: 1px solid #ddd;
       clear: both;
       height: 10px;
@@ -206,5 +208,7 @@
   margin-top: 10px;
   padding-top: 20px;
   border-top: 1px solid #eee;
-
+  .reply-submit input[type=submit] {
+    @include green-button();
+  }
 }
