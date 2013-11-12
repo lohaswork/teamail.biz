@@ -69,7 +69,15 @@
 
 }
 .qeditor_preview {
-  p { margin:0; padding:0; }
+  font-size: 14px;
+  line-height: 1.428;
+  p { margin:0; padding:0; font-size: 14px; }
+  h1 {font-size:36px;}
+  h2 {font-size:30px;}
+  h3 {font-size:24px;}
+  h4 {font-size:18px;}
+  h5 {font-size:14px;}
+  h6 {font-size:12px;}
   width: 100%;
   text-align: left;
   min-height: 200px;
