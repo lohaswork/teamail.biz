@@ -10,29 +10,8 @@
     back2top: $('.back2top'),
     scroller: $('.scroller'),
 
-    videoReady: function (){
-      // Once the video is ready
-      _V_("demo-video").ready(function(){
-
-        var myPlayer = this;    // Store the video object
-        var aspectRatio = 9/16; // Make up an aspect ratio
-
-        function resizeVideoJS(){
-          // Get the parent element's actual width
-          var width = document.getElementById(myPlayer.id).parentElement.offsetWidth;
-          width = width - 8;
-          // Set width to fill parent element, Set height
-          myPlayer.width(width).height( width * aspectRatio );
-        }
-
-        resizeVideoJS(); // Initialize the function
-        window.onresize = resizeVideoJS; // Call the function on resize
-      });
-    },
-
     init: function(){
       var self =this;
-      self.videoReady();
 
       $(window).scroll(function(){
         // add navbar opacity on scroll
@@ -44,9 +23,9 @@
 
         // global scroll to top button
         if ($(this).scrollTop() > 160) {
-          this.scrollTop.fadeIn();
+          self.scrollTop.fadeIn();
         } else {
-          this.scrollTop.fadeOut();
+          self.scrollTop.fadeOut();
         }
       });
 
