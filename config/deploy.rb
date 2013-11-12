@@ -23,7 +23,7 @@ set :deploy_to, "/www/teamail_deploy"
 set :application, "LohasWork.com"
 set :scm, :git
 set :repository,  "git@github.com:lohaswork/teamail.biz.git"
-set :branch, "serco/fix-details"  # Need changge to master
+set :branch, "master"  # Need changge to master
 
 # Configurations
 set :rails_env, "production"

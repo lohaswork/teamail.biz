@@ -38,7 +38,7 @@ module EmailEngine
           @topic = Topic.create_topic(title, analyzed_content, @notifiers, @organization, @creator)
           add_tags_to(@topic)
           post_attachments_to_oss(@topic.discussions.first) if self.has_attachments?
-          EmailEngine::TopicNotifier.new(@topic.id).create_topic_notification
+          EmailEngine::TopicNotifier.new(@topic.id, @notifiers).create_topic_notification
         end
       end
 

@@ -4,13 +4,14 @@ module EmailEngine
 
     attr_reader :gateway, :topic
 
-    def initialize(topic_id, gateway=EmailEngine::MailgunGateway.new)
+    def initialize(topic_id, selected_emails,gateway=EmailEngine::MailgunGateway.new)
+      @emails = selected_emails
       @topic = Topic.find topic_id
       @gateway = gateway
     end
 
 
-    def create_topic_notification(emails=deliver_emails)
+    def create_topic_notification(emails=@emails)
       gateway.send_batch_message(
         from: topic.creator.email_name,
         to: emails,
@@ -21,10 +22,6 @@ module EmailEngine
 
 
     private
-    def deliver_emails
-      topic.users.map(&:email)
-    end
-
     def new_topic_notification_text
       <<-EMAIL
       <html><body>

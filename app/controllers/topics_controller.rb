@@ -24,7 +24,7 @@ class TopicsController < ApplicationController
     end
 
     new_topic = Topic.create_topic(params[:title], params[:content], selected_emails, current_organization, login_user)
-    TopicNotifierWorker.perform_async(new_topic.id)
+    TopicNotifierWorker.perform_async(new_topic.id, selected_emails)
     notice = "话题创建成功"
 
     render :json => {
