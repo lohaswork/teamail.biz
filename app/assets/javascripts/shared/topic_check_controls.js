@@ -86,7 +86,13 @@
     },
     refreshTopicList: function(){
       $(document).on("refreshed", "#topic-list", function () {
+        // reload timeago
         $('.timeago').timeago();
+        // clear hidden field
+        $('#selected_topics_to_tagging').val("");
+        $('#selected_tags').val("");
+        $('#selected_topics_to_archive').val("");
+        // make button status init
         $("#dropdown-tags").hide();
         $("#tagging-dropdown").attr("disabled","disabled");
         if ($("#archive-submit")) {
