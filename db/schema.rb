@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131113131926) do
+ActiveRecord::Schema.define(version: 20131113151235) do
 
   create_table "discussions", force: true do |t|
     t.integer  "discussable_id"
@@ -93,6 +93,8 @@ ActiveRecord::Schema.define(version: 20131113131926) do
     t.datetime "updated_at",    null: false
     t.string   "content_type"
   end
+
+  add_index "upload_files", ["discussion_id"], name: "index_upload_files_on_discussion_id", using: :btree
 
   create_table "user_discussions", force: true do |t|
     t.integer  "user_id"
