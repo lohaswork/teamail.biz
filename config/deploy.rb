@@ -27,7 +27,8 @@ set :branch, "master"  # Need changge to master
 
 # Configurations
 set :rails_env, "production"
-#set :deploy_via, :remote_cache
+set :deploy_via, :remote_cache
+set :copy_exclude, [ '.git' ]
 set :use_sudo, false
 set :normalize_asset_timestamps, false
 default_run_options[:pty] = true

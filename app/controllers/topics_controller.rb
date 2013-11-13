@@ -16,11 +16,8 @@ class TopicsController < ApplicationController
       unless current_organization.has_member?(invited_email)
         email_status = User.already_register?(invited_email)
         current_organization.invite_user(invited_email)
-        InvitationNotifierWorker.perform_async(
-          invited_email, current_organization.name, login_user.email,
-          email_status)
+        InvitationNotifierWorker.perform_async(invited_email, current_organization.name, login_user.email, email_status)
       end
-
       selected_emails << invited_email unless selected_emails.include? invited_email.downcase
     end
 
@@ -29,7 +26,6 @@ class TopicsController < ApplicationController
     new_topic = Topic.create_topic(title, email_title, params[:content], selected_emails, current_organization, login_user)
     merge_tags_from_title(new_topic, tags)
     TopicNotifierWorker.perform_async(new_topic.id, selected_emails)
-    notice = "话题创建成功"
 
     render :json => {
       :dismiss => "myModal",
@@ -37,7 +33,7 @@ class TopicsController < ApplicationController
         "message-dialog" => render_to_string(:partial => 'shared/error_and_notification',
                                              :layout => false,
                                              :locals => {
-                                               :notice => notice
+                                               :notice => "话题创建成功"
                                             })
       }
     }

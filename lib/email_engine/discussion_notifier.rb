@@ -15,7 +15,7 @@ module EmailEngine
       gateway.send_batch_message(
         from: discussion.creator.email_name,
         to: emails,
-        subject: topic.title,
+        subject: topic.email_title || topic.title,
         body: new_discussion_notification_text
       )
     end

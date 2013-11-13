@@ -1,5 +1,6 @@
 require 'sanitize'
 module TopicsHelper
+
   def safe_content(content)
     content = Sanitize.clean(content, Sanitize::Config::RELAXED)
   end

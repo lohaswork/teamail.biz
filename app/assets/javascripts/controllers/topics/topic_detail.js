@@ -9,6 +9,7 @@
       new App.page.TopicCheckControls;
       $(document).ready(function() {
         $("#tagging-dropdown").attr("disabled",false);
+        $(".content a").attr('target', '_blank');
         $(".content blockquote").hide();
         $.each($(".content"), function() {
           $("<button class='toggle-quote'></button>").insertBefore($(this).find("blockquote").first());
@@ -30,9 +31,15 @@
       .on("refreshed", "#select-user-for-topic", function(){
         return false;
       })
+      .on("refreshed", "#discussion-list", function(){
+        $(".content a").attr('target', '_blank');
+        var editor = $('<div class="qeditor_preview clearfix" contentEditable="true"></div>');
+        var placeholder = $('<div class="qeditor_placeholder">请输入内容</div>');
+        $(".qeditor_preview").html(placeholder);
+        return false;
+      })
       .on("refreshed", "#select-user-for-discussion", function(){
         $("#new-discussion #invited_emails").val("");
-        $("#new-discussion #content").val("");
         return false;
       })
       .on("refreshed", "#topic-area", function () {
