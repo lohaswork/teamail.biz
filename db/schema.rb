@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131105031942) do
+ActiveRecord::Schema.define(version: 20131113094729) do
 
   create_table "discussions", force: true do |t|
     t.integer  "discussable_id"
@@ -80,6 +80,7 @@ ActiveRecord::Schema.define(version: 20131105031942) do
     t.integer  "organization_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.string   "email_title"
   end
 
   add_index "topics", ["organization_id"], name: "index_topics_on_organization_id", using: :btree
@@ -122,7 +123,6 @@ ActiveRecord::Schema.define(version: 20131105031942) do
     t.string   "remember_token"
     t.integer  "online_status"
     t.integer  "active_status"
-    t.integer  "authority_type"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
     t.string   "active_code"

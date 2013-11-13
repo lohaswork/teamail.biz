@@ -1,5 +1,6 @@
 # encoding: utf-8
 class TopicsController < ApplicationController
+  include TextRegexp::TopicAnalysis
   before_filter :login_required, :organization_required
 
   def index
@@ -23,7 +24,10 @@ class TopicsController < ApplicationController
       selected_emails << invited_email unless selected_emails.include? invited_email.downcase
     end
 
-    new_topic = Topic.create_topic(params[:title], params[:content], selected_emails, current_organization, login_user)
+    email_title = params[:title]
+    title, tags = analyzed_title email_title unless email_title.blank?
+    new_topic = Topic.create_topic(title, email_title, params[:content], selected_emails, current_organization, login_user)
+    merge_tags_from_title(new_topic, tags)
     TopicNotifierWorker.perform_async(new_topic.id, selected_emails)
     notice = "话题创建成功"
 

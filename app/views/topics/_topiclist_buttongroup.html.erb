@@ -1,5 +1,5 @@
 <div class="topiclist-buttongroup">
-  <span class="topic-check-all">
+  <span class="topic-check-all" style="display:<%= controller_name == 'topics' && action_name == 'show' ? 'none' : '' %>;">
     <input type="checkbox", class='all', data-all=true>
   </span>
   <%= render :partial => 'tags/tagging' %>

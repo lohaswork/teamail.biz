@@ -109,12 +109,6 @@ describe "topic section" do
         click_button "新建"
         page.should have_content "标签名不能为空"
       end
-
-      it "cannot create tag with mark other than dash and underscore" do
-        fill_in "tag_name", :with => "错误%标签"
-        click_button "新建"
-        page.should have_content "名称不合法"
-      end
     end
   end
 
@@ -365,12 +359,6 @@ describe "topic section" do
         fill_in "tag_name", :with => " "
         click_button "新建"
         page.should have_content "标签名不能为空"
-      end
-
-      it "cannot create tag with mark other than dash and underscore" do
-        fill_in "tag_name", :with => "错误%标签"
-        click_button "新建"
-        page.should have_content "名称不合法"
       end
     end
   end

@@ -5,12 +5,11 @@ module EmailEngine
     module EmailContentResolution
       extend ActiveSupport::Concern
 
-      def analyzed_title
-        title_array = subject.gsub(/\s+/m, ' ').strip.split(' ')
-        tag_set = Set.new
-        title_array.map { |segment| tag_set.add? segment if /^#/.match segment }
-        @tags = tag_set.to_a.map { |tag| tag[1..-1] }
-        title_content = (title_array - tag_set.to_a).join(' ')
+      include TextRegexp::TopicAnalysis
+
+      def topic_title_from_email
+        title, @tags = analyzed_title(subject)
+        title
       end
 
       def analyzed_content
