@@ -64,16 +64,10 @@ class TopicsController < ApplicationController
       }
     else
       topic = Topic.find(detail_topic_id).archived_by(login_user)
-      # 刷新 archive 按钮状态
-      render :json => {
-        :update => {
-          "archive-form" => render_to_string(:partial => 'topics/archive_form',
-                                             :layout => false,
-                                             :locals => {
-                                               :topic => topic
-                                             })
-        }
-      }
+      # 返回未处理列表
+      flash[:notice] = "归档成功"
+      #render :json => { :status => "success", :redirect => personal_topics_inbox_path }
+      redirect_to personal_topics_inbox_path
     end
   end
 
