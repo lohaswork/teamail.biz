@@ -43,9 +43,7 @@ module TopicsHelper
   end
 
   def unread_topic_number
-    login_user.topics.reject { |topic| topic.archive_status_of(login_user) == 1 }
-    .reject { |topic| topic.read_status_of(login_user) == 1 }
-    .length
+    num = Topic.get_unarchived(login_user).to_a.reject { |topic| topic.read_status_of(login_user) == 1 }.length.to_s
   end
 
   def in_personal_topics_page?

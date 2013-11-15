@@ -141,4 +141,9 @@ class TopicsController < ApplicationController
       }
     end
   end
+
+  def get_unread_num_of_unarchived_topics
+    num = Topic.get_unarchived(login_user).to_a.reject { |topic| topic.read_status_of(login_user) == 1 }.length
+    render :text => num
+  end
 end
