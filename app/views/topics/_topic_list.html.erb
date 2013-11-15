@@ -6,9 +6,13 @@
           <div class='topic-checkbox'>
             <%= check_box_tag nil, topic.id, false, :class=>"item custome-checkbox", :'data-item'=>true %>
           </div>
-          <div class='topic-creator'>
-            <%= topic.creator.email_name%>
-            (<%= topic.discussions.size %>)
+          <div class='topic-creator-info'>
+            <div class='topic-creator'>
+              <%= topic.creator.email_name%>
+            </div>
+            <div class="topic-reply-num">
+              (<%= topic.discussions.size %>)
+            </div>
           </div>
           <div class='topic-title-with-tag'>
             <%= render :partial => 'tags/headline_tags', :locals => {:topic => topic} %>

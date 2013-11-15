@@ -27,16 +27,8 @@ class TopicsController < ApplicationController
     merge_tags_from_title(new_topic, tags)
     TopicNotifierWorker.perform_async(new_topic.id, selected_emails)
 
-    render :json => {
-      :dismiss => "myModal",
-      :modal => {
-        "message-dialog" => render_to_string(:partial => 'shared/error_and_notification',
-                                             :layout => false,
-                                             :locals => {
-                                               :notice => "话题创建成功"
-                                            })
-      }
-    }
+    render :json => { :reload => true }
+    flash[:notice] = "话题创建成功"
   end
 
   def show
