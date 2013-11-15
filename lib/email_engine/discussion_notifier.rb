@@ -58,19 +58,6 @@ module EmailEngine
               <td style="border-collapse: collapse;">
                 <table cellpadding="0" cellspacing="0" border="0" align="left">
                   <tr style="padding-top: 20px;">
-                    <td width="600" valign="top" style="border-collapse: collapse; background-color: #F4FAF2; line-height: 35px; height: 35px; color: #999;">
-                      <span style="margin-right: 20px; color: #588CC7; margin-left:15px;">#{discussion.creator.email}</span>
-                      #{discussion.created_at.strftime("%Y年%m月%d日 %H:%M")}
-                      <span style="margin-left: 60px;">teamail.biz 邮件</span>
-                    </td>
-                  <tr>
-                  <tr>
-                    <td width="600" valign="top" style="border-collapse: collapse; color: #777; padding-top: 8px;">
-                      <span style="margin-right: 20px;">发送至:</span>
-                        #{discussion_notify_party_with_format}
-                    </td>
-                  </tr>
-                  <tr>
                     <td width="600" valign="top" style="border-collapse: collapse; padding-top: 15px;">
                       #{discussion.content}
                     </td>
