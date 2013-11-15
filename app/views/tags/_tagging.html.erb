@@ -4,8 +4,9 @@
     <span class="caret"></span>
   </button>
   <ul id="dropdown-tags" class="dropdown-menu" role="menu">
+    <div class="tag-label">标记为：</div>
     <div id="tag-list-container">
-      <lable>标记为：</lable>
+      <li class="divider"></li>
       <%= form_tag topics_add_tags_path(:topic => @topic), :method => "post", :remote => true do %>
         <%= render :partial => 'tags/tag_list', :locals => { :tags => current_organization.tags } %>
         <li class="divider"></li>

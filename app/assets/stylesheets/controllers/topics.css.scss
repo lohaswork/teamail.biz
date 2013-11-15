@@ -7,7 +7,7 @@
 .topiclist-buttongroup {
   padding-left: 3%;
   max-width: 300px;
-  margin-top: 15px;
+  margin-top: 4px;
   height: 30px;
   margin-bottom: 20px;
   button {
@@ -27,23 +27,14 @@
     float: left;
     margin-right: 5px;
   }
-
 }
+/*
 .topic-area-gap {
   width: 105%;
   position: relative;
   clear: both;
   border-top: 1px solid #ccc;
 }
-#topic-area {
-}
-
-.unread {
-  font-weight: bold;
-}
-.read {
-}
-
 .headline {
   margin-top: 12px;
   .breadcrumb {
@@ -54,8 +45,18 @@
     color: #000;
   }
 }
+*/
+#topic-area {
+}
+
+.unread {
+  font-weight: bold;
+}
+.read {
+}
+
 #topic-list {
-  li.topic-row:first-child {
+  ul.topic-list-ul {
     border-top: 1px #ccc solid;
   }
   li.topic-row {
@@ -69,6 +70,7 @@
     padding-right: 3%;
     padding-bottom: 4px;
     border-bottom: 1px #ccc dashed;
+    &:hover { background-color: #eee;}
     .topic-checkbox {
       float: left;
       min-width: 20px;
@@ -83,10 +85,10 @@
     .topic-title-with-tag {
       float: left;
       font-size: 14px;
-      width: auto;
       max-width: 65%;
       overflow: hidden;
       .title {
+        color: #999;
         margin-right: 5px;
         @include get-rid-of-long-words();
       }
@@ -209,4 +211,35 @@
   .reply-submit input[type=submit] {
     @include green-button();
   }
+}
+
+// select user
+#select-user-for-topic, #select-user-for-discussion {
+  .subgroup-select {
+    margin-bottom: 10px;
+  }
+  span {
+    margin-left: 10px;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+    color: #999;
+    background-color: #eee;
+    &:hover {
+      color: #fff;
+      font-weight: bold;
+      background-color: #ccc;
+    }
+  }
+  .selected {
+    font-weight: bold;
+    color: #fff;
+    background-color: #C3CEAB;
+    &:hover {
+      color: #fff;
+      background-color: #C3CEAB;
+    }
+  }
+  label {font-weight: normal;}
+  margin: 10px auto;
 }

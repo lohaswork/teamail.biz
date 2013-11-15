@@ -8,6 +8,7 @@ class Discussion < ActiveRecord::Base
   has_many :users, lambda { uniq }, :through => :user_discussions
   validates :content, :presence => { :message => "请输入回复内容" }
   after_create :update_topic_members
+  after_touch :update_topic_members
 
   class << self
     def create_discussion(login_user, topic, emails, content)

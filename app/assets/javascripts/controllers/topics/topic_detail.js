@@ -36,6 +36,10 @@
         var editor = $('<div class="qeditor_preview clearfix" contentEditable="true"></div>');
         var placeholder = $('<div class="qeditor_placeholder">请输入内容</div>');
         $(".qeditor_preview").html(placeholder);
+        $(".content blockquote").hide();
+        $.each($(".content"), function() {
+          $("<button class='toggle-quote'></button>").insertBefore($(this).find("blockquote").first());
+        });
         return false;
       })
       .on("refreshed", "#select-user-for-discussion", function(){

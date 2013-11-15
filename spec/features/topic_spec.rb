@@ -99,7 +99,7 @@ describe "the topics action" do
           click_on "创建新话题"
           sleep 0.5
           fill_in "title", :with => "test title"
-          find(:xpath, '//*[@id="select-user-for-topic"]/label[10]/input').set(true)
+          find(:xpath, '//*[@id="select-user-for-topic"]/label[9]/input').set(true)
           click_button "创建"
           page.should have_content "话题创建成功"
           visit organization_topics_path
@@ -124,7 +124,7 @@ describe "the topics action" do
           click_on "创建新话题"
           sleep 0.5
           fill_in "title", :with => "test title"
-          find(:xpath, "//*[@id='select-user-for-topic']/label[1]/input").set(true)
+          find(:xpath, "//*[@id='select-user-for-topic']/div/span").click
           click_button "创建"
           page.should have_content "话题创建成功"
           wait_for_ajax
@@ -215,9 +215,9 @@ describe "the topics action" do
 
     context "click the topic title" do
       it "should go to the topic detail page" do
-        click_on @organization.topics.first.title
-        current_path.should == topic_path(@organization.topics.first)
-        page.should have_content @organization.topics.first.discussions.first.content
+        click_on @organization.topics.last.title
+        current_path.should == topic_path(@organization.topics.last)
+        page.should have_content @organization.topics.last.discussions.last.content
       end
     end
 
@@ -246,7 +246,7 @@ describe "the topics action" do
         page.should have_content "话题创建成功"
         visit organization_topics_path
         page.should have_content "test title"
-        click_on @organization.topics.last.title
+        click_on "test title"
         page.should have_content "如题"
       end
     end
@@ -312,8 +312,7 @@ describe "the topics action" do
         it "should add all users by select all" do
           Topic.last.users.size.should == 1
           editor_fill_in :in => '#new-discussion-form', :with => "user create a discussion for topic users"
-          checkbox = find(:xpath, "//*[@id='select-user-for-discussion']/label[1]/input")
-          checkbox.set(true)
+          find(:xpath, "//*[@id='select-user-for-discussion']/div/span").click
           click_button "回复"
           page.should have_content "user create a discussion for topic users"
           Topic.last.users.length.should == 10
@@ -322,7 +321,7 @@ describe "the topics action" do
         it "should add set the last created user as default checked" do
           Topic.last.users.size.should == 1
           editor_fill_in :in => '#new-discussion-form', :with => "user create a discussion for discussion users"
-          checkbox = find(:xpath, "//*[@id='select-user-for-discussion']/label[10]/input")
+          checkbox = find(:xpath, "//*[@id='select-user-for-discussion']/label[9]/input")
           checkbox.set(true)
           click_button "回复"
           page.should have_content "user create a discussion for discussion users"
@@ -438,7 +437,7 @@ describe "the topics action" do
             click_on "创建新话题"
             fill_in "title", :with => "test title"
             sleep 0.5
-            find(:xpath, "//*[@id='select-user-for-topic']/label[10]/input").set(true)
+            find(:xpath, "//*[@id='select-user-for-topic']/label[9]/input").set(true)
             click_button "创建"
             page.should have_content "话题创建成功"
             visit personal_topics_path
@@ -461,8 +460,8 @@ describe "the topics action" do
             click_on "创建新话题"
             fill_in "title", :with => "test title"
             sleep 0.5
-            page.should have_selector(:xpath, "//*[@id='select-user-for-topic']/label[1]/input")
-            find(:xpath, "//*[@id='select-user-for-topic']/label[1]/input").set(true)
+            page.should have_selector(:xpath, "//*[@id='select-user-for-topic']/div/span")
+            find(:xpath, "//*[@id='select-user-for-topic']/div/span").click
             click_button "创建"
             wait_for_ajax
             expect(@organization.reload.topics.last.users.length).to eq 10
