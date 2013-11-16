@@ -9,17 +9,6 @@ class TopicsController < ApplicationController
 
   def create
     selected_emails = params[:selected_users_for_topic].split(',')
-    invited_emails = params[:invited_emails].split(/[\,\;]/).map { |email| email.strip }
-    User.check_emails_validation(invited_emails)
-
-    invited_emails.each do |invited_email|
-      unless current_organization.has_member?(invited_email)
-        email_status = User.already_register?(invited_email)
-        current_organization.invite_user(invited_email)
-        InvitationNotifierWorker.perform_async(invited_email, current_organization.name, login_user.email, email_status)
-      end
-      selected_emails << invited_email unless selected_emails.include? invited_email.downcase
-    end
 
     email_title = params[:title]
     title, tags = analyzed_title email_title unless email_title.blank?

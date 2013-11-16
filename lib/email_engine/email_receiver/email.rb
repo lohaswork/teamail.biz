@@ -27,7 +27,6 @@ module EmailEngine
       def create_from_email
         resolve_email
         invalid_creator_notification && return if !@organization || is_creating_discussion && !@organization.has_member?(sender)
-        invite_notifiers
         if is_creating_discussion
           content = analyzed_content
           discussion = Discussion.create_discussion(@creator, @topic, @notifiers, content)
@@ -43,17 +42,6 @@ module EmailEngine
         end
       end
 
-      protected
-
-      def invite_notifiers
-        @notifiers.each do |email|
-          if !@organization.has_member?(email)
-            is_registered_user = User.already_register?(email)
-            @organization.invite_user(email)
-            EmailEngine::InvitationNotifier.new(email, @organization, @creator.email, is_registered_user).invitation_notification
-          end
-        end
-      end
     end
 
   end

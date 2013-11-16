@@ -41,15 +41,17 @@ module EmailEngine
           exp_body = body_plain
         end
         topic_id = exp_body[/#{Regexp.escape(@gateway.host_name)}\/topics\/(\d+)/m, 1]
-        topic_id = topic_id.blank? ? nil : topic_id.to_i
-        topic_id && Topic.find(topic_id)
+        topic_id && Topic.find(topic_id.to_i)
       end
 
       def set_notifiers
         email_regex = /\b[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\b/i
         @notifiers = []
         all_recipient_emails = to + "," + (self.methods.include?(:cc) ? self.cc : '')
-        all_recipient_emails.split(',').map{ |address| @notifiers.concat( address.scan(email_regex) ) }
+        all_recipient_emails.split(',').map do |address|
+          email = address.scan(email_regex)
+          @notifiers.concat email if @organization && @organization.has_member?(email)
+        end
         @notifiers = (@topic.default_notify_members.map(&:email) + @notifiers).uniq if is_creating_discussion
         @notifiers.delete sender
         @notifiers.delete $config.default_system_email

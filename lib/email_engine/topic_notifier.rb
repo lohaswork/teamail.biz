@@ -13,7 +13,6 @@ module EmailEngine
 
     def create_topic_notification(emails=@emails)
       gateway.send_batch_message(
-        from: topic.creator.email_name,
         to: emails,
         subject: topic.email_title || topic.title,
         body: new_topic_notification_text
@@ -42,13 +41,18 @@ module EmailEngine
               <td style="border-collapse: collapse;">
                 <table cellpadding="0" cellspacing="0" border="0" align="left">
                   <tr style="padding-top: 20px;">
+                    <td width="600" valign="top" style="border-collapse: collapse; color: #777; padding-top: 10px;">
+                      #{topic.creator.email_name} 写道:
+                    </td>
+                  </tr>
+                  <tr>
                     <td width="600" valign="top" style="border-collapse: collapse; padding-top: 15px;">
                       #{topic.content}
                     </td>
                   </tr>
                   <tr>
-                    <td width="600" valign="top" style="border-collapse: collapse; padding-top: 10px; color: #777;">
-                      点击链接进入teamail.biz查看：<a href='http://#{@gateway.host_name}/topics/#{topic.id}'>http://#{@gateway.host_name}/topics/#{topic.id}</a>
+                    <td width="600" valign="top" style="border-collapse: collapse; padding-top: 15px; color: #777;">
+                      点击链接进入teamail查看：<a href='http://#{@gateway.host_name}/topics/#{topic.id}'>http://#{@gateway.host_name}/topics/#{topic.id}</a>
                     </td>
                   </tr>
                 </table>

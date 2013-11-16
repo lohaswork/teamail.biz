@@ -64,11 +64,6 @@ describe "the topics action" do
           click_on "创建新话题"
           find('#select-user-for-topic').should_not have_content(@user.email_name)
         end
-
-        it "should see the invited emails text field" do
-          click_button "创建新话题"
-          page.should have_selector('#invited_emails', text: "")
-        end
       end
 
       context "user reopen the field" do
@@ -119,7 +114,6 @@ describe "the topics action" do
           @organization.topics.last.users.should include(@user)
         end
 
-        # need refactor to button to select all
         it "should select all of the users by select all checkbox" do
           click_on "创建新话题"
           sleep 0.5
@@ -131,53 +125,6 @@ describe "the topics action" do
           expect(@organization.reload.topics.last.users.length).to eq 10
         end
 
-        it "should be able to invite user to topic" do
-          click_on "创建新话题"
-          sleep 0.5
-          fill_in "title", :with => "test title"
-          fill_in "invited_emails", with: "test@example.com"
-          click_button "创建"
-          page.should have_content "话题创建成功"
-          visit personal_topics_path
-          page.should have_content "test title"
-          @organization.topics.last.users.last.email.should == "test@example.com"
-        end
-
-        it "should be able to invite multiple users to topic" do
-          click_on "创建新话题"
-          sleep 0.5
-          fill_in "title", :with => "test title"
-          fill_in "invited_emails", with: "test@example.com; test2@example2.com"
-          click_button "创建"
-          page.should have_content "话题创建成功"
-          visit personal_topics_path
-          click_on "test title"
-          page.should have_content "test title"
-          page.should have_content "test@example.com"
-          page.should have_content "test2@example2.com"
-        end
-
-
-        it "should add user to topic when inputs member's email instead of check the checkbox" do
-          click_on "创建新话题"
-          sleep 0.5
-          fill_in "title", :with => "test title"
-          fill_in "invited_emails", with: @organization.users.last.email
-          click_button "创建"
-          page.should have_content "话题创建成功"
-          visit personal_topics_path
-          page.should have_content "test title"
-          @organization.topics.last.users.should include @organization.users.last
-        end
-
-        it "should see error message when add the invalid invite user into topic members" do
-          click_on "创建新话题"
-          sleep 0.5
-          fill_in "title", :with => "test title"
-          fill_in "invited_emails", with: "testexample.com"
-          click_button "创建"
-          page.should have_content "邮件地址不合法"
-        end
       end
 
       context "user create success with a discussion" do
@@ -401,11 +348,6 @@ describe "the topics action" do
             click_on "创建新话题"
             find('#select-user-for-topic').should_not have_content(@user.email_name)
           end
-
-          it "should see the invited emails text field" do
-            click_button "创建新话题"
-            page.should have_selector('#invited_emails', text: "")
-          end
         end
 
         context "user reopen the field" do
@@ -466,18 +408,6 @@ describe "the topics action" do
             wait_for_ajax
             expect(@organization.reload.topics.last.users.length).to eq 10
             #expect(@organization.reload.topics.last.users.length).to eq(@organization.reload.users.length)
-          end
-
-          it "should be able to invite user to topic" do
-            click_on "创建新话题"
-            sleep 0.5
-            fill_in "title", :with => "test title"
-            fill_in "invited_emails", with: "test@example.com"
-            click_button "创建"
-            page.should have_content "话题创建成功"
-            visit personal_topics_path
-            page.should have_content "test title"
-            @organization.topics.last.users.last.email.should == "test@example.com"
           end
         end
 
