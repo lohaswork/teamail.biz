@@ -11,7 +11,7 @@ describe "the topics action" do
         user = create(:normal_user)
         organization = user.default_organization
         login_with(user.email, user.password)
-        page.should have_content(user.email)
+        page.should have_content '登出'
         visit organization_topics_path
         page.should have_content organization.topics.first.title
       end
@@ -41,7 +41,7 @@ describe "the topics action" do
       @organization = create(:organization_with_multi_users)
       @user = @organization.users.first
       mock_login_with(@user.email)
-      page.should have_content @user.email
+      page.should have_content '登出'
       visit organization_topics_path
     end
 
@@ -63,11 +63,6 @@ describe "the topics action" do
           page.should have_button "创建新话题"
           click_on "创建新话题"
           find('#select-user-for-topic').should_not have_content(@user.email_name)
-        end
-
-        it "should see the invited emails text field" do
-          click_button "创建新话题"
-          page.should have_selector('#invited_emails', text: "")
         end
       end
 
@@ -99,7 +94,7 @@ describe "the topics action" do
           click_on "创建新话题"
           sleep 0.5
           fill_in "title", :with => "test title"
-          find(:xpath, '//*[@id="select-user-for-topic"]/label[10]/input').set(true)
+          find(:xpath, '//*[@id="select-user-for-topic"]/label[9]/input').set(true)
           click_button "创建"
           page.should have_content "话题创建成功"
           visit organization_topics_path
@@ -119,65 +114,17 @@ describe "the topics action" do
           @organization.topics.last.users.should include(@user)
         end
 
-        # need refactor to button to select all
         it "should select all of the users by select all checkbox" do
           click_on "创建新话题"
           sleep 0.5
           fill_in "title", :with => "test title"
-          find(:xpath, "//*[@id='select-user-for-topic']/label[1]/input").set(true)
+          find(:xpath, "//*[@id='select-user-for-topic']/div/span").click
           click_button "创建"
           page.should have_content "话题创建成功"
           wait_for_ajax
           expect(@organization.reload.topics.last.users.length).to eq 10
         end
 
-        it "should be able to invite user to topic" do
-          click_on "创建新话题"
-          sleep 0.5
-          fill_in "title", :with => "test title"
-          fill_in "invited_emails", with: "test@example.com"
-          click_button "创建"
-          page.should have_content "话题创建成功"
-          visit personal_topics_path
-          page.should have_content "test title"
-          @organization.topics.last.users.last.email.should == "test@example.com"
-        end
-
-        it "should be able to invite multiple users to topic" do
-          click_on "创建新话题"
-          sleep 0.5
-          fill_in "title", :with => "test title"
-          fill_in "invited_emails", with: "test@example.com; test2@example2.com"
-          click_button "创建"
-          page.should have_content "话题创建成功"
-          visit personal_topics_path
-          click_on "test title"
-          page.should have_content "test title"
-          page.should have_content "test@example.com"
-          page.should have_content "test2@example2.com"
-        end
-
-
-        it "should add user to topic when inputs member's email instead of check the checkbox" do
-          click_on "创建新话题"
-          sleep 0.5
-          fill_in "title", :with => "test title"
-          fill_in "invited_emails", with: @organization.users.last.email
-          click_button "创建"
-          page.should have_content "话题创建成功"
-          visit personal_topics_path
-          page.should have_content "test title"
-          @organization.topics.last.users.should include @organization.users.last
-        end
-
-        it "should see error message when add the invalid invite user into topic members" do
-          click_on "创建新话题"
-          sleep 0.5
-          fill_in "title", :with => "test title"
-          fill_in "invited_emails", with: "testexample.com"
-          click_button "创建"
-          page.should have_content "邮件地址不合法"
-        end
       end
 
       context "user create success with a discussion" do
@@ -209,15 +156,15 @@ describe "the topics action" do
       user = create(:normal_user)
       @organization = user.default_organization
       login_with(user.email, user.password)
-      page.should have_content(user.email)
+      page.should have_content '登出'
       visit organization_topics_path
     end
 
     context "click the topic title" do
       it "should go to the topic detail page" do
-        click_on @organization.topics.first.title
-        current_path.should == topic_path(@organization.topics.first)
-        page.should have_content @organization.topics.first.discussions.first.content
+        click_on @organization.topics.last.title
+        current_path.should == topic_path(@organization.topics.last)
+        page.should have_content @organization.topics.last.discussions.last.content
       end
     end
 
@@ -246,7 +193,7 @@ describe "the topics action" do
         page.should have_content "话题创建成功"
         visit organization_topics_path
         page.should have_content "test title"
-        click_on @organization.topics.last.title
+        click_on "test title"
         page.should have_content "如题"
       end
     end
@@ -257,7 +204,7 @@ describe "the topics action" do
       @organization = create(:organization_with_multi_users)
       @user = @organization.users.first
       mock_login_with(@user.email)
-      page.should have_content @user.email
+      page.should have_content '登出'
       visit organization_topics_path
     end
 
@@ -312,8 +259,7 @@ describe "the topics action" do
         it "should add all users by select all" do
           Topic.last.users.size.should == 1
           editor_fill_in :in => '#new-discussion-form', :with => "user create a discussion for topic users"
-          checkbox = find(:xpath, "//*[@id='select-user-for-discussion']/label[1]/input")
-          checkbox.set(true)
+          find(:xpath, "//*[@id='select-user-for-discussion']/div/span").click
           click_button "回复"
           page.should have_content "user create a discussion for topic users"
           Topic.last.users.length.should == 10
@@ -322,7 +268,7 @@ describe "the topics action" do
         it "should add set the last created user as default checked" do
           Topic.last.users.size.should == 1
           editor_fill_in :in => '#new-discussion-form', :with => "user create a discussion for discussion users"
-          checkbox = find(:xpath, "//*[@id='select-user-for-discussion']/label[10]/input")
+          checkbox = find(:xpath, "//*[@id='select-user-for-discussion']/label[9]/input")
           checkbox.set(true)
           click_button "回复"
           page.should have_content "user create a discussion for discussion users"
@@ -345,7 +291,7 @@ describe "the topics action" do
       before do
         @user = create(:normal_user)
         login_with(@user.email, @user.password)
-        page.should have_content @user.email
+        page.should have_content '登出'
       end
       context "user go to topics page" do
         it "should have the topic title" do
@@ -356,7 +302,9 @@ describe "the topics action" do
 
       context "user click on the navybar" do
         it "should have the topic title" do
-          click_on "个人空间"
+          within('.personal-inbox') do
+            click_on "所有"
+          end
           page.should have_content @user.topics.first.title
         end
       end
@@ -400,11 +348,6 @@ describe "the topics action" do
             click_on "创建新话题"
             find('#select-user-for-topic').should_not have_content(@user.email_name)
           end
-
-          it "should see the invited emails text field" do
-            click_button "创建新话题"
-            page.should have_selector('#invited_emails', text: "")
-          end
         end
 
         context "user reopen the field" do
@@ -436,7 +379,7 @@ describe "the topics action" do
             click_on "创建新话题"
             fill_in "title", :with => "test title"
             sleep 0.5
-            find(:xpath, "//*[@id='select-user-for-topic']/label[10]/input").set(true)
+            find(:xpath, "//*[@id='select-user-for-topic']/label[9]/input").set(true)
             click_button "创建"
             page.should have_content "话题创建成功"
             visit personal_topics_path
@@ -457,32 +400,21 @@ describe "the topics action" do
 
           it "should select all of the users by select all checkbox" do
             click_on "创建新话题"
-            fill_in "title", :with => "test title"
             sleep 0.5
-            page.should have_selector(:xpath, "//*[@id='select-user-for-topic']/label[1]/input")
-            find(:xpath, "//*[@id='select-user-for-topic']/label[1]/input").set(true)
+            fill_in "title", :with => "test title"
+            page.should have_selector(:xpath, "//*[@id='select-user-for-topic']/div/span")
+            find(:xpath, "//*[@id='select-user-for-topic']/div/span").click
             click_button "创建"
             wait_for_ajax
             expect(@organization.reload.topics.last.users.length).to eq 10
             #expect(@organization.reload.topics.last.users.length).to eq(@organization.reload.users.length)
-          end
-
-          it "should be able to invite user to topic" do
-            click_on "创建新话题"
-            sleep 0.5
-            fill_in "title", :with => "test title"
-            fill_in "invited_emails", with: "test@example.com"
-            click_button "创建"
-            page.should have_content "话题创建成功"
-            visit personal_topics_path
-            page.should have_content "test title"
-            @organization.topics.last.users.last.email.should == "test@example.com"
           end
         end
 
         context "user create success with a discussion" do
           it "shold see the discussion size change" do
             click_on "创建新话题"
+            sleep 0.5
             fill_in "title", :with => "test title"
             editor_fill_in :in => '#new-topic-form', :with => "this is test discussion"
             click_button "创建"
@@ -508,7 +440,7 @@ describe "the topics action" do
       before do
         @user = create(:normal_user)
         login_with(@user.email, @user.password)
-        page.should have_content @user.email
+        page.should have_content '登出'
         visit personal_topics_inbox_path
       end
 

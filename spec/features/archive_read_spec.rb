@@ -11,10 +11,9 @@ describe "topics have new discussion", :js => true do
 
   before do
       mock_login_with(user.email)
-      page.should have_content(user.email)
+      page.should have_content '登出'
       topic.users << another_user
-      topic.discussions.last.users << user
-      topic.save
+      topic.discussions.last.user_discussions.where(:user_id => user.id).first_or_create.update_attribute(:read_status, false)
   end
 
   describe "archive_feature" do
@@ -85,7 +84,7 @@ describe "topics have new discussion", :js => true do
       visit personal_topics_path
       click_on "创建新话题"
       fill_in "title", :with => "test title"
-      checkbox = find(:xpath, "//*[@id='select-user-for-topic']/label[10]/input")
+      checkbox = find(:xpath, "//*[@id='select-user-for-topic']/label[9]/input")
       checkbox.set(true)
       click_button "创建"
       page.should have_content "话题创建成功"

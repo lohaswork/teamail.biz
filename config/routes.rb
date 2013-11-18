@@ -44,6 +44,7 @@ LohasWorkCom::Application.routes.draw do
     post 'filter_with_tags/page/:page' => :filter_with_tags
     post 'archive' => :archive, as: :archive_topics
     post 'archive/page/:page' => :archive
+    get 'get_unread_number' => :get_unread_number_of_unarchived_topics, as: :get_unread_number
   end
 
   resources :topics, only: [:create, :show]

@@ -8,11 +8,12 @@ class Discussion < ActiveRecord::Base
   has_many :users, lambda { uniq }, :through => :user_discussions
   validates :content, :presence => { :message => "请输入回复内容" }
   after_create :update_topic_members
+  after_touch :update_topic_members
 
   class << self
     def create_discussion(login_user, topic, emails, content)
       discussion = Discussion.new(:content => content)
-      raise ValidationError.new(discussion.errors.full_messages) if !discussion.valid?
+      raise ValidationError.new(discussion.errors.messages.values) if !discussion.valid?
       selected_users = emails.map { |email| User.find_by_email email }
       discussion.notify_party = selected_users
       discussion.creator = login_user
@@ -44,7 +45,7 @@ class Discussion < ActiveRecord::Base
 
   def mark_as_read_by(user)
     begin
-      self.user_discussions.find_by_user_id(user.id).update_attribute(:read_status, true)
+      self.user_discussions.where(:user_id => user.id).first_or_create.update_attribute(:read_status, true)
     rescue ActiveRecord::RecordNotFound, NoMethodError
       nil
     end

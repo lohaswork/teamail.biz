@@ -1,0 +1,21 @@
+!function($) {
+
+  App.page.UnreadNumberPage = function (){
+    this.init();
+  }
+  App.page.UnreadNumberPage.prototype = {
+    init: function(){
+      var self = this;
+      <% unless Rails.env.test? %>
+        $(document).ready(
+          function(){
+            setInterval(function(){
+              $('#unread-number-query').load('/get_unread_number');
+            }, 60000);
+          }
+        )
+      <% end %>
+    }
+  }
+
+}(window.jQuery);

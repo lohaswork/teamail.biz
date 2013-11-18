@@ -16,6 +16,8 @@
             $(this).addClass("active-tag");
           }
           $('#tag-filters-submit').trigger("click");
+          window.history.pushState({}, "teamail.biz", "/organization_topics");
+          $('.headline .breadcrumb').html('<li class="active">团队空间</li>');
           return false;
         });
     }

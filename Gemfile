@@ -59,6 +59,7 @@ group :test, :development do
   gem 'metric_fu'
   gem 'poltergeist'
   gem "rails_best_practices"
+  gem "parallel_tests"
 end
 
 # Use ActiveModel has_secure_password

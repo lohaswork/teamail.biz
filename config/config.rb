@@ -9,7 +9,7 @@
     email: false
   },
   development:{
-    default_system_email: "test@mail.teamail.biz"
+    default_system_email: "dev@mail.teamail.biz"
   },
   production:{
 

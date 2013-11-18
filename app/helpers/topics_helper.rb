@@ -1,8 +1,8 @@
-
 require 'sanitize'
 module TopicsHelper
+
   def safe_content(content)
-    Sanitize.clean(content, Sanitize::Config::RELAXED)
+    content = Sanitize.clean(content, Sanitize::Config::RELAXED)
   end
 
   def show_for_checkbox(users, topic)
@@ -28,14 +28,22 @@ module TopicsHelper
     end
   end
 
-  def display_unread_style?(topic)
-    topic.read_status_of(login_user) != 1 || false
+  def read_style(topic)
+    if UserDiscussion.where(discussion_id: topic.discussions.last.id, user_id: login_user.id).exists? && topic.read_status_of(login_user) != 1
+      "unread"
+    else
+      "read"
+    end
+  end
+
+  def has_attachments?(topic)
+    arr = topic.discussions.map { |discussion| discussion.upload_files.length }
+    arr.delete 0
+    !arr.blank?
   end
 
   def unread_topic_number
-    login_user.topics.reject { |topic| topic.archive_status_of(login_user) == 1 }
-    .reject { |topic| topic.read_status_of(login_user) == 1 }
-    .length
+    num = Topic.get_unarchived(login_user).to_a.reject { |topic| topic.read_status_of(login_user) == 1 }.length.to_s
   end
 
   def in_personal_topics_page?

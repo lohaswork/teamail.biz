@@ -1,5 +1,6 @@
 # encoding: utf-8
 class TopicsController < ApplicationController
+  include TextRegexp::TopicAnalysis
   before_filter :login_required, :organization_required
 
   def index
@@ -8,32 +9,15 @@ class TopicsController < ApplicationController
 
   def create
     selected_emails = params[:selected_users_for_topic].split(',')
-    invited_emails = params[:invited_emails].split(/[\,\;]/).map { |email| email.strip }
-    User.check_emails_validation(invited_emails)
 
-    invited_emails.each do |invited_email|
-      unless current_organization.has_member?(invited_email)
-        email_status = User.already_register?(invited_email)
-        current_organization.invite_user(invited_email)
-        InvitationNotifierWorker.perform_async(
-          invited_email, current_organization.name, login_user.email,
-          email_status)
-      end
+    email_title = params[:title]
+    title, tags = analyzed_title email_title unless email_title.blank?
+    new_topic = Topic.create_topic(title, email_title, params[:content], selected_emails, current_organization, login_user)
+    add_tags_from_title(new_topic, tags)
+    TopicNotifierWorker.perform_async(new_topic.id, selected_emails)
 
-      selected_emails << invited_email unless selected_emails.include? invited_email.downcase
-    end
-
-    new_topic = Topic.create_topic(params[:title], params[:content], selected_emails, current_organization, login_user)
-    TopicNotifierWorker.perform_async(new_topic.id)
-    notice = "话题创建成功"
-
-    render :json => {
-      :notice => render_to_string(:partial => 'shared/notifications',
-                                  :layout => false,
-                                  :locals => {
-                                    :notice => notice
-                                  })
-    }
+    render :json => { :reload => true }
+    flash[:notice] = "话题创建成功"
   end
 
   def show
@@ -61,16 +45,10 @@ class TopicsController < ApplicationController
       }
     else
       topic = Topic.find(detail_topic_id).archived_by(login_user)
-      # 刷新 archive 按钮状态
-      render :json => {
-        :update => {
-          "archive-form" => render_to_string(:partial => 'topics/archive_form',
-                                             :layout => false,
-                                             :locals => {
-                                               :topic => topic
-                                             })
-        }
-      }
+      # 返回未处理列表
+      flash[:notice] = "归档成功"
+      #render :json => { :status => "success", :redirect => personal_topics_inbox_path }
+      redirect_to personal_topics_inbox_path
     end
   end
 
@@ -151,5 +129,10 @@ class TopicsController < ApplicationController
         }
       }
     end
+  end
+
+  def get_unread_number_of_unarchived_topics
+    number = Topic.get_unarchived(login_user).to_a.reject { |topic| topic.read_status_of(login_user) == 1 }.length
+    render :text => number
   end
 end

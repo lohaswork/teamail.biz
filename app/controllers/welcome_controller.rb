@@ -2,7 +2,7 @@
 class WelcomeController < ApplicationController
   def index
     if is_logged_in?
-       redirect_to login_user.default_organization.blank? ? no_organizations_path : personal_topics_path
+       redirect_to login_user.default_organization.blank? ? no_organizations_path : personal_topics_inbox_path
     end
   end
 
@@ -10,11 +10,13 @@ class WelcomeController < ApplicationController
     EarlyAdopter.create_early_adopter(params[:email])
     render :json => {
                     :update => {
-                                  'early-adopter-form' => render_to_string(:partial => 'apply_form',
-                                                                          :layout => false)
+                      'early-adopter-form' => render_to_string(:partial => 'apply_form',
+                                                               :layout => false)
                                 },
-                    :modal => render_to_string(:partial => 'create_success',
-                                               :layout => false)
+                    :modal => {
+                      'early_adotpers_add_success_msg' => render_to_string(:partial => 'create_success',
+                                                                           :layout => false)
                     }
+    }
   end
 end

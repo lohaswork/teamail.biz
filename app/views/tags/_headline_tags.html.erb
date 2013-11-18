@@ -1,11 +1,11 @@
 <% tag_div_id = "tag-container-#{topic.id}" -%>
 <ul id="<%= tag_div_id -%>" class="headline-tag-container list-inline">
   <%- topic.tags.each do |tag| %>
-    <%- tag_color = tag.color || "1" %>
+    <%- tag_color = tag.color.to_i > 8 ? "1" : tag.color if tag.color %>
     <li class="tag-color-<%= tag_color %>">
       <%= tag.name %>
       <%= link_to topic_remove_tag_path(:topic => topic, :tag => tag), :method => :post, :remote => true, :class => "tag-remove-link" do %>
-        <i class="fa fa-times-circle-o fa-lg remove-tag"></i>
+        <i class="fa fa-times fa-lg remove-tag"></i>
       <% end %>
     </li>
   <% end %>

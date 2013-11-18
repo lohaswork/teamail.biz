@@ -1,0 +1,6 @@
+<% if !display_notice_and_alert.blank? %>
+  <div class='row flash-notice alert alert-warning alert-dismiss'>
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <%= display_notice_and_alert %>
+  </div>
+<% end %>

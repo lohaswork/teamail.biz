@@ -1,23 +1,26 @@
-.error {
-  display: none;
-  font-size: 14px;
-  text-align: left;
-  max-width: 420px;
-  border: solid;
-  color: #B94A48;
-  background-color: #F2DEDE;
-  margin: 20px auto;
-  padding: 8px 15px;
+@mixin better_transparentize($color, $alpha) {
+  $c: rgba($color, $alpha);
+  $ie_c: ie_hex_str($c);
+  background: rgba($color, 1);
+  background: $c;
+  background: transparent\9;
+  zoom: 1;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie_c}, endColorstr=#{$ie_c});
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie_c}, endColorstr=#{$ie_c})";
 }
-.notification {
-  display: none;
-  font-size: 14px;
-  line-height: 35px;
-  height: 35px;
+
+.flash-notice {
   text-align: center;
-  max-width: 420px;
-  border: solid #CCC;
-  color: #FFF;
-  background-color: #49BF67;
-  margin: 20px auto;
+  margin: 0 auto;
+  max-width: 400px;
+  font-size: 16px;
+  font-weight: 600;
+}
+#message-dialog {
+  .modal-body {
+    padding: 0 0 0 0;
+  }
+  .alert {
+    margin-bottom: 0;
+  }
 }

@@ -9,7 +9,7 @@ describe "topic section" do
       user = create(:normal_user)
       @organization = user.default_organization
       login_with(user.email, user.password)
-      page.should have_content user.email
+      page.should have_content '登出'
       visit organization_topics_path
     end
 
@@ -109,12 +109,6 @@ describe "topic section" do
         click_button "新建"
         page.should have_content "标签名不能为空"
       end
-
-      it "cannot create tag with mark other than dash and underscore" do
-        fill_in "tag_name", :with => "错误%标签"
-        click_button "新建"
-        page.should have_content "名称不合法"
-      end
     end
   end
 
@@ -169,7 +163,7 @@ describe "topic section" do
       user = create(:normal_user)
       @organization = user.default_organization
       login_with(user.email, user.password)
-      page.should have_content user.email
+      page.should have_content '登出'
     end
 
     context "topic list page filter" do
@@ -260,7 +254,7 @@ describe "topic section" do
       @organization.users << another_user
       # login
       login_with(user.email, user.password)
-      page.should have_content user.email
+      page.should have_content '登出'
       visit personal_topics_inbox_path
     end
 
@@ -365,12 +359,6 @@ describe "topic section" do
         fill_in "tag_name", :with => " "
         click_button "新建"
         page.should have_content "标签名不能为空"
-      end
-
-      it "cannot create tag with mark other than dash and underscore" do
-        fill_in "tag_name", :with => "错误%标签"
-        click_button "新建"
-        page.should have_content "名称不合法"
       end
     end
   end

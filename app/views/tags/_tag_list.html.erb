@@ -1,4 +1,7 @@
 <div id="tag-list" class="checkbox-group" data-update="#selected_tags" data-reload=true>
+  <% if tags.blank? %>
+    <li>请先创建标签</li>
+  <% end %>
   <%- tags.try(:each) do |tag|%>
     <li>
       <%= check_box_tag 'tags[]', tag.id, false, :class=>"item", :'data-item'=>true %>

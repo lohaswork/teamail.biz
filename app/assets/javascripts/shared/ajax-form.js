@@ -9,11 +9,6 @@
       var $errorBar = $('.error');
       $errorBar.html(data.message).show();
     },
-    showNotification: function(data){
-      var $noticeBar = $('.notification');
-      $noticeBar.html(data.notice).show();
-      $('#myModal').modal('hide');
-    },
     init: function(){
     var self = this;
     $(document).on( 'ajax:before', 'form[data-remote], a[data-remote]', function (e) {
@@ -34,18 +29,20 @@
               $('#' + id).trigger('refreshed');
             }
           }
+          if (data.dismiss) {
+            $('#' + data.dismiss).modal('hide');
+          }
           if (data.modal) {
-              var newElement = $(data.modal);
-              $('#myModal').html(newElement).modal();
+            for (var id in data.modal) {
+              var newElement = $(data.modal[id]);
+              $('#top-message-container').html(newElement).modal();
             }
+          }
           // remove part is not used
           else if (data.remove) {
             for (var id in data.remove) {
               $('#' + data.remove[id]).remove();
             }
-          }
-          else if (data.notice) {
-            self.showNotification(data);
           }
           else if (data.reload) {
             window.location.reload(true);
@@ -76,6 +73,12 @@
         if (xhr.status > 399 && xhr.status < 500) {
           if (data.redirect) {
             window.location = data.redirect;
+          }
+          else if (data.modal) {
+            for (var id in data.modal) {
+              var newElement = $(data.modal[id]);
+              $('#top-message-container').html(newElement).modal();
+            }
           } else {
             self.showErrors(data);
           }

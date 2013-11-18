@@ -22,9 +22,9 @@ class User < ActiveRecord::Base
   class << self
     def create_with_organization(user, organization_name)
       user = User.new(:email => user[:email], :password => user[:password])
-      raise ValidationError.new(user.errors.full_messages) if !user.valid?
+      raise ValidationError.new(user.errors.messages.values) if !user.valid?
       organization = Organization.new(:name => organization_name)
-      raise ValidationError.new(organization.errors.full_messages)if !organization.valid?
+      raise ValidationError.new(organization.errors.messages.values)if !organization.valid?
       organization.save!
       user.organizations << organization
       user.default_organization = organization
@@ -62,7 +62,7 @@ class User < ActiveRecord::Base
         user.update_attribute(:reset_token, nil)
         user.update_attribute(:active_status, 1) if user.active_status != 1
       rescue
-        raise ValidationError.new(user.errors.full_messages)
+        raise ValidationError.new(user.errors.messages.values)
       end
     end
 
@@ -72,12 +72,6 @@ class User < ActiveRecord::Base
 
     def already_register?(email)
       !!self.find_by_email(email)
-    end
-
-    def check_emails_validation(invited_emails)
-      invited_emails.each do |invited_email|
-        raise ValidationError.new('Email 邮件地址不合法') unless User::VALID_EMAIL_REGEX =~ invited_email
-      end
     end
   end
 

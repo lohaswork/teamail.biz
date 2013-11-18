@@ -1,0 +1,8 @@
+<ol class="breadcrumb">
+  <% if in_personal_topics_page? %>
+    <li><%=link_to('个人空间', personal_topics_path) %></li>
+    <li class="active"><%= current_page?(:controller => 'topics', :action => 'unarchived') ? '未处理' : '所有' %></li>
+  <% else %>
+    <li class="active">团队空间</li>
+  <% end %>
+</ol>

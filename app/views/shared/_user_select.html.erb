@@ -1,10 +1,11 @@
 <%- if !get_colleagues.blank?%>
-  <label>
-    <input type="checkbox", class='all', data-all=true> 全选
-  </label>
+  <div class="subgroup-select">
+    选择邮件通知人:
+    <span class='all'>全选</span>
+  </div>
   <%- show_for_checkbox(get_colleagues, topic).each do |user| %>
     <label>
-      <%= check_box_tag nil, user[:email], false, :class=>"item", :'data-item'=>true, :'data-selected'=>user[:is_in_topic] %>
+      <%= check_box_tag nil, user[:email], false, :class=>"item", :'data-item'=>true, :'data-selected'=>user[:is_in_topic], :class => 'custome-checkbox' %>
       <%=user[:email_name]%>
     </label>
   <% end %>

@@ -17,7 +17,7 @@ class Organization < ActiveRecord::Base
 
   def add_tag(tag_name)
     tag = Tag.new(:name => tag_name, :organization_id => self.id)
-    raise ValidationError.new(tag.errors.full_messages) if !tag.valid?
+    raise ValidationError.new(tag.errors.messages.values) if !tag.valid?
     tag.save!
     self.save!
     self
@@ -34,7 +34,7 @@ class Organization < ActiveRecord::Base
   def invite_user(email)
     unless user = User.find_by_email(email)
       user = User.new(:email => email, :password => User.generate_init_password)
-      raise ValidationError.new(user.errors.full_messages) if !user.valid?
+      raise ValidationError.new(user.errors.messages.values) if !user.valid?
       user.generate_reset_token
     end
     user.organizations << self
