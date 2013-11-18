@@ -13,7 +13,7 @@ class TopicsController < ApplicationController
     email_title = params[:title]
     title, tags = analyzed_title email_title unless email_title.blank?
     new_topic = Topic.create_topic(title, email_title, params[:content], selected_emails, current_organization, login_user)
-    merge_tags_from_title(new_topic, tags)
+    add_tags_from_title(new_topic, tags)
     TopicNotifierWorker.perform_async(new_topic.id, selected_emails)
 
     render :json => { :reload => true }
@@ -131,8 +131,8 @@ class TopicsController < ApplicationController
     end
   end
 
-  def get_unread_num_of_unarchived_topics
-    num = Topic.get_unarchived(login_user).to_a.reject { |topic| topic.read_status_of(login_user) == 1 }.length
-    render :text => num
+  def get_unread_number_of_unarchived_topics
+    number = Topic.get_unarchived(login_user).to_a.reject { |topic| topic.read_status_of(login_user) == 1 }.length
+    render :text => number
   end
 end

@@ -10,7 +10,7 @@ class EarlyAdopter < ActiveRecord::Base
     begin
       early_adopter.save!
     rescue
-      raise ValidationError.new(early_adopter.errors.full_messages)
+      raise ValidationError.new(early_adopter.errors.messages.values)
     end
   end
 end

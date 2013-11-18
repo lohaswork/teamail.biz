@@ -36,7 +36,7 @@ module EmailEngine
           title = subject.blank? ? "此主题标题为空" : topic_title_from_email
           email_title = subject
           @topic = Topic.create_topic(title, email_title, analyzed_content, @notifiers, @organization, @creator)
-          merge_tags_from_title(@topic, @tags)
+          add_tags_from_title(@topic, @tags)
           post_attachments_to_oss(@topic.discussions.first) if self.has_attachments?
           EmailEngine::TopicNotifier.new(@topic.id, @notifiers).create_topic_notification
         end

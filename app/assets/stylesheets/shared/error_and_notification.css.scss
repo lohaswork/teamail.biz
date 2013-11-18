@@ -16,3 +16,11 @@
   font-size: 16px;
   font-weight: 600;
 }
+#message-dialog {
+  .modal-body {
+    padding: 0 0 0 0;
+  }
+  .alert {
+    margin-bottom: 0;
+  }
+}

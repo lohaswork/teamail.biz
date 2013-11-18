@@ -70,15 +70,15 @@
         catch (e) {}
         if(data.update) {
         }
-        if (data.modal) {
-          for (var id in data.modal) {
-            var newElement = $(data.modal[id]);
-            $('#top-message-container').html(newElement).modal();
-          }
-        }
         if (xhr.status > 399 && xhr.status < 500) {
           if (data.redirect) {
             window.location = data.redirect;
+          }
+          else if (data.modal) {
+            for (var id in data.modal) {
+              var newElement = $(data.modal[id]);
+              $('#top-message-container').html(newElement).modal();
+            }
           } else {
             self.showErrors(data);
           }

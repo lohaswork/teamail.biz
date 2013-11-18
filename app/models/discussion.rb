@@ -13,7 +13,7 @@ class Discussion < ActiveRecord::Base
   class << self
     def create_discussion(login_user, topic, emails, content)
       discussion = Discussion.new(:content => content)
-      raise ValidationError.new(discussion.errors.full_messages) if !discussion.valid?
+      raise ValidationError.new(discussion.errors.messages.values) if !discussion.valid?
       selected_users = emails.map { |email| User.find_by_email email }
       discussion.notify_party = selected_users
       discussion.creator = login_user

@@ -400,8 +400,8 @@ describe "the topics action" do
 
           it "should select all of the users by select all checkbox" do
             click_on "创建新话题"
-            fill_in "title", :with => "test title"
             sleep 0.5
+            fill_in "title", :with => "test title"
             page.should have_selector(:xpath, "//*[@id='select-user-for-topic']/div/span")
             find(:xpath, "//*[@id='select-user-for-topic']/div/span").click
             click_button "创建"

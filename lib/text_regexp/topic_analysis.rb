@@ -23,7 +23,7 @@ module TextRegexp
       return title_subject, tags
     end
 
-    def merge_tags_from_title(topic, tags)
+    def add_tags_from_title(topic, tags)
       valid_tags = tags.map do |tag|
         if !Tag::VALID_TAGNAME_TEGEX.match(tag)
           nil

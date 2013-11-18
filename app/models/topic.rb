@@ -20,7 +20,7 @@ class Topic < ActiveRecord::Base
   class << self
     def create_topic(title, email_title=nil, content, emails, organization, login_user)
       topic = new(:title => title, :email_title => email_title)
-      raise ValidationError.new(topic.errors.full_messages) if !topic.valid?
+      raise ValidationError.new(topic.errors.messages.values) if !topic.valid?
       content = content.blank? ? "如题" : content
       topic.organization = organization
       Discussion.create_discussion(login_user, topic, emails, content)
