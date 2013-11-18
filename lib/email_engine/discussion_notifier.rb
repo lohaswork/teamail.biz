@@ -44,7 +44,7 @@ module EmailEngine
                     </td>
                   </tr>
                   <tr>
-                    <td width="600" valign="top" style="border-collapse: collapse; padding-top: 15px;">
+                    <td width="600" valign="top" style="border-collapse: collapse; padding-top: 15px; padding-left: 15px;">
                       #{discussion.content}
                     </td>
                   </tr>
