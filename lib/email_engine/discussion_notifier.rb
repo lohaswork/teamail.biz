@@ -15,7 +15,8 @@ module EmailEngine
       gateway.send_batch_message(
         to: emails,
         subject: topic.email_title || topic.title,
-        body: new_discussion_notification_text
+        body: new_discussion_notification_text,
+        message_id: discussion_message_id
       )
     end
 
@@ -23,6 +24,10 @@ module EmailEngine
     private
     def topic
       discussion.discussable_type == "Topic" && discussion.discussable
+    end
+
+    def discussion_message_id
+      "#{@gateway.host_name}/topics/#{topic.id}/discussion/#{discussion.id}@mail.teamail.biz"
     end
 
     def new_discussion_notification_text

@@ -18,11 +18,16 @@ module EmailEngine
         from: from.email_name,
         to: user.email,
         subject: "[TeaMail]邀请加入#{organization_name}",
-        body: notification_text
+        body: notification_text,
+        message_id: invitation_message_id
       )
     end
 
     private
+
+    def invitation_message_id
+      "#{@gateway.host_name}/invitation/#{user.id}@mail.teamail.biz"
+    end
 
     def invitation_notification_text
       <<-EMAIL

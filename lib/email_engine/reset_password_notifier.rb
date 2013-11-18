@@ -13,11 +13,16 @@ module EmailEngine
       gateway.send_batch_message(
         to: user.email,
         subject: "重置密码",
-        body: reset_password_notification_text
+        body: reset_password_notification_text,
+        message_id: reset_message_id
       )
     end
 
     private
+
+    def reset_message_id
+      "#{@gateway.host_name}/reset/#{user.id}@mail.teamail.biz"
+    end
 
     def reset_password_notification_text
       <<-EMAIL

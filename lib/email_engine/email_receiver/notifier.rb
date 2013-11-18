@@ -9,8 +9,13 @@ module EmailEngine
         @gateway.send_batch_message(
           to: sender,
           subject: "您的账户不合法",
-          body: invalid_creator_notification_text
+          body: invalid_creator_notification_text,
+          message_id: invalid_creator_message_id
         )
+      end
+
+      def invalid_creator_message_id
+        "#{@gateway.host_name}/invalid/#{SecureRandom.urlsafe_base64}@mail.teamail.biz"
       end
 
       def invalid_creator_notification_text

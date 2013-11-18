@@ -13,11 +13,16 @@ module EmailEngine
       gateway.send_batch_message(
         to: user.email,
         subject: "注册成功",
-        body: signup_notification_text
+        body: signup_notification_text,
+        message_id: signup_message_id
       )
     end
 
     private
+
+    def signup_message_id
+      "#{@gateway.host_name}/signup/#{user.id}@mail.teamail.biz"
+    end
 
     def signup_notification_text
       <<-EMAIL

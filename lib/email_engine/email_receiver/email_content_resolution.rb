@@ -35,13 +35,10 @@ module EmailEngine
       end
 
       def resolve_topic_of_email
-        if self.respond_to?(:body_html) && !body_html.blank?
-          exp_body = body_html
-        else
-          exp_body = body_plain
-        end
-        topic_id = exp_body[/#{Regexp.escape(@gateway.host_name)}\/topics\/(\d+)/m, 1]
-        topic_id && Topic.find(topic_id.to_i)
+        exp_body = in_reply_to || reference
+        topic_id = nil
+        exp_body.scan(/#{Regexp.escape(@gateway.host_name)}\/topics\/(\d+)/m) { |id| topic_id = id.join("").to_i }
+        topic_id && Topic.find(topic_id)
       end
 
       def set_notifiers

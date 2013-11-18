@@ -10,7 +10,8 @@ module EmailEngine
           from: default_sender(options[:from]),
           to: delivery_filter(options[:to]),
           subject: options[:subject],
-          html: options[:body]
+          html: options[:body],
+          'h:Message-ID' => options[:message_id]
           ) if send_email?
 
       #Rails.logger.debug "Use #{default_sender} send email to #{delivery_filter(options[:to])} with subject: #{options[:subject]}\n And the content is: options[:body]"
