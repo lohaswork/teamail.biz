@@ -46,10 +46,14 @@ QEDITOR_TOOLBAR_HTML = """
   <span class="vline"></span>
   <a href="#" data-action="insertorderedlist" class="qe-ol"><span class="fa fa-list-ol" title="Insert Ordered-list"></span></a>
   <a href="#" data-action="insertunorderedlist" class="qe-ul"><span class="fa fa-list-ul" title="Insert Unordered-list"></span></a>
+  <!--
   <a href="#" data-action="indent" class="qe-indent"><span class="fa fa-indent" title="Indent"></span></a>
   <a href="#" data-action="outdent" class="qe-outdent"><span class="fa fa-outdent" title="Outdent"></span></a>
+  -->
   <span class="vline"></span>
+  <!--
   <a href="#" data-action="insertHorizontalRule" class="qe-hr"><span class="fa fa-minus" title="Insert Horizontal Rule"></span></a>
+  -->
   <a href="#" data-action="blockquote" class="qe-blockquote"><span class="fa fa-quote-left" title="Blockquote"></span></a>
   <a href="#" data-action="pre" class="qe-pre"><span class="fa fa-code" title="Pre"></span></a>
   <a href="#" data-action="createLink" class="qe-link"><span class="fa fa-link" title="Create Link" title="Create Link"></span></a>
@@ -151,7 +155,7 @@ do ($=jQuery)->
         QEditor.exitFullScreen() if e.keyCode == 27
 
       # use <p> tag on enter by default
-      document.execCommand('defaultParagraphSeparator', false, 'p')
+      # document.execCommand('defaultParagraphSeparator', false, 'p')
 
       currentVal = obj.val()
       # if currentVal.trim().lenth == 0
@@ -211,7 +215,6 @@ do ($=jQuery)->
           if nodeName == "blockquote" or nodeName == "pre"
             e.stopPropagation()
             document.execCommand('InsertParagraph',false)
-            document.execCommand("formatBlock",false,"p")
             document.execCommand('outdent',false)
             return false
 

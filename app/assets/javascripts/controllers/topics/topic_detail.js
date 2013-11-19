@@ -12,7 +12,7 @@
         $(".content a").attr('target', '_blank');
         $(".content blockquote").hide();
         $.each($(".content"), function() {
-          $("<button class='toggle-quote'></button>").insertBefore($(this).find("blockquote").first());
+          $("<button class='toggle-quote'></button><br>").insertBefore($(this).find("blockquote").first());
         });
       });
       $(document).on("refreshed", ".headline-tag-container", function () {
