@@ -3,7 +3,7 @@
     <div class="input-group">
       <%= text_field_tag :tag_name, nil, :placeholder=>"输入新标签名", :class=>"form-control" %>
       <span class="input-group-btn">
-        <%= submit_tag "新建", :id=>"tag-submit", :class=>"btn btn-default", :disabled=>"disabled" %>
+        <%= submit_tag "新建", :id=>"tag-submit", :class=>"btn btn-default", :disabled=>"disabled", 'data-disable-with' => '提交中...' %>
       </span>
     </div>
   <% end %>

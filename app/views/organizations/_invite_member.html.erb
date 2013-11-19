@@ -4,7 +4,7 @@
       <div class="form-group">
         <%= text_field_tag :user_email, nil, :class => "form-control", :placeholder=>"请输入Email"%>
       </div>
-      <%= submit_tag "邀请", :class=>"btn btn-default"%>
+      <%= submit_tag "邀请", :class=>"btn btn-default", 'data-disable-with' => '提交中...' %>
     <% end %>
   <% end %>
 </div>
