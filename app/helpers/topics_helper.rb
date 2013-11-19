@@ -7,13 +7,13 @@ module TopicsHelper
       :elements => %w[
       a abbr b blockquote br cite code div dd dl dt em h1 h2 h3 h4 h5 h6 i li mark ol p pre
       q s span small strike strong sub sup time u ul font],
-      :attributes => {'a' => ['href', 'title'],
+      :attributes => { 'a' => ['href', 'title'],
                       'font' => ['face', 'color'],
                       'div' => ['style'],
                       'span' => ['style'],
-                      'img' => ['alt', 'src', 'title']},
-      :protocols => {'a' => {'href' => ['http', 'https', 'mailto']},
-                     'img' => {'src'  => ['http', 'https']}
+                      'img' => ['alt', 'src', 'title'] },
+      :protocols => { 'a' => { 'href' => ['http', 'https', 'mailto'] },
+                     'img' => { 'src'  => ['http', 'https'] }
       })
   end
 
