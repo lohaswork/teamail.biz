@@ -15,12 +15,17 @@ module EmailEngine
       gateway.send_batch_message(
         to: emails,
         subject: topic.email_title || topic.title,
-        body: new_topic_notification_text
+        body: new_topic_notification_text,
+        message_id: topic_message_id
       )
     end
 
 
     private
+
+    def topic_message_id
+      "<#{@gateway.host_name(false)}/topics/#{topic.id}@mail.teamail.biz>"
+    end
 
     def topic_notify_party_with_format
       notify_emails = topic.discussions.first.notify_party.map { |user| user.email }
@@ -52,7 +57,7 @@ module EmailEngine
                   </tr>
                   <tr>
                     <td width="600" valign="top" style="border-collapse: collapse; padding-top: 15px; color: #777;">
-                      点击链接进入teamail查看：<a href='http://#{@gateway.host_name}/topics/#{topic.id}'>http://#{@gateway.host_name}/topics/#{topic.id}</a>
+                      点击链接进入teamail查看：<a href='#{@gateway.protocol}://#{@gateway.host_name}/topics/#{topic.id}'>#{@gateway.protocol}://#{@gateway.host_name}/topics/#{topic.id}</a>
                     </td>
                   </tr>
                 </table>

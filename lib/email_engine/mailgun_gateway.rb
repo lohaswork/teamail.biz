@@ -1,8 +1,18 @@
 module EmailEngine
   class MailgunGateway
 
-    def host_name
-      Rails.env.production? ? "teamail.biz" : "0.0.0.0:3000"
+    def host_name(port_name = true)
+      if Rails.env.production?
+        "teamail.biz"
+      elsif port_name
+        "0.0.0.0:3000"
+      else
+        "0.0.0.0"
+      end
+    end
+
+    def protocol
+      Rails.env.production? ? "https" : "http"
     end
 
     def send_batch_message(options={})
@@ -10,7 +20,10 @@ module EmailEngine
           from: default_sender(options[:from]),
           to: delivery_filter(options[:to]),
           subject: options[:subject],
-          html: options[:body]
+          html: options[:body],
+          'h:Message-Id' => options[:message_id],
+          'h:In-Reply-To' => options[:in_reply_to],
+          'h:Reference' => options[:in_reply_to]
           ) if send_email?
 
       #Rails.logger.debug "Use #{default_sender} send email to #{delivery_filter(options[:to])} with subject: #{options[:subject]}\n And the content is: options[:body]"

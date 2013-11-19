@@ -13,11 +13,16 @@ module EmailEngine
       gateway.send_batch_message(
         to: user.email,
         subject: "注册成功",
-        body: signup_notification_text
+        body: signup_notification_text,
+        message_id: signup_message_id
       )
     end
 
     private
+
+    def signup_message_id
+      "<#{@gateway.host_name(false)}/signup/#{SecureRandom.urlsafe_base64}@mail.teamail.biz>"
+    end
 
     def signup_notification_text
       <<-EMAIL
@@ -42,8 +47,8 @@ module EmailEngine
                       </p>
                       <br>
                       <p style="text-align: center;">
-                        <a style="color: #5BB65B;" href='http://#{@gateway.host_name}/active/#{user.active_code}'>
-                          http://#{@gateway.host_name}/active/#{user.active_code}
+                        <a style="color: #5BB65B;" href='#{@gateway.protocol}://#{@gateway.host_name}/active/#{user.active_code}'>
+                          #{@gateway.protocol}://#{@gateway.host_name}/active/#{user.active_code}
                         </a>
                       </p>
                     </td>

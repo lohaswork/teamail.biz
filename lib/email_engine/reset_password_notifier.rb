@@ -13,11 +13,16 @@ module EmailEngine
       gateway.send_batch_message(
         to: user.email,
         subject: "重置密码",
-        body: reset_password_notification_text
+        body: reset_password_notification_text,
+        message_id: reset_message_id
       )
     end
 
     private
+
+    def reset_message_id
+      "<#{@gateway.host_name(false)}/reset/#{SecureRandom.urlsafe_base64}@mail.teamail.biz>"
+    end
 
     def reset_password_notification_text
       <<-EMAIL
@@ -42,8 +47,8 @@ module EmailEngine
                       </p>
                       <br>
                       <p style="text-align: center;">
-                        <a style="color: #5BB65B;" href='http://#{@gateway.host_name}/reset/#{user.reset_token}'>
-                          http://#{@gateway.host_name}/reset/#{user.reset_token}
+                        <a style="color: #5BB65B;" href='#{@gateway.protocol}://#{@gateway.host_name}/reset/#{user.reset_token}'>
+                          #{@gateway.protocol}://#{@gateway.host_name}/reset/#{user.reset_token}
                         </a>
                       </p>
                     </td>
