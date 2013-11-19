@@ -21,7 +21,7 @@ module EmailEngine
     private
 
     def reset_message_id
-      "#{@gateway.host_name}/reset/#{user.id}@mail.teamail.biz"
+      "<#{@gateway.host_name(false)}/reset/#{SecureRandom.urlsafe_base64}@mail.teamail.biz>"
     end
 
     def reset_password_notification_text
@@ -47,8 +47,8 @@ module EmailEngine
                       </p>
                       <br>
                       <p style="text-align: center;">
-                        <a style="color: #5BB65B;" href='http://#{@gateway.host_name}/reset/#{user.reset_token}'>
-                          http://#{@gateway.host_name}/reset/#{user.reset_token}
+                        <a style="color: #5BB65B;" href='#{@gateway.protocol}://#{@gateway.host_name}/reset/#{user.reset_token}'>
+                          #{@gateway.protocol}://#{@gateway.host_name}/reset/#{user.reset_token}
                         </a>
                       </p>
                     </td>

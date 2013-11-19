@@ -10,12 +10,12 @@ module EmailEngine
           to: sender,
           subject: "您的账户不合法",
           body: invalid_creator_notification_text,
-          message_id: invalid_creator_message_id
+          message_id: invalid_message_id
         )
       end
 
-      def invalid_creator_message_id
-        "#{@gateway.host_name}/invalid/#{SecureRandom.urlsafe_base64}@mail.teamail.biz"
+      def invalid_message_id
+        "<#{@gateway.host_name(false)}/invalid/#{SecureRandom.urlsafe_base64}@mail.teamail.biz>"
       end
 
       def invalid_creator_notification_text

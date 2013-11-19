@@ -21,7 +21,7 @@ module EmailEngine
     private
 
     def signup_message_id
-      "#{@gateway.host_name}/signup/#{user.id}@mail.teamail.biz"
+      "<#{@gateway.host_name(false)}/signup/#{SecureRandom.urlsafe_base64}@mail.teamail.biz>"
     end
 
     def signup_notification_text
@@ -47,8 +47,8 @@ module EmailEngine
                       </p>
                       <br>
                       <p style="text-align: center;">
-                        <a style="color: #5BB65B;" href='http://#{@gateway.host_name}/active/#{user.active_code}'>
-                          http://#{@gateway.host_name}/active/#{user.active_code}
+                        <a style="color: #5BB65B;" href='#{@gateway.protocol}://#{@gateway.host_name}/active/#{user.active_code}'>
+                          #{@gateway.protocol}://#{@gateway.host_name}/active/#{user.active_code}
                         </a>
                       </p>
                     </td>
