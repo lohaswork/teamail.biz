@@ -16,8 +16,7 @@ module EmailEngine
         to: emails,
         subject: topic.email_title || topic.title,
         body: new_topic_notification_text,
-        message_id: topic_message_id,
-        in_reply_to: reply_header
+        message_id: topic_message_id
       )
     end
 
@@ -25,10 +24,6 @@ module EmailEngine
     private
 
     def topic_message_id
-      "<#{@gateway.host_name(false)}/topics/#{topic.id}@mail.teamail.biz>"
-    end
-
-    def reply_header
       "<#{@gateway.host_name(false)}/topics/#{topic.id}@mail.teamail.biz>"
     end
 
