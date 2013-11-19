@@ -188,6 +188,7 @@ describe "the topics action" do
     context "user create topic with blank content success" do
       it "should see the R.T for content" do
         click_on "创建新话题"
+        sleep 0.5
         fill_in "title", :with => "test title"
         click_button "创建"
         page.should have_content "话题创建成功"
