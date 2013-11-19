@@ -155,7 +155,7 @@ do ($=jQuery)->
         QEditor.exitFullScreen() if e.keyCode == 27
 
       # use <p> tag on enter by default
-      document.execCommand('defaultParagraphSeparator', false, 'p')
+      # document.execCommand('defaultParagraphSeparator', false, 'p')
 
       currentVal = obj.val()
       # if currentVal.trim().lenth == 0
@@ -215,7 +215,6 @@ do ($=jQuery)->
           if nodeName == "blockquote" or nodeName == "pre"
             e.stopPropagation()
             document.execCommand('InsertParagraph',false)
-            document.execCommand("formatBlock",false,"p")
             document.execCommand('outdent',false)
             return false
 
