@@ -6,12 +6,6 @@
   }
   App.page.CheckBoxGroup.prototype = {
     init: function(){
-      $(document).ready(function() {
-        var btnAll = $(".checkbox-group .all")
-        if (btnAll.hasClass("selected")) {
-          btnAll.removeClass("selected");
-        }
-      });
       $(document).on("change", ".checkbox-group input", function(){
         var me = $(this);
         if (me.is(':checked')) {
