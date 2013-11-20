@@ -3,6 +3,6 @@
     <div class="form-group">
       <%= text_field_tag :email, nil, :class=>"form-control", :placeholder=>"邮箱"%>
     </div>
-    <%= submit_tag "发送邮件重置密码", :class=>"btn btn-default"%>
+    <%= submit_tag "发送邮件重置密码", :class=>"btn btn-default", 'data-disable-with' => '提交中...' %>
   <% end %>
 </div>

@@ -1,6 +1,6 @@
 <div id="archive-form">
 <% disabled = archive_disabled?(topic) ? 'disabled' : false %>
-<%= form_tag archive_topics_path(:topic => topic), :method => "post", :remote => current_page?(topic_path(topic)) ? false : true do %>
+<%= form_tag archive_topics_path(:topic => topic), :method => "post", :remote => true do %>
   <%= button_tag(type: "submit", id: "archive-submit", class: "btn btn-default", disabled: disabled) do %>
     <i class="fa fa-archive">&nbsp归档</i>
   <% end %>

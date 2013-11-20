@@ -1,7 +1,7 @@
 <div id="early-adopter-form" class="apply-form">
     <%= form_tag add_early_adotpers_welcome_index_path, :method => "post", :class=>"sign-up-form", :remote => true do %>
         <%= text_field_tag :email, nil, :class=>"email required", :placeholder=>"邮箱地址", :title=>"邮箱地址" %>
-        <%= submit_tag "提交", :id=>"applyBtn", :value=>"立刻提交" %>
+        <%= submit_tag "提交", :id=>"applyBtn", :value=>"立刻提交", 'data-disable-with' => '提交中...' %>
     <% end %>
     <h4>我们的产品即将上线&nbsp<br class="visible-xs">申请提前体验！</h4>
 </div>
