@@ -1,0 +1,28 @@
+body.home {
+  // Overwrite default from app.css
+  background-color: #fff;
+
+  // Overwrite nav.css
+  .navbar {
+    background: #fff;
+    margin-bottom: 0;
+  }
+
+  // Main wraper
+  .landing-page-wraper {
+    position: relative;
+    min-height: 100%;
+    width: 100%;
+  }
+
+  // Landing header
+  .landing-header-bg {
+    background: image-url("landing-header-bg.jpg") no-repeat center top;
+    min-height: 800px;
+  }
+  .landing-header {
+    padding-top: 150px;
+    text-align: center;
+  }
+
+}

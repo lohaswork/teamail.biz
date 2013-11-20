@@ -1,5 +1,5 @@
 LohasWorkCom::Application.routes.draw do
-  root 'welcome#index'
+  root 'home#index'
 
   controller :users do
     get 'signup_success' => :signup_success
