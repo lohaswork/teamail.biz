@@ -6,6 +6,7 @@ module ControllerModules::ExceptionHandlers
   included do
     rescue_from ActiveRecord::RecordInvalid, ValidationError, :with => :handle_validation_error
     rescue_from ActiveRecord::RecordNotFound, :with => :handle_not_found_error
+    rescue_from Exceptions::PostEmailReceiveError, :with => :render_406
   end
 
   protected
@@ -31,6 +32,10 @@ module ControllerModules::ExceptionHandlers
     else
       redirect_to '/404.html'
     end
+  end
+
+  def render_406
+    render :nothing => true, :status => 406
   end
 
   def log_the_error(exception)

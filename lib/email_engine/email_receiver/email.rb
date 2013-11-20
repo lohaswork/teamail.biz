@@ -30,15 +30,23 @@ module EmailEngine
         if is_creating_discussion
           content = analyzed_content
           discussion = Discussion.create_discussion(@creator, @topic, @notifiers, content)
-          post_attachments_to_oss(discussion) if self.has_attachments?
-          EmailEngine::DiscussionNotifier.new(discussion.id, @notifiers).create_discussion_notification
+          begin
+            post_attachments_to_oss(discussion) if self.has_attachments?
+            EmailEngine::DiscussionNotifier.new(discussion.id, @notifiers).create_discussion_notification
+          rescue
+            raise Exceptions::PostEmailReceiveError
+          end
         else
           title = subject.blank? ? "此主题标题为空" : topic_title_from_email
           email_title = subject
           @topic = Topic.create_topic(title, email_title, analyzed_content, @notifiers, @organization, @creator)
-          add_tags_from_title(@topic, @tags)
-          post_attachments_to_oss(@topic.discussions.first) if self.has_attachments?
-          EmailEngine::TopicNotifier.new(@topic.id, @notifiers).create_topic_notification
+          begin
+            add_tags_from_title(@topic, @tags)
+            post_attachments_to_oss(@topic.discussions.first) if self.has_attachments?
+            EmailEngine::TopicNotifier.new(@topic.id, @notifiers).create_topic_notification
+          rescue
+            raise Exceptions::PostEmailReceiveError
+          end
         end
       end
 

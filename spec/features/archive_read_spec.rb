@@ -48,8 +48,7 @@ describe "topics have new discussion", :js => true do
       unarchived_topic.user_topics.find_by_user_id(user.id).archive_status.should_not eq(1)
       click_button 'archive-submit'
       # Wait for page loading, need refactor later
-      sleep 0.1
-      find('#archive-submit')[:disabled].should eq "disabled"
+      wait_for_ajax
       unarchived_topic.user_topics.find_by_user_id(user.id).archive_status.should eq(1)
     end
   end

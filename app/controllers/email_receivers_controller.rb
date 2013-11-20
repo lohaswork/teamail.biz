@@ -1,5 +1,6 @@
 # encoding: utf-8
 class EmailReceiversController < ApplicationController
+
   def email
     #should set the route for mailgun manully for development
     email = EmailEngine::EmailReceiver::Email.new request.POST
@@ -7,4 +8,5 @@ class EmailReceiversController < ApplicationController
     email.create_from_email
     render :nothing => true
   end
+
 end
