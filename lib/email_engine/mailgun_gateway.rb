@@ -36,7 +36,7 @@ module EmailEngine
     end
 
     def default_sender(email)
-      (email || "teamail") + " " +$config.default_system_email
+      (email || "teamail.biz") + " " +$config.default_system_email
     end
 
     def api_key

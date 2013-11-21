@@ -10,7 +10,7 @@
     <%= link_to personal_topics_inbox_path do %>
       <h5 class="<%= 'selected' if current_page?(:controller => 'topics', :action => 'unarchived') %>">
           收件箱
-          <span class="badge" id="unread-num-query">
+          <span class="badge" id="unread-number-query">
             <%= unread_topic_number %>
           </span>
       </h5>
