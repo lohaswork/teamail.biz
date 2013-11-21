@@ -43,28 +43,6 @@
           element.val(value);
         }
       })
-      .on("click", ".checkbox-group .all", function(){
-        var btnAll = $(this);
-        if (btnAll.hasClass("selected")) {
-          btnAll.removeClass("selected");
-          btnAll.parents(".checkbox-group").find("input[data-item]").prop('checked', function(){
-            var me = $(this);
-            if (me.is(':checked')) {
-              me.trigger('unchecked');
-            }
-            return false;
-          });
-        } else {
-          btnAll.addClass("selected");
-          btnAll.parents(".checkbox-group").find("input[data-item]").prop('checked', function(){
-            var me = $(this);
-            if (!me.is(':checked')) {
-              me.trigger('checked');
-            }
-            return 'checked';
-          });
-        }
-      })
       .on('change', '.checkbox-group input[data-all]', function(){
         var selectAll = $(this);
         selectAll.parents(".checkbox-group").find("input[data-item]").prop('checked', function(){

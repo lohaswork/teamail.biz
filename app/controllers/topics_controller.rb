@@ -8,7 +8,7 @@ class TopicsController < ApplicationController
   end
 
   def create
-    selected_emails = params[:selected_users_for_topic].split(',')
+    selected_emails = params[:selected_emails] || []
 
     email_title = params[:title]
     title, tags = analyzed_title email_title unless email_title.blank?

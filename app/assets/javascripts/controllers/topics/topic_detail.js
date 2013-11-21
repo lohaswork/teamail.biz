@@ -15,23 +15,23 @@
           $("<button class='toggle-quote'></button><br>").insertBefore($(this).find("blockquote").first());
         });
       });
-      $(document).on("refreshed", ".headline-tag-container", function () {
+      $(document).on("refreshed", ".headline-tag-container", function(e) {
         $("#dropdown-tags").hide();
         $("#tag-list :checkbox").attr('checked', false);
         $("#tagging-submit").hide();
         $("#tag-input").show();
-        return false;
+        e.stopPropagation();
       })
       .on("click", ".toggle-quote", function(){
         $(this).parents('.content').find('blockquote').toggle();
       })
-      .on("refreshed", "#discussion-list", function(){
-        return false;
+      .on("refreshed", "#select-user-for-topic", function(e){
+        e.stopPropagation();
       })
-      .on("refreshed", "#select-user-for-topic", function(){
-        return false;
+      .on("refreshed", "#select-user-for-discussion", function(e){
+        e.stopPropagation();
       })
-      .on("refreshed", "#discussion-list", function(){
+      .on("refreshed", "#discussion-list", function(e){
         $(".content a").attr('target', '_blank');
         var editor = $('<div class="qeditor_preview clearfix" contentEditable="true"></div>');
         var placeholder = $('<div class="qeditor_placeholder">请输入内容</div>');
@@ -40,13 +40,9 @@
         $.each($(".content"), function() {
           $("<button class='toggle-quote'></button>").insertBefore($(this).find("blockquote").first());
         });
-        return false;
+        e.stopPropagation();
       })
-      .on("refreshed", "#select-user-for-discussion", function(){
-        $("#new-discussion #invited_emails").val("");
-        return false;
-      })
-      .on("refreshed", "#topic-area", function () {
+      .on("refreshed", "#topic-area", function(e) {
         $('.timeago').timeago();
         window.history.pushState({}, "teamail.biz", "/organization_topics");
         $('.headline h4').html('话题列表');
@@ -62,7 +58,7 @@
             $("#tagging-dropdown").attr("disabled","disabled");
           }
         })
-        return false;
+        e.stopPropagation();
       });
     }
   }

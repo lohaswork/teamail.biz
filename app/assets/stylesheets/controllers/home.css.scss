@@ -23,6 +23,9 @@ body.home {
   .landing-header {
     padding-top: 150px;
     text-align: center;
+    .signup-form {
+      max-width: 300px;
+    }
   }
 
 }
