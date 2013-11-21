@@ -45,7 +45,7 @@ class TopicsController < ApplicationController
       }
     else
       topic = Topic.find(detail_topic_id).archived_by(login_user)
-      # 返回未处理列表
+      # 返回收件箱列表
       render :json => { :status => "success", :redirect => personal_topics_inbox_path }
     end
   end

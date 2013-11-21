@@ -74,14 +74,14 @@ describe "topics have new discussion", :js => true do
       visit personal_topics_path
       click_on user.topics.first.title
       page.should have_content user.topics.first.title
-      click_on "未处理"
+      click_on "收件箱"
       page.should have_css('li.read')
       find(:css,"div.personal-inbox").should have_content (unread_num - 1).to_s
     end
 
     it "should be unread for other users when a new topic created" do
       visit personal_topics_path
-      click_on "创建新话题"
+      click_on "创建新邮件"
       sleep 0.5
       fill_in "title", :with => "test title"
       checkbox = find(:xpath, "//*[@id='select-user-for-topic']/label[9]/input")

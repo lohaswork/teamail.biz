@@ -1,6 +1,6 @@
 <div class="sidebar col-xs-2">
   <div data-page="NewTopicPage">
-    <button type="button" id="create-new-topic" class="btn btn-default">创建新话题</button>
+    <button type="button" id="create-new-topic" class="btn btn-default">创建新邮件</button>
   </div>
   <hr>
   <div class="personal-inbox" data-page="UnreadNumberPage">
@@ -9,7 +9,7 @@
     </h4>
     <%= link_to personal_topics_inbox_path do %>
       <h5 class="<%= 'selected' if current_page?(:controller => 'topics', :action => 'unarchived') %>">
-          未处理
+          收件箱
           <span class="badge" id="unread-num-query">
             <%= unread_topic_number %>
           </span>
@@ -17,7 +17,7 @@
     <%end %>
     <%= link_to personal_topics_path do %>
       <h5 class="<%= 'selected' if current_page?(:controller => 'users', :action => 'topics') %>">
-        所有
+        所有邮件
       </h5>
     <% end %>
   </div>
@@ -28,7 +28,7 @@
     </h4>
     <%= link_to organization_topics_path do %>
       <h5 class="<%= 'selected' if current_page?(:controller => 'topics', :action => 'index') %>">
-        所有
+        所有邮件
       </h5>
     <% end %>
     <%= render :partial => 'tags/tag_filters', :locals => { :tags => current_organization.tags } %>
