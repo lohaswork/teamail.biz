@@ -17,7 +17,7 @@ class TopicsController < ApplicationController
     TopicNotifierWorker.perform_async(new_topic.id, selected_emails)
 
     render :json => { :reload => true }
-    flash[:notice] = "话题创建成功"
+    flash[:notice] = "邮件创建成功"
   end
 
   def show

@@ -85,7 +85,7 @@ describe "the topics action" do
           sleep 0.5
           fill_in "title", :with => "test title"
           click_button "创建"
-          page.should have_content "话题创建成功"
+          page.should have_content "邮件创建成功"
           visit organization_topics_path
           page.should have_content "test title"
         end
@@ -96,7 +96,7 @@ describe "the topics action" do
           fill_in "title", :with => "test title"
           find(:xpath, '//*[@id="select-user-for-topic"]/label[9]/input').set(true)
           click_button "创建"
-          page.should have_content "话题创建成功"
+          page.should have_content "邮件创建成功"
           visit organization_topics_path
           page.should have_content "test title"
           wait_for_ajax
@@ -108,7 +108,7 @@ describe "the topics action" do
           sleep 0.5
           fill_in "title", :with => "test title"
           click_button "创建"
-          page.should have_content "话题创建成功"
+          page.should have_content "邮件创建成功"
           visit organization_topics_path
           page.should have_content "test title"
           @organization.topics.last.users.should include(@user)
@@ -120,7 +120,7 @@ describe "the topics action" do
           fill_in "title", :with => "test title"
           find(:xpath, "//*[@id='select-user-for-topic']/div/span").click
           click_button "创建"
-          page.should have_content "话题创建成功"
+          page.should have_content "邮件创建成功"
           wait_for_ajax
           expect(@organization.reload.topics.last.users.length).to eq 10
         end
@@ -134,7 +134,7 @@ describe "the topics action" do
           fill_in "title", :with => "test title"
           editor_fill_in :in => '#new-topic-form', :with => "this is test discussion"
           click_button "创建"
-          page.should have_content "话题创建成功"
+          page.should have_content "邮件创建成功"
           visit organization_topics_path
           page.should have_content "test title"
           page.should have_content 1
@@ -191,7 +191,7 @@ describe "the topics action" do
         sleep 0.5
         fill_in "title", :with => "test title"
         click_button "创建"
-        page.should have_content "话题创建成功"
+        page.should have_content "邮件创建成功"
         visit organization_topics_path
         page.should have_content "test title"
         click_on "test title"
@@ -216,7 +216,7 @@ describe "the topics action" do
         sleep 0.5
         find(:xpath, "//*[@id='select-user-for-topic']/label[9]/input").set(true)
         click_button "创建"
-        page.should have_content "话题创建成功"
+        page.should have_content "邮件创建成功"
         visit organization_topics_path
         page.should have_content("test title")
         click_on "test title"
@@ -231,7 +231,7 @@ describe "the topics action" do
         sleep 0.5
         fill_in "title", :with => "test select user"
         click_button "创建"
-        page.should have_content "话题创建成功"
+        page.should have_content "邮件创建成功"
         visit organization_topics_path
         click_on "test select user"
         page.should have_button("回复")
@@ -370,7 +370,7 @@ describe "the topics action" do
             sleep 0.5
             fill_in "title", :with => "test title"
             click_button "创建"
-            page.should have_content "话题创建成功"
+            page.should have_content "邮件创建成功"
             visit personal_topics_path
             page.should have_content "test title"
             page.should_not have_selector "#new-topic-form"
@@ -382,7 +382,7 @@ describe "the topics action" do
             sleep 0.5
             find(:xpath, "//*[@id='select-user-for-topic']/label[9]/input").set(true)
             click_button "创建"
-            page.should have_content "话题创建成功"
+            page.should have_content "邮件创建成功"
             visit personal_topics_path
             page.should have_content "test title"
             @organization.reload.topics.last.users.should include(@organization.users.last)
@@ -393,7 +393,7 @@ describe "the topics action" do
             sleep 0.5
             fill_in "title", :with => "test title"
             click_button "创建"
-            page.should have_content "话题创建成功"
+            page.should have_content "邮件创建成功"
             visit personal_topics_path
             page.should have_content "test title"
             @organization.topics.last.users.should include(@user)
@@ -419,7 +419,7 @@ describe "the topics action" do
             fill_in "title", :with => "test title"
             editor_fill_in :in => '#new-topic-form', :with => "this is test discussion"
             click_button "创建"
-            page.should have_content "话题创建成功"
+            page.should have_content "邮件创建成功"
             visit personal_topics_path
             page.should have_content "test title"
             page.should have_content 1

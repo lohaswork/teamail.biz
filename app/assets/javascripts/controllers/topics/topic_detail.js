@@ -45,7 +45,6 @@
       .on("refreshed", "#topic-area", function(e) {
         $('.timeago').timeago();
         window.history.pushState({}, "teamail.biz", "/organization_topics");
-        $('.headline h4').html('话题列表');
         $('.topic-check-all').show();
         $("#tagging-dropdown").attr("disabled","disabled");
         $("#archive-form").remove();
