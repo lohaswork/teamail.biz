@@ -8,6 +8,7 @@
             <%= check_box_tag 'tags[]', tag.id, false, :style => 'visibility: hidden; position: absolute;' %>
             <i class="fa fa-circle"></i>
             <%= tag.name %>
+            <i class="fa fa-times fa-lg" style="display:none;"></i>
           </a>
         </li>
       <% end %>

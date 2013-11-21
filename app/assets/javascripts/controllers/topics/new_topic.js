@@ -15,6 +15,12 @@
       });
       $(document).on('hidden.bs.modal', '#myModal', function (){
         $('#myModal :text').val("");
+      })
+      .on("click", "#select-user-for-topic .all", function(){
+        var btnAll = $(this);
+        btnAll.toggleClass("selected");
+        var checkStatus = btnAll.hasClass("selected") ? true : false;
+        btnAll.parents(".user-select").find(":checkbox").prop('checked', checkStatus);
       });
     }
   }

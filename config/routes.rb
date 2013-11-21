@@ -1,6 +1,8 @@
 LohasWorkCom::Application.routes.draw do
   root 'welcome#index'
 
+  get 'home' => 'home#index', as: 'home'
+
   controller :users do
     get 'signup_success' => :signup_success
     get 'active/:active_code' => :active, as: :active

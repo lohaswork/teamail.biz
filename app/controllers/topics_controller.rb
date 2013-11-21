@@ -8,7 +8,7 @@ class TopicsController < ApplicationController
   end
 
   def create
-    selected_emails = params[:selected_users_for_topic].split(',')
+    selected_emails = params[:selected_emails] || []
 
     email_title = params[:title]
     title, tags = analyzed_title email_title unless email_title.blank?
@@ -17,7 +17,7 @@ class TopicsController < ApplicationController
     TopicNotifierWorker.perform_async(new_topic.id, selected_emails)
 
     render :json => { :reload => true }
-    flash[:notice] = "话题创建成功"
+    flash[:notice] = "邮件创建成功"
   end
 
   def show
@@ -45,7 +45,7 @@ class TopicsController < ApplicationController
       }
     else
       topic = Topic.find(detail_topic_id).archived_by(login_user)
-      # 返回未处理列表
+      # 返回收件箱列表
       render :json => { :status => "success", :redirect => personal_topics_inbox_path }
     end
   end

@@ -1,16 +1,13 @@
 .navbar {
-  min-height: 32px;
-  line-height: 32px;
+  min-height: 42px;
+  line-height: 42px;
   background-image: linear-gradient(to bottom, #ffffff,#f2f2f2);
   background-repeat: repeat-x;
   border: 1px solid #d4d4d4;
-  .logo {
-    padding-top: 0.5%;
-  }
-
   ul.list-inline {
+    margin: 0;
+    padding-top: 2px;
     li {
-      padding-top: 2%;
       a {
         color: #666;
         &:hover {

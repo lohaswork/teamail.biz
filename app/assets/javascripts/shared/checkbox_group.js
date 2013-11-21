@@ -6,12 +6,6 @@
   }
   App.page.CheckBoxGroup.prototype = {
     init: function(){
-      $(document).ready(function() {
-        var btnAll = $(".checkbox-group .all")
-        if (btnAll.hasClass("selected")) {
-          btnAll.removeClass("selected");
-        }
-      });
       $(document).on("change", ".checkbox-group input", function(){
         var me = $(this);
         if (me.is(':checked')) {
@@ -47,28 +41,6 @@
           var arrayIndex = $.inArray(me.val(), value);
           if (arrayIndex != -1) value.splice( arrayIndex, 1 );
           element.val(value);
-        }
-      })
-      .on("click", ".checkbox-group .all", function(){
-        var btnAll = $(this);
-        if (btnAll.hasClass("selected")) {
-          btnAll.removeClass("selected");
-          btnAll.parents(".checkbox-group").find("input[data-item]").prop('checked', function(){
-            var me = $(this);
-            if (me.is(':checked')) {
-              me.trigger('unchecked');
-            }
-            return false;
-          });
-        } else {
-          btnAll.addClass("selected");
-          btnAll.parents(".checkbox-group").find("input[data-item]").prop('checked', function(){
-            var me = $(this);
-            if (!me.is(':checked')) {
-              me.trigger('checked');
-            }
-            return 'checked';
-          });
         }
       })
       .on('change', '.checkbox-group input[data-all]', function(){

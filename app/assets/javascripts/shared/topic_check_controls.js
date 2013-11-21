@@ -28,9 +28,9 @@
           $("#tagging-dropdown").attr("disabled","disabled");
         }
       })
-      .on("click", "#tagging-dropdown", function(){
+      .on("click", "#tagging-dropdown", function(e){
         $("#dropdown-tags").toggle();
-        return false;
+        e.stopPropagation();
       })
       .on('keyup', '#tag_name', function(){
         if ($('#tag_name').val() != "") {
@@ -48,9 +48,9 @@
           $("#tag-input").show();
         }
       })// Enable tags submit button
-      .on("refreshed", "#tag-list", function() {
+      .on("refreshed", "#tag-list", function(e) {
         $("#tag-input input[type='text']").val("");
-        return false;
+        e.stopPropagation();
       })
       .on('change', '.topic-check-all input[data-all]', function(){
         var selectAll = $(this);
@@ -85,7 +85,7 @@
       };
     },
     refreshTopicList: function(){
-      $(document).on("refreshed", "#topic-list", function () {
+      $(document).on("refreshed", "#topic-list", function (e) {
         // reload timeago
         $('.timeago').timeago();
         // clear hidden field
@@ -103,7 +103,7 @@
         $('.topic-check-all input[data-all]').attr('checked', false);
         $("#tagging-submit").hide();
         $("#tag-input").show();
-        return false;
+        e.stopPropagation();
       });
     }
   }

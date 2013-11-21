@@ -21,6 +21,11 @@ $list-colors : #e11d21, #eb6420, #fbca04, #009800,
       color: #fff!important;
       background-color: nth($list-colors,$i);
     }
+    .fa-times {
+      float: right;
+      margin-top: 3px;
+      margin-right: 5px;
+    }
   }
   .headline-tag-container {
     .tag-color-#{$i} {

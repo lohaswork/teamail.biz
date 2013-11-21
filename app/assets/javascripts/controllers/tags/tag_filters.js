@@ -7,18 +7,21 @@
   App.page.SidebarTags.prototype = {
     init: function(){
       var self = this;
-        $(document).on("click", "#tag-filters li", function(){
-          if ($(this).hasClass("active-tag")){
-            $(this).find(':checkbox').prop("checked", false);
-            $(this).removeClass("active-tag");
+        $(document).on("click", "#tag-filters li", function(e){
+          var $tag = $(this);
+          if ($tag.hasClass("active-tag")){
+            $tag.find(':checkbox').prop("checked", false);
+            $tag.removeClass("active-tag");
+            $tag.find(".fa-times").hide();
           } else {
-            $(this).find(':checkbox').prop("checked", "checked");
-            $(this).addClass("active-tag");
+            $tag.find(':checkbox').prop("checked", "checked");
+            $tag.addClass("active-tag");
+            $tag.find(".fa-times").show();
           }
           $('#tag-filters-submit').trigger("click");
           window.history.pushState({}, "teamail.biz", "/organization_topics");
-          $('.headline .breadcrumb').html('<li class="active">团队空间</li>');
-          return false;
+          // $('.headline .breadcrumb').html('<li class="active">团队空间</li>');
+          e.stopPropagation();
         });
     }
   }

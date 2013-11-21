@@ -1,55 +1,50 @@
 !function($) {
 
-  App.page.TopicsShowPage = function (element){
+  App.page.TopicDetails = function (element){
     this.el = element;
     this.init();
   }
-  App.page.TopicsShowPage.prototype = {
+  App.page.TopicDetails.prototype = {
     init: function(){
       new App.page.TopicCheckControls;
       $(document).ready(function() {
         $("#tagging-dropdown").attr("disabled",false);
         $(".content a").attr('target', '_blank');
         $(".content blockquote").hide();
-        $.each($(".content"), function() {
-          $("<button class='toggle-quote'></button><br>").insertBefore($(this).find("blockquote").first());
+        $(".content").each(function() {
+          var $blockquote = $(this).children("blockquote");
+          $blockquote.each(function() {
+            var self = this,
+                $toggleBtn = $("<br><button class='toggle-quote'></button><br>");
+            $toggleBtn.insertBefore($(self));
+            $toggleBtn.on("click", function(){
+              $(self).toggle();
+            })
+          })
         });
       });
-      $(document).on("refreshed", ".headline-tag-container", function () {
+      $(document).on("refreshed", ".headline-tag-container", function(e) {
         $("#dropdown-tags").hide();
         $("#tag-list :checkbox").attr('checked', false);
         $("#tagging-submit").hide();
         $("#tag-input").show();
-        return false;
+        e.stopPropagation();
       })
-      .on("click", ".toggle-quote", function(){
-        $(this).parents('.content').find('blockquote').toggle();
+      .on("refreshed", "#select-user-for-topic", function(e){
+        e.stopPropagation();
       })
-      .on("refreshed", "#discussion-list", function(){
-        return false;
+      .on("refreshed", "#select-user-for-discussion", function(e){
+        e.stopPropagation();
       })
-      .on("refreshed", "#select-user-for-topic", function(){
-        return false;
-      })
-      .on("refreshed", "#discussion-list", function(){
-        $(".content a").attr('target', '_blank');
+      .on("refreshed", "#discussion-list", function(e){
         var editor = $('<div class="qeditor_preview clearfix" contentEditable="true"></div>');
         var placeholder = $('<div class="qeditor_placeholder">请输入内容</div>');
         $(".qeditor_preview").html(placeholder);
-        $(".content blockquote").hide();
-        $.each($(".content"), function() {
-          $("<button class='toggle-quote'></button>").insertBefore($(this).find("blockquote").first());
-        });
-        return false;
+        e.stopPropagation();
       })
-      .on("refreshed", "#select-user-for-discussion", function(){
-        $("#new-discussion #invited_emails").val("");
-        return false;
-      })
-      .on("refreshed", "#topic-area", function () {
+      .on("refreshed", "#topic-area", function(e) {
         $('.timeago').timeago();
         window.history.pushState({}, "teamail.biz", "/organization_topics");
-        $('.headline h4').html('话题列表');
         $('.topic-check-all').show();
         $("#tagging-dropdown").attr("disabled","disabled");
         $("#archive-form").remove();
@@ -62,7 +57,7 @@
             $("#tagging-dropdown").attr("disabled","disabled");
           }
         })
-        return false;
+        e.stopPropagation();
       });
     }
   }
