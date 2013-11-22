@@ -97,7 +97,7 @@ describe "user authentaction action" do
       let(:user) { create(:normal_user) }
       before do
         login_with(user.email, user.password)
-        page.should have_content("登出")
+        page.should have_content("退出")
       end
 
       it "should redirect to topics page visit login path" do
@@ -112,9 +112,9 @@ describe "user authentaction action" do
 
       it "should go to root path after logout" do
         visit organization_topics_path
-        click_on("登出")
+        click_on("退出")
         current_path.should == "/login"
-        page.should_not have_content '登出'
+        page.should_not have_content '退出'
       end
     end
 

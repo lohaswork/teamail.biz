@@ -12,7 +12,7 @@ describe "organization member page" do
   describe "modify user name", :js => true do
     before do
       mock_login_with(user.email)
-      page.should have_content '登出'
+      page.should have_content '退出'
       visit show_member_path
       page.should have_content user.email
     end
@@ -27,7 +27,7 @@ describe "organization member page" do
   describe "invite user", :js => true do
     before do
       mock_login_with(user.email)
-      page.should have_content '登出'
+      page.should have_content '退出'
       visit show_member_path
       page.should have_content user.display_name
     end
@@ -85,7 +85,7 @@ describe "organization member page" do
   describe "delete member", :js => true do
     before do
       mock_login_with(user.email)
-      page.should have_content '登出'
+      page.should have_content '退出'
       visit show_member_path
       page.should have_content user.display_name
     end
@@ -127,7 +127,7 @@ describe "organization member page" do
     let(:user) { create(:clean_user) }
     before do
       login_with(user.email, user.password)
-      page.should have_content '登出'
+      page.should have_content '退出'
       page.should have_content "请联系团队管理员，让您回到组织怀抱。"
     end
 

@@ -52,7 +52,7 @@ module EmailEngine
                         </a>
                       </p>
                       <p style="text-align: center; color: #666; padding-top: 10px;">
-                        如有疑惑请联系: <a style="color: #5BB65B; text-decoration: none;" href=mailto:support@LohasWork.com>support@LohasWork.com</a>
+                        如有问题请联系: <a style="color: #5BB65B; text-decoration: none;" href=mailto:support@LohasWork.com>support@LohasWork.com</a>
                       </p>
                       <img src="http://teamail.u.qiniudn.com/img/email/lohaswork-logo-for-email-template.png" alt="lohaswork">
                     </td>
