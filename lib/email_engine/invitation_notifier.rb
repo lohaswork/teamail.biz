@@ -43,19 +43,20 @@ module EmailEngine
               <td style="border-collapse: collapse;">
                 <table cellpadding="0" cellspacing="0" border="0" align="center">
                   <tr style="padding-top: 20px;">
-                    <td width="600" valign="top" style="border-collapse: collapse;">
-                      <p style="text-align: center;color: #666;">
+                    <td width="600" valign="top" style="border-collapse: collapse; text-align: center;">
+                      <img src="http://teamail.u.qiniudn.com/img/email/teamail-logo-for-email-template.png" alt="teamail.biz">
+                      <p style="text-align: center;color: #666; padding-top: 25px;">
                         你好：#{from.display_name}邀请您加入他/她的组织
                       </p>
                       <p style="text-align: center;color: #666;">
                         点击下方链接即刻加入！
                       </p>
-                      <br>
-                      <p style="text-align: center;">
+                      <p style="text-align: center; padding-top: 10px; padding-bottom: 15px;">
                         <a style="color: #5BB65B;" href='#{@gateway.protocol}://#{@gateway.host_name}/reset/#{user.reset_token}'>
                           #{@gateway.protocol}://#{@gateway.host_name}/reset/#{user.reset_token}
                         </a>
                       </p>
+                      <img src="http://teamail.u.qiniudn.com/img/email/lohaswork-logo-for-email-template.png" alt="lohaswork">
                     </td>
                   <tr>
                 </table>
