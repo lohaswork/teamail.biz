@@ -4,7 +4,7 @@
       <div class='discussion-info'>
         <span class="reply-span">&nbsp</span>
         <div class='discussion-creator'>
-          <%= discussion.creator.email%>
+          <%= discussion.creator.display_name%>
         </div>
         <div class='update-time'>
           <%= discussion.created_at.strftime("%Y年%m月%d日 %H:%M")%>
@@ -13,7 +13,7 @@
       <div class='notify-party'>
         发送至:
         <%- discussion.notify_party.try(:each) do |user| %>
-          <span><%= user.active_status ? user.email_name : user.email %></span>
+          <span><%= user.display_name %></span>
         <% end %>
       </div>
       <div class='content'>

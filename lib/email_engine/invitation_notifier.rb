@@ -15,7 +15,7 @@ module EmailEngine
     def invitation_notification
       notification_text = @is_registered_user ? on_board_text : invitation_notification_text
       gateway.send_batch_message(
-        from: from.email_name,
+        from: from.display_name,
         to: user.email,
         subject: "[teamail] 邀请加入#{organization_name}",
         body: notification_text,
@@ -45,7 +45,7 @@ module EmailEngine
                   <tr style="padding-top: 20px;">
                     <td width="600" valign="top" style="border-collapse: collapse;">
                       <p style="text-align: center;color: #666;">
-                        你好：#{from.email}邀请您加入他/她的组织
+                        你好：#{from.display_name}邀请您加入他/她的组织
                       </p>
                       <p style="text-align: center;color: #666;">
                         点击下方链接即刻加入！
@@ -83,7 +83,7 @@ module EmailEngine
                   <tr>
                     <td width="600" valign="top" style="border-collapse: collapse;"></td>
                       <p style="text-align: center;color: #666; padding-top: 20px;">
-                        #{user.email}, 您已成功加入#{from}的组织
+                        #{user.display_name}, 您已成功加入#{from}的组织
                       </p>
                     </td>
                   <tr>

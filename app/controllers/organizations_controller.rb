@@ -3,7 +3,6 @@ class OrganizationsController < ApplicationController
   before_filter :login_required, :organization_required
 
   def show_member
-    @colleagues = get_colleagues
   end
 
   def delete_member

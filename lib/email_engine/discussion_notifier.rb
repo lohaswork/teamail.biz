@@ -51,7 +51,7 @@ module EmailEngine
                 <table cellpadding="0" cellspacing="0" border="0" align="left">
                   <tr style="padding-top: 20px;">
                     <td width="600" valign="top" style="border-collapse: collapse; color: #777; padding-top: 10px;">
-                      #{discussion.creator.email_name} 写道:
+                      #{discussion.creator.display_name} 写道:
                     </td>
                   </tr>
                   <tr>

@@ -6,7 +6,7 @@
   <%- show_for_checkbox(get_colleagues, topic).each do |user| %>
     <label>
       <%= check_box_tag 'selected_emails[]', user[:email], false, :class=>"item", :'data-selected'=>user[:is_in_topic], :class => 'custome-checkbox' %>
-      <%=user[:email_name]%>
+      <%=user[:display_name]%>
     </label>
   <% end %>
 <% end %>

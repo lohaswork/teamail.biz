@@ -32,6 +32,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def set_user_name
+    name = params[:user_name].strip
+    login_user.set_name name
+    render :json => { :reload => true }
+  end
 
   def do_forgot
     email = params[:email]

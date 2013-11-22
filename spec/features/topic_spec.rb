@@ -56,13 +56,13 @@ describe "the topics action" do
         it "should saw the user select checkbox" do
           page.should have_button "创建新邮件"
           click_on "创建新邮件"
-          find('#select-user-for-topic').should have_content(@organization.users.last.email_name)
+          find('#select-user-for-topic').should have_content(@organization.users.last.display_name)
         end
 
         it "should not have current user name in the select user checkbox" do
           page.should have_button "创建新邮件"
           click_on "创建新邮件"
-          find('#select-user-for-topic').should_not have_content(@user.email_name)
+          find('#select-user-for-topic').should_not have_content(@user.display_name)
         end
       end
 
@@ -341,13 +341,13 @@ describe "the topics action" do
           it "should saw the user select checkbox" do
             page.should have_button "创建新邮件"
             click_on "创建新邮件"
-            find('#select-user-for-topic').should have_content(@organization.users.last.email_name)
+            find('#select-user-for-topic').should have_content(@organization.users.last.display_name)
           end
 
           it "should not have current user name in the select user checkbox" do
             page.should have_button "创建新邮件"
             click_on "创建新邮件"
-            find('#select-user-for-topic').should_not have_content(@user.email_name)
+            find('#select-user-for-topic').should_not have_content(@user.display_name)
           end
         end
 
