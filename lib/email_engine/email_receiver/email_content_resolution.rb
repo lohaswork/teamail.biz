@@ -36,11 +36,11 @@ module EmailEngine
 
       def resolve_topic_of_email
         topic_id = nil
-        if self.respond_to?(:in_reply_to) || self.respond_to?(:reference)
-          exp_body = self.respond_to?(:in_reply_to) ? in_reply_to : reference
-          exp_body.scan(/#{Regexp.escape(@gateway.host_name(false))}\/topics\/(\d+)/m) { |id| topic_id = id.join("").to_i }
-          topic_id && Topic.find(topic_id)
+        [:in_reply_to, :reference, :body_html, :body_plain].each do |exp_body|
+          self.send(exp_body).scan(/#{Regexp.escape(@gateway.host_name(false))}\/topics\/(\d+)/m) { |id| topic_id = id.join("").to_i } if self.respond_to? exp_body
+          break if topic_id
         end
+        topic_id && Topic.find(topic_id)
       end
 
       def set_notifiers

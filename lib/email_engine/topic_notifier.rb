@@ -57,7 +57,7 @@ module EmailEngine
                   </tr>
                   <tr>
                     <td width="600" valign="top" style="border-collapse: collapse; padding-top: 15px; color: #777;">
-                      点击链接进入teamail查看：<a href='#{@gateway.protocol}://#{@gateway.host_name}/topics/#{topic.id}'>#{@gateway.protocol}://#{@gateway.host_name}/topics/#{topic.id}</a>
+                      点击链接进入teamail查看：<a href='#{@gateway.protocol}://#{@gateway.host_name}/topics/#{topic.id}'>#{@gateway.protocol}://#{@gateway.host_name(false)}/topics/#{topic.id}</a>
                     </td>
                   </tr>
                 </table>
