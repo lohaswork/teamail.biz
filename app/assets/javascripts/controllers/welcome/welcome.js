@@ -30,17 +30,17 @@
       });
 
       // scroll back to top
-      self.back2top.click(function(){
+      self.back2top.click(function(e){
         $("html, body").animate({ scrollTop: 0 }, 700);
-        return false;
+        e.stopPropagation();
       });
 
       // scroll navigation functionality
-      self.scroller.click(function(){
+      self.scroller.click(function(e){
         var section = $($(this).data("section"));
         var top = section.offset().top;
         $("html, body").animate({ scrollTop: top }, 700);
-        return false;
+        e.stopPropagation();
       });
     }
   }

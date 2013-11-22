@@ -11,7 +11,7 @@ describe "the topics action" do
         user = create(:normal_user)
         organization = user.default_organization
         login_with(user.email, user.password)
-        page.should have_content '登出'
+        page.should have_content '退出'
         visit organization_topics_path
         page.should have_content organization.topics.first.title
       end
@@ -41,7 +41,7 @@ describe "the topics action" do
       @organization = create(:organization_with_multi_users)
       @user = @organization.users.first
       mock_login_with(@user.email)
-      page.should have_content '登出'
+      page.should have_content '退出'
       visit organization_topics_path
     end
 
@@ -56,13 +56,13 @@ describe "the topics action" do
         it "should saw the user select checkbox" do
           page.should have_button "创建新邮件"
           click_on "创建新邮件"
-          find('#select-user-for-topic').should have_content(@organization.users.last.email_name)
+          find('#select-user-for-topic').should have_content(@organization.users.last.display_name)
         end
 
         it "should not have current user name in the select user checkbox" do
           page.should have_button "创建新邮件"
           click_on "创建新邮件"
-          find('#select-user-for-topic').should_not have_content(@user.email_name)
+          find('#select-user-for-topic').should_not have_content(@user.display_name)
         end
       end
 
@@ -156,7 +156,7 @@ describe "the topics action" do
       user = create(:normal_user)
       @organization = user.default_organization
       login_with(user.email, user.password)
-      page.should have_content '登出'
+      page.should have_content '退出'
       visit organization_topics_path
     end
 
@@ -205,7 +205,7 @@ describe "the topics action" do
       @organization = create(:organization_with_multi_users)
       @user = @organization.users.first
       mock_login_with(@user.email)
-      page.should have_content '登出'
+      page.should have_content '退出'
       visit organization_topics_path
     end
 
@@ -292,7 +292,7 @@ describe "the topics action" do
       before do
         @user = create(:normal_user)
         login_with(@user.email, @user.password)
-        page.should have_content '登出'
+        page.should have_content '退出'
       end
       context "user go to topics page" do
         it "should have the topic title" do
@@ -326,7 +326,7 @@ describe "the topics action" do
         @organization = create(:organization_with_multi_users)
         @user = @organization.users.first
         mock_login_with(@user.email)
-        page.should have_content "登出"
+        page.should have_content "退出"
       end
 
       describe "user can open a create topic field" do
@@ -341,13 +341,13 @@ describe "the topics action" do
           it "should saw the user select checkbox" do
             page.should have_button "创建新邮件"
             click_on "创建新邮件"
-            find('#select-user-for-topic').should have_content(@organization.users.last.email_name)
+            find('#select-user-for-topic').should have_content(@organization.users.last.display_name)
           end
 
           it "should not have current user name in the select user checkbox" do
             page.should have_button "创建新邮件"
             click_on "创建新邮件"
-            find('#select-user-for-topic').should_not have_content(@user.email_name)
+            find('#select-user-for-topic').should_not have_content(@user.display_name)
           end
         end
 
@@ -441,7 +441,7 @@ describe "the topics action" do
       before do
         @user = create(:normal_user)
         login_with(@user.email, @user.password)
-        page.should have_content '登出'
+        page.should have_content '退出'
         visit personal_topics_inbox_path
       end
 

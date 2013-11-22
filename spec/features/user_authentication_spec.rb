@@ -52,18 +52,6 @@ describe "user authentaction action" do
     end
 
     describe "user signup fail" do
-      context "uer fill in email not correct" do
-        it "should ask for email address when not fill in" do
-          sign_up_with(nil, 'password', 'company')
-          page.should have_content '请输入邮件地址'
-        end
-
-        it "should say not valid when email address invalid" do
-          sign_up_with('not@correct', 'password', 'company')
-          page.should have_content '邮件地址不合法'
-        end
-      end
-
       describe "fill in already used info" do
         before do
           sign_up_with('user@example.com', 'password', 'company')
@@ -109,7 +97,7 @@ describe "user authentaction action" do
       let(:user) { create(:normal_user) }
       before do
         login_with(user.email, user.password)
-        page.should have_content("登出")
+        page.should have_content("退出")
       end
 
       it "should redirect to topics page visit login path" do
@@ -124,9 +112,9 @@ describe "user authentaction action" do
 
       it "should go to root path after logout" do
         visit organization_topics_path
-        click_on("登出")
+        click_on("退出")
         current_path.should == "/login"
-        page.should_not have_content '登出'
+        page.should_not have_content '退出'
       end
     end
 
@@ -227,15 +215,6 @@ describe "user authentaction action" do
         it "should saw error message if link is incorrect" do
           visit "/reset/incorrect-link"
           page.should have_content "您的链接已失效"
-        end
-      end
-
-      context "user enter an incorrect password"do
-        it "should saw error message" do
-          visit "/reset/#{user.reset_token}"
-          fill_in 'password', :with => "wrong"
-          click_button "重置密码"
-          page.should have_content "密码至少需要六位"
         end
       end
 

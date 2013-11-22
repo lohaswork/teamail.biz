@@ -24,7 +24,7 @@ module TopicsHelper
   def show_for_checkbox(users, topic)
     users.map { |user| {
       :email => user.email,
-      :email_name => user.active_status ? user.email_name : user.email,
+      :display_name => user.display_name,
       :is_in_topic => topic && topic.default_notify_members.include?(user) || false } }
   end
 

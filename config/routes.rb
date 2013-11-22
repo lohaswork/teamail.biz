@@ -15,6 +15,7 @@ LohasWorkCom::Application.routes.draw do
     get 'personal_topics' => :topics
     get 'personal_topics/page/:page' => :topics
     get 'no_organizations' => :no_organizations
+    post 'set_user_name' => :set_user_name
   end
   get 'signup' => 'users#new', as: 'signup'
   resources :users, only:[:new, :create]

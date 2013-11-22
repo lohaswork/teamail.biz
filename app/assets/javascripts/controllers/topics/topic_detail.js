@@ -10,16 +10,18 @@
       $(document).ready(function() {
         $("#tagging-dropdown").attr("disabled",false);
         $(".content a").attr('target', '_blank');
-        $(".content blockquote").hide();
         $(".content").each(function() {
-          var $blockquote = $(this).children("blockquote");
+          var $blockquote = $(this).find("blockquote");
           $blockquote.each(function() {
-            var self = this,
-                $toggleBtn = $("<br><button class='toggle-quote'></button><br>");
-            $toggleBtn.insertBefore($(self));
-            $toggleBtn.on("click", function(){
-              $(self).toggle();
-            })
+            var self = this;
+            if ($(self).parentsUntil( $(".content"), "blockquote" ).length === 0) {
+              $(self).hide();
+              var $toggleBtn = $("<br><button class='toggle-quote'></button><br>");
+              $toggleBtn.insertBefore($(self));
+              $toggleBtn.on("click", function(){
+                $(self).toggle();
+              });
+            }
           })
         });
       });

@@ -9,7 +9,7 @@ describe "topic section" do
       user = create(:normal_user)
       @organization = user.default_organization
       login_with(user.email, user.password)
-      page.should have_content '登出'
+      page.should have_content '退出'
       visit organization_topics_path
     end
 
@@ -118,7 +118,7 @@ describe "topic section" do
       @organization = @user.default_organization
       topic_id = @user.topics.first.id
       login_with(@user.email, @user.password)
-      page.should have_content "登出"
+      page.should have_content "退出"
       visit topic_path(topic_id)
     end
 
@@ -163,7 +163,7 @@ describe "topic section" do
       user = create(:normal_user)
       @organization = user.default_organization
       login_with(user.email, user.password)
-      page.should have_content '登出'
+      page.should have_content '退出'
     end
 
     context "topic list page filter" do
@@ -254,7 +254,7 @@ describe "topic section" do
       @organization.users << another_user
       # login
       login_with(user.email, user.password)
-      page.should have_content '登出'
+      page.should have_content '退出'
       visit personal_topics_inbox_path
     end
 

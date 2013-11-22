@@ -12,7 +12,9 @@ module ControllerModules::ExceptionHandlers
   protected
   def handle_validation_error(exception)
     log_the_error exception
-    error_messages = exception.message
+    error_messages = []
+    error_messages << exception.message
+    error_messages.flatten!
     error_messages = ["信息有误"] if error_messages.blank?
     render :json => { :status => "error",
       :modal => {

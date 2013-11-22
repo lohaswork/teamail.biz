@@ -47,7 +47,7 @@ module EmailEngine
                 <table cellpadding="0" cellspacing="0" border="0" align="left">
                   <tr style="padding-top: 20px;">
                     <td width="600" valign="top" style="border-collapse: collapse; color: #777; padding-top: 10px;">
-                      #{topic.creator.email_name} 写道:
+                      #{topic.creator.display_name} 写道:
                     </td>
                   </tr>
                   <tr>
@@ -57,7 +57,7 @@ module EmailEngine
                   </tr>
                   <tr>
                     <td width="600" valign="top" style="border-collapse: collapse; padding-top: 15px; color: #777;">
-                      点击链接进入teamail查看：<a href='#{@gateway.protocol}://#{@gateway.host_name}/topics/#{topic.id}'>#{@gateway.protocol}://#{@gateway.host_name}/topics/#{topic.id}</a>
+                      点击链接进入teamail查看：<a href='#{@gateway.protocol}://#{@gateway.host_name}/topics/#{topic.id}'>#{@gateway.protocol}://#{@gateway.host_name(false)}/topics/#{topic.id}</a>
                     </td>
                   </tr>
                 </table>

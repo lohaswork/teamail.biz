@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'bcrypt'
 class User < ActiveRecord::Base
-  attr_accessible :email, :password
+  attr_accessible :email, :password, :name
 
   has_many :organization_memberships
   has_many :organizations, lambda { uniq }, :through => :organization_memberships
@@ -16,8 +16,9 @@ class User < ActiveRecord::Base
   validates :email, :presence => { :message=>'请输入邮件地址' },
     :format => { :with => VALID_EMAIL_REGEX, :message=>'邮件地址不合法', :allow_blank => true },
     :uniqueness => { :message=>'邮件地址已使用' }
-
   validates :password, :length => { :minimum => 6, :message => '密码至少需要六位' }
+  validates :name, :format => { :with => /\A\S*\z/, :message=>'用户名格式错误，不能含有空格', :allow_blank => true },
+                   :length => { :maximum => 12, :message => '用户名不能超过12位' }
 
   class << self
     def create_with_organization(user, organization_name)
@@ -73,6 +74,16 @@ class User < ActiveRecord::Base
     def already_register?(email)
       !!self.find_by_email(email)
     end
+  end
+
+  def display_name
+    name.blank? ? email : name
+  end
+
+  def set_name(name)
+    self.name = name
+    raise ValidationError.new(self.errors.messages.values) if !self.valid?
+    self.save!
   end
 
   def password
