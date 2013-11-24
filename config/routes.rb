@@ -4,18 +4,18 @@ LohasWorkCom::Application.routes.draw do
   get 'home' => 'home#index', as: 'home'
 
   controller :users do
-    get 'signup_success' => :signup_success
+    get 'signup-success' => :signup_success, as: :signup_success
     get 'active/:active_code' => :active, as: :active
-    get 'forgot' => :forgot
+    get 'forgot' => :forgot, as: :forgot
     post 'forgot' => :do_forgot, as: :do_forgot
-    get 'forgot_success/:token' => :forgot_success, as: :forgot_success
+    get 'forgot-success/:token' => :forgot_success, as: :forgot_success
     get  'reset/:reset_token' => :reset, as: :reset
     post 'reset/:reset_token' => :do_reset, as: :do_reset
-    get 'reset_success' => :reset_success
-    get 'personal_topics' => :topics
-    get 'personal_topics/page/:page' => :topics
-    get 'no_organizations' => :no_organizations
-    post 'set_user_name' => :set_user_name
+    get 'reset-success' => :reset_success, as: :reset_success
+    get 'personal-topics' => :topics, as: :personal_topics
+    get 'personal-topics/page/:page' => :topics
+    get 'no-organizations' => :no_organizations, as: :no_organizations
+    post 'set-user-name' => :set_user_name, as: :set_user_name
   end
   get 'signup' => 'users#new', as: 'signup'
   resources :users, only:[:new, :create]
@@ -30,24 +30,24 @@ LohasWorkCom::Application.routes.draw do
   delete 'files/delete' => "files#delete"
 
   controller :organizations do
-    get 'show_member' => :show_member
-    post 'delete_member' => :delete_member
-    post 'add_member' => :add_member
+    get 'show-member' => :show_member, as: :show_member
+    post 'delete-member' => :delete_member, as: :delete_member
+    post 'add-member' => :add_member, as: :add_member
   end
 
-  get '/organization_topics' => 'topics#index', as: :organization_topics
-  get '/organization_topics/page/:page' => 'topics#index'
-  get '/personal_topics_inbox' => 'topics#unarchived', as: :personal_topics_inbox
-  get '/personal_topics_inbox/page/:page' => 'topics#unarchived'
+  get '/organization-topics' => 'topics#index', as: :organization_topics
+  get '/organization-topics/page/:page' => 'topics#index'
+  get '/personal-topics-inbox' => 'topics#unarchived', as: :personal_topics_inbox
+  get '/personal-topics-inbox/page/:page' => 'topics#unarchived'
 
   controller :topics do
-    post 'remove_tag' => :remove_tag, as: :topic_remove_tag
-    post 'add_tag' => :add_tags, as: :topics_add_tags
-    post 'filter_with_tags' => :filter_with_tags, as: :topics_filter_with_tags
-    post 'filter_with_tags/page/:page' => :filter_with_tags
+    post 'remove-tag' => :remove_tag, as: :topic_remove_tag
+    post 'add-tag' => :add_tags, as: :topics_add_tags
+    post 'filter-with-tags' => :filter_with_tags, as: :topics_filter_with_tags
+    post 'filter-with-tags/page/:page' => :filter_with_tags
     post 'archive' => :archive, as: :archive_topics
     post 'archive/page/:page' => :archive
-    get 'get_unread_number' => :get_unread_number_of_unarchived_topics, as: :get_unread_number
+    get 'get-unread-number' => :get_unread_number_of_unarchived_topics, as: :get_unread_number
   end
 
   resources :topics, only: [:create, :show]
@@ -59,7 +59,7 @@ LohasWorkCom::Application.routes.draw do
   post "emails/receive" => "email_receivers#email"
   resources :welcome, only: [] do
     collection do
-      post 'add_early_adotpers' => :add_early_adotpers
+      post 'add-early-adotpers' => :add_early_adotpers, as: :add_early_adotpers
       get 'index'
     end
   end
