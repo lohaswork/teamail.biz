@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   include ControllerModules::Organization
 
   protect_from_forgery
-  before_filter :set_page_id
+  before_filter :set_page_id, :set_cache_buster
 
   def login_required
     redirect_to login_path if !is_logged_in?
@@ -22,5 +22,13 @@ class ApplicationController < ActionController::Base
     render_to_string(partial: partial,
                      layout: false,
                      locals: locals)
+  end
+
+  protected
+
+  def set_cache_buster
+    response.headers["Cache-Control"] = "no-cache, no-store, max-age=0, must-revalidate"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "Fri, 01 Jan 1990 00:00:00 GMT"
   end
 end
