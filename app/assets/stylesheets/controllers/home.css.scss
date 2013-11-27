@@ -1,11 +1,31 @@
 body.home {
   // Overwrite default from app.css
+  padding-top: 42px;
   background-color: #fff;
 
   // Overwrite nav.css
   .navbar {
     background: #fff;
     margin-bottom: 0;
+    ul.list-inline {
+      margin: 0;
+      padding-top: 2px;
+      li {
+        border: 1px solid #eee;
+        border-radius: 5px;
+        height: 32px;
+        line-height: 32px;
+        padding-left: 8px;
+        padding-right: 8px;
+        background-color: #eee;
+        a {
+          color: #666;
+          &:hover {
+            color: #999;
+          }
+        }
+      }
+    }
   }
 
   // Main wraper
@@ -112,10 +132,17 @@ body.home {
     }
     .guide-btn {
       margin-top: 30px;
-      height: 55px;
+      height: 45px;
       font-size: 20px;
       padding-left: 20px;
       padding-right:20px;
+    }
+    h5 {
+      color: #81A75E;
+      cursor: pointer;
+      &:hover {
+        color: darken(#81A75E, 5%);
+      }
     }
   }
 

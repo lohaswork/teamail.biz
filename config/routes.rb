@@ -17,7 +17,7 @@ LohasWorkCom::Application.routes.draw do
     get 'no-organizations' => :no_organizations, as: :no_organizations
     post 'set-user-name' => :set_user_name, as: :set_user_name
   end
-  get 'signup' => 'users#new', as: 'signup'
+  get 'signup' => 'users#new', as: :signup
   resources :users, only:[:new, :create]
 
   get 'logout' => 'sessions#destroy', as: 'logout'
