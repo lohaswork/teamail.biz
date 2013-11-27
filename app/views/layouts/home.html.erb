@@ -25,6 +25,7 @@
       <%= render 'layouts/navigation' %>
       <%= yield %>
     </div>
+    <%= render 'layouts/footer_index' %>
     <%= javascript_include_tag "application" %>
     <%= javascript_tag '$.fx.off = true;' if Rails.env.test? %>
     <!--[if lt IE 9]>

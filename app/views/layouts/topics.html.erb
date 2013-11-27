@@ -35,13 +35,13 @@
       </div>
     </div>
     <%= render 'layouts/footer' %>
-  <%= javascript_include_tag "application" %>
-  <%= javascript_tag '$.fx.off = true;' if Rails.env.test? %>
-  <!--[if lt IE 9]>
-      <%= javascript_include_tag "ie" %>
-  <![endif]-->
-  <script type="text/javascript">
-    $(".content-editor").qeditor({});
-  </script>
+    <%= javascript_include_tag "application" %>
+    <%= javascript_tag '$.fx.off = true;' if Rails.env.test? %>
+    <!--[if lt IE 9]>
+        <%= javascript_include_tag "ie" %>
+    <![endif]-->
+    <script type="text/javascript">
+      $(".content-editor").qeditor({});
+    </script>
   </body>
 </html>

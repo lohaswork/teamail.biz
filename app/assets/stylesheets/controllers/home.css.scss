@@ -72,6 +72,69 @@ body.home {
   // User Story
   .user-story-bg {
     background-color: #a1b58f;
-    min-height: 400px;
   }
+  .user-story-list {
+    color: #f7f7f7;
+    .user-story-intro {
+      padding-top: 35px;
+      padding-bottom: 35px;
+    }
+    h3 {
+      background-color: #eee;
+      height: 45px;
+      line-height: 45px;
+      margin: 0 auto;
+      width: 350px;
+      color: #a1b58f;
+      border-radius: 6px;
+      text-align: center;
+    }
+    p {
+      text-align: center;
+      font-size: 17px;
+    }
+  }
+  .user-story-1 {
+    height: 610px;
+    margin-bottom: 45px;
+    background: image-url("user-story-bg-1.jpg") no-repeat center bottom;
+  }
+
+  // Bottom-signup-guide
+  .bottom-signup-guide {
+    background: image-url("bottom-guide-bg.png") 0 0 repeat;
+    padding-top: 45px;
+    padding-bottom:55px;
+    text-align: center;
+    h4 {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    .guide-btn {
+      margin-top: 30px;
+      height: 55px;
+      font-size: 20px;
+      padding-left: 20px;
+      padding-right:20px;
+    }
+  }
+
+  // Footer
+  .footer-index {
+    background: #333 image-url("footer-bg.png") 0 0 repeat;
+    width: 100%;
+    color: #b5b5b5;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    .footer-links {
+      a {
+        color: #b5b5b5;
+        &:hover { color: #fff; }
+      }
+      li {
+        padding-bottom: 5px;
+      }
+    }
+  }
+
 }
