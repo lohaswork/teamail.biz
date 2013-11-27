@@ -1,8 +1,8 @@
 <ul id='discussion-list' class="list-unstyled" data-page="TopicDetails" data-reload=true>
-  <%- discussions.try(:each) do |discussion| %>
+  <%- discussions.try(:each_with_index) do |discussion, index| %>
     <li class="discussion-li">
       <div class='discussion-info'>
-        <span class="reply-span">&nbsp</span>
+        <span class="reply-span"><%= index+1 %></span>
         <div class='discussion-creator'>
           <%= discussion.creator.display_name%>
         </div>

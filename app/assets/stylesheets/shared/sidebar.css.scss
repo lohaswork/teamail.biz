@@ -25,7 +25,8 @@
   h5.selected { color: #000!important; }
 }
 #create-new-topic {
-  width: 124px;
+  min-width: 95px;
+  width: 75%;
   @include green-button();
 }
 .personal-inbox {
