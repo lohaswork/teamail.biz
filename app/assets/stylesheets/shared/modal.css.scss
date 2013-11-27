@@ -1,8 +1,5 @@
 .modal {
   #new-topic-form {
-    position: fixed;
-    right: 0px;
-    bottom: 0px;
     .modal-header {
       padding: 10px 15px;
       background-color: #73AE5C;
@@ -24,3 +21,7 @@
     }
   } // End of #new-topic-form
 } // End of .modal
+#select-user-for-topic {
+  max-height: 160px;
+  overflow-y: scroll;
+}

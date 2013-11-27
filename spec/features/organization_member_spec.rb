@@ -110,7 +110,7 @@ describe "organization member page" do
 
       it "create new topic should not see kicked_user in notifier list" do
         visit organization_topics_path
-        click_on "创建新邮件"
+        click_on "写邮件"
         find(:css, "div#select-user-for-topic").should_not have_content kicked_user.display_name
       end
     end
