@@ -20,7 +20,9 @@ body {
     text-decoration: none;
   }
 }
-
+h1, h2, h3, h4, h5, h6, dt {
+  font-family: "helvetica neue", helvetica, arial, "Hiragino Sans GB", "Hiragino Sans GB W3", "Microsoft Yahei", "WenQuanYi Micro Hei", "SimHei", Sans-serif;
+}
 .page-container {
   margin-top: 10px;
   background-color: #fff;

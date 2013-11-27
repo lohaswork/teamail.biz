@@ -1,5 +1,6 @@
 <div class="landing-header-bg">
   <div class="container landing-header">
+    <h1>改进而不改变, 用Email进行团队协作</h1>
     <div class="screen-shot-container col-md-8">
       <%= image_tag "landing-header-screenshot.png" %>
     </div>
@@ -7,12 +8,12 @@
       <%= form_tag users_path, :method => "post", :class=>"form-horizontal", :remote => true do %>
         <div class="form-group">
           <div class="col-sm-12">
-            <%= text_field_tag :'user[email]', nil, :class=>"form-control", :placeholder=>"邮箱"%>
+            <%= text_field_tag :'user[email]', nil, :class=>"form-control", :placeholder=>"你的邮箱"%>
           </div>
         </div>
         <div class="form-group">
           <div class="col-sm-12">
-            <%= password_field_tag :'user[password]', nil, :class=>"form-control", :placeholder=>"密码"%>
+            <%= password_field_tag :'user[password]', nil, :class=>"form-control", :placeholder=>"你的密码"%>
           </div>
         </div>
         <div class="form-group">
@@ -26,7 +27,39 @@
           </div>
         </div>
       <% end %>
+      <div class="signup-post">
+        <h4>开通免费服务，一步到位</h4>
+        <p>如同Email一般简单易用，无须教程</p>
+      </div>
     </div>
+  </div>
+  <div class="secondary-nav-bg">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6 col-md-3">
+          <h3><a href="#">官方博客</a></h3>
+          <p>为什么要使用这个产品？</p>
+        </div>
+        <div class="col-sm-6 col-md-3">
+          <h3><a href="#">功能介绍</a></h3>
+          <p>探索产品的方方面面</p>
+        </div>
+        <div class="col-sm-6 col-md-3">
+          <h3><a href="#">常见问题</a></h3>
+          <p>我是否可以长期免费使用？</p>
+        </div>
+        <div class="col-sm-6 col-md-3">
+          <h3><a href="#">关于我们</a></h3>
+          <p>我们是谁？为什么打造这样一款产品</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="user-story-bg">
+  <div class="user-story container">
+    用户故事
   </div>
 </div>
 

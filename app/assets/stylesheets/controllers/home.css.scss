@@ -18,14 +18,60 @@ body.home {
   // Landing header
   .landing-header-bg {
     background: image-url("landing-header-bg.jpg") no-repeat center top;
-    min-height: 800px;
+    min-height: 700px;
   }
   .landing-header {
-    padding-top: 150px;
     text-align: center;
+    h1 {
+      color: #f5f5f5;
+      font-weight: bold;
+      padding: 30px 0;
+      text-shadow: 0px -2px 0px #000;
+    }
+    .screen-shot-container {
+      min-width: 650px;
+    }
     .signup-form {
       max-width: 300px;
+      padding-top: 10px;
+      input {
+        text-align: center;
+        height: 49px;
+        font-size: 18px;
+      }
+      .btn {
+        color: #fff;
+        background-color: #81A75E;
+        border:none;
+        &:hover {
+          background-color: darken(#81A75E, 5%)
+        }
+      }
+    }
+    .signup-post {
+      margin-top: 30px;
+      h4 {
+        color: #f5f5f5;
+      }
+      p {
+        color: #f5f5f5;
+      }
     }
   }
+  .secondary-nav-bg {
+    color: #212f40;
+    margin-top: 46px;
+    min-height: 150px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+    padding: 30px 0 5px;
+    background: #fff;
+    opacity: 0.7;
+    text-align: center;
+  }
 
+  // User Story
+  .user-story-bg {
+    background-color: #a1b58f;
+    min-height: 400px;
+  }
 }
