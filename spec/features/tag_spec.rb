@@ -191,7 +191,7 @@ describe "topic section" do
       end
 
       it "filter using tag and should see topic list refreshed" do
-        link = all(:css, "div#tag-filters a").first
+        link = all(:css, "div#tag-filters li").first
         link.click
         wait_for_ajax
         page.should have_content @organization.topics.first.title
@@ -199,14 +199,14 @@ describe "topic section" do
       end
 
       it "filter using tag that does not have any topics should not see any topics" do
-        link = all(:css, "div#tag-filters a").last
+        link = all(:css, "div#tag-filters li").last
         link.click
         page.should_not have_css("div.topic-row")
       end
 
       #it "click two tags and they both turn active" do
-      #  first_link = all(:css, "div#tag-filters a").first
-      #  last_link = all(:css, "div#tag-filters a").last
+      #  first_link = all(:css, "div#tag-filters li").first
+      #  last_link = all(:css, "div#tag-filters li").last
       #  first_link.click
       #  all(:css, "div#tag-filters li.active-tag").length.should eq 1
       #  last_link.click
@@ -228,7 +228,7 @@ describe "topic section" do
       end
 
       it "filter using tag and should see topic list refreshed" do
-        link = all(:css, "div#tag-filters a").first
+        link = all(:css, "div#tag-filters li").first
         link.click
         wait_for_ajax
         page.should have_content @organization.topics.first.title
@@ -236,14 +236,14 @@ describe "topic section" do
       end
 
       it "filter using tag that does not have any topics should not see any topics" do
-        link = all(:css, "div#tag-filters a").last
+        link = all(:css, "div#tag-filters li").last
         link.click
         page.should_not have_css("div.topic-row")
       end
 
       #it "click two tags and they both turn active" do
-      #  first_link = all(:css, "div#tag-filters a").first
-      #  last_link = all(:css, "div#tag-filters a").last
+      #  first_link = all(:css, "div#tag-filters li").first
+      #  last_link = all(:css, "div#tag-filters li").last
       #  first_link.click
       #  all(:css, "div#tag-filters").first.should have_css("li.active-tag")
       #  last_link.click
