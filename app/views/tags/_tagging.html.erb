@@ -8,7 +8,7 @@
     <div id="tag-list-container">
       <li class="divider"></li>
       <%= form_tag topics_add_tags_path(:topic => @topic), :method => "post", :remote => true do %>
-        <%= render :partial => 'tags/tag_list', :locals => { :tags => current_organization.tags } %>
+        <%= render :partial => 'tags/tag_list', :locals => { :tags => current_organization.tags.visible } %>
         <li class="divider"></li>
         <%= hidden_field_tag :selected_topics_to_tagging, '' %>
         <%= hidden_field_tag :selected_tags, '' %>

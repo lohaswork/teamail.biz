@@ -145,6 +145,7 @@ describe "the topics action" do
         it "should see error message" do
           click_on "写邮件"
           click_button "创建"
+          sleep 0.5
           page.should have_content "请输入标题"
         end
       end

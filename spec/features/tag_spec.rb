@@ -174,13 +174,33 @@ describe "topic section" do
         visit organization_topics_path
       end
 
+      it "click 管理标签 will toggle tag manage page" do
+        click_button "管理标签"
+        find(:css, "div#tag-filters").should have_content "隐藏"
+        click_button "管理标签"
+        find(:css, "div#tag-filters").should_not have_content "隐藏"
+      end
+
+      it "click 管理标签 and then click link 隐藏, will see tag disapear" do
+        click_button "管理标签"
+        find(:css, "div#tag-filters").should have_content @organization.tags.first.name
+        tag = find(:xpath, "(//div[@id='tag-filters']//li)[1]")
+        tag.should have_content "隐藏"
+        within(:xpath, "(//div[@id='tag-filters']//li)[1]") do
+          click_on "隐藏"
+        end
+        find(:css, "div#tag-filters").should_not have_content @organization.tags.first.name
+        # Implies still at manage tag page
+        find(:css, "div#tag-filters").should have_content "隐藏"
+      end
+
       it "should see all organization tags" do
         find(:css, "div#tag-filters").should have_content @organization.tags.first.name
         find(:css, "div#tag-filters").should have_content @organization.tags.last.name
       end
 
       it "filter using tag and should see topic list refreshed" do
-        link = all(:css, "div#tag-filters a").first
+        link = all(:css, "div#tag-filters li").first
         link.click
         wait_for_ajax
         page.should have_content @organization.topics.first.title
@@ -188,14 +208,14 @@ describe "topic section" do
       end
 
       it "filter using tag that does not have any topics should not see any topics" do
-        link = all(:css, "div#tag-filters a").last
+        link = all(:css, "div#tag-filters li").last
         link.click
         page.should_not have_css("div.topic-row")
       end
 
       #it "click two tags and they both turn active" do
-      #  first_link = all(:css, "div#tag-filters a").first
-      #  last_link = all(:css, "div#tag-filters a").last
+      #  first_link = all(:css, "div#tag-filters li").first
+      #  last_link = all(:css, "div#tag-filters li").last
       #  first_link.click
       #  all(:css, "div#tag-filters li.active-tag").length.should eq 1
       #  last_link.click
@@ -217,7 +237,7 @@ describe "topic section" do
       end
 
       it "filter using tag and should see topic list refreshed" do
-        link = all(:css, "div#tag-filters a").first
+        link = all(:css, "div#tag-filters li").first
         link.click
         wait_for_ajax
         page.should have_content @organization.topics.first.title
@@ -225,14 +245,14 @@ describe "topic section" do
       end
 
       it "filter using tag that does not have any topics should not see any topics" do
-        link = all(:css, "div#tag-filters a").last
+        link = all(:css, "div#tag-filters li").last
         link.click
         page.should_not have_css("div.topic-row")
       end
 
       #it "click two tags and they both turn active" do
-      #  first_link = all(:css, "div#tag-filters a").first
-      #  last_link = all(:css, "div#tag-filters a").last
+      #  first_link = all(:css, "div#tag-filters li").first
+      #  last_link = all(:css, "div#tag-filters li").last
       #  first_link.click
       #  all(:css, "div#tag-filters").first.should have_css("li.active-tag")
       #  last_link.click

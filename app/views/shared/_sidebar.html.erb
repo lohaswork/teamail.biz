@@ -5,7 +5,7 @@
   <hr>
   <div class="personal-inbox" data-page="UnreadNumberPage">
     <h4 class="name-space">
-      个人空间
+      <i class="fa fa-user">&nbsp&nbsp个人空间</i>
     </h4>
     <%= link_to personal_topics_inbox_path do %>
       <h5 class="<%= 'selected' if current_page?(:controller => 'topics', :action => 'unarchived') %>">
@@ -21,16 +21,15 @@
       </h5>
     <% end %>
   </div>
-  <hr>
   <div>
     <h4 class="name-space">
-      团队空间
+      <i class="fa fa-users">&nbsp&nbsp团队空间</i>
     </h4>
     <%= link_to organization_topics_path do %>
       <h5 class="<%= 'selected' if current_page?(:controller => 'topics', :action => 'index') %>">
         所有邮件
       </h5>
     <% end %>
-    <%= render :partial => 'tags/tag_filters', :locals => { :tags => current_organization.tags } %>
+    <%= render :partial => 'tags/tag_filters' %>
   </div>
 </div>
