@@ -11,6 +11,8 @@ class Tag < ActiveRecord::Base
                    :format => { :with => VALID_TAGNAME_TEGEX, :message=>"名称不合法，标签名只能包含汉字、字母、数字、下划线'_'和连接号'-'，且不能以下划线和连接号开头或结尾", :allow_blank => true }
   validates_uniqueness_of :name, :scope => :organization_id, :message=>"标签名已使用"
 
+  scope :visible, lambda { where("IFNULL(hide_status, 0) <> 1") }
+
   before_create :add_color
 
   private

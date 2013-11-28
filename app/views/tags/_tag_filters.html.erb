@@ -1,18 +1,20 @@
-<div id="tag-filters" data-page="SidebarTags">
+<div id="tag-filters" data-page="SidebarTags" data-reload=true>
   <%= form_tag topics_filter_with_tags_path(:topic => @topic), :method => "post", :remote => true do %>
     <ul class="list-unstyled">
-      <%- tags.try(:each) do |tag|%>
+      <%- current_organization.tags.visible.try(:each) do |tag|%>
         <%- tag_color = tag.color.to_i > 8 ? "1" : tag.color if tag.color %>
         <li id="tag-link-<%= tag.id %>" class="tag-color-<%= tag_color %>">
-          <a>
             <%= check_box_tag 'tags[]', tag.id, false, :style => 'visibility: hidden; position: absolute;' %>
             <i class="fa fa-circle"></i>
             <%= tag.name %>
             <i class="fa fa-times fa-lg" style="display:none;"></i>
-          </a>
+            <%= link_to hide_tag_path(tag), :method => :post, :remote => true, "data-confirm" => '确定隐藏标签? 提示: 该操作将导致组织内全体成员的左边标签栏变化', :class => "hide-tag-link", :style => "display:none;" do %>
+              隐藏
+            <% end %>
         </li>
       <% end %>
     </ul>
     <%= submit_tag "筛选", :id => "tag-filters-submit", :style => "display:none;" %>
   <% end %>
+  <button class="btn btn-default  btn-block manage-tag">管理标签</button>
 </div>

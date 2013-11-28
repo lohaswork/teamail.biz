@@ -24,7 +24,11 @@ LohasWorkCom::Application.routes.draw do
   get 'login' => 'sessions#new', as: 'login'
   resources :sessions, only: [:new, :create, :destroy]
 
-  resources :tags, only: [:create]
+  resources :tags, only: [:create] do
+    member do
+      post 'hide' => :hide, as: :hide
+    end
+  end
 
   get 'files/download' => "files#download"
   delete 'files/delete' => "files#delete"

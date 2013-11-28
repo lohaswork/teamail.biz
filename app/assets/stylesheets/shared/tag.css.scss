@@ -4,6 +4,7 @@ $list-colors : #e11d21, #eb6420, #fbca04, #009800,
 @for $i from 1 to 9 {
   #tag-filters {
     .tag-color-#{$i} {
+
       a { color: #999; }
       i {
         color: nth($list-colors,$i);
