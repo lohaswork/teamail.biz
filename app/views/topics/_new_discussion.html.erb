@@ -5,6 +5,7 @@
         <div class="col-xs-12">
           <%= render :partial => 'shared/editor' %>
           <%= render :partial => 'shared/user_select_for_discussion', :locals => { :topic => @topic} %>
+          <%= text_field_tag :invited_emails, nil, :class => 'form-control', :placeholder => '输入电子邮件邀请成员...' %>
         </div>
       </div>
       <div class="reply-submit">
