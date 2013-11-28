@@ -221,6 +221,8 @@
 #select-user-for-topic, #select-user-for-discussion {
   .subgroup-select {
     margin-bottom: 10px;
+    height: 25px;
+    line-height: 25px;
   }
   span {
     margin-left: 10px;
@@ -238,10 +240,10 @@
   .selected {
     font-weight: bold;
     color: #fff;
-    background-color: #C3CEAB;
+    background-color: #BFC9A7;
     &:hover {
       color: #fff;
-      background-color: #C3CEAB;
+      background-color: #BFC9A7;
     }
   }
   label {font-weight: normal;}
