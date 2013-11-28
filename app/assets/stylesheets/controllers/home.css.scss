@@ -1,11 +1,31 @@
 body.home {
   // Overwrite default from app.css
+  padding-top: 42px;
   background-color: #fff;
 
   // Overwrite nav.css
   .navbar {
     background: #fff;
     margin-bottom: 0;
+    ul.list-inline {
+      margin: 0;
+      padding-top: 2px;
+      li {
+        border: 1px solid #eee;
+        border-radius: 5px;
+        height: 32px;
+        line-height: 32px;
+        padding-left: 8px;
+        padding-right: 8px;
+        background-color: #eee;
+        a {
+          color: #666;
+          &:hover {
+            color: #999;
+          }
+        }
+      }
+    }
   }
 
   // Main wraper
@@ -18,13 +38,129 @@ body.home {
   // Landing header
   .landing-header-bg {
     background: image-url("landing-header-bg.jpg") no-repeat center top;
-    min-height: 800px;
+    min-height: 700px;
   }
   .landing-header {
-    padding-top: 150px;
     text-align: center;
+    h1 {
+      color: #f5f5f5;
+      font-weight: bold;
+      padding: 30px 0;
+      text-shadow: 0px -2px 0px #000;
+    }
+    .screen-shot-container {
+      min-width: 650px;
+    }
     .signup-form {
       max-width: 300px;
+      padding-top: 10px;
+      input {
+        text-align: center;
+        height: 49px;
+        font-size: 18px;
+      }
+      .btn {
+        color: #fff;
+        background-color: #81A75E;
+        border:none;
+        &:hover {
+          background-color: darken(#81A75E, 5%)
+        }
+      }
+    }
+    .signup-post {
+      margin-top: 30px;
+      h4 {
+        color: #f5f5f5;
+      }
+      p {
+        color: #f5f5f5;
+      }
+    }
+  }
+  .secondary-nav-bg {
+    color: #212f40;
+    margin-top: 46px;
+    min-height: 150px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+    padding: 30px 0 5px;
+    background: #fff;
+    opacity: 0.7;
+    text-align: center;
+  }
+
+  // User Story
+  .user-story-bg {
+    background-color: #a1b58f;
+  }
+  .user-story-list {
+    color: #f7f7f7;
+    .user-story-intro {
+      padding-top: 35px;
+      padding-bottom: 35px;
+    }
+    h3 {
+      background-color: #eee;
+      height: 45px;
+      line-height: 45px;
+      margin: 0 auto;
+      width: 350px;
+      color: #a1b58f;
+      border-radius: 6px;
+      text-align: center;
+    }
+    p {
+      text-align: center;
+      font-size: 17px;
+    }
+  }
+  .user-story-1 {
+    height: 610px;
+    margin-bottom: 45px;
+    background: image-url("user-story-bg-1.jpg") no-repeat center bottom;
+  }
+
+  // Bottom-signup-guide
+  .bottom-signup-guide {
+    background: image-url("bottom-guide-bg.png") 0 0 repeat;
+    padding-top: 45px;
+    padding-bottom:55px;
+    text-align: center;
+    h4 {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    .guide-btn {
+      margin-top: 30px;
+      height: 45px;
+      font-size: 20px;
+      padding-left: 20px;
+      padding-right:20px;
+    }
+    h5 {
+      color: #81A75E;
+      cursor: pointer;
+      &:hover {
+        color: darken(#81A75E, 5%);
+      }
+    }
+  }
+
+  // Footer
+  .footer-index {
+    background: #333 image-url("footer-bg.png") 0 0 repeat;
+    width: 100%;
+    color: #b5b5b5;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    .footer-links {
+      a {
+        color: #b5b5b5;
+        &:hover { color: #fff; }
+      }
+      li {
+        padding-bottom: 5px;
+      }
     }
   }
 

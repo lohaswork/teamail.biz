@@ -48,31 +48,31 @@ describe "the topics action" do
     describe "user can open a create topic field" do
       context "user click the new topic buttion" do
         it "should have a field for new topic" do
-          page.should have_button "创建新邮件"
-          click_on "创建新邮件"
+          page.should have_button "写邮件"
+          click_on "写邮件"
           page.should have_selector "#new-topic-form"
         end
 
         it "should saw the user select checkbox" do
-          page.should have_button "创建新邮件"
-          click_on "创建新邮件"
+          page.should have_button "写邮件"
+          click_on "写邮件"
           find('#select-user-for-topic').should have_content(@organization.users.last.display_name)
         end
 
         it "should not have current user name in the select user checkbox" do
-          page.should have_button "创建新邮件"
-          click_on "创建新邮件"
+          page.should have_button "写邮件"
+          click_on "写邮件"
           find('#select-user-for-topic').should_not have_content(@user.display_name)
         end
       end
 
       context "user reopen the field" do
         it "should keep the text" do
-          click_on "创建新邮件"
+          click_on "写邮件"
           fill_in "title", :with => "test title"
           find("#modal-close").trigger('click')
           page.should_not have_link "modal-close"
-          click_on "创建新邮件"
+          click_on "写邮件"
           find_field('title').value == "test title"
         end
       end
@@ -81,7 +81,7 @@ describe "the topics action" do
     describe "user create new topic", :js => true do
       context "user create success" do
         it "should see the new topic on the list" do
-          click_on "创建新邮件"
+          click_on "写邮件"
           sleep 0.5
           fill_in "title", :with => "test title"
           click_button "创建"
@@ -91,7 +91,7 @@ describe "the topics action" do
         end
 
         it "should add the selected user into topic members" do
-          click_on "创建新邮件"
+          click_on "写邮件"
           sleep 0.5
           fill_in "title", :with => "test title"
           find(:xpath, '//*[@id="select-user-for-topic"]/label[9]/input').set(true)
@@ -104,7 +104,7 @@ describe "the topics action" do
         end
 
         it "should default add the current user as member" do
-          click_on "创建新邮件"
+          click_on "写邮件"
           sleep 0.5
           fill_in "title", :with => "test title"
           click_button "创建"
@@ -115,7 +115,7 @@ describe "the topics action" do
         end
 
         it "should select all of the users by select all checkbox" do
-          click_on "创建新邮件"
+          click_on "写邮件"
           sleep 0.5
           fill_in "title", :with => "test title"
           find(:xpath, "//*[@id='select-user-for-topic']/div/span").click
@@ -129,7 +129,7 @@ describe "the topics action" do
 
       context "user create success with a discussion" do
         it "shold see the discussion size change" do
-          click_on "创建新邮件"
+          click_on "写邮件"
           sleep 0.5
           fill_in "title", :with => "test title"
           editor_fill_in :in => '#new-topic-form', :with => "this is test discussion"
@@ -143,7 +143,7 @@ describe "the topics action" do
 
       context "user create failed" do
         it "should see error message" do
-          click_on "创建新邮件"
+          click_on "写邮件"
           click_button "创建"
           page.should have_content "请输入标题"
         end
@@ -187,7 +187,7 @@ describe "the topics action" do
 
     context "user create topic with blank content success" do
       it "should see the R.T for content" do
-        click_on "创建新邮件"
+        click_on "写邮件"
         sleep 0.5
         fill_in "title", :with => "test title"
         click_button "创建"
@@ -211,7 +211,7 @@ describe "the topics action" do
 
     context "user go to discussion page saw the select users" do
       it "should see the last discussion member default selected " do
-        click_on "创建新邮件"
+        click_on "写邮件"
         fill_in "title", :with => "test title"
         sleep 0.5
         find(:xpath, "//*[@id='select-user-for-topic']/label[9]/input").set(true)
@@ -227,7 +227,7 @@ describe "the topics action" do
 
     describe "user create discussion with select user" do
       before do
-        click_on "创建新邮件"
+        click_on "写邮件"
         sleep 0.5
         fill_in "title", :with => "test select user"
         click_button "创建"
@@ -313,7 +313,7 @@ describe "the topics action" do
       context "when no colleagues of the user" do
         it "should have no select-all checkbox" do
           visit personal_topics_path
-          click_on "创建新邮件"
+          click_on "写邮件"
           page.should have_selector "#new-topic-form"
           find('#select-user-for-topic').should_not have_content("全选")
         end
@@ -332,32 +332,32 @@ describe "the topics action" do
       describe "user can open a create topic field" do
         context "user click the new topic buttion" do
           it "should have a field for new topic" do
-            page.should have_button "创建新邮件"
+            page.should have_button "写邮件"
             page.should_not have_selector "#new-topic-form"
-            click_on "创建新邮件"
+            click_on "写邮件"
             page.should have_selector "#new-topic-form"
           end
 
           it "should saw the user select checkbox" do
-            page.should have_button "创建新邮件"
-            click_on "创建新邮件"
+            page.should have_button "写邮件"
+            click_on "写邮件"
             find('#select-user-for-topic').should have_content(@organization.users.last.display_name)
           end
 
           it "should not have current user name in the select user checkbox" do
-            page.should have_button "创建新邮件"
-            click_on "创建新邮件"
+            page.should have_button "写邮件"
+            click_on "写邮件"
             find('#select-user-for-topic').should_not have_content(@user.display_name)
           end
         end
 
         context "user reopen the field" do
           it "should keep the text" do
-            click_on "创建新邮件"
+            click_on "写邮件"
             fill_in "title", :with => "test title"
             find("#modal-close").trigger('click')
             page.should_not have_link "modal-close"
-            click_on "创建新邮件"
+            click_on "写邮件"
             find_field('title').value == "test title"
           end
         end
@@ -366,7 +366,7 @@ describe "the topics action" do
       describe "user create new topic on personal space" do
         context "user create success" do
           it "should see the new topic on the list" do
-            click_on "创建新邮件"
+            click_on "写邮件"
             sleep 0.5
             fill_in "title", :with => "test title"
             click_button "创建"
@@ -377,7 +377,7 @@ describe "the topics action" do
           end
 
           it "should add the selected user into topic members" do
-            click_on "创建新邮件"
+            click_on "写邮件"
             fill_in "title", :with => "test title"
             sleep 0.5
             find(:xpath, "//*[@id='select-user-for-topic']/label[9]/input").set(true)
@@ -389,7 +389,7 @@ describe "the topics action" do
           end
 
           it "should default add the current user as member" do
-            click_on "创建新邮件"
+            click_on "写邮件"
             sleep 0.5
             fill_in "title", :with => "test title"
             click_button "创建"
@@ -400,7 +400,7 @@ describe "the topics action" do
           end
 
           it "should select all of the users by select all checkbox" do
-            click_on "创建新邮件"
+            click_on "写邮件"
             sleep 0.5
             fill_in "title", :with => "test title"
             page.should have_selector(:xpath, "//*[@id='select-user-for-topic']/div/span")
@@ -414,7 +414,7 @@ describe "the topics action" do
 
         context "user create success with a discussion" do
           it "shold see the discussion size change" do
-            click_on "创建新邮件"
+            click_on "写邮件"
             sleep 0.5
             fill_in "title", :with => "test title"
             editor_fill_in :in => '#new-topic-form', :with => "this is test discussion"
@@ -428,7 +428,7 @@ describe "the topics action" do
 
         context "user create failed" do
           it "should see error message" do
-            click_on "创建新邮件"
+            click_on "写邮件"
             sleep 0.5
             click_button "创建"
             page.should have_content "请输入标题"

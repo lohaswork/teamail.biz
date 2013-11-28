@@ -8,6 +8,10 @@
     margin: 0;
     padding-top: 2px;
     li {
+      height: 32px;
+      line-height: 32px;
+      padding-left: 8px;
+      padding-right: 8px;
       a {
         color: #666;
         &:hover {

@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title><%= content_for?(:title) ? yield(:title) : "TeaMail.biz" %></title>
-    <meta name="keywords" content="TeaMail 团队协作 项目管理 SaaS">
-    <meta name="description" content="TeaMail是为中小团队定制的团队协作和项目管理工具">
+    <title><%= content_for?(:title) ? yield(:title) : "teamail.biz | Teamwork with Email." %></title>
+    <meta name="keywords" content="teamail 团队协作 项目管理 SaaS">
+    <meta name="description" content="teamail.biz是为中小团队定制的团队协作和项目管理工具">
     <meta name="author" content="LohasWork">
     <%= favicon_link_tag 'favicon.ico' %>
     <%= stylesheet_link_tag "application", :media => "all" %>
@@ -35,13 +35,13 @@
       </div>
     </div>
     <%= render 'layouts/footer' %>
-  <%= javascript_include_tag "application" %>
-  <%= javascript_tag '$.fx.off = true;' if Rails.env.test? %>
-  <!--[if lt IE 9]>
-      <%= javascript_include_tag "ie" %>
-  <![endif]-->
-  <script type="text/javascript">
-    $(".content-editor").qeditor({});
-  </script>
+    <%= javascript_include_tag "application" %>
+    <%= javascript_tag '$.fx.off = true;' if Rails.env.test? %>
+    <!--[if lt IE 9]>
+        <%= javascript_include_tag "ie" %>
+    <![endif]-->
+    <script type="text/javascript">
+      $(".content-editor").qeditor({});
+    </script>
   </body>
 </html>

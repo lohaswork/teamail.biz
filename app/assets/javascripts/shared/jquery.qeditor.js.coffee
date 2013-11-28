@@ -58,7 +58,9 @@ QEDITOR_TOOLBAR_HTML = """
   <a href="#" data-action="pre" class="qe-pre"><span class="fa fa-code" title="Pre"></span></a>
   <a href="#" data-action="createLink" class="qe-link"><span class="fa fa-link" title="Create Link" title="Create Link"></span></a>
   <a href="#" data-action="insertimage" class="qe-image"><span class="fa fa-picture" title="Insert Image"></span></a>
+  <!--
   <a href="#" onclick="return QEditor.toggleFullScreen(this);" class="qe-fullscreen pull-right"><span class="fa fa-fullscreen" title="Toggle Fullscreen"></span></a>
+  -->
 </div>
 """
 QEDITOR_ALLOW_TAGS_ON_PASTE = "div,p,ul,ol,li,hr,br,b,strong,i,em,img,h2,h3,h4,h5,h6,h7"

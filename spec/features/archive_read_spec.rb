@@ -81,7 +81,7 @@ describe "topics have new discussion", :js => true do
 
     it "should be unread for other users when a new topic created" do
       visit personal_topics_path
-      click_on "创建新邮件"
+      click_on "写邮件"
       sleep 0.5
       fill_in "title", :with => "test title"
       checkbox = find(:xpath, "//*[@id='select-user-for-topic']/label[9]/input")
