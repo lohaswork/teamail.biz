@@ -174,6 +174,13 @@ describe "topic section" do
         visit organization_topics_path
       end
 
+      it "click 管理标签 will toggle tag manage page" do
+        click_button "管理标签"
+        find(:css, "div#tag-filters").should have_content "隐藏"
+        click_button "管理标签"
+        find(:css, "div#tag-filters").should_not have_content "隐藏"
+      end
+
       it "click 管理标签 and then click link 隐藏, will see tag disapear" do
         click_button "管理标签"
         find(:css, "div#tag-filters").should have_content @organization.tags.first.name
@@ -183,6 +190,8 @@ describe "topic section" do
           click_on "隐藏"
         end
         find(:css, "div#tag-filters").should_not have_content @organization.tags.first.name
+        # Implies still at manage tag page
+        find(:css, "div#tag-filters").should have_content "隐藏"
       end
 
       it "should see all organization tags" do
