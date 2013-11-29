@@ -26,7 +26,7 @@ module ControllerModules::User
     login_user.is_admin?(current_organization)
   end
 
-  def check_emails_validation(invited_emails)
+  def get_valid(invited_emails)
     invited_emails.each do |invited_email|
       raise ValidationError.new('Email 邮件地址不合法') unless User::VALID_EMAIL_REGEX =~ invited_email
     end
