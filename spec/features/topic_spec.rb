@@ -137,8 +137,8 @@ describe "the topics action" do
           fill_in "invited_emails", with: "test@example.com; test2@example2.com"
           click_button "创建"
           page.should have_content "邮件创建成功"
-          visit personal_topics_path
           page.should have_content "test title"
+          click_on "写邮件"
           page.should have_content "test@example.com"
           page.should have_content "test2@example2.com"
         end
