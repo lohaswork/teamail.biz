@@ -5,16 +5,14 @@ class DiscussionsController < ApplicationController
   def create
     @topic = Topic.find(params[:topic_id])
     selected_emails = params[:selected_emails] || []
-    invited_emails = params[:invited_emails].split(/[\,\;]/).map { |email| email.strip }
-    emails = get_valid(invited_emails).reject { |email| selected_emails.include? email.downcase }
-    selected_emails.concat emails
+    invited_emails = params[:invited_emails].split(/[\,\;]/).map { |email| email.strip.downcase }
 
-    emails.reject { |email| current_organization.has_member?(email) }.each do |email|
-      email_status = User.already_register?(email)
-      current_organization.invite_user(email)
-      InvitationNotifierWorker.perform_async(email, current_organization.name, login_user.email, email_status)
-    end
+    # Validate invite emails and add member by emails and send invitation emails at meantime
+    add_member_from_discussion(invited_emails)
 
+    # Get discussion notify party by add invited_emails and selected_emails,
+    #   then send discussion notifications
+    selected_emails = selected_emails.concat(invited_emails).uniq
     discussion = Discussion.create_discussion(login_user, @topic, selected_emails, params[:content])
     DiscussionNotifierWorker.perform_async(discussion.id, selected_emails)
 

@@ -9,7 +9,16 @@ class TopicsController < ApplicationController
 
   def create
     selected_emails = params[:selected_emails] || []
+    invited_emails = params[:invited_emails].split(/[\,\;]/).map { |email| email.strip.downcase }
 
+    # Validate invite emails and add member by emails and send invitation emails at meantime
+    add_member_from_discussion(invited_emails)
+
+    # Get discussion notify party by add invited_emails and selected_emails,
+    #   then send discussion notifications
+    selected_emails = selected_emails.concat(invited_emails).uniq
+
+    # Analyze title to sperate tags and real title
     email_title = params[:title]
     title, tags = analyzed_title email_title unless email_title.blank?
     new_topic = Topic.create_topic(title, email_title, params[:content], selected_emails, current_organization, login_user)
