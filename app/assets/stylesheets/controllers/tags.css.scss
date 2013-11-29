@@ -29,3 +29,33 @@
     padding-left:10px;
   }
 }
+
+#tag-filters {
+  .hide-tag-link {
+    float: right;
+    margin-right: 10px;
+  }
+  .manage-tag {
+    outline:none;
+    font-size: 13px;
+    font-weight: bold;
+    color: #333;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.9);
+    white-space: nowrap;
+    background-color: #eaeaea;
+    background-image: linear-gradient(#fafafa, #eaeaea);
+    background-repeat: repeat-x;
+    border-radius: 3px;
+    border: 1px solid #ddd;
+    border-bottom-color: #c5c5c5;
+    &:hover {
+      background: darken(#eaeaea, 2%);
+    }
+  }
+  .btn-selected {
+    background-color: #dadada;
+    background-image: none;
+    border-color: #b5b5b5;
+    box-shadow: inset 0 3px 5px rgba(0,0,0,0.15);
+  }
+}
