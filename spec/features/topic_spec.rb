@@ -425,7 +425,7 @@ describe "the topics action" do
             page.should have_selector(:xpath, "//*[@id='select-user-for-topic']/div/span")
             find(:xpath, "//*[@id='select-user-for-topic']/div/span").click
             click_button "创建"
-            wait_for_ajax
+            page.should have_content "邮件创建成功"
             expect(@organization.reload.topics.last.users.length).to eq 10
             #expect(@organization.reload.topics.last.users.length).to eq(@organization.reload.users.length)
           end
