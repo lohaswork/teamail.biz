@@ -7,7 +7,7 @@ class Organization < ActiveRecord::Base
   has_many :topics
   has_many :tags
   # Cancel validation of uniqueness of name
-  validates :name, presence: true # :uniqueness => { :case_sensitive => false, :message => "组织名已使用" }
+  validates :name, presence: { :message => "组织名不能为空" } # :uniqueness => { :case_sensitive => false, :message => "组织名已使用" }
 
   scope :for_user, lambda { |user| joins(:users).where("user_id = ?", user.id).readonly(false) }
 
@@ -46,5 +46,28 @@ class Organization < ActiveRecord::Base
   def has_member?(email)
     user = User.find_by_email(email)
     self.users.include? user
+  end
+
+  def setup_seed_data(user)
+    # Create default tags
+    tags = []
+    ["示例项目", "任务"].each_with_index do |name, index|
+      tag = Tag.create(:name => name, :organization_id => self.id, :color => (index + 1).to_s)
+      tags << tag.id
+    end
+    # Create manual topic
+    title = "如何使用teamail进行项目管理"
+    email_title = "[示例项目][任务]" + " " + title
+    content = manual_content
+    topic = Topic.create_topic(title, email_title, content, emails=[], self, user)
+    topic.add_tags(tags)
+  end
+
+  private
+  def manual_content
+    %"
+      <div>需要补充的教程内容和贴图</div>
+      <div>示例数据</div>
+    "
   end
 end

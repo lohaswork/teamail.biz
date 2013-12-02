@@ -18,12 +18,12 @@ class Topic < ActiveRecord::Base
   scope :get_unarchived, lambda { |user| joins(:user_topics).where("user_topics.user_id = ? AND IFNULL( user_topics.archive_status, 0 ) <> 1 ", user.id) }
 
   class << self
-    def create_topic(title, email_title=nil, content, emails, organization, login_user)
+    def create_topic(title, email_title=nil, content, emails, organization, user)
       topic = new(:title => title, :email_title => email_title)
       raise ValidationError.new(topic.errors.messages.values) if !topic.valid?
       content = content.blank? ? "如题" : content
       topic.organization = organization
-      Discussion.create_discussion(login_user, topic, emails, content)
+      Discussion.create_discussion(user, topic, emails, content)
       topic
     end
   end
@@ -62,7 +62,7 @@ class Topic < ActiveRecord::Base
     self
   end
 
-  def unarchived_by_user_others
+  def unarchived_by_others
     self.users.reject { |user| user.id == self.last_updator.id }.each { |user| self.user_topics.find_by_user_id(user.id).update_attribute(:archive_status, false) }
   end
 
