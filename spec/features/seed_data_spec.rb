@@ -2,7 +2,6 @@
 require 'spec_helper'
 require 'helpers'
 describe "user signup with seed data", :js => true do
-  # 分为4个模块: invite user, delete_member, user without an organization login, user have other organizations
   include Helpers
 
   before do
