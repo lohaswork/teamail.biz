@@ -133,10 +133,11 @@ describe "the topics action" do
         it "should be able to invite multiple users to topic" do
           click_on "写邮件"
           sleep 0.5
-          fill_in "invited_emails", with: "test@example.com; test2@example2.com"
+          fill_in "invited_emails", with: "test@example.com; test2@example2.com,test3@example3.com"
           click_button "添加"
           page.should have_content "test@example.com"
           page.should have_content "test2@example2.com"
+          page.should have_content "test3@example3.com"
         end
 
       end
@@ -158,6 +159,7 @@ describe "the topics action" do
       context "user create failed" do
         it "should see error message" do
           click_on "写邮件"
+          sleep 0.5
           click_button "创建"
           sleep 0.5
           page.should have_content "请输入标题"
