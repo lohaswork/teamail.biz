@@ -8,25 +8,31 @@ class TopicsController < ApplicationController
   end
 
   def create
-    selected_emails = params[:selected_emails] || []
-    invited_emails = params[:invited_emails].split(/[\,\;]/).map { |email| email.strip.downcase }
+    @topic = params[:topic_id].blank? ? nil : Topic.find(params[:topic_id])
+    if params[:invitation_button]
+      # Validate invite emails and add member by emails and send invitation emails at meantime
+      add_member_from_discussion(params[:invited_emails])
 
-    # Validate invite emails and add member by emails and send invitation emails at meantime
-    add_member_from_discussion(invited_emails)
+      respond_array = []
+      respond_array << "select-user-for-topic" << get_rendered_string('shared/user_select_for_topic', { topic: nil })
+      respond_array << "select-user-for-discussion" << get_rendered_string('shared/user_select_for_discussion', { topic: @topic })
+      render :json => { update: Hash[*respond_array] }
+    else
+      selected_emails = params[:selected_emails] || []
 
-    # Get discussion notify party by add invited_emails and selected_emails,
-    #   then send discussion notifications
-    selected_emails = selected_emails.concat(invited_emails).uniq
+      # Get discussion notify party from selected_emails,
+      #   then send discussion notifications
 
-    # Analyze title to sperate tags and real title
-    email_title = params[:title]
-    title, tags = analyzed_title email_title unless email_title.blank?
-    new_topic = Topic.create_topic(title, email_title, params[:content], selected_emails, current_organization, login_user)
-    add_tags_from_title(new_topic, tags)
-    TopicNotifierWorker.perform_async(new_topic.id, selected_emails)
+      # Analyze title to sperate tags and real title
+      email_title = params[:title]
+      title, tags = analyzed_title email_title unless email_title.blank?
+      new_topic = Topic.create_topic(title, email_title, params[:content], selected_emails, current_organization, login_user)
+      add_tags_from_title(new_topic, tags)
+      TopicNotifierWorker.perform_async(new_topic.id, selected_emails)
 
-    render :json => { :reload => true }
-    flash[:notice] = "邮件创建成功"
+      render :json => { :reload => true }
+      flash[:notice] = "邮件创建成功"
+    end
   end
 
   def show

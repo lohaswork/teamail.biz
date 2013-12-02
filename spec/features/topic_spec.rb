@@ -99,7 +99,7 @@ describe "the topics action" do
           click_on "写邮件"
           sleep 0.5
           fill_in "title", :with => "test title"
-          find(:xpath, '//*[@id="select-user-for-topic"]/label[9]/input').set(true)
+          find(:xpath, '//*[@id="select-user-for-topic"]//label[9]/input').set(true)
           click_button "创建"
           page.should have_content "邮件创建成功"
           visit organization_topics_path
@@ -123,7 +123,7 @@ describe "the topics action" do
           click_on "写邮件"
           sleep 0.5
           fill_in "title", :with => "test title"
-          find(:xpath, "//*[@id='select-user-for-topic']/div/span").click
+          find(:xpath, "//div[@id='select-user-for-topic']/div[@id='subgroup-select']/div[1]/span").click
           click_button "创建"
           page.should have_content "邮件创建成功"
           wait_for_ajax
@@ -133,12 +133,8 @@ describe "the topics action" do
         it "should be able to invite multiple users to topic" do
           click_on "写邮件"
           sleep 0.5
-          fill_in "title", :with => "test title"
           fill_in "invited_emails", with: "test@example.com; test2@example2.com"
-          click_button "创建"
-          page.should have_content "邮件创建成功"
-          page.should have_content "test title"
-          click_on "写邮件"
+          click_button "添加"
           page.should have_content "test@example.com"
           page.should have_content "test2@example2.com"
         end
@@ -233,14 +229,14 @@ describe "the topics action" do
         click_on "写邮件"
         fill_in "title", :with => "test title"
         sleep 0.5
-        find(:xpath, "//*[@id='select-user-for-topic']/label[9]/input").set(true)
+        find(:xpath, "//*[@id='select-user-for-topic']//label[9]/input").set(true)
         click_button "创建"
         page.should have_content "邮件创建成功"
         visit organization_topics_path
         page.should have_content("test title")
         click_on "test title"
         page.should have_button "回复"
-        find(:xpath, "//*[@id='select-user-for-discussion']/label[9]/input").should be_checked
+        find(:xpath, "//*[@id='select-user-for-discussion']//label[9]/input").should be_checked
       end
     end
 
@@ -256,10 +252,14 @@ describe "the topics action" do
         page.should have_button("回复")
       end
 
+      it "should see the invited emails text field" do
+        page.should have_selector('#invited_emails', text: "")
+      end
+
       context "select a user manully" do
         it "should add the user to the discussion" do
           editor_fill_in :in => '#new-discussion-form', :with => "user create a discussion for discussion users"
-          checkbox = find(:xpath, "//*[@id='select-user-for-discussion']/label[9]/input")
+          checkbox = find(:xpath, "//*[@id='select-user-for-discussion']//label[9]/input")
           checkbox.set(true)
           click_button "回复"
           page.should have_content "user create a discussion for discussion users"
@@ -269,7 +269,7 @@ describe "the topics action" do
         it "should add the user to the topic member" do
           Topic.last.users.should_not include(@organization.users.last)
           editor_fill_in :in => '#new-discussion-form', :with => "user create a discussion for topic users"
-          checkbox = find(:xpath, "//*[@id='select-user-for-discussion']/label[9]/input")
+          checkbox = find(:xpath, "//*[@id='select-user-for-discussion']//label[9]/input")
           checkbox.set(true)
           click_button "回复"
           page.should have_content "user create a discussion for topic users"
@@ -279,7 +279,7 @@ describe "the topics action" do
         it "should add all users by select all" do
           Topic.last.users.size.should == 1
           editor_fill_in :in => '#new-discussion-form', :with => "user create a discussion for topic users"
-          find(:xpath, "//*[@id='select-user-for-discussion']/div/span").click
+          find(:xpath, "//div[@id='select-user-for-discussion']/div[@id='subgroup-select']/div[1]/span").click
           click_button "回复"
           page.should have_content "user create a discussion for topic users"
           Topic.last.users.length.should == 10
@@ -288,7 +288,7 @@ describe "the topics action" do
         it "should add set the last created user as default checked" do
           Topic.last.users.size.should == 1
           editor_fill_in :in => '#new-discussion-form', :with => "user create a discussion for discussion users"
-          checkbox = find(:xpath, "//*[@id='select-user-for-discussion']/label[9]/input")
+          checkbox = find(:xpath, "//*[@id='select-user-for-discussion']//label[9]/input")
           checkbox.set(true)
           click_button "回复"
           page.should have_content "user create a discussion for discussion users"
@@ -334,7 +334,7 @@ describe "the topics action" do
           visit personal_topics_path
           click_on "写邮件"
           page.should have_selector "#new-topic-form"
-          find('#select-user-for-topic').should_not have_content("全选")
+          find('#select-user-for-topic').should_not have_selector("div.subgroup-select-list label")
         end
       end
 
@@ -399,7 +399,7 @@ describe "the topics action" do
             click_on "写邮件"
             fill_in "title", :with => "test title"
             sleep 0.5
-            find(:xpath, "//*[@id='select-user-for-topic']/label[9]/input").set(true)
+            find(:xpath, "//*[@id='select-user-for-topic']//label[9]/input").set(true)
             click_button "创建"
             page.should have_content "邮件创建成功"
             visit personal_topics_path
@@ -422,8 +422,8 @@ describe "the topics action" do
             click_on "写邮件"
             sleep 0.5
             fill_in "title", :with => "test title"
-            page.should have_selector(:xpath, "//*[@id='select-user-for-topic']/div/span")
-            find(:xpath, "//*[@id='select-user-for-topic']/div/span").click
+            page.should have_selector(:xpath, "//div[@id='select-user-for-topic']/div[@id='subgroup-select']/div[1]/span")
+            find(:xpath, "//div[@id='select-user-for-topic']/div[@id='subgroup-select']/div[1]/span").click
             click_button "创建"
             page.should have_content "邮件创建成功"
             expect(@organization.reload.topics.last.users.length).to eq 10

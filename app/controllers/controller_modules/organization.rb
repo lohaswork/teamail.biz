@@ -28,7 +28,7 @@ module ControllerModules::Organization
     end
 
     def add_member_from_discussion(emails)
-      emails = get_valid emails
+      emails = get_valid emails.split(/[\,\;]/).map { |email| email.strip.downcase }
       emails.reject { |email| current_organization.has_member?(email) }.each do |email|
         is_registered_user = User.already_register?(email)
         current_organization.add_member_by(email)
