@@ -37,7 +37,7 @@ class TopicsController < ApplicationController
 
   def show
     @topic = Topic.find(params[:id])
-    @topic.discussions.last.mark_as_read_by(login_user)
+    @topic.discussions.last.mark_as_read_by_user(login_user)
     @discussions = @topic.discussions
   end
 
@@ -46,7 +46,7 @@ class TopicsController < ApplicationController
 
     if detail_topic_id.blank? # 判断是否在 topic detail 页面
       selected_topics_ids = params[:selected_topics_to_archive].split(',')
-      Topic.find(selected_topics_ids).each { |topic| topic.archived_by(login_user) }
+      Topic.find(selected_topics_ids).each { |topic| topic.archived_by_user(login_user) }
       topics = Topic.get_unarchived(login_user).order_by_update.page(params[:page])
       # 刷新 topic list
       render :json => {
@@ -59,7 +59,7 @@ class TopicsController < ApplicationController
         }
       }
     else
-      topic = Topic.find(detail_topic_id).archived_by(login_user)
+      topic = Topic.find(detail_topic_id).archived_by_user(login_user)
       # 返回收件箱列表
       render :json => { :status => "success", :redirect => personal_topics_inbox_path }
     end

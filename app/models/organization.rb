@@ -31,7 +31,7 @@ class Organization < ActiveRecord::Base
     self
   end
 
-  def add_member_by(email)
+  def add_member_by_email(email)
     unless user = User.find_by_email(email)
       user = User.new(:email => email, :password => User.generate_init_password)
       raise ValidationError.new(user.errors.messages.values) if !user.valid?
