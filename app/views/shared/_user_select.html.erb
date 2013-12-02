@@ -1,12 +1,19 @@
-<%- if !get_colleagues.blank?%>
-  <div class="subgroup-select">
+<div id="subgroup-select">
+  <div class="subgroup-select-header">
     选择邮件通知人:
     <span class='all'>全选</span>
+    <%= text_field_tag :invited_emails, nil, :class => 'invited-emails-input', :placeholder => '输入Email添加通知人' %>
+    <%= submit_tag "添加", :name => "invitation_button", :class=>"btn btn-default", 'data-disable-with' => '提交中...' %>
   </div>
-  <%- show_for_checkbox(get_colleagues, topic).each do |user| %>
-    <label>
-      <%= check_box_tag 'selected_emails[]', user[:email], false, :class=>"item", :'data-selected'=>user[:is_in_topic], :class => 'custome-checkbox' %>
-      <%=user[:display_name]%>
-    </label>
-  <% end %>
-<% end %>
+  <div class="alert alert-warning mailling-warning">提示: 请勿添加邮件列表</div>
+  <div class="subgroup-select-list">
+    <%- if !get_colleagues.blank?%>
+      <%- show_for_checkbox(get_colleagues, topic).each do |user| %>
+        <label>
+          <%= check_box_tag 'selected_emails[]', user[:email], false, :class=>"item", :'data-selected'=>user[:is_in_topic], :class => 'custome-checkbox' %>
+          <%=user[:display_name]%>
+        </label>
+      <% end %>
+    <% end %>
+  </div>
+</div>

@@ -25,7 +25,7 @@ class OrganizationsController < ApplicationController
     organization = current_organization
     unless organization.has_member?(new_member_email)
       is_registered_user = User.already_register?(new_member_email)
-      organization.invite_user(new_member_email)
+      organization.add_member_by_email(new_member_email)
       InvitationNotifierWorker.perform_async(new_member_email, organization.name, login_user.email, is_registered_user)
     end
     colleagues = get_colleagues

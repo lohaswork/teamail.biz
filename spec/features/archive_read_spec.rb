@@ -18,8 +18,8 @@ describe "topics have new discussion", :js => true do
 
   describe "archive_feature" do
     before do
-      topic.archived_by(user)
-      topic.archived_by(another_user)
+      topic.archived_by_user(user)
+      topic.archived_by_user(another_user)
     end
 
     it "should have a topic archived already and archive button disabled" do
@@ -84,7 +84,7 @@ describe "topics have new discussion", :js => true do
       click_on "写邮件"
       sleep 0.5
       fill_in "title", :with => "test title"
-      checkbox = find(:xpath, "//*[@id='select-user-for-topic']/label[9]/input")
+      checkbox = find(:xpath, "//*[@id='select-user-for-topic']//label[9]/input")
       checkbox.set(true)
       click_button "创建"
       page.should have_content "邮件创建成功"
@@ -96,7 +96,7 @@ describe "topics have new discussion", :js => true do
     end
 
     it "should change read status when add a discussion to the read topic" do
-      topic.discussions.last.mark_as_read_by(another_user)
+      topic.discussions.last.mark_as_read_by_user(another_user)
       visit topic_path(topic)
       editor_fill_in :in => '#new-discussion-form', :with => "discussion from user himself"
       click_button "回复"
