@@ -9,7 +9,10 @@
       </div>
       <div class="reply-submit">
         <%= submit_tag "回复", :class=>"btn btn-default", 'data-disable-with' => '提交中...' %>
-        <button class="btn btn-default"><%= file_field_tag 'discussion_file' %></button>
+        <button type=button class="btn btn-default upload-button"><i class="fa fa-paperclip fa-lg"></i></button>
+        <div id="discussion-file-list">
+        </div>
+        <%= file_field_tag 'discussion_file', :style => "position:absolute; top:-100px;" %>
       </div>
     <% end %>
   </div>

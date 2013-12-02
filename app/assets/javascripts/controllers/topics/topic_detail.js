@@ -62,9 +62,24 @@
         e.stopPropagation();
       });
 
+
+      $(document).on("click", ".upload-button", function(e) {
+        var self = this;
+        $("#discussion_file").trigger('click');
+        e.stopPropagation();
+        e.preventDefault();
+      });
       $('#discussion_file').bind('change', function() {
         //this.files[0].size gets the size of your file.
-        alert(this.files[0].size);
+        var file = this.files[0],
+            size = "";
+        if (file.size > 1024*1024) {
+          size = (file.size/(1024*1024)).toFixed(1) + "MB";
+        } else {
+          size = (file.size/1024).toFixed(1) + "KB";
+        }
+        var fileInfo = file.name + size;
+        $("#discussion-file-list").html(fileInfo);
       });
     }
   }
