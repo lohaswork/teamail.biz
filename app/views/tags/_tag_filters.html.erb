@@ -1,7 +1,7 @@
 <div id="tag-filters" data-page="SidebarTags" data-reload=true>
   <%= form_tag topics_filter_with_tags_path(:topic => @topic), :method => "post", :remote => true do %>
     <ul class="list-unstyled">
-      <%- current_organization.tags.visible.try(:each) do |tag|%>
+      <%- default_display_tags.try(:each) do |tag|%>
         <%- tag_color = tag.color.to_i > 8 ? "1" : tag.color if tag.color %>
         <li id="tag-link-<%= tag.id %>" class="tag-color-<%= tag_color %>">
             <%= check_box_tag 'tags[]', tag.id, false, :style => 'visibility: hidden; position: absolute;' %>
