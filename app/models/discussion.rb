@@ -20,7 +20,7 @@ class Discussion < ActiveRecord::Base
       discussion.users << (selected_users << user)
       topic.discussions << discussion
       topic.new_record? ? topic.save! : topic.touch
-      discussion.mark_as_read_by(user)
+      discussion.mark_as_read_by_user(user)
       topic.unarchived_by_others
       topic.mark_as_unread_to_others
       discussion
@@ -43,7 +43,7 @@ class Discussion < ActiveRecord::Base
     end
   end
 
-  def mark_as_read_by(user)
+  def mark_as_read_by_user(user)
     begin
       self.user_discussions.where(:user_id => user.id).first_or_create.update_attribute(:read_status, true)
     rescue ActiveRecord::RecordNotFound, NoMethodError
@@ -52,7 +52,7 @@ class Discussion < ActiveRecord::Base
     self
   end
 
-  def mark_as_unread_by(user)
+  def mark_as_unread_by_user(user)
     begin
       self.user_discussions.where(:user_id => user.id).first_or_create.update_attribute(:read_status, false)
     rescue ActiveRecord::RecordNotFound, NoMethodError

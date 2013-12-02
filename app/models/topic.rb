@@ -53,7 +53,7 @@ class Topic < ActiveRecord::Base
     self.get_relation_with(user).archive_status
   end
 
-  def archived_by(user)
+  def archived_by_user(user)
     begin
       self.user_topics.find_by_user_id(user.id).update_attribute(:archive_status, true)
     rescue ActiveRecord::RecordNotFound
@@ -67,7 +67,7 @@ class Topic < ActiveRecord::Base
   end
 
   def mark_as_unread_to_others
-    self.users.reject { |user| user.id == self.last_updator.id }.each { |user| self.discussions.last.mark_as_unread_by(user) }
+    self.users.reject { |user| user.id == self.last_updator.id }.each { |user| self.discussions.last.mark_as_unread_by_user(user) }
   end
 
   def read_status_of(user)

@@ -26,4 +26,11 @@ module ControllerModules::User
     login_user.is_admin?(current_organization)
   end
 
+  def get_valid_emails(emails)
+    emails.each do |email|
+      raise ValidationError.new('Email 地址不合法') unless User::VALID_EMAIL_REGEX =~ email
+    end
+    emails
+  end
+
 end
