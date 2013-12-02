@@ -1,6 +1,6 @@
 <div id='new-discussion'>
   <div id='new-discussion-form'>
-    <%= form_tag topic_discussions_path(@topic), :method => "post", :class=>"form-horizontal", :remote => true do %>
+    <%= form_tag topic_discussions_path(@topic), :method => "post", :class=>"form-horizontal", :html => { :multipart => true }, :remote => true do %>
       <div class="input-area form-group">
         <div class="col-xs-12">
           <%= render :partial => 'shared/editor' %>
@@ -9,6 +9,7 @@
       </div>
       <div class="reply-submit">
         <%= submit_tag "回复", :class=>"btn btn-default", 'data-disable-with' => '提交中...' %>
+        <button class="btn btn-default"><%= file_field_tag 'discussion_file' %></button>
       </div>
     <% end %>
   </div>

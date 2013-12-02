@@ -32,6 +32,7 @@ LohasWorkCom::Application.routes.draw do
 
   get 'files/download' => "files#download"
   delete 'files/delete' => "files#delete"
+  resources :files, only: [:create]
 
   controller :organizations do
     get 'show-member' => :show_member, as: :show_member

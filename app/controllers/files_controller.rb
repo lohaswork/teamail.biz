@@ -1,5 +1,13 @@
 class FilesController < ApplicationController
 
+  def create
+    uploadfile = UploadFile.new
+    file = params[:discussion_file]
+    uploadfile.file = file
+    uploadfile.save!
+    render :nothing => true
+  end
+
   def download
     file = UploadFile.find(params[:id])
     data = open(file.file.url)
