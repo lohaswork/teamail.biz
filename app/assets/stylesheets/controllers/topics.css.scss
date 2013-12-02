@@ -219,13 +219,17 @@
 
 // select user
 #select-user-for-topic, #select-user-for-discussion {
+  .subgroup-select-header {
+    height: 34px;
+    margin-bottom: 15px;
+    float: left;
+  }
   .subgroup-select {
-    margin-bottom: 10px;
-    height: 25px;
-    line-height: 25px;
+    clear: both;
   }
   span {
     margin-left: 10px;
+    margin-right: 20px;
     padding: 5px;
     cursor: pointer;
     border-radius: 4px;
@@ -245,6 +249,18 @@
       color: #fff;
       background-color: #BFC9A7;
     }
+  }
+  .invited-emails-input {
+    height: 34px;
+    padding: 6px 9px;
+    max-width: 155px;
+    @include input-border(4px);
+  }
+  .mailling-warning {
+    margin-left: 5px;
+    padding: 6px 6px;
+    margin-bottom: 0;
+    float: left;
   }
   label {font-weight: normal;}
   margin: 10px auto;
