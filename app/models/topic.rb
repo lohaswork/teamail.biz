@@ -18,12 +18,12 @@ class Topic < ActiveRecord::Base
   scope :get_unarchived, lambda { |user| joins(:user_topics).where("user_topics.user_id = ? AND IFNULL( user_topics.archive_status, 0 ) <> 1 ", user.id) }
 
   class << self
-    def create_topic(title, email_title=nil, content, emails, organization, login_user)
+    def create_topic(title, email_title=nil, content, emails, organization, user)
       topic = new(:title => title, :email_title => email_title)
       raise ValidationError.new(topic.errors.messages.values) if !topic.valid?
       content = content.blank? ? "如题" : content
       topic.organization = organization
-      Discussion.create_discussion(login_user, topic, emails, content)
+      Discussion.create_discussion(user, topic, emails, content)
       topic
     end
   end

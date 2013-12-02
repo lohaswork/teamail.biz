@@ -11,16 +11,16 @@ class Discussion < ActiveRecord::Base
   after_touch :update_topic_members
 
   class << self
-    def create_discussion(login_user, topic, emails, content)
+    def create_discussion(user, topic, emails, content)
       discussion = Discussion.new(:content => content)
       raise ValidationError.new(discussion.errors.messages.values) if !discussion.valid?
       selected_users = emails.map { |email| User.find_by_email email }
       discussion.notify_party = selected_users
-      discussion.creator = login_user
-      discussion.users << (selected_users << login_user)
+      discussion.creator = user
+      discussion.users << (selected_users << user)
       topic.discussions << discussion
       topic.new_record? ? topic.save! : topic.touch
-      discussion.mark_as_read_by(login_user)
+      discussion.mark_as_read_by(user)
       topic.unarchived_by_others
       topic.mark_as_unread_to_others
       discussion

@@ -24,13 +24,14 @@ class User < ActiveRecord::Base
     def create_with_organization(user, organization_name)
       user = User.new(:email => user[:email], :password => user[:password])
       raise ValidationError.new(user.errors.messages.values) if !user.valid?
-      organization = Organization.new(:name => organization_name)
+      organization = Organization.new(:name => organization_name.strip)
       raise ValidationError.new(organization.errors.messages.values)if !organization.valid?
       organization.save!
       user.organizations << organization
       user.default_organization = organization
       user.save!
       organization.membership(user).update_attribute(:authority_type, 1)
+      organization.setup_seed_data(user)
       user
     end
 
