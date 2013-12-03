@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery.remotipart
+//= require jquery-fileupload
 //= require twitter/bootstrap
 //= require shared/app
 //= require_directory ./shared

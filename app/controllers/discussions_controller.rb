@@ -20,14 +20,6 @@ class DiscussionsController < ApplicationController
       discussion = Discussion.create_discussion(login_user, @topic, selected_emails, params[:content])
       DiscussionNotifierWorker.perform_async(discussion.id, selected_emails)
 
-      if params[:discussion_file]
-        uploadfile = UploadFile.new
-        file = params[:discussion_file]
-        uploadfile.file = file
-        discussion.upload_files << uploadfile
-        discussion.save
-      end
-
       respond_array = []
       respond_array << "select-user-for-discussion" << get_rendered_string('shared/user_select_for_discussion', { topic: @topic.reload })
       respond_array << "discussion-list" << get_rendered_string('topics/discussion_list', { discussions: @topic.reload.discussions })

@@ -10,11 +10,10 @@
         </div>
         <div class="reply-submit col-xs-12">
           <%= submit_tag "回复", :class=>"btn btn-default", 'data-disable-with' => '提交中...' %>
-          <button type=button class="btn btn-default upload-button"><i class="fa fa-paperclip fa-lg"></i></button>
-          <%= file_field_tag 'discussion_file', :style => "position:fixed; top:-100px;" %>
         </div>
       </div>
     <% end %>
   </div>
+  <%= render :partial => 'shared/file_container' %>
+  <%= render :partial => 'shared/upload' %>
 </div>
-

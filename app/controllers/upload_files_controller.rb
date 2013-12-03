@@ -1,11 +1,9 @@
-class FilesController < ApplicationController
+class UploadFilesController < ApplicationController
 
   def create
-    uploadfile = UploadFile.new
-    file = params[:discussion_file]
-    uploadfile.file = file
-    uploadfile.save!
-    render :nothing => true
+    uploadfile = UploadFile.create params[:upload]
+
+    render json: {files: [uploadfile.to_jq_upload]}, status: :created
   end
 
   def download
