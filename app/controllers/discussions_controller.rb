@@ -28,7 +28,6 @@ class DiscussionsController < ApplicationController
         discussion.save
       end
 
-      debugger
       respond_array = []
       respond_array << "select-user-for-discussion" << get_rendered_string('shared/user_select_for_discussion', { topic: @topic.reload })
       respond_array << "discussion-list" << get_rendered_string('topics/discussion_list', { discussions: @topic.reload.discussions })

@@ -35,7 +35,7 @@ class Discussion < ActiveRecord::Base
     self.user_from = user.id
   end
 
-  def read_status_of(user)
+  def read_status_of_user(user)
     begin
       self.user_discussions.find_by_user_id(user.id).read_status
     rescue ActiveRecord::RecordNotFound, NoMethodError

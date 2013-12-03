@@ -45,7 +45,7 @@ module TopicsHelper
   end
 
   def read_style(topic)
-    if UserDiscussion.where(discussion_id: topic.discussions.last.id, user_id: login_user.id).exists? && topic.read_status_of(login_user) != 1
+    if UserDiscussion.where(discussion_id: topic.discussions.last.id, user_id: login_user.id).exists? && topic.read_status_of_user(login_user) != 1
       "unread"
     else
       "read"
@@ -59,7 +59,7 @@ module TopicsHelper
   end
 
   def unread_topic_number
-    num = Topic.get_unarchived(login_user).to_a.reject { |topic| topic.read_status_of(login_user) == 1 }.length.to_s
+    num = Topic.get_unarchived(login_user).to_a.reject { |topic| topic.read_status_of_user(login_user) == 1 }.length.to_s
   end
 
   def in_personal_topics_page?
