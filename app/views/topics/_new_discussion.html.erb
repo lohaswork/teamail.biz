@@ -7,6 +7,7 @@
           <%= render :partial => 'shared/user_select_for_discussion', :locals => { :topic => @topic} %>
         </div>
         <div id="discussion-file-list">
+          <%= hidden_field_tag :upload_success_files, '' %>
         </div>
         <div class="reply-submit col-xs-12">
           <%= submit_tag "回复", :class=>"btn btn-default", 'data-disable-with' => '提交中...' %>
@@ -14,6 +15,5 @@
       </div>
     <% end %>
   </div>
-  <%= render :partial => 'shared/file_container' %>
   <%= render :partial => 'shared/upload' %>
 </div>

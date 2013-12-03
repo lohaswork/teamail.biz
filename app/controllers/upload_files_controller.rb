@@ -3,7 +3,10 @@ class UploadFilesController < ApplicationController
   def create
     uploadfile = UploadFile.create params[:upload]
 
-    render json: {files: [uploadfile.to_jq_upload]}, status: :created
+    render :json => {
+      :files => [uploadfile.to_jq_upload]
+      },
+    :status => :created
   end
 
   def download
@@ -27,6 +30,14 @@ class UploadFilesController < ApplicationController
                                                                            })
                           }
                       }
+  end
 
+  def destroy
+    upload = UploadFile.find(params[:id])
+    upload.destroy
+
+    respond_to do |format|
+      format.json { head :no_content }
+    end
   end
 end

@@ -1,32 +1,19 @@
-<div class="discussion-uploader container" data-page="UploadPage">
+<div class="discussion-uploader">
   <%= form_for UploadFile.new, :html => { :multipart => true, :id => "fileupload"  } do |f| %>
     <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
-    <div class="row fileupload-buttonbar">
-      <div class="span7">
+    <div class="fileupload-buttonbar">
+      <div class="fileupload-button-row">
         <!-- The fileinput-button span is used to style the file input field as button -->
         <span class="btn btn-success fileinput-button">
-          <i class="icon-plus icon-white"></i>
+          <i class="fa fa-plus"></i>
           <span>Add files...</span>
           <%= f.file_field :file, multiple: true, name: 'upload[file]' %>
         </span>
-        <button type="submit" class="btn btn-primary start">
-          <i class="icon-upload icon-white"></i>
-          <span>Start upload</span>
-        </button>
-        <button type="reset" class="btn btn-warning cancel">
-          <i class="icon-ban-circle icon-white"></i>
-          <span>Cancel upload</span>
-        </button>
-        <button type="button" class="btn btn-danger delete">
-          <i class="icon-trash icon-white"></i>
-          <span>Delete</span>
-        </button>
-        <input type="checkbox" class="toggle">
       </div>
-      <div class="span5">
-        <!-- The global progress bar -->
-        <div class="progress progress-success progress-striped active fade">
-          <div class="bar" style="width:0%;"></div>
+      <div class="col-xs-12">
+        <div class="progress active fade">
+          <div class="progress-bar progress-bar-success bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+          </div>
         </div>
       </div>
     </div>
@@ -37,18 +24,8 @@
     <table class="table table-striped"><tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery"></tbody>
     </table>
   <% end %>
-
 </div>
-<script>
-  var fileUploadErrors = {
-  maxFileSize: 'File is too big',
-  minFileSize: 'File is too small',
-  acceptFileTypes: 'Filetype not allowed',
-  maxNumberOfFiles: 'Max number of files exceeded',
-  uploadedBytes: 'Uploaded bytes exceed file size',
-  emptyResult: 'Empty file upload result'
-  };
-</script>
+
 
 <!-- The template to display files available for upload -->
 <script id="template-upload" type="text/x-tmpl">
@@ -61,11 +38,14 @@
     <td class="error" colspan="2"><span class="label label-important">{%=locale.fileupload.error%}</span> {%=locale.fileupload.errors[file.error] || file.error%}</td>
     {% } else if (o.files.valid && !i) { %}
     <td>
-      <div class="progress progress-success progress-striped active"><div class="bar" style="width:0%;"></div></div>
+      <div class="progress active">
+        <div class="progress-bar progress-bar-success bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+        </div>
+      </div>
     </td>
     <td class="start">{% if (!o.options.autoUpload) { %}
       <button class="btn btn-primary">
-        <i class="icon-upload icon-white"></i>
+        <i class="fa fa-upload"></i>
         <span>{%=locale.fileupload.start%}</span>
       </button>
       {% } %}</td>
@@ -74,7 +54,7 @@
     {% } %}
     <td class="cancel">{% if (!i) { %}
       <button class="btn btn-warning">
-        <i class="icon-ban-circle icon-white"></i>
+        <i class="fa fa-ban-circle"></i>
         <span>{%=locale.fileupload.cancel%}</span>
       </button>
       {% } %}</td>
@@ -87,6 +67,7 @@
     <tr class="template-download fade">
       {% if (file.error) { %}
         <td></td>
+        <td class="file-id"><span>{%= file.id %}</span></td>
         <td class="name"><span>{%=file.name%}</span></td>
         <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
         <td class="error" colspan="2"><span class="label label-important">{%=locale.fileupload.error%}</span> {%=locale.fileupload.errors[file.error] || file.error%}</td>
@@ -102,34 +83,10 @@
         {% } %}
       <td class="delete">
         <button class="btn btn-danger" data-type="{%=file.delete_type%}" data-url="{%=file.delete_url%}">
-          <i class="icon-trash icon-white"></i>
+          <i class="fa fa-trash"></i>
           <span>{%=locale.fileupload.destroy%}</span>
         </button>
-        <input type="checkbox" name="delete" value="1">
       </td>
     </tr>
     {% } %}
-</script>
-
-<script type="text/javascript" charset="utf-8">
-  $(function () {
-      // Initialize the jQuery File Upload widget:
-      $('#fileupload').fileupload();
-      //
-      // Load existing files:
-      $.getJSON($('#fileupload').prop('action'), function (files) {
-        var fu = $('#fileupload').data('blueimpFileupload'),
-          template;
-        fu._adjustMaxNumberOfFiles(-files.length);
-        console.log(files);
-        template = fu._renderDownload(files)
-          .appendTo($('#fileupload .files'));
-        // Force reflow:
-        fu._reflow = fu._transition && template.length &&
-          template[0].offsetWidth;
-        template.addClass('in');
-        $('#loading').remove();
-      });
-
-  });
 </script>
