@@ -36,7 +36,12 @@ module ControllerModules::ExceptionHandlers
     end
   end
 
-  def render_406
+  def render_406(exception)
+    log_the_error exception
+    if Rails.env.production?
+      Rails.logger.error exception.backtrace.join("\n")
+      Rails.logger.error exception
+    end
     render :nothing => true, :status => 406
   end
 

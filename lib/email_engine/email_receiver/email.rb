@@ -33,8 +33,8 @@ module EmailEngine
           begin
             post_attachments_to_oss(discussion) if self.has_attachments?
             EmailEngine::DiscussionNotifier.new(discussion.id, @notifiers).create_discussion_notification
-          rescue
-            raise Exceptions::PostEmailReceiveError
+          rescue Exception => e
+            raise Exceptions::PostEmailReceiveError, "#{$!}", $!.backtrace
           end
         else
           title = subject.blank? ? "此主题标题为空" : topic_title_from_email
@@ -44,8 +44,8 @@ module EmailEngine
             add_tags_from_title(@topic, @tags)
             post_attachments_to_oss(@topic.discussions.first) if self.has_attachments?
             EmailEngine::TopicNotifier.new(@topic.id, @notifiers).create_topic_notification
-          rescue
-            raise Exceptions::PostEmailReceiveError
+          rescue Exception => e
+            raise Exceptions::PostEmailReceiveError, "#{$!}", $!.backtrace
           end
         end
       end
