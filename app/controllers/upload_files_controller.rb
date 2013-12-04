@@ -7,6 +7,7 @@ class UploadFilesController < ApplicationController
       :files => [uploadfile.to_jq_upload]
       },
     :status => :created
+
   end
 
   def download
