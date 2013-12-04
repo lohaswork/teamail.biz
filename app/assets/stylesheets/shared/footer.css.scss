@@ -1,0 +1,17 @@
+// Footer
+.footer-index {
+  background: #333 image-url("footer-bg.png") 0 0 repeat;
+  width: 100%;
+  color: #b5b5b5;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  a {
+    color: #b5b5b5;
+    &:hover { color: #fff; }
+  }
+  .footer-links {
+    li {
+      padding-bottom: 5px;
+    }
+  }
+}
