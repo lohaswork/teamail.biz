@@ -3,7 +3,36 @@ body.home {
   padding-top: 42px;
   background-color: #a1b58f;
 
+  // Video modal
+  #video-modal .modal-dialog {
+    width: 662px;
+  }
   // Overwrite nav.css
+  .scroll {
+    opacity: 0.85;
+  }
+  .scrolltop {
+    background-color: #F1F1F1;
+    border: 1px solid #8E958A;
+    color: #8E958A;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    border-radius: 100px;
+    display: none;
+    font-weight: 600;
+    height: 36px;
+    line-height: 36px;
+    width: 36px;
+    opacity: 0.6;
+    position: fixed;
+    right: 10%;
+    top: 65%;
+    text-align: center;
+    i {
+      position:relative;
+      top:-1px;
+    }
+  }
   .navbar {
     background: #fff;
     margin-bottom: 0;
