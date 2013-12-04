@@ -3,3 +3,5 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 jQuery ->
   $('body').scrollspy({ target: '#question-nav-container' })
+  $('#video-opener').click ->
+    $('#video-modal').modal()
