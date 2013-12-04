@@ -1,12 +1,13 @@
 body.home {
   // Overwrite default from app.css
   padding-top: 42px;
-  background-color: #fff;
+  background-color: #a1b58f;
 
   // Overwrite nav.css
   .navbar {
     background: #fff;
     margin-bottom: 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
     ul.list-inline {
       margin: 0;
       padding-top: 2px;
@@ -142,6 +143,71 @@ body.home {
       cursor: pointer;
       &:hover {
         color: darken(#81A75E, 5%);
+      }
+    }
+  }
+
+  // About us & FAQ & agreement
+  .document-container {
+    margin: 60px auto;
+    max-width: 960px;
+    color: #f7f7f7;
+    .document-title {
+      background-color: #eee;
+      height: 45px;
+      line-height: 45px;
+      margin: 0 auto 20px;
+      width: 350px;
+      color: #a1b58f;
+      border-radius: 6px;
+      text-align: center;
+    }
+    .side-info {
+      img {
+        width: 100%;
+        border: 2px #fff;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+
+      }
+      h3 {
+        margin-left: 1em;
+      }
+      .address-list {
+        background-color: #eee;
+        color: #a1b58f;
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+        padding: 20px 20px 10px;
+      }
+      a {
+        color: #a1b58f;
+        &:hover {
+          font-weight:bold;
+          text-shadow: -3px 4px 3px #fbfbfb;
+        }
+      }
+    }
+    .main-info {
+      h3 {
+        margin-left: 1em;
+      }
+      p {
+        font-size: 16px;
+      }
+      ul {
+        background-color: #eee;
+        color: #a1b58f;
+        border-radius: 8px;
+        padding-top: 20px;
+        padding-right: 20px;
+        padding-bottom: 20px;
+        margin-top: 10px;
+        margin-bottom: 20px;
+      }
+      li {
+        font-size: 16px;
+        line-height: 28px;
       }
     }
   }

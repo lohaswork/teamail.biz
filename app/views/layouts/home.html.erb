@@ -25,6 +25,7 @@
       <%= render 'layouts/navigation_index' %>
       <%= yield %>
     </div>
+    <%= render 'layouts/bottom_guide' %>
     <%= render 'layouts/footer_index' %>
     <%= javascript_include_tag "application" %>
     <%= javascript_tag '$.fx.off = true;' if Rails.env.test? %>
