@@ -13,4 +13,5 @@ jQuery ->
 
     done: (e, data) ->
       that = this;
+      $('#upload_success_files').val(data.result.files[0].id)
       $.blueimp.fileupload.prototype.options.done.call(that, e, data);
