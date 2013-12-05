@@ -28,6 +28,16 @@ class TopicsController < ApplicationController
       title, tags = analyzed_title email_title unless email_title.blank?
       new_topic = Topic.create_topic(title, email_title, params[:content], selected_emails, current_organization, login_user)
       add_tags_from_title(new_topic, tags)
+
+      if files = params[:topic_upload_files].split(',')
+        discussion = new_topic.discussions.first
+        files.each do |id|
+          file = UploadFile.find_by(id: id)
+          discussion.upload_files << file unless file.blank?
+        end
+        discussion.save!
+      end
+
       TopicNotifierWorker.perform_async(new_topic.id, selected_emails)
 
       render :json => { :reload => true }

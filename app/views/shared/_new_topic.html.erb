@@ -6,7 +6,7 @@
         <h4 class="modal-title">新邮件</h4>
       </div>
       <div class="modal-body">
-        <div class="form-group">
+        <div class="form-group" data-page="EditorPage">
           <div class="col-xs-12">
             <%= text_field_tag :title, nil, :class => 'form-control', :placeholder=>"主题"%>
             <%= render :partial => 'shared/editor' %>
@@ -18,12 +18,16 @@
           </div>
         </div>
       </div>
+      <div id="topic-file-list">
+        <%= hidden_field_tag :topic_upload_files, '', :class => 'file-id-container' %>
+      </div>
       <div class="modal-footer">
         <div class="pull-left">
           <%= submit_tag "创建", :class => "btn btn-default", 'data-disable-with' => '提交中...' %>
         </div>
       </div>
     <% end %>
+    <%= render :partial => 'shared/upload' %>
   </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->
 

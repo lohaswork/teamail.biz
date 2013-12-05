@@ -38,6 +38,9 @@
       .on("refreshed", "#select-user-for-discussion", function(e){
         e.stopPropagation();
       })
+      .on("refreshed", "#new-discussion", function(e){
+        e.stopPropagation();
+      })
       .on("refreshed", "#discussion-list", function(e){
         var editor = $('<div class="qeditor_preview clearfix" contentEditable="true"></div>');
         var placeholder = $('<div class="qeditor_placeholder">请输入内容</div>');

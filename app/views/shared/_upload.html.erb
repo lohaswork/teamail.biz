@@ -1,4 +1,4 @@
-<div class="discussion-uploader" id="discussion-uploader">
+<div class="file-uploader" data-page="UploadPage" data-reload=true>
   <%= form_for UploadFile.new, :html => { :multipart => true, :id => "fileupload" } do |f| %>
     <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
     <div class="fileupload-buttonbar">
@@ -85,7 +85,6 @@
           <i class="fa fa-trash"></i>
           <span>{%=locale.fileupload.destroy%}</span>
         </button>
-        <input type="checkbox" name="delete" value="1">
       </td>
     </tr>
     {% } %}
