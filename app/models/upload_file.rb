@@ -11,7 +11,7 @@ class UploadFile < ActiveRecord::Base
       "name" => read_attribute(:name),
       "id" => read_attribute(:id),
       "size" => read_attribute(:size),
-      #"url" => self.file.url(:original),
+      "url" => self.file.url,
       "delete_url" => upload_file_path(self),
       "delete_type" => "DELETE"
     }
