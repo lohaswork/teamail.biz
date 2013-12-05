@@ -8,14 +8,22 @@ jQuery ->
 
     init: ->
       $('body').scrollspy({ target: '#question-nav-container' })
-      $('#video-opener').click ->
-        $('#video-modal').modal()
 
   class App.page.HomeIndexPage
     constructor: ->
       this.init()
 
     init: ->
+      myPlayer = _V_("demo-video")
+      $('#video-opener').click ->
+        $('#video-modal').modal()
+      $('#video-modal').on 'shown.bs.modal', ->
+        myPlayer.play()
+      .on 'hide.bs.modal', ->
+        myPlayer.pause()
+
+
+
       $(window).scroll ->
         navbar = $(".navbar.navbar-fixed-top")
         scrollTop = $('.scrolltop')
