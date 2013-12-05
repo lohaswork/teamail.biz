@@ -20,11 +20,7 @@ class DiscussionsController < ApplicationController
       discussion = Discussion.create_discussion(login_user, @topic, selected_emails, params[:content])
 
       if files = params[:discussion_upload_files].split(',')
-        files.each do |id|
-          file = UploadFile.find_by(id: id)
-          discussion.upload_files << file unless file.blank?
-        end
-        discussion.save!
+        discussion.add_files(files)
       end
 
       DiscussionNotifierWorker.perform_async(discussion.id, selected_emails)

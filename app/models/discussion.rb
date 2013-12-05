@@ -74,6 +74,14 @@ class Discussion < ActiveRecord::Base
     end
   end
 
+  def add_files(files)
+    files.each do |id|
+      file = UploadFile.find_by(id: id)
+      self.upload_files << file unless file.blank?
+    end
+    self.save!
+  end
+
   private
 
   def update_topic_members

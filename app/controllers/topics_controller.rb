@@ -31,11 +31,7 @@ class TopicsController < ApplicationController
 
       if files = params[:topic_upload_files].split(',')
         discussion = new_topic.discussions.first
-        files.each do |id|
-          file = UploadFile.find_by(id: id)
-          discussion.upload_files << file unless file.blank?
-        end
-        discussion.save!
+        discussion.add_files(files)
       end
 
       TopicNotifierWorker.perform_async(new_topic.id, selected_emails)
