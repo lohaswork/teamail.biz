@@ -21,11 +21,7 @@ module EmailEngine
 
       private
       def attachments_number
-        if self.respond_to? :attachment_count
-          attachment_count.to_i
-        else
-          0
-        end
+        self.respond_to? :attachment_count ? attachment_count.to_i : 0
       end
 
     end

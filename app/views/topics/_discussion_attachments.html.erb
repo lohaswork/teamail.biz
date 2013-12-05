@@ -4,10 +4,8 @@
       <li>
         <i class="fa fa-paperclip fa-lg"></i>
         <%= file.name %>
-        <%= link_to('下载', files_download_path(id: file.id), method: :get) %>
-        <!--
-        <%= link_to('删除', files_delete_path(id: file.id), method: :delete, remote: true) %>
-        -->
+        <%= file.size ? number_to_human_size(file.size) : "未知大小" %>
+        <a href="<%= file.file.url%>" title="<%= file.name%>" rel="attachments" download="<%= file.name%>">下载</a>
       </li>
     <% end %>
   </ul>

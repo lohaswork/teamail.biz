@@ -18,8 +18,8 @@
         var me = $(this),
             targetGroup = me.parents('.checkbox-group').data('update').split(',');
         for (id in targetGroup) {
-          var element = $(targetGroup[id])
-          var value = element.val();
+          var element = $(targetGroup[id]),
+              value = element.val();
 
           if (value === undefined) continue;
           value = value.split(',');

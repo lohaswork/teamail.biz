@@ -70,8 +70,8 @@ class Topic < ActiveRecord::Base
     self.users.reject { |user| user.id == self.last_updator.id }.each { |user| self.discussions.last.mark_as_unread_by_user(user) }
   end
 
-  def read_status_of(user)
-    self.discussions.last.read_status_of(user)
+  def read_status_of_user(user)
+    self.discussions.last.read_status_of_user(user)
   end
 
   def last_update_time

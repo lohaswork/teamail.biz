@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-fileupload
 //= require twitter/bootstrap
 //= require shared/app
 //= require_directory ./shared

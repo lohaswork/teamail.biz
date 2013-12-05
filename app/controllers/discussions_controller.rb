@@ -18,11 +18,16 @@ class DiscussionsController < ApplicationController
       # Get discussion notify party from selected_emails,
       #   then send discussion notifications
       discussion = Discussion.create_discussion(login_user, @topic, selected_emails, params[:content])
+
+      if files = params[:discussion_upload_files].split(',')
+        discussion.add_files(files)
+      end
+
       DiscussionNotifierWorker.perform_async(discussion.id, selected_emails)
 
       respond_array = []
-      respond_array << "select-user-for-discussion" << get_rendered_string('shared/user_select_for_discussion', { topic: @topic.reload })
-      respond_array << "discussion-list" << get_rendered_string('topics/discussion_list', { discussions: @topic.discussions })
+      respond_array << "new-discussion" << get_rendered_string('topics/new_discussion', { topic: @topic.reload })
+      respond_array << "discussion-list" << get_rendered_string('topics/discussion_list', { discussions: @topic.reload.discussions })
       render :json => { update: Hash[*respond_array] }
     end
   end

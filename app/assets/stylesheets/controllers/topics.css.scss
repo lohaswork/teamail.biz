@@ -259,3 +259,19 @@
   label {font-weight: normal;}
   margin: 10px auto;
 }
+
+// uploader
+.fileupload-buttonbar {
+  height: 0;
+}
+.progress {
+  margin-bottom: 0;
+}
+.file-uploader {
+  table {
+    margin-bottom: 0;
+  }
+  .template-upload td, .template-download td {
+    vertical-align: middle;
+  }
+}
