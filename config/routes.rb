@@ -1,7 +1,12 @@
 LohasWorkCom::Application.routes.draw do
   root 'welcome#index'
 
-  get 'home' => 'home#index', as: 'home'
+  controller :home do
+    get 'home' => :index, as: :home
+    get 'about-us' => :about_us, as: :about_us
+    get 'faq' => :faq
+    get 'agreement' => :agreement
+  end
 
   controller :users do
     get 'signup-success' => :signup_success, as: :signup_success
