@@ -6,4 +6,9 @@ jQuery ->
 
     init: ->
       # Initialize editor
-      this.el.find(".content-editor").qeditor();
+      editorForm = this.el
+      editorForm.find(".content-editor").qeditor();
+      editorForm.on 'click', ".upload-link", (e,data) ->
+        $(editorForm).find(".fileinput-button :file").trigger('click')
+        e.preventDefault()
+
