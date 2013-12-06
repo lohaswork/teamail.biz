@@ -119,6 +119,40 @@ body.home {
     text-align: center;
   }
 
+  // Major features
+  .major-features-bg {
+    background-color: #eee;
+  }
+  .major-features {
+    max-width: 960px;
+  }
+  .feature-block {
+    height: 290px;
+    padding: 20px 15px 10px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    background-color: #fff;
+    border-radius: 3px;
+    border: 1px solid #fff;
+    box-shadow: 0px 1px 2px 1px #E5E5E5;
+    .feature-title-1 {
+      color: #609D47;
+    }
+    .feature-title-2 {
+      color: #389DD8;
+    }
+    .feature-title-3 {
+      color: #923728;
+    }
+    p, li {
+      font-size: 16px;
+      font-weight: 200;
+      color: #666;
+      line-height: 25px;
+    }
+    a { font-size: 14px;}
+  }
+
   // User Story
   .user-story-bg {
     background-color: #a1b58f;
