@@ -97,11 +97,8 @@
       font-size: 14px;
       max-width: 65%;
       overflow: hidden;
-      .title {
-        color: #999;
-        margin-right: 5px;
-        @include get-rid-of-long-words();
-      }
+      margin-right: 5px;
+      @include get-rid-of-long-words();
       .headline-tag-container {
         margin-right: 5px;
         float: left;
