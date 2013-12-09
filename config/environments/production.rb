@@ -73,6 +73,6 @@ LohasWorkCom::Application.configure do
   config.assets.paths << Rails.root.join('app', 'assets', 'font')
 
   # Precompile additional assets
-  config.assets.precompile += [ 'ie.js', 'placeholder.js', 'ie/ie.css', 'ie/font-awesome-ie7.min.css' ]
+  config.assets.precompile += [ 'ie.js', 'placeholder.js', 'google-analytics.js', 'ie/ie.css', 'ie/font-awesome-ie7.min.css' ]
   config.assets.precompile += %w( .svg .eot .woff .ttf .js .css)
 end
