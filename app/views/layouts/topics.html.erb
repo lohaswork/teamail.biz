@@ -19,6 +19,7 @@
     <!--[if lt IE 9]>
       <%= javascript_include_tag "ie" %>
     <![endif]-->
+    <%= javascript_include_tag "google-analytics" if Rails.env.production? %>
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
   </head>
