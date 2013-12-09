@@ -262,8 +262,6 @@ body.home {
       .active {
         a { font-weight: bold; color: #a1b58f; background-color: #eee; }
       }
-      li {
-      }
       a {
         color: #fff;
         &:hover { color: #a1b58f; }
@@ -272,8 +270,6 @@ body.home {
     .main-info {
       .heading-indent {
         margin-left: 1em;
-      }
-      p {
       }
       ul {
         background-color: #eee;
@@ -292,6 +288,11 @@ body.home {
       }
     }
   }
-
+  .agreement-content {
+    h4 {
+      margin-top: 25px;
+      margin-bottom: 15px;
+    }
+  }
 
 }
