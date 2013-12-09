@@ -10,26 +10,28 @@
             </p>
         </div>
         <div class="col-xs-12 col-md-4 icp">
-          <p>沪ICP备13031730号-2</p>
+          <p><a href="http://www.miitbeian.gov.cn" target="_blank">沪ICP备13031730号-2</a></p>
         </div>
         <div class="col-xs-12 col-md-3 footer-links">
           <ul class="list-unstyled col-md-6">
             <li>
-              <a href="#">常见问题</a>
+              <%= link_to '常见问题', faq_path, {target: "_blank"} %>
             </li>
+            <!--
             <li>
               <a href="#">功能介绍</a>
             </li>
+            -->
             <li>
-              <a href="#">服务条款</a>
+              <%= link_to '服务条款', agreement_path, {target: "_blank"} %>
             </li>
           </ul>
           <ul class="list-unstyled col-md-6">
             <li>
-              <a href="#">官方博客</a>
+              <a href="http://blog.lohaswork.com/" target="_blank">官方博客</a>
             </li>
             <li>
-              <a href="#">关于我们</a>
+              <%= link_to '关于我们', about_us_path, {target: "_blank"} %>
             </li>
             <li>
               <a href="mailto:support@lohaswork.com">联系我们</a>

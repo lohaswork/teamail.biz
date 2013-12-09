@@ -57,7 +57,10 @@ QEDITOR_TOOLBAR_HTML = """
   <a href="#" data-action="blockquote" class="qe-blockquote"><span class="fa fa-quote-left" title="Blockquote"></span></a>
   <a href="#" data-action="pre" class="qe-pre"><span class="fa fa-code" title="Pre"></span></a>
   <a href="#" data-action="createLink" class="qe-link"><span class="fa fa-link" title="Create Link" title="Create Link"></span></a>
+  <!--
   <a href="#" data-action="insertimage" class="qe-image"><span class="fa fa-picture" title="Insert Image"></span></a>
+  -->
+  <a href="#" class="upload-link"><span class="fa fa-paperclip" title="Upload Files">&nbsp上传文件</span></a>
   <!--
   <a href="#" onclick="return QEditor.toggleFullScreen(this);" class="qe-fullscreen pull-right"><span class="fa fa-fullscreen" title="Toggle Fullscreen"></span></a>
   -->

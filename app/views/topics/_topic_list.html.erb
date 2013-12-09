@@ -16,11 +16,9 @@
           </div>
           <div class='topic-title-with-tag'>
             <%= render :partial => 'tags/headline_tags', :locals => {:topic => topic} %>
-            <div class='title'>
-              <%= link_to topic_path(topic) do %>
-                <%= topic.title %>
-              <% end %>
-            </div>
+            <%= link_to topic_path(topic) do %>
+              <%= topic.title %>
+            <% end %>
           </div>
           <div class='topic-update-time'>
             <%- if has_attachments?(topic) %>

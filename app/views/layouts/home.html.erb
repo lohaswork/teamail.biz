@@ -10,12 +10,17 @@
     <meta name="author" content="LohasWork">
     <%= favicon_link_tag 'favicon.ico' %>
     <%= stylesheet_link_tag "application", :media => "all" %>
+    <link href="https://vjs.zencdn.net/4.1/video-js.css" rel="stylesheet">
     <!--[if lt IE 8]>
     <%= stylesheet_link_tag "ie/font-awesome-ie7.min.css", media: "all" %>
     <![endif]-->
     <!--[if IE]>
         <%= stylesheet_link_tag "ie/ie.css", media: "all" %>
     <![endif]-->
+    <!--[if lt IE 9]>
+      <%= javascript_include_tag "ie" %>
+    <![endif]-->
+    <%= javascript_include_tag "google-analytics" if Rails.env.production? %>
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
   </head>
@@ -25,11 +30,11 @@
       <%= render 'layouts/navigation_index' %>
       <%= yield %>
     </div>
-    <%= render 'layouts/footer_index' %>
     <%= javascript_include_tag "application" %>
     <%= javascript_tag '$.fx.off = true;' if Rails.env.test? %>
-    <!--[if lt IE 9]>
-      <%= javascript_include_tag "ie" %>
+    <script src="https://vjs.zencdn.net/4.1/video.js"></script>
+    <!--[if lt IE 10]>
+      <%= javascript_include_tag "placeholder" %>
     <![endif]-->
   </body>
 </html>

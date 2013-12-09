@@ -35,7 +35,7 @@ class Discussion < ActiveRecord::Base
     self.user_from = user.id
   end
 
-  def read_status_of(user)
+  def read_status_of_user(user)
     begin
       self.user_discussions.find_by_user_id(user.id).read_status
     rescue ActiveRecord::RecordNotFound, NoMethodError
@@ -72,6 +72,14 @@ class Discussion < ActiveRecord::Base
     else
       self.user_to.split(',').map { |id| User.find id }
     end
+  end
+
+  def add_files(files)
+    files.each do |id|
+      file = UploadFile.find_by(id: id)
+      self.upload_files << file unless file.blank?
+    end
+    self.save!
   end
 
   private

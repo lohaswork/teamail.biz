@@ -259,24 +259,6 @@ body.welcome {
       }
     }
   }
-  /* footer */
-  .footer-fix {
-    clear: both;
-  }
-  .footer-index {
-    background: image-url("footer_bg.png") 0 0 repeat;
-    width: 100%;
-    min-height: 100px;
-    color: #838383;
-    padding-top: 35px;
-    font-size: 14px;
-    font-size: 1.4rem;
-    .icp {
-      position:relative;
-      top: -5px;
-      left: 40px;
-    }
-  }
 }
 
 /* mobile */

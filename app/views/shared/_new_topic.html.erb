@@ -1,4 +1,4 @@
-<div class="modal-dialog" id="new-topic-form">
+<div class="modal-dialog" id="new-topic-form" data-page="EditorPage" data-reload=true>
   <div class="modal-content">
     <%= form_tag topics_path, :method => "post", :class=>"form-horizontal", :remote => true do %>
       <div class="modal-header">
@@ -18,12 +18,16 @@
           </div>
         </div>
       </div>
+      <div id="topic-file-list">
+        <%= hidden_field_tag :topic_upload_files, '', :class => 'file-id-container' %>
+      </div>
       <div class="modal-footer">
         <div class="pull-left">
           <%= submit_tag "创建", :class => "btn btn-default", 'data-disable-with' => '提交中...' %>
         </div>
       </div>
     <% end %>
+    <%= render :partial => 'shared/upload' %>
   </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->
 

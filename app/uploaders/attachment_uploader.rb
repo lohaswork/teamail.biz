@@ -6,12 +6,12 @@ class AttachmentUploader < CarrierWave::Uploader::Base
   CarrierWave::SanitizedFile.sanitize_regexp = /[^[:word:]\.\-\+]/
 
   process :set_content_type
-  process :save_content_type_and_file_name_in_model
+  process :save_content_type_size_and_file_name_in_model
 
-  def save_content_type_and_file_name_in_model
+  def save_content_type_size_and_file_name_in_model
     model.content_type = file.content_type if file.content_type
     model.name = file.original_filename if file.original_filename
-    #model.file_size = file.size
+    model.size = file.size if file.size
   end
 
   # Include RMagick or MiniMagick support:

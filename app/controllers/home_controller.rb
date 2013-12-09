@@ -6,4 +6,13 @@ class HomeController < ApplicationController
     end
   end
 
+  def about_us
+  end
+
+  def faq
+  end
+
+  def agreement
+  end
+
 end
