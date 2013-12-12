@@ -15,4 +15,6 @@ class HomeController < ApplicationController
   def agreement
   end
 
+  def help
+  end
 end

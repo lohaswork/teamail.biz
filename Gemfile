@@ -29,7 +29,7 @@ gem "jquery-fileupload-rails"
 # gem 'jbuilder', '~> 1.2'
 
 gem 'compass-rails', '~> 2.0.alpha.0'
-gem 'anjlab-bootstrap-rails', '>= 3.0.0.0', :require => 'bootstrap-rails'
+gem 'anjlab-bootstrap-rails', '~> 3.0.3.0', :require => 'bootstrap-rails'
 gem 'font-awesome-sass'
 gem 'rest-client'
 gem 'carrierwave-aliyun'

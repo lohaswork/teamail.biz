@@ -2,7 +2,6 @@ body.home {
   // Overwrite default from app.css
   padding-top: 42px;
   background-color: #a1b58f;
-
   // Video modal
   #video-modal .modal-dialog {
     width: 662px;
@@ -41,14 +40,14 @@ body.home {
       margin: 0;
       padding-top: 2px;
       li {
-        border: 1px solid #eee;
-        border-radius: 5px;
-        height: 32px;
-        line-height: 32px;
-        padding-left: 8px;
-        padding-right: 8px;
-        background-color: #eee;
+        padding-right:0;
         a {
+          border: 1px solid #eee;
+          border-radius: 5px;
+          height: 32px;
+          line-height: 32px;
+          background-color: #eee;
+          padding: 8px 8px;
           color: #666;
           &:hover {
             color: #999;
@@ -60,8 +59,8 @@ body.home {
 
   // Main wraper
   .landing-page-wraper {
-    position: relative;
     min-height: 100%;
+    height: 100%;
     width: 100%;
   }
 
@@ -80,6 +79,7 @@ body.home {
     }
     .screen-shot-container {
       min-width: 650px;
+      height: 375px;
     }
     .signup-form {
       max-width: 300px;
@@ -179,9 +179,45 @@ body.home {
     }
   }
   .user-story-1 {
-    height: 610px;
+    height: 651px;
     margin-bottom: 45px;
-    background: image-url("user-story-bg-1.jpg") no-repeat center bottom;
+    background: image-url("user-story-bg-01.jpg") no-repeat center bottom;
+  }
+  .us1-top {
+    padding-top: 10px;
+  }
+  .us1-bottom {
+    padding-top: 530px;
+  }
+  .user-story-2 {
+    height: 600px;
+    margin-bottom: 65px;
+    background: image-url("user-story-bg-02.jpg") no-repeat center top;
+  }
+  .us2-bottom {
+    padding-top: 555px;
+  }
+  .user-story-3 {
+    height: 640px;
+    margin-bottom: 105px;
+    background: image-url("user-story-bg-03.jpg") no-repeat center bottom;
+  }
+  .us3-top {
+    padding-top: 10px;
+  }
+  .us3-bottom {
+    padding-top: 585px;
+  }
+  .user-story-4 {
+    height: 530px;
+    margin-bottom: 85px;
+    background: image-url("user-story-bg-04.jpg") no-repeat center bottom;
+  }
+  .us4-middle {
+    color: #a1b58f;
+    padding-top:380px;
+    position:relative;
+    left: 30px;
   }
 
   // Bottom-signup-guide
@@ -312,6 +348,46 @@ body.home {
       a {
         color: #f7f7f7;
         font-weight: bold;
+      }
+    }
+  }
+  // Grey background for help
+  .override-with-grey-bg {
+    background-color: #eee;
+    min-height: 100%;
+    width: 100%;
+    padding-top: 40px;
+    .help-content {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: rgba(0,0,0,0.1) 1px 1px 10px;
+      min-height: 300px;
+      padding-top: 35px;
+      padding-bottom: 15px;
+      margin-bottom: 50px;
+      color: #000;
+    }
+    .edition-pin {
+      text-align: right;
+      margin-right: 2%;
+      color: #999;
+    }
+    h3 { text-align:center; }
+    .guide-section {
+      text-align: center;
+      .max-width-guide-image {
+        max-width:100%;
+      }
+      .half-width-guide-image-left {
+        max-width:45%;
+        float: left;
+      }
+      .half-width-guide-image-right {
+        max-width:45%;
+      }
+      p { text-align:left; }
+      .guide-title {
+        color: #389DD8;
       }
     }
   }
