@@ -78,8 +78,8 @@ class Organization < ActiveRecord::Base
         <h4 style='text-align:center;'>第 ① 步 <small>邀请同事一起加入</small></h4>
         <br>
         <p>点击上方导航栏右侧的 <strong>成员管理</strong></p>
-        <img src='/assets/guide-section-2.png' style='max-width:50%;float:left;'>
-        <img src='/assets/guide-section-3.png' style='max-width:50%;'>
+        <img src='/assets/guide-section-2.png' style='max-width:45%;float:left;'>
+        <img src='/assets/guide-section-3.png' style='max-width:45%;'>
         <br>
         <br>
         <p>如上图，输入同事的 <strong>email 地址</strong>，然后点击 <strong>邀请</strong> 按钮，就完成了邀请环节。你的同事 <strong>sherry</strong> 会收到一封来自「teamail.biz」的邀请邮件。</p>

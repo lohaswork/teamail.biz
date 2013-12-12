@@ -375,7 +375,20 @@ body.home {
     h3 { text-align:center; }
     .guide-section {
       text-align: center;
+      .max-width-guide-image {
+        max-width:100%;
+      }
+      .half-width-guide-image-left {
+        max-width:45%;
+        float: left;
+      }
+      .half-width-guide-image-right {
+        max-width:45%;
+      }
       p { text-align:left; }
+      .guide-title {
+        color: #389DD8;
+      }
     }
   }
 
