@@ -1,11 +1,12 @@
 LohasWorkCom::Application.routes.draw do
-  root 'welcome#index'
+  root 'home#index'
 
   controller :home do
     get 'home' => :index, as: :home
     get 'about-us' => :about_us, as: :about_us
     get 'faq' => :faq
     get 'agreement' => :agreement
+    get 'help' => :help
   end
 
   controller :users do
