@@ -7,13 +7,13 @@
     </div>
     <ul class="list-inline pull-right">
       <% unless controller_name == "home" && action_name == "index" %>
-        <li>
-          <%= link_to('注册', signup_path) %>
-        </li>
+        <%= link_to signup_path do %>
+          <li>注册</li>
+        <% end%>
       <% end%>
-      <li>
-        <%= link_to('登录', login_path) %>
-      </li>
+      <%= link_to login_path do %>
+        <li>登录</li>
+      <% end%>
     </ul>
   </nav>
 </header>

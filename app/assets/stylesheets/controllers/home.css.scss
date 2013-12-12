@@ -38,7 +38,7 @@ body.home {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
     ul.list-inline {
       margin: 0;
-      padding-top: 2px;
+      padding-top: 6px;
       li {
         border: 1px solid #eee;
         border-radius: 5px;
@@ -47,11 +47,9 @@ body.home {
         padding-left: 8px;
         padding-right: 8px;
         background-color: #eee;
-        a {
-          color: #666;
-          &:hover {
-            color: #999;
-          }
+        color: #666;
+        &:hover {
+          color: #999;
         }
       }
     }
