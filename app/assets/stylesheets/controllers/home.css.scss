@@ -354,7 +354,6 @@ body.home {
   // Grey background for help
   .override-with-grey-bg {
     background-color: #eee;
-    height: 100%;
     min-height: 100%;
     width: 100%;
     padding-top: 40px;
@@ -368,7 +367,16 @@ body.home {
       margin-bottom: 50px;
       color: #000;
     }
-    h3 { text-align: center; }
+    .edition-pin {
+      text-align: right;
+      margin-right: 2%;
+      color: #999;
+    }
+    h3 { text-align:center; }
+    .guide-section {
+      text-align: center;
+      p { text-align:left; }
+    }
   }
 
 }
