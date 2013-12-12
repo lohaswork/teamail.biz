@@ -35,7 +35,7 @@ jQuery ->
           navbar.removeClass("scroll")
 
         # global scroll to top button
-        if $(this).scrollTop() > 160
+        if $(this).scrollTop() > 350
           scrollTop.fadeIn()
         else
           scrollTop.fadeOut()
