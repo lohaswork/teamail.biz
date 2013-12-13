@@ -36,7 +36,7 @@ LohasWorkCom::Application.routes.draw do
     end
   end
 
-  get 'files/download' => "upload_files#download"
+  get 'file-download/:id' => "upload_files#download", as: :download
   delete 'files/delete' => "upload_files#delete"
   resources :upload_files, only: [:create, :destroy]
 
