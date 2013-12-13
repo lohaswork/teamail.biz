@@ -26,23 +26,7 @@ module CarrierWave
           RestClient.put(URI.encode(url), file, headers)
           return path_to_url(path, :get => true)
         end
-        def path_to_secure_url(path, opts = {})
-          if opts[:get]
-            "https://#{@aliyun_host}/#{path}"
-          else
-            "https://#{@aliyun_upload_host}/#{path}"
-          end
-        end
       end
-    end
-    class File
-        def url
-          if Rails.env.production?
-            oss_connection.path_to_secure_url(@path, :get => true)
-          else
-            oss_connection.path_to_url(@path, :get => true)
-          end
-        end
     end
   end
 end
@@ -79,6 +63,12 @@ class AttachmentUploader < CarrierWave::Uploader::Base
   # 调整临时文件的存放路径，默认是再 public 下面
   def cache_dir
     "#{Rails.root}/tmp/uploads"
+  end
+
+  def url
+    url ||= super({})
+    url = url.gsub "http", "https"
+    url
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
