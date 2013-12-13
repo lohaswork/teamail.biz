@@ -6,14 +6,14 @@ module CarrierWave
   module Storage
     class Aliyun < Abstract
       class Connection
-        def put(path, file, options={})
+        def put(path, file, options = {})
           path = format_path(path)
           bucket_path = get_bucket_path(path)
           content_md5 = Digest::MD5.file(file)
           content_type = options[:content_type] || "image/jpg"
           date = gmtdate
           url = path_to_url(path)
-          auth_sign = sign("PUT", bucket_path, content_md5, content_type,date)
+          auth_sign = sign("PUT", bucket_path, content_md5, content_type, date)
           headers = {
             "Authorization" => auth_sign,
             "Content-Type" => content_type,
