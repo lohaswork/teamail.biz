@@ -26,7 +26,23 @@ module CarrierWave
           RestClient.put(URI.encode(url), file, headers)
           return path_to_url(path, :get => true)
         end
+        def path_to_secure_url(path, opts = {})
+          if opts[:get]
+            "https://#{@aliyun_host}/#{path}"
+          else
+            "https://#{@aliyun_upload_host}/#{path}"
+          end
+        end
       end
+    end
+    class File
+        def url
+          if Rails.env.production?
+            oss_connection.path_to_secure_url(@path, :get => true)
+          else
+            oss_connection.path_to_url(@path, :get => true)
+          end
+        end
     end
   end
 end
