@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe User do
-  # before { @user = User.new(email: "user@example.com", password: "password") }
 
   subject (:user){ User.new(email: "user@example.com", password: "password") }
 
@@ -10,10 +9,6 @@ describe User do
     expect(user).to respond_to(:password)
     expect(user).to be_valid
   end
-  # it { should respond_to(:email) }
-  # it { should respond_to(:password) }
-
-  # it { should be_valid }
 
   describe "when email is not present" do
     before { user.email = " " }
