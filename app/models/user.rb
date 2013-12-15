@@ -111,10 +111,6 @@ class User < ActiveRecord::Base
     active_status? ? false : update_attribute(:active_status, true)
   end
 
-  def email_name
-    email[/[^@]+/]
-  end
-
   def default_organization=(organization)
     self.default_organization_id = organization.id
   end
