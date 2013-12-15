@@ -53,23 +53,22 @@
   <div class="secondary-nav-bg">
     <div class="container">
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3">
           <h3><a href="http://blog.lohaswork.com/" target="_blank">官方博客</a></h3>
-          <p>为什么要使用这个产品？</p>
+          <p>为什么要使用这个服务？</p>
         </div>
-        <!--
-        <div class="col-sm-6 col-md-3">
-          <h3><a href="#">功能介绍</a></h3>
-          <p>探索产品的方方面面</p>
+        <div class="col-md-3">
+          <h3><%= link_to '使用帮助', help_path, {target: "_blank"} %></h3></h3>
+          <p>探索 teamail 的方方面面</p>
         </div>
-        -->
-        <div class="col-md-4">
+
+        <div class="col-md-3">
           <h3><%= link_to '常见问题', faq_path, {target: "_blank"} %></h3>
           <p>我是否可以长期免费使用？</p>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
           <h3><%= link_to '关于我们', about_us_path, {target: "_blank"} %></h3>
-          <p>我们是谁？为什么打造这样一款产品</p>
+          <p>我们是谁？为什么打造这样一款产品？</p>
         </div>
       </div>
     </div>
@@ -80,24 +79,25 @@
   <div class="major-features container">
     <div class="col-md-4">
       <div class="feature-block">
-        <h3 class="feature-title-1">Email深度集成</h3>
-        <p>不改变原有项目管理方式,你可以通过Email完成所有基础的操作。</p>
-        <p>只需要在email的收件人地址上加入 <a href="mailto:notifications@mail.teamail.biz">notifications@mail.teamail.biz</a> , 剩下的就交给teamail来处理吧。</p>
+        <h3 class="feature-title-1">一致体验</h3>
+        <p>工作上离不开 email？没有问题！</p>
+        <p>你可以通过Email完成所有基础的操作。不必担心多套系统切换，我们提供了和 email 高度整合的使用方式。</p>
       </div>
     </div>
     <div class="col-md-4">
       <div class="feature-block">
-        <h3 class="feature-title-2">标签式管理</h3>
-        <p>还在为分类而头疼嘛？灵活使用标签，条理化你的工作讯息。</p>
-        <p>标签多层次筛选，不再使用的标签隐藏，只要你想得到，所有的项目信息都可以方便的进行管理。</p>
+        <h3 class="feature-title-2">全局视野</h3>
+        <p>传统的 email 信息混乱，每天花在整理信息的时间上就让人烦心。</p>
+        <p>通过teamail，你可以多维度地查看项目进展，把所有的精力花在必要的管理和执行上。</p>
+        <p>提升工作效率，仅在片刻之间。</p>
       </div>
     </div>
     <div class="col-md-4">
       <div class="feature-block">
-        <h3 class="feature-title-3">共享文件</h3>
-        <p>文件上传，没问题，teamail随时给你更好的使用体验。</p>
-        <p>只使用Email的古董派，也没问题。</p>
-        <p>email附件自动收录，让你更省心。</p>
+        <h3 class="feature-title-3">数据存储</h3>
+        <p>还在费劲整理资料？那就快试试 teamail 吧</p>
+        <p>所有数据、附件自动收录，不必担心邮件删除了就再也找不回来。</p>
+        <p>新员工加入，看历史记录去吧，再也不用一遍遍解释培训了。</p>
       </div>
     </div>
   </div>
@@ -109,16 +109,18 @@
       <h3>你可以这样使用 teamail.biz</h3>
     </div>
     <div class="user-story-1">
-      <p>讲故事部分，这里只是示例文字。示例强调文件部分<strong>强调</strong>还是示例部分。讲故事部分，这里只是示例文字。</p>
-      <p>示例强调文件部分<strong>强调</strong>还是示例部分。</p>
+      <p class="us1-top"><strong>梅雪</strong>，公司的新人，在 teamail 页面上看到了 项目经理 <strong>麦克</strong> 通过手机发布的一个任务，<br>完成 客户 <strong>董小姐</strong> 需要的初版方案。</p>
+      <p class="us1-bottom"><strong>麦克</strong>，项目经理<br>转发客户 <strong>董小姐</strong> 的需求文档给下属 <strong>梅雪</strong>。</p>
     </div>
-    <div class="user-story-1">
-      <p>讲故事部分，这里只是示例文字。示例强调文件部分<strong>强调</strong>还是示例部分。讲故事部分，这里只是示例文字。</p>
-      <p>示例强调文件部分<strong>强调</strong>还是示例部分。</p>
+    <div class="user-story-2">
+      <p class="us2-bottom">很快，<strong>梅雪</strong> 完成了文案，准备发给客户。她知道 <strong>董小姐</strong> 还不在会话列表中，<br>所以通过页面的 添加通知人功能 添加了 <strong>董小姐</strong> 的 Email，并且同时选中了通知人 <strong>麦克</strong>。</p>
     </div>
-    <div class="user-story-1">
-      <p>讲故事部分，这里只是示例文字。示例强调文件部分<strong>强调</strong>还是示例部分。讲故事部分，这里只是示例文字。</p>
-      <p>示例强调文件部分<strong>强调</strong>还是示例部分。</p>
+    <div class="user-story-3">
+      <p class="us3-top"><strong>蓝侬</strong>，这家公司的总监，像往常一样查看团队情况，通过标签筛选 <strong>“A广场项目”</strong> 时，<br>发现 <strong>梅雪</strong> 的初步方案有些问题。</p>
+      <p class="us3-bottom"><strong>蓝侬</strong> 随即给出了自己的意见，并且勾选通知了 <strong>梅雪</strong> 和 <strong>麦克</strong>。这封回复会出现在他们两人的 teamail 个人空间，<br>同时会以邮件形式发送给他们，而完全不会影响到客户 <strong>董小姐</strong>。</p>
+    </div>
+    <div class="user-story-4">
+      <p class="us4-middle"><strong>梅雪</strong> 通过标签筛选 <strong>“B广场项目”</strong><strong>“讨论”</strong>，仔细研读了公司<br>过去项目的成果后，重新撰写了一份符合公司规范的方案书。</p>
     </div>
   </div>
 </div>
