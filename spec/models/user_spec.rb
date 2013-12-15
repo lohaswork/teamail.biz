@@ -56,4 +56,42 @@ describe User do
       expect(user).to be_valid
     end
   end
+
+  describe ".authentication" do
+    before do
+      user.active_status = 1
+      user.save
+    end
+    subject (:result){ User.authentication(@email, @password) }
+
+    it "when a valid user" do
+      @email = "user@example.com"
+      @password = "password"
+      expect(result).to be_a User
+    end
+
+    it "when password is not present" do
+      @email = "user@example.com"
+      expect{result}.to raise_error(ValidationError)
+    end
+
+    it "when password is incorrect" do
+      @email = "user@example.com"
+      @password = "wrongpassword"
+      expect{result}.to raise_error(ValidationError)
+    end
+
+    it "when use a wrong email" do
+      @email = "wrong@example.com"
+      @password = "password"
+      expect{result}.to raise_error(ValidationError)
+    end
+
+    it "when the user is not active" do
+      user.update_attribute(:active_status, false)
+      @email = "user@example.com"
+      @password = "password"
+      expect{result}.to raise_error(ValidationError)
+    end
+  end
 end
