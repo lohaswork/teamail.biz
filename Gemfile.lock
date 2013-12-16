@@ -63,7 +63,6 @@ GEM
     childprocess (0.3.9)
       ffi (~> 1.0, >= 1.0.11)
     chronic (0.10.2)
-    chunky_png (1.2.9)
     churn (0.0.34)
       chronic (>= 0.2.3)
       hirb
@@ -85,12 +84,6 @@ GEM
     coffee-script-source (1.6.3)
     colored (1.2)
     columnize (0.3.6)
-    compass (0.12.2)
-      chunky_png (~> 1.2)
-      fssm (>= 0.2.7)
-      sass (~> 3.1)
-    compass-rails (2.0.alpha.0)
-      compass (>= 0.12.2, < 0.14)
     connection_pool (1.1.0)
     database_cleaner (1.2.0)
     debugger (1.6.2)
@@ -118,7 +111,6 @@ GEM
     font-awesome-sass (4.0.2)
       sass-rails (>= 3.1.1)
     formatador (0.2.4)
-    fssm (0.2.10)
     guard (2.1.1)
       formatador (>= 0.2.4)
       listen (~> 2.1)
@@ -346,7 +338,6 @@ DEPENDENCIES
   capybara
   carrierwave-aliyun
   coffee-rails (~> 4.0.0)
-  compass-rails
   database_cleaner
   debugger
   factory_girl_rails
