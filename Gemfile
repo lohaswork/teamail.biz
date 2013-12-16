@@ -72,7 +72,7 @@ gem 'unicorn-worker-killer'
 
 # Use Capistrano for deployment
 gem 'capistrano', '~> 2.15.5', group: :development
-
+gem 'capistrano-ext', group: :development
 # group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   # gem 'sdoc', require: false
