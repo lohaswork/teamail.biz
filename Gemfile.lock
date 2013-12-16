@@ -346,7 +346,7 @@ DEPENDENCIES
   capybara
   carrierwave-aliyun
   coffee-rails (~> 4.0.0)
-  compass-rails (~> 2.0.alpha.0)
+  compass-rails
   database_cleaner
   debugger
   factory_girl_rails
