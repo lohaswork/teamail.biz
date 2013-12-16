@@ -4,6 +4,8 @@ module EmailEngine
     def host_name(port_name = true)
       if Rails.env.production?
         "teamail.biz"
+      elsif Rails.env.staging?
+        "121.199.16.68"
       elsif port_name
         "0.0.0.0:3000"
       else
@@ -12,7 +14,7 @@ module EmailEngine
     end
 
     def protocol
-      Rails.env.production? ? "https" : "http"
+      (Rails.env.production? || Rails.env.staging?) ? "https" : "http"
     end
 
     def send_batch_message(options={})
@@ -48,7 +50,7 @@ module EmailEngine
     end
 
     def delivery_filter(emails)
-      Rails.env.production? ? emails : $config.receive_test_email
+      (Rails.env.production? || Rails.env.staging?) ? emails : $config.receive_test_email
     end
   end
 end
