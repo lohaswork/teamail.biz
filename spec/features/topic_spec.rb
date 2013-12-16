@@ -371,17 +371,6 @@ describe "the topics action" do
             find('#select-user-for-topic').should_not have_content(@user.display_name)
           end
         end
-
-        context "user reopen the field" do
-          it "should keep the text" do
-            click_on "写邮件"
-            fill_in "title", :with => "test title"
-            find("#modal-close").trigger('click')
-            page.should_not have_link "modal-close"
-            click_on "写邮件"
-            find_field('title').value == "test title"
-          end
-        end
       end
 
       describe "user create new topic on personal space" do
@@ -395,64 +384,6 @@ describe "the topics action" do
             visit personal_topics_path
             page.should have_content "test title"
             page.should_not have_selector "#new-topic-form"
-          end
-
-          it "should add the selected user into topic members" do
-            click_on "写邮件"
-            fill_in "title", :with => "test title"
-            sleep 0.5
-            find(:xpath, "//*[@id='select-user-for-topic']//label[9]/input").set(true)
-            click_button "创建"
-            page.should have_content "邮件创建成功"
-            visit personal_topics_path
-            page.should have_content "test title"
-            @organization.reload.topics.last.users.should include(@organization.users.last)
-          end
-
-          it "should default add the current user as member" do
-            click_on "写邮件"
-            sleep 0.5
-            fill_in "title", :with => "test title"
-            click_button "创建"
-            page.should have_content "邮件创建成功"
-            visit personal_topics_path
-            page.should have_content "test title"
-            @organization.topics.last.users.should include(@user)
-          end
-
-          it "should select all of the users by select all checkbox" do
-            click_on "写邮件"
-            sleep 0.5
-            fill_in "title", :with => "test title"
-            page.should have_selector(:xpath, "//div[@id='select-user-for-topic']/div[@id='subgroup-select']/div[1]/span")
-            find(:xpath, "//div[@id='select-user-for-topic']/div[@id='subgroup-select']/div[1]/span").click
-            click_button "创建"
-            page.should have_content "邮件创建成功"
-            expect(@organization.reload.topics.last.users.length).to eq 10
-            #expect(@organization.reload.topics.last.users.length).to eq(@organization.reload.users.length)
-          end
-        end
-
-        context "user create success with a discussion" do
-          it "shold see the discussion size change" do
-            click_on "写邮件"
-            sleep 0.5
-            fill_in "title", :with => "test title"
-            editor_fill_in :in => '#new-topic-form', :with => "this is test discussion"
-            click_button "创建"
-            page.should have_content "邮件创建成功"
-            visit personal_topics_path
-            page.should have_content "test title"
-            page.should have_content 1
-          end
-        end
-
-        context "user create failed" do
-          it "should see error message" do
-            click_on "写邮件"
-            sleep 0.5
-            click_button "创建"
-            page.should have_content "请输入标题"
           end
         end
       end
