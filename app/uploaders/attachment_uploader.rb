@@ -1,5 +1,36 @@
 # encoding: utf-8
 require 'carrierwave/processing/mime_types'
+
+# Open CarrierWave-Aliyun gem and override put method
+module CarrierWave
+  module Storage
+    class Aliyun < Abstract
+      class Connection
+        def put(path, file, options = {})
+          path = format_path(path)
+          bucket_path = get_bucket_path(path)
+          content_md5 = Digest::MD5.file(file)
+          content_type = options[:content_type] || "image/jpg"
+          date = gmtdate
+          url = path_to_url(path)
+          auth_sign = sign("PUT", bucket_path, content_md5, content_type, date)
+          headers = {
+            "Authorization" => auth_sign,
+            "Content-Type" => content_type,
+            "Content-Disposition" => "attachment;filename=\"#{::File.basename file}\"",
+            "Content-Length" => file.size,
+            "Date" => date,
+            "Host" => @aliyun_upload_host,
+            "Expect" => "100-Continue"
+          }
+          RestClient.put(URI.encode(url), file, headers)
+          return path_to_url(path, :get => true)
+        end
+      end
+    end
+  end
+end
+
 class AttachmentUploader < CarrierWave::Uploader::Base
   include CarrierWave::MimeTypes
 
@@ -32,6 +63,12 @@ class AttachmentUploader < CarrierWave::Uploader::Base
   # 调整临时文件的存放路径，默认是再 public 下面
   def cache_dir
     "#{Rails.root}/tmp/uploads"
+  end
+
+  def url
+    url ||= super({})
+    url = url.gsub "http", "https"
+    url
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:

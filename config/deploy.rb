@@ -110,7 +110,8 @@ namespace :deploy do
   task :housekeeping, :roles => :app do
     run "rm -rf #{current_path}/public/videos"  ###
     run "ln -s #{shared_path}/public/videos #{current_path}/public/videos"
-    run "#{sudo} ln -nfs #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/nginx.conf"
+    # Uncomment this when nginx configuration changes
+    # run "#{sudo} ln -nfs #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/nginx.conf"
     run "rm -rf #{current_path}/unicorn"
     run "ln -s #{shared_path}/unicorn/ #{current_path}/unicorn"
     run "rm -rf #{current_path}/tmp/sockets"
