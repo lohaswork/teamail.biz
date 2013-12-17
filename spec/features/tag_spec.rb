@@ -17,20 +17,21 @@ describe "topic section" do
       before do
         # topics should not have any tags before this
         find(:css, "div#select-topic").should_not have_content @organization.tags.first.name
-        first(:css, "div#select-topic input[type='checkbox']").set(true)
+        find(:xpath, "//*[@id='select-topic']/ul/li[1]/div[1]/input").set(true)
         click_button "tagging-dropdown"
-        first(:css, "div#tag-list input[type='checkbox']").set(true)
+        @checkbox = find(:xpath, "(//*[@id='tag-list']//input[@type='checkbox'])[1]")
+        @checkbox.set(true)
         click_button "应用"
       end
 
       it "should see already exist tags attached to the selected topics" do
-        find(:css, "div#select-topic").should have_content @organization.tags.first.name
+        find(:css, "div#select-topic").should have_content Tag.find(@checkbox.value).name
       end
 
       it "click delete tagging link, should not see the attached tag" do
         remove_tag_link = find(:css, "a.tag-remove-link")
         remove_tag_link.click
-        find(:css, "div#select-topic").should_not have_content @organization.tags.first.name
+        find(:css, "div#select-topic").should_not have_content Tag.find(@checkbox.value).name
       end
     end
 
@@ -42,7 +43,7 @@ describe "topic section" do
 
     context "select some topics, click the tagging-group control" do
       before do
-        first(:css, "div#select-topic input[type='checkbox']").set(true)
+        find(:xpath, "//*[@id='select-topic']/ul/li[1]/div[1]/input").set(true)
         click_button "tagging-dropdown"
       end
 
@@ -53,7 +54,7 @@ describe "topic section" do
       end
 
       it "should not see 新建 button when tags are selected" do
-        first(:css, "div#tag-list input[type='checkbox']").set(true)
+        find(:xpath, "(//*[@id='tag-list']//input[@type='checkbox'])[1]").set(true)
         page.should_not have_selector(:css, "#tag-submit")
         page.should_not have_button "新建"
         page.should have_selector(:css, "#tagging-submit")
@@ -61,12 +62,12 @@ describe "topic section" do
       end
 
       it "should not see 应用 button when selections are canceled" do
-        first(:css, "div#tag-list input[type='checkbox']").set(true)
+        find(:xpath, "(//*[@id='tag-list']//input[@type='checkbox'])[1]").set(true)
         page.should_not have_selector(:css, "#tag-submit")
         page.should_not have_button "新建"
         page.should have_selector(:css, "#tagging-submit")
         page.should have_button "应用"
-        first(:css, "div#tag-list input[type='checkbox']").set(false)
+        find(:xpath, "(//*[@id='tag-list']//input[@type='checkbox'])[1]").set(false)
         page.should have_selector(:css, "#tag-submit")
         fill_in "tag_name", :with => "新标签"
         page.should have_button "新建"
@@ -237,16 +238,17 @@ describe "topic section" do
       end
 
       it "filter using tag and should see topic list refreshed" do
-        link = all(:css, "div#tag-filters li").first
-        link.click
-        wait_for_ajax
+        within(:xpath, "//div[@id='tag-filters']") do
+          find('li', :text => @organization.tags.first.name).click
+        end
         page.should have_content @organization.topics.first.title
         page.should_not have_content @organization.topics.last.title
       end
 
       it "filter using tag that does not have any topics should not see any topics" do
-        link = all(:css, "div#tag-filters li").last
-        link.click
+        within(:xpath, "//div[@id='tag-filters']") do
+          find('li', :text => @organization.tags.last.name).click
+        end
         page.should_not have_css("div.topic-row")
       end
 
