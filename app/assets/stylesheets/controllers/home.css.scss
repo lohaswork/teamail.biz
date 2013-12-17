@@ -24,7 +24,7 @@ body.home {
     width: 36px;
     opacity: 0.6;
     position: fixed;
-    right: 10%;
+    right: 6%;
     top: 65%;
     text-align: center;
     i {
@@ -128,11 +128,11 @@ body.home {
     background-color: #eee;
   }
   .major-features {
-    max-width: 960px;
+    max-width: 1080px;
   }
   .feature-block {
-    height: 290px;
-    padding: 15px 10px 10px 15px;
+    height: 300px;
+    padding: 10px 10px 10px 10px;
     margin-top: 50px;
     margin-bottom: 50px;
     background-color: #fff;
@@ -151,6 +151,9 @@ body.home {
     }
     .feature-title-3 {
       color: #923728;
+    }
+    .feature-title-4 {
+      color: #CC9966;
     }
     p, li {
       font-size: 16px;
