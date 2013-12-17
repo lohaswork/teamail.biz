@@ -94,7 +94,7 @@ namespace :deploy do
   end
 
   task :start, :roles => :app, :except => { :no_release => true } do
-    run "cd #{current_path} && RAILS_ENV=production bundle exec unicorn_rails -c #{unicorn_config} -D"
+    run "cd #{current_path} && RAILS_ENV=#{rails_env} bundle exec unicorn_rails -c #{unicorn_config} -D"
   end
 
   task :stop, :roles => :app, :except => { :no_release => true } do

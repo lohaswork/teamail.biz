@@ -2,7 +2,7 @@
 set :server_name, "121.199.16.68"
 
 # Repository
-set :branch, "staging"  # Need changge to master
+set :branch, "staging"  # Need changge to staging
 
 # Configurations
 set :rails_env, "staging"
