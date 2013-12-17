@@ -3,6 +3,7 @@ require 'sidekiq/capistrano'
 $:.unshift('./config')
 require 'capistrano-db-rollback'
 require 'capistrano_database_yml'
+require 'capistrano/ext/multistage'
 
 # Five steps to run the first deployment
 # 0. Create unicorn related files at local development ENV
@@ -14,7 +15,9 @@ require 'capistrano_database_yml'
 # 6. Upload the video manually
 
 # Need change before deployment
-set :server_name, "121.199.43.92"
+set :stages, %w(production staging)
+set :default_stage, "staging"
+
 set :user, "deployer"
 set :sudo_user, "deployer"
 set :deploy_to, "/www/teamail_deploy"
@@ -23,10 +26,8 @@ set :deploy_to, "/www/teamail_deploy"
 set :application, "LohasWork.com"
 set :scm, :git
 set :repository,  "git@github.com:lohaswork/teamail.biz.git"
-set :branch, "master"  # Need changge to master
 
 # Configurations
-set :rails_env, "production"
 set :deploy_via, :remote_cache
 set :copy_exclude, [ '.git' ]
 set :use_sudo, false
@@ -38,10 +39,6 @@ set :default_environment, {
   'RBENV_VERSION' => "#{rbenv_version}",
 }
 
-# Roles
-role :web, "121.199.43.92"                          # Your HTTP server, Apache/etc
-role :app, "121.199.43.92"                          # This may be the same as your `Web` server
-role :db,  "121.199.43.92", :primary => true        # This is where Rails migrations will run
 
 # For sidekiq
 set(:sidekiq_cmd) { "bundle exec sidekiq -e #{rails_env}" }
@@ -97,7 +94,7 @@ namespace :deploy do
   end
 
   task :start, :roles => :app, :except => { :no_release => true } do
-    run "cd #{current_path} && RAILS_ENV=production bundle exec unicorn_rails -c #{unicorn_config} -D"
+    run "cd #{current_path} && RAILS_ENV=#{rails_env} bundle exec unicorn_rails -c #{unicorn_config} -D"
   end
 
   task :stop, :roles => :app, :except => { :no_release => true } do

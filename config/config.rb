@@ -13,6 +13,8 @@
   },
   production:{
 
+  },
+  staging:{
+    default_system_email: "stage@mail.teamail.biz"
   }
-
 }

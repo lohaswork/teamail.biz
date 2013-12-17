@@ -108,6 +108,9 @@ Capistrano::Configuration.instance.load do
           production:
             database: teamail_production
             <<: *base
+          staging:
+            database: teamail_staging
+            <<: *base
         EOF
 
         location = fetch(:template_dir, "config/deploy") + '/database.yml.erb'
