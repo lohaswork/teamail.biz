@@ -52,6 +52,14 @@ set(:sidekiq_processes) { 1 }
 set :unicorn_config, "#{current_path}/config/unicorn.rb"
 set :unicorn_pid, "#{current_path}/tmp/pids/unicorn.pid"
 
+# Fetch AARRR data
+namespace :aarrr do
+  desc "Get AARRR data"
+  task :fetch do
+    run "ruby ~/mysql-script/aarrr.rb"
+  end
+end
+
 namespace :deploy do
 
   # redis
