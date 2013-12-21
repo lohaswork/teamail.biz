@@ -14,14 +14,14 @@ describe Tag do
     it { should_not be_valid }
   end
 
-  # describe "when name format is invalid" do
-  #   it "should be invalid" do
-  #     names = ["has space", "has$", "has!", "_start", "-start"]
-  #     names.each do |invalid_name|
-  #       tag.name = invalid_name
-  #       expect(tag).not_to be_valid
-  #     end
-  #   end
-  # end
+  describe "when name format is invalid" do
+    it "should be invalid" do
+      names = ["has space", "has[", "has]"]
+      names.each do |invalid_name|
+        tag.name = invalid_name
+        expect(tag).not_to be_valid
+      end
+    end
+  end
 
 end
