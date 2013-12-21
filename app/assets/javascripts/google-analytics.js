@@ -4,4 +4,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
 ga('create', 'UA-46302335-1', 'teamail.biz');
+if (document.cookie.indexOf("login_token") == -1) {
+  ga('set', 'dimension1', 'visitors');
+}
 ga('send', 'pageview');

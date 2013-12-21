@@ -17,7 +17,11 @@
 
 <div class="landing-header-bg">
   <div class="container landing-header">
-    <h1>改进而不改变, 用Email进行团队协作</h1>
+    <h1>
+      <%= image_tag "left-wing.png", :class => "wings-image" %>
+      为 Email 插上团队协作的翅膀
+      <%= image_tag "right-wing.png", :class => "wings-image" %>
+    </h1>
     <div class="screen-shot-container col-md-8">
       <%= image_tag "landing-header-screenshot.png" %>
     </div>
@@ -59,7 +63,7 @@
         </div>
         <div class="col-md-3">
           <h3><%= link_to '使用帮助', help_path, {target: "_blank"} %></h3></h3>
-          <p>探索 teamail 的方方面面</p>
+          <p>探索 teamail.biz 的方方面面</p>
         </div>
 
         <div class="col-md-3">
@@ -77,27 +81,32 @@
 
 <div class="major-features-bg">
   <div class="major-features container">
-    <div class="col-md-4">
+    <div class="col-md-3">
       <div class="feature-block">
-        <h3 class="feature-title-1">一致体验</h3>
-        <p>工作上离不开 email？没有问题！</p>
-        <p>你可以通过Email完成所有基础的操作。不必担心多套系统切换，我们提供了和 email 高度整合的使用方式。</p>
+        <h3 class="feature-title-1">全局掌控</h3>
+        <p>仅靠每周例会和Email片段难以及时把握团队整体状况，导致局面失控并延误时机？</p>
+        <p>teamail.biz 整合团队整体的Email信息流，Leader可以通过"团队空间"了解项目最新进展，及时发现问题并给予指导，机会不再稍纵即逝！</p>
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
       <div class="feature-block">
-        <h3 class="feature-title-2">全局视野</h3>
-        <p>传统的 email 信息混乱，每天花在整理信息的时间上就让人烦心。</p>
-        <p>通过teamail，你可以多维度地查看项目进展，把所有的精力花在必要的管理和执行上。</p>
-        <p>提升工作效率，仅在片刻之间。</p>
+        <h3 class="feature-title-2">新人指导</h3>
+        <p>项目忙起来没有时间指导培训新人，导致一边老队员连夜奋战一边新同学无所事事？</p>
+        <p>teamail.biz 帮你保留以往所有项目的完整信息，并以条理化的形式展现。新入成员可以通过历史记录快速了解团队工作方式，尽快上手！</p>
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
       <div class="feature-block">
-        <h3 class="feature-title-3">数据存储</h3>
-        <p>还在费劲整理资料？那就快试试 teamail 吧</p>
-        <p>所有数据、附件自动收录，不必担心邮件删除了就再也找不回来。</p>
-        <p>新员工加入，看历史记录去吧，再也不用一遍遍解释培训了。</p>
+        <h3 class="feature-title-3">Email整合</h3>
+        <p>想要高效的项目管理，却又离不开Email？</p>
+        <p>在 teamail.biz 中，你可以通过熟悉的Email操作来创建任务/回复讨论/发送文件。我们提供了与Email高度契合的使用方式，不再需要多系统间的切换及由此带来的繁复操作！</p>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="feature-block">
+        <h3 class="feature-title-4">管理实践</h3>
+        <p>究竟怎样做才是行之有效的团队协作与项目管理？</p>
+        <p>从"及时清空收件箱"到"团队信息透明化"，teamail.biz 让你在潜移默化中体验并实践GTD和敏捷管理思想，帮你快速实现高效的协作与管理！</p>
       </div>
     </div>
   </div>
@@ -109,18 +118,18 @@
       <h3>你可以这样使用 teamail.biz</h3>
     </div>
     <div class="user-story-1">
-      <p class="us1-top"><strong>梅雪</strong>，公司的新人，在 teamail 页面上看到了 项目经理 <strong>麦克</strong> 通过手机发布的一个任务，<br>完成 客户 <strong>董小姐</strong> 需要的初版方案。</p>
-      <p class="us1-bottom"><strong>麦克</strong>，项目经理<br>转发客户 <strong>董小姐</strong> 的需求文档给下属 <strong>梅雪</strong>。</p>
+      <p class="us1-top">项目经理 <strong>麦克</strong>，在出差路上收到客户 <strong>董小姐</strong> 通过Email<br>发来的需求文档，他通过转发邮件轻松创建了一项任务，<br>要求新同事 <strong>梅雪</strong> 按照客户需求制作一份初步方案。</p>
+      <p class="us1-bottom"><strong>梅雪</strong>，公司的新人，在 teamail.biz 上看到了 <strong>麦克</strong> 发布的任务，开始工作。</p>
     </div>
     <div class="user-story-2">
       <p class="us2-bottom">很快，<strong>梅雪</strong> 完成了文案，准备发给客户。她知道 <strong>董小姐</strong> 还不在会话列表中，<br>所以通过页面的 添加通知人功能 添加了 <strong>董小姐</strong> 的 Email，并且同时选中了通知人 <strong>麦克</strong>。</p>
     </div>
     <div class="user-story-3">
-      <p class="us3-top"><strong>蓝侬</strong>，这家公司的总监，像往常一样查看团队情况，通过标签筛选 <strong>“A广场项目”</strong> 时，<br>发现 <strong>梅雪</strong> 的初步方案有些问题。</p>
-      <p class="us3-bottom"><strong>蓝侬</strong> 随即给出了自己的意见，并且勾选通知了 <strong>梅雪</strong> 和 <strong>麦克</strong>。这封回复会出现在他们两人的 teamail 个人空间，<br>同时会以邮件形式发送给他们，而完全不会影响到客户 <strong>董小姐</strong>。</p>
+      <p class="us3-top"><strong>蓝侬</strong>，这家公司的总监，每天都会抽出一两个小时通过 teamail.biz 查看团队整体情况。<br>通过标签筛选 <strong>“A广场项目”</strong> 时，发现 <strong>梅雪</strong> 的初步方案有些问题。</p>
+      <p class="us3-bottom"><strong>蓝侬</strong> 随即给出了自己的意见，并且勾选通知了 <strong>梅雪</strong> 和 <strong>麦克</strong>。这封回复会出现在他们两人的 teamail.biz 个人空间，<br>同时会以邮件形式发送给他们，而完全不会影响到客户 <strong>董小姐</strong>。</p>
     </div>
     <div class="user-story-4">
-      <p class="us4-middle"><strong>梅雪</strong> 通过标签筛选 <strong>“B广场项目”</strong><strong>“讨论”</strong>，仔细研读了公司<br>过去项目的成果后，重新撰写了一份符合公司规范的方案书。</p>
+      <p class="us4-middle"><strong>梅雪</strong> 通过标签筛选 <strong>“B广场项目”+“讨论”</strong>，仔细研读了公司<br>过去项目的成果后，重新撰写了一份符合公司规范的方案书。</p>
     </div>
   </div>
 </div>

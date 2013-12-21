@@ -28,7 +28,6 @@ gem "jquery-fileupload-rails"
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 1.2'
 
-gem 'compass-rails', '~> 2.0.alpha.0'
 gem 'anjlab-bootstrap-rails', '~> 3.0.3.0', :require => 'bootstrap-rails'
 gem 'font-awesome-sass'
 gem 'rest-client'
@@ -72,7 +71,7 @@ gem 'unicorn-worker-killer'
 
 # Use Capistrano for deployment
 gem 'capistrano', '~> 2.15.5', group: :development
-
+gem 'capistrano-ext', group: :development
 # group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   # gem 'sdoc', require: false

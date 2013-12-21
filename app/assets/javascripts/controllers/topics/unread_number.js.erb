@@ -6,7 +6,7 @@
   App.page.UnreadNumberPage.prototype = {
     init: function(){
       var self = this;
-      <% if Rails.env.production? %>
+      <% if Rails.env.production? || Rails.env.staging? %>
         $(document).ready(
           function(){
             setInterval(function(){

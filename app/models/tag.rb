@@ -9,6 +9,7 @@ class Tag < ActiveRecord::Base
   VALID_TAGNAME_TEGEX = /\A[^\s\[\]]+\z/
   validates :name, :presence => { :message => "标签名不能为空" },
                    :format => { :with => VALID_TAGNAME_TEGEX, :message=>"名称不合法，标签名不能包含空格和中括号'['、']'", :allow_blank => true }
+
   validates_uniqueness_of :name, :scope => :organization_id, :message=>"标签名已使用"
 
   scope :visible, lambda { where("IFNULL(hide_status, 0) <> 1") }

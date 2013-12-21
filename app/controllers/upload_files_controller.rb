@@ -10,12 +10,11 @@ class UploadFilesController < ApplicationController
 
   end
 
-  # Not used for now, but need refactor later
-  # def download
-  #   file = UploadFile.find(params[:id])
-  #   data = open(file.file.url)
-  #   send_data data.read, filename: file.name, type: file.content_type, disposition: 'attachment', stream: 'true', buffer_size: '4096'
-  # end
+  def download
+    file = UploadFile.find(params[:id])
+    url = file.file.url
+    redirect_to url
+  end
 
   def destroy
     upload = UploadFile.find(params[:id])
