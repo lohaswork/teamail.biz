@@ -126,33 +126,8 @@ describe "user authentaction action" do
           login_with(nil, "password")
           page.should have_content '没有这个用户'
         end
-
-        it "should see error message" do
-          login_with(nil, nil)
-          page.should have_content '没有这个用户'
-        end
-      end
-      context "user enter error message", :js => true do
-        it "should see error message" do
-          login_with("error@email.com", "password")
-          page.should have_content '没有这个用户'
-        end
-
-        it "should see error message" do
-          login_with(@user.email, "wrongpassword")
-          page.should have_content '密码或邮件地址不正确'
-        end
-      end
-
-      context "an not active user login", :js => true do
-        it "should see error message" do
-          user = create(:non_activate_user)
-          login_with(user.email, user.password)
-          page.should have_content '您的账户尚未激活'
-        end
       end
     end
-
 
     context "user click the forgot password" do
       it "should go to forget password page" do
