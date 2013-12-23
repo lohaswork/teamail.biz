@@ -10,7 +10,6 @@ LohasWorkCom::Application.routes.draw do
   end
 
   controller :home do
-    get 'home' => :index, as: :home
     get 'about-us' => :about_us, as: :about_us
     get 'faq' => :faq
     get 'agreement' => :agreement
@@ -76,12 +75,6 @@ LohasWorkCom::Application.routes.draw do
   end
 
   post "emails/receive" => "email_receivers#email"
-  resources :welcome, only: [] do
-    collection do
-      post 'add-early-adotpers' => :add_early_adotpers, as: :add_early_adotpers
-      get 'index'
-    end
-  end
 
   match '/*other' => redirect('/'), via: [:get, :post, :patch, :delete]
 
