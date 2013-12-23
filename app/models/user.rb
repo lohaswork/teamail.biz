@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
       user.organizations << organization
       user.default_organization = organization
       user.save!
-      organization.membership(user).update_attribute(:authority_type, 1)
+      organization.membership(user).update_attribute(:authority_type, true)
       organization.setup_seed_data(user)
       user
     end
@@ -62,7 +62,7 @@ class User < ActiveRecord::Base
         user.password = password
         user.save!
         user.update_attribute(:reset_token, nil)
-        user.update_attribute(:active_status, 1) if user.active_status != 1
+        user.update_attribute(:active_status, true) if user.active_status != 1
       rescue
         raise ValidationError.new(user.errors.messages.values)
       end
@@ -109,10 +109,6 @@ class User < ActiveRecord::Base
 
   def activate!
     active_status? ? false : update_attribute(:active_status, true)
-  end
-
-  def email_name
-    email[/[^@]+/]
   end
 
   def default_organization=(organization)
