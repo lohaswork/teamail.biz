@@ -67,12 +67,6 @@ LohasWorkCom::Application.routes.draw do
   end
 
   post "emails/receive" => "email_receivers#email"
-  resources :welcome, only: [] do
-    collection do
-      post 'add-early-adotpers' => :add_early_adotpers, as: :add_early_adotpers
-      get 'index'
-    end
-  end
 
   match '/*other' => redirect('/'), via: [:get, :post, :patch, :delete]
 
