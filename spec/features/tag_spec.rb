@@ -241,6 +241,7 @@ describe "topic section" do
         within(:xpath, "//div[@id='tag-filters']") do
           find('li', :text => @organization.tags.first.name).click
         end
+        wait_for_ajax
         page.should have_content @organization.topics.first.title
         page.should_not have_content @organization.topics.last.title
       end
