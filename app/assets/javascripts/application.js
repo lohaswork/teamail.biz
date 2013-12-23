@@ -17,8 +17,11 @@
 //= require lib/angular.min
 //= require lib/angular-resource.min
 //= require app/main
-//= require_tree ./config
 //= require app-init
+//= require_tree ./app/controllers
+//= require_tree ./app/directives
+//= require_tree ./app/filters
+//= require_tree ./app/services
 //= require_directory ./shared
 //= require_tree ./controllers
 //= require_self
