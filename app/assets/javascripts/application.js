@@ -14,7 +14,11 @@
 //= require jquery_ujs
 //= require jquery-fileupload
 //= require twitter/bootstrap
-//= require shared/app
+//= require lib/angular.min
+//= require lib/angular-resource.min
+//= require app/main
+//= require_tree ./config
+//= require app-init
 //= require_directory ./shared
 //= require_tree ./controllers
 //= require_self

@@ -18,7 +18,8 @@ LohasWorkCom::Application.configure do
   config.serve_static_assets = false
 
   # Compress JavaScripts and CSS.
-  config.assets.js_compressor = :uglifier
+  #config.assets.js_compressor = :uglifier
+  config.assets.js_compressor = Uglifier.new(mangle: false)
   # config.assets.css_compressor = :sass
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
@@ -69,8 +70,7 @@ LohasWorkCom::Application.configure do
   config.active_support.deprecation = :notify
 
   # Using font in asset pipeline
-  # Add the fonts path
-  config.assets.paths << Rails.root.join('app', 'assets', 'font')
+  config.assets.paths << Rails.root.join('app', 'assets', 'templates')
 
   # Precompile additional assets
   config.assets.precompile += [ 'ie.js', 'placeholder.js', 'google-analytics.js', 'ie/ie.css', 'ie/font-awesome-ie7.min.css' ]
