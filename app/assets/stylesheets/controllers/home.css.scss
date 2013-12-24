@@ -403,4 +403,104 @@ body.home {
     }
   }
 
+  // For mobile phone styles
+  @media only screen and (max-device-width: 768px) {
+    font-size: 62.5%;
+    h3 { font-size: 2rem; }
+    h4 { font-size: 1.8rem; }
+    p { font-size: 1.2rem; }
+
+    .landing-header-bg {
+      min-height: auto;
+    }
+    .landing-header .screen-shot-container {
+      height: auto;
+    }
+    .landing-header {
+      h1 {
+        font-size:2.0rem;
+        img { display:none; }
+      }
+      img { max-width:100%;}
+      .signup-form {
+        margin: 0 auto;
+        padding-top: 2rem;
+        input {
+          height: 3rem;
+          font-size: 1.6rem;
+        }
+        .btn {
+        }
+      }
+    }
+    .secondary-nav-bg {
+      margin-top: 39px;
+      min-height: 150px;
+      padding: 30px 0 5px;
+    }
+    .feature-block {
+      height: auto;
+      padding: 10px 10px 10px 10px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      p, li {
+        font-size: 1.4rem;
+        line-height: 2rem;
+      }
+      a { font-size: 1.4rem;}
+    }
+    .user-story-1, .user-story-2, .user-story-3, .user-story-4 {
+      width: 100%;
+      height: auto;
+      p { font-size: 1.4rem;}
+    }
+    .user-story-1 {
+      margin-bottom: 10%;
+      background: image-url("user-story-bg-01.jpg") no-repeat center center;
+      background-size: 100% auto;
+    }
+    .us1-top {
+      padding-top: 0;
+    }
+    .us1-bottom {
+      padding-top: 58%;
+    }
+    .user-story-2 {
+      margin-bottom: 10%;
+      background-size: 100% auto;
+    }
+    .us2-bottom {
+      padding-top: 60%;
+    }
+    .user-story-3 {
+      margin-bottom: 10%;
+      background: image-url("user-story-bg-03.jpg") no-repeat center center;
+      background-size: 100% auto;
+    }
+    .us3-top {
+      padding-top: 0;
+    }
+    .us3-bottom {
+      padding-top: 67%;
+    }
+    .user-story-4 {
+      margin-bottom: 10%;
+      background-size: 100% auto;
+    }
+    .us4-middle {
+      color: #fff;
+      padding-top:0;
+      padding-bottom:55%;
+      position:relative;
+      left: 0;
+    }
+  }
+  // faq mobile
+  .faq-content {
+    p {
+      font-size: 1.2rem;
+      line-height: 2.0rem;
+    }
+  }
 }
+
