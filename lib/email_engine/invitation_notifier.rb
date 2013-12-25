@@ -15,7 +15,7 @@ module EmailEngine
     def invitation_notification
       notification_text = @is_registered_user ? on_board_text : invitation_notification_text
       gateway.send_batch_message(
-        from: from.display_name,
+        from: from.display_name + " " + from.email,
         to: user.email,
         subject: "[teamail] 邀请加入#{organization_name}",
         body: notification_text,
@@ -44,19 +44,17 @@ module EmailEngine
                 <table cellpadding="0" cellspacing="0" border="0" align="center">
                   <tr style="padding-top: 20px;">
                     <td width="600" valign="top" style="border-collapse: collapse; text-align: center;">
-                      <img src="http://teamail.u.qiniudn.com/img/email/teamail-logo-for-email-template.png" alt="teamail.biz">
-                      <p style="text-align: center;color: #666; padding-top: 25px;">
-                        你好：#{from.display_name}邀请您加入他/她的组织
+                      <p style="text-align: left;color: #666; padding-top: 20px;">
+                        我正在使用 teamail.biz 进行项目管理, 希望你也能一起加入进来。
                       </p>
-                      <p style="text-align: center;color: #666;">
-                        点击下方链接即刻加入！
+                      <p style="text-align: left;color: #666;">
+                        请点击下面的链接马上加入。
                       </p>
-                      <p style="text-align: center; padding-top: 10px; padding-bottom: 15px;">
+                      <p style="text-align: left; padding-top: 10px; padding-bottom: 15px;">
                         <a style="color: #5BB65B;" href='#{@gateway.protocol}://#{@gateway.host_name}/reset/#{user.reset_token}'>
                           #{@gateway.protocol}://#{@gateway.host_name}/reset/#{user.reset_token}
                         </a>
                       </p>
-                      <img src="http://teamail.u.qiniudn.com/img/email/lohaswork-logo-for-email-template.png" alt="lohaswork">
                     </td>
                   <tr>
                 </table>
@@ -84,7 +82,7 @@ module EmailEngine
                   <tr>
                     <td width="600" valign="top" style="border-collapse: collapse;"></td>
                       <p style="text-align: center;color: #666; padding-top: 20px;">
-                        #{user.display_name}, 您已成功加入#{from}的组织
+                        你已成功加入#{from.display_name}的组织
                       </p>
                     </td>
                   <tr>
