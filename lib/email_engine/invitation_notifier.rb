@@ -17,7 +17,7 @@ module EmailEngine
       gateway.send_batch_message(
         from: from.display_name + " " + from.email,
         to: user.email,
-        subject: "[teamail] 邀请加入#{organization_name}",
+        subject: "一起来用 teamil.biz 进行项目管理",
         body: notification_text,
         message_id: invitation_message_id
       )
