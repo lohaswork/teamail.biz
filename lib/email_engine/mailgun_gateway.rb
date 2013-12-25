@@ -19,7 +19,7 @@ module EmailEngine
 
     def send_batch_message(options={})
       RestClient.post(messaging_api_end_point,
-          from: default_sender(options[:from]),
+          from: options[:from] || ("teamail.biz" + " " + $config.default_system_email),
           to: delivery_filter(options[:to]),
           subject: options[:subject],
           html: options[:body],
@@ -35,10 +35,6 @@ module EmailEngine
 
     def send_email?
       !!$config.email
-    end
-
-    def default_sender(email)
-      (email || "teamail.biz") + " " +$config.default_system_email
     end
 
     def api_key

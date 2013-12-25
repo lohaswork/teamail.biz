@@ -1,5 +1,5 @@
 # Create 'app' angular application (module)
-teamailApp = angular.module("teamailApp", ['ngResource'])
+teamailApp = angular.module("teamailApp", ['ngResource', 'ngRoute'])
 
 # Csrf token to make forms in Angular work with Rails
 teamailApp.config ($httpProvider) ->

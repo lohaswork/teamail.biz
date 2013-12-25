@@ -16,6 +16,7 @@
 //= require twitter/bootstrap
 //= require lib/angular.min
 //= require lib/angular-resource.min
+//= require lib/angular-route.min
 //= require app/main
 //= require_tree ./app/controllers
 //= require_tree ./app/directives
