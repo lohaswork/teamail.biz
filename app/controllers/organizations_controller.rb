@@ -38,6 +38,24 @@ class OrganizationsController < ApplicationController
                                                          :colleagues => colleagues
                                                     })
                           }
-                      }
+                    }
+  end
+
+  def invite_member_again
+    member = User.find params[:user]
+    InvitationNotifierWorker.perform_async(member.email, current_organization.name, login_user.email, is_registered_user = false)
+    render :json => {
+               :modal => {
+                 "message-dialog" => render_to_string(:partial => 'shared/error_and_notification',
+                                                      :locals => { notice: "邮件发送成功！" },
+                                                      :layout => false)
+                         }
+                    }
+  end
+
+  def set_organization_name
+    name = params[:organization_name].strip
+    current_organization.set_name name
+    render :json => { :reload => true }
   end
 end

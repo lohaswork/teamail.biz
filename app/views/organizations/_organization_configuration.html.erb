@@ -1,0 +1,15 @@
+<ul class="col-xs-12 list-unstyled configuration">
+  <li class="name-setting">
+    组织名称:
+    <%= current_organization.name %>
+  </li>
+  <li>
+    <%= form_tag set_organization_name_path, :method => "post", :class=>"form-inline", :remote => true do %>
+      <div class="form-group">
+        <label class="sr-only" for="exampleInputOrganizationName">Organization Name</label>
+        <%= text_field_tag :organization_name, nil, :class=>"form-control", :placeholder=>"设置组织名称"%>
+      </div>
+      <%= submit_tag "确定", :class=>"btn btn-default", 'data-disable-with' => '提交中...' %>
+    <% end %>
+  </li>
+</ul>

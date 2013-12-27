@@ -17,8 +17,6 @@ class User < ActiveRecord::Base
     :format => { :with => VALID_EMAIL_REGEX, :message=>'邮件地址不合法', :allow_blank => true },
     :uniqueness => { :message=>'邮件地址已使用' }
   validates :password, :length => { :minimum => 6, :message => '密码至少需要六位' }
-  validates :name, :format => { :with => /\A\S*\z/, :message=>'用户名格式错误，不能含有空格', :allow_blank => true },
-                   :length => { :maximum => 12, :message => '用户名不能超过12位' }
 
   class << self
     def create_with_organization(user, organization_name)

@@ -63,6 +63,12 @@ class Organization < ActiveRecord::Base
     topic.add_tags(tags)
   end
 
+  def set_name(name)
+    self.name = name
+    raise ValidationError.new(self.errors.messages.values) if !self.valid?
+    self.save!
+  end
+
   private
   def manual_content
     %"
@@ -78,7 +84,7 @@ class Organization < ActiveRecord::Base
         <br>
         <h4 style='text-align:center;'>第 ① 步 <small>邀请同事一起加入</small></h4>
         <br>
-        <p>点击上方导航栏右侧的 <strong>成员管理</strong></p>
+        <p>点击上方导航栏右侧的 <strong>设置</strong></p>
         <img src='http://teamail.u.qiniudn.com/guide/guide-section-2.png' style='max-width:45%;float:left;'>
         <img src='http://teamail.u.qiniudn.com/guide/guide-section-3.png' style='max-width:45%;'>
         <br>
@@ -94,7 +100,7 @@ class Organization < ActiveRecord::Base
         <br>
         <br>
         <p>填入 <strong>标题、内容</strong>，选择 <strong>通知人</strong>，点击创建，即可通过 teamail.biz 成功发送你的第一封邮件。</p>
-        <p>等一下，要是这时候想起来忘记通过 <strong>成员管理</strong> 页面添加某个人了怎么办？ 不着急，在 <strong>添加通知人输入框</strong> 中输入这个通知人的 Email 地址就好了，当然别忘了在通知人上 <strong>勾选新添加的地址</strong>。系统会发送这封邮件给该同学，并自动邀请TA加入你的团队。</p>
+        <p>等一下，要是这时候想起来忘记通过 <strong>设置</strong> 页面添加某个人了怎么办？ 不着急，在 <strong>添加通知人输入框</strong> 中输入这个通知人的 Email 地址就好了，当然别忘了在通知人上 <strong>勾选新添加的地址</strong>。系统会发送这封邮件给该同学，并自动邀请TA加入你的团队。</p>
         <br>
         <img src='http://teamail.u.qiniudn.com/guide/guide-section-6.png' style='max-width:100%;'>
         <br>

@@ -1,8 +1,22 @@
+<div class="return-link">
+  <%= link_to personal_topics_inbox_path do %>
+    <span class="fa-stack fa-lg">
+      <i class="fa fa-square-o fa-stack-2x"></i>
+      <i class="fa fa-reply fa-stack-1x"></i>
+    </span>
+    返回主界面
+  <% end %>
+</div>
 <div>
+  <%- if login_user_admin? %>
+    <h3><i class="fa fa-sitemap"></i>&nbsp&nbsp组织设置</h3>
+    <%= render :partial => 'organization_configuration' %>
+    <hr>
+  <% end %>
+  <h3><i class="fa fa-user"></i>&nbsp&nbsp个人设置</h3>
+  <%= render :partial => 'user_configuration' %>
+  <hr>
   <h3><i class="fa fa-group"></i>&nbsp&nbsp成员管理</h3>
-  <div class="return-link">
-    <%= link_to('返回列表', personal_topics_inbox_path) %>
-  </div>
-  <%= render :partial => 'member_list', :locals => {:colleagues => @colleagues} %>
-  <%= render :partial => 'invite_member', :locals => {:colleagues => @colleagues} %>
+  <%= render :partial => 'member_list', :locals => { :colleagues => get_colleagues } %>
+  <%= render :partial => 'invite_member' %>
 </div>
