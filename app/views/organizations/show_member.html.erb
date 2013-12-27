@@ -9,11 +9,11 @@
 </div>
 <div>
   <%- if login_user_admin? %>
-    <h3><i class="fa fa-group"></i>&nbsp&nbsp组织设置</h3>
+    <h3><i class="fa fa-sitemap"></i>&nbsp&nbsp组织设置</h3>
     <%= render :partial => 'organization_configuration' %>
     <hr>
   <% end %>
-  <h3><i class="fa fa-group"></i>&nbsp&nbsp个人设置</h3>
+  <h3><i class="fa fa-user"></i>&nbsp&nbsp个人设置</h3>
   <%= render :partial => 'user_configuration' %>
   <hr>
   <h3><i class="fa fa-group"></i>&nbsp&nbsp成员管理</h3>
