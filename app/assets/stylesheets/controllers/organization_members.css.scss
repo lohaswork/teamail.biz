@@ -1,7 +1,12 @@
+.configuration {
+  .name-setting {
+    margin: 20px 0 10px 0;
+  }
+}
 #member-list {
   margin-top: 20px;
   margin-bottom: 20px;
-  li {
+  .member-name {
     color: #000;
     margin-bottom: 10px;
     a {
@@ -16,6 +21,13 @@
     float: left;
   }
 }
+.invite-again-notice {
+  margin-left: 20px;
+  padding: 7px;
+}
+.invite-again-container {
+  margin-bottom: 20px;
+}
 .return-link {
-  margin: 20px 0 10px 20px;
+  margin: 10px 0 10px 0;
 }

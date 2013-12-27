@@ -18,8 +18,10 @@ describe "organization member page" do
     end
 
     it "modify username can see immediately" do
-      fill_in "user_name", :with => " 新名字 "
-      click_on "确定"
+      within(:xpath, "//*[@id='user-configuration']") do
+        fill_in "user_name", :with => " 新名字 "
+        click_on "确定"
+      end
       page.should have_content "新名字"
     end
   end
