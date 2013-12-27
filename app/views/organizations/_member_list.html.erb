@@ -1,27 +1,6 @@
-  <ul class='col-xs-12 list-unstyled' id="member-list">
-    <li>
-      <i class="fa fa-user"></i>
-      <%= login_user.display_name %>
-    </li>
-    <li>
-      <%= form_tag set_user_name_path, :method => "post", :class=>"form-inline", :remote => true do %>
-        <div class="form-group">
-          <label class="sr-only" for="exampleInputUserName">User Name</label>
-          <%= text_field_tag :user_name, nil, :class=>"form-control", :placeholder=>"设置用户名"%>
-        </div>
-        <%= submit_tag "确定", :class=>"btn btn-default", 'data-disable-with' => '提交中...' %>
-      <% end %>
-    </li>
-    <hr>
-    <%- get_colleagues.try(:each) do |user|%>
-      <li class="member-name">
-        <i class="fa fa-user"></i>
-        <%= user.display_name %>
-        <%- if login_user_admin? %>
-          <%= link_to delete_member_path(:user => user), :method => :post, :remote => true, :class=>"center" do %>
-            删除该成员
-          <% end %>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
+<ul class='col-xs-12 list-unstyled' id="member-list">
+  <li class="member-name" ng-repeat="member in members">
+    <i class="fa fa-user"></i>
+    {{ member.email }}
+  </li>
+</ul>

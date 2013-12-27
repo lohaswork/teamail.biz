@@ -1,11 +1,11 @@
 <div class="member-invite">
   <%- if login_user_admin? %>
-    <%= form_tag add_member_path, :method => :post, :class => "form-inline", :remote => true do %>
+    <form class"form-inline" ng-submit="create()">
       <div class="form-group">
-        <%= text_field_tag :user_email, nil, :class => "form-control", :placeholder=>"请输入Email"%>
+        <%= text_field_tag :user_email, nil, :class => "form-control", :placeholder=>"请输入Email", 'ng-model' => "memberEmail"%>
       </div>
       <%= submit_tag "邀请", :class=>"btn btn-default", 'data-disable-with' => '提交中...' %>
-    <% end %>
+    </form>
     <div class="alert alert-warning mailling-warning">提示: 请勿添加邮件列表</div>
   <% end %>
 </div>
