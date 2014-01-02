@@ -47,6 +47,8 @@ LohasWorkCom::Application.routes.draw do
     get 'show-member' => :show_member, as: :show_member
     post 'delete-member' => :delete_member, as: :delete_member
     post 'add-member' => :add_member, as: :add_member
+    post 'set-organization-name' => :set_organization_name, as: :set_organization_name
+    post 'invite-member-again' => :invite_member_again, as: :invite_member_again
   end
 
   get '/organization-topics' => 'topics#index', as: :organization_topics

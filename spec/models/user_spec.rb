@@ -39,16 +39,6 @@ describe User do
     it { should_not be_valid }
   end
 
-  describe "when name contains white space in the middle" do
-    before { user.name = "ab cd" }
-    it { should_not be_valid }
-  end
-
-  describe "when name is longer than 12 characters" do
-    before { user.name = "a"*13 }
-    it { should_not be_valid }
-  end
-
   describe "when name is valid" do
     before { user.name = "abcd" }
     it "create a valid user" do

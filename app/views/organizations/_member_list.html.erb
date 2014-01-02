@@ -2,5 +2,17 @@
   <li class="member-name" ng-repeat="member in members">
     <i class="fa fa-user"></i>
     {{ member.email }}
+    <%- if login_user_admin? %>
+      <%= link_to delete_member_path(:user => user), :method => :post, :remote => true do %>
+        删除该成员
+      <% end %>
+    <% end %>
   </li>
+  <%- unless user.active_status? %>
+    <li class="invite-again-container">
+      <span class="invite-again-notice alert alert-info">他/她还没有激活，<%= link_to invite_member_again_path(:user => user), :method => :post, :remote => true do %>重新发送<% end %>
+        邀请邮件。
+      </span>
+    </li>
+  <% end %>
 </ul>
