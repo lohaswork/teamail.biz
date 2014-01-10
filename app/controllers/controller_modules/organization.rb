@@ -10,6 +10,7 @@ module ControllerModules::Organization
     def update_current_organization(organization)
       begin
        session[:organization] = organization.id
+       @current_organization = organization
       rescue
         nil
       end
