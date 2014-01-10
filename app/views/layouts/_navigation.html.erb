@@ -9,7 +9,22 @@
       <% if is_logged_in?%>
         <% if !!current_organization %>
           <li>
-            <%= current_organization.name %>
+            <div class="btn-group">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                <%= current_organization.name %> <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                <% if organizations_other_than_current.any? %>
+                  <%- organizations_other_than_current.try(:each) do |organization| %>
+                    <li>
+                      <%= link_to organization.name, change_default_organization_path(organization: organization) %>
+                    </li>
+                  <% end %>
+                <% else %>
+                  <li>没有其他组织可切换</li>
+                <% end %>
+              </ul>
+            </div>
           </li>
           <li>
             <%= link_to('设置', show_member_path)%>

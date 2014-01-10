@@ -49,6 +49,7 @@ LohasWorkCom::Application.routes.draw do
 
   controller :organizations do
     get 'show-member' => :show_member, as: :show_member
+    get 'change-default-organization' => :change_default_organization, as: :change_default_organization
     post 'delete-member' => :delete_member, as: :delete_member
     post 'add-member' => :add_member, as: :add_member
     post 'set-organization-name' => :set_organization_name, as: :set_organization_name
