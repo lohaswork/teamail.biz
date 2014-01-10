@@ -8,6 +8,8 @@ class Discussion < ActiveRecord::Base
   has_many :users, lambda { uniq }, :through => :user_discussions
   validates :content, :presence => { :message => "请输入回复内容" }
 
+  after_create :update_topic_member
+
   class << self
     def create_discussion(user, topic, emails, content)
       discussion = Discussion.new(:content => content)
@@ -78,5 +80,10 @@ class Discussion < ActiveRecord::Base
       self.upload_files << file unless file.blank?
     end
     self.save!
+  end
+
+  private
+  def update_topic_member
+    discussable.users << (users - discussable.users)
   end
 end

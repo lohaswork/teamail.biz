@@ -17,9 +17,6 @@ class Topic < ActiveRecord::Base
   scope :order_by_update, lambda { order('updated_at DESC') }
   scope :get_unarchived, lambda { |user| joins(:user_topics).where("user_topics.user_id = ? AND IFNULL( user_topics.archive_status, 0 ) <> 1 ", user.id) }
 
-  after_save :update_member
-  after_touch :update_member
-
   class << self
     def create_topic(title, email_title=nil, content, emails, organization, user)
       topic = new(:title => title, :email_title => email_title)
@@ -96,10 +93,5 @@ class Topic < ActiveRecord::Base
   def default_notify_members
     members = discussions.last.notify_party.compact
     members << discussions.last.creator
-  end
-
-  private
-  def update_member
-    users << (discussions.last.users - users)
   end
 end
