@@ -3,7 +3,7 @@ class OrganizationsController < ApplicationController
   before_filter :login_required, :organization_required
 
   def change_default_organization
-    login_user.default_organization_id = params[:organization]
+    login_user.update_attribute(:default_organization_id, params[:organization])
     update_current_organization(login_user.default_organization)
     redirect_to personal_topics_inbox_path
   end
