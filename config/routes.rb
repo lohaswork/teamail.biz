@@ -1,4 +1,8 @@
 LohasWorkCom::Application.routes.draw do
+
+  use_doorkeeper
+  mount API::Base => '/api'
+
   root 'home#index'
 
   namespace :api, defaults: {format: :json} do
