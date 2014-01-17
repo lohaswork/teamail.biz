@@ -5,14 +5,6 @@ LohasWorkCom::Application.routes.draw do
 
   root 'home#index'
 
-  namespace :api, defaults: {format: :json} do
-    resource :organizations, only:[] do
-      member do
-        get 'members'
-      end
-    end
-  end
-
   controller :home do
     get 'about-us' => :about_us, as: :about_us
     get 'faq' => :faq
