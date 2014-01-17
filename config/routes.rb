@@ -1,6 +1,9 @@
 LohasWorkCom::Application.routes.draw do
 
-  use_doorkeeper
+  use_doorkeeper do
+    # default it accepts :authorizations, :tokens, :applications and :authorized_applications
+    skip_controllers :applications, :authorized_applications, :authorizations
+  end
   mount API::Base => '/api'
 
   root 'home#index'
