@@ -104,14 +104,14 @@ module APIGuard
 
     private
     def install_error_responders(base)
-      error_classes = [ MissingTokenError, TokenNotFoundError,
+      error_classes = [MissingTokenError, TokenNotFoundError,
                         ExpiredError, RevokedError, InsufficientScopeError]
 
       base.send :rescue_from, *error_classes, oauth2_bearer_token_error_handler
     end
 
     def oauth2_bearer_token_error_handler
-      Proc.new {|e|
+      Proc.new { |e|
         response = case e
           when MissingTokenError
             Rack::OAuth2::Server::Resource::Bearer::Unauthorized.new
@@ -137,7 +137,7 @@ module APIGuard
             Rack::OAuth2::Server::Resource::Bearer::Forbidden.new(
               :insufficient_scope,
               Rack::OAuth2::Server::Resource::ErrorMethods::DEFAULT_DESCRIPTION[:insufficient_scope],
-              { :scope => e.scopes})
+              { :scope => e.scopes })
           end
 
         response.finish
