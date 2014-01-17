@@ -6,7 +6,7 @@ module API
     version 'v1', using: :path
     format :json
 
-    #guard_all!
+    guard_all!
 
     resource :topic do
 
