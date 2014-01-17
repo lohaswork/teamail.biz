@@ -28,6 +28,15 @@ gem "jquery-fileupload-rails"
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 1.2'
 
+# Build APIs with Grape
+gem 'grape'
+
+# Build an Oauth Provider
+gem 'doorkeeper'
+
+# OAuth 2 Guard on Resource Server (API)
+gem "rack-oauth2"
+
 gem 'anjlab-bootstrap-rails', '~> 3.0.3.0', :require => 'bootstrap-rails'
 gem 'font-awesome-sass'
 gem 'rest-client'

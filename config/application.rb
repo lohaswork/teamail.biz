@@ -54,5 +54,12 @@ module LohasWorkCom
     config.assets.version = '1.0'
     config.autoload_paths += Dir["#{config.root}/lib/**/"]
     config.autoload_paths += %W(#{Rails.root}/app/workers)
+
+    # Add Grape API files
+    config.paths.add "app/api", glob: "**/*.rb"
+    config.autoload_paths += Dir["#{Rails.root}/app/api/*"]
+
+    config.paths.add "app/services", glob: "**/*.rb"
+    config.autoload_paths += Dir["#{Rails.root}/app/services/*"]
   end
 end
