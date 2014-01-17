@@ -1,5 +1,3 @@
-require "helpers"
-
 module API
   class Base < Grape::API
     include APIGuard
