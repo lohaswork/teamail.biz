@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140116075533) do
+ActiveRecord::Schema.define(version: 20140120094728) do
 
   create_table "discussions", force: true do |t|
     t.integer  "discussable_id"
@@ -79,8 +79,9 @@ ActiveRecord::Schema.define(version: 20140116075533) do
     t.integer  "organization_id"
     t.integer  "user_id"
     t.integer  "authority_type"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "formal_type",     default: 1
   end
 
   add_index "organization_memberships", ["organization_id"], name: "index_organization_memberships_on_organization_id", using: :btree
@@ -161,16 +162,17 @@ ActiveRecord::Schema.define(version: 20140116075533) do
 
   create_table "users", force: true do |t|
     t.string   "name"
-    t.string   "email",                   null: false
+    t.string   "email",                               null: false
     t.string   "password_digest"
     t.string   "remember_token"
     t.integer  "online_status"
     t.integer  "active_status"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.string   "active_code"
     t.string   "reset_token"
     t.integer  "default_organization_id"
+    t.integer  "formal_type",             default: 1
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
