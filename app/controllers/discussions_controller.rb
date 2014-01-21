@@ -4,9 +4,9 @@ class DiscussionsController < ApplicationController
 
   def create
     @topic = Topic.find(params[:topic_id])
-    if params[:invitation_button]
+    if params[:add_informal_user_button]
       # Validate invite emails and add member by emails and send invitation emails at meantime
-      add_member_from_discussion(params[:invited_emails])
+      add_member_from_discussion(params[:informal_user_emails])
 
       respond_array = []
       respond_array << "select-user-for-topic" << get_rendered_string('shared/user_select_for_topic', { topic: nil })

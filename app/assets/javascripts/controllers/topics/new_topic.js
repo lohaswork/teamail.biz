@@ -22,6 +22,7 @@
         var checkStatus = btnAll.hasClass("selected") ? true : false;
         btnAll.parents(".user-select").find(":checkbox").prop('checked', checkStatus);
       });
+      $('.temp-user-hint').popover({trigger:'hover'});
     }
   }
 
