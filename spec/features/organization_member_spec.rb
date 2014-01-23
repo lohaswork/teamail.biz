@@ -55,6 +55,7 @@ describe "organization member page" do
         fill_in "user_emails", :with => "test"
         click_button "邀请"
         page.should_not have_content "test@test.com"
+        sleep 0.5
         page.should have_content "邮件地址不合法"
       end
 
@@ -63,14 +64,44 @@ describe "organization member page" do
         fill_in "user_emails", :with => new_member.email
         click_button "邀请"
         page.should have_content new_member.display_name
-        User.find_by_email(new_member.email).active_status.should eq(1)
+        User.find_by_email(new_member.email).should be_active_status
+      end
+
+      context "invite an informal member of the organization" do
+        before do
+          new_member.organizations << organization
+          new_member.save
+          organization.membership(new_member).update_attribute(:formal_type, false)
+        end
+
+        it "should see display_name" do
+          fill_in "user_emails", :with => new_member.email
+          click_button "邀请"
+          page.should have_content new_member.display_name
+          user = User.find_by_email(new_member.email)
+          user.should be_formal_type
+          user.should be_active_status
+        end
+      end
+
+      context "invite an informal user" do
+        let(:informal_user) { create(:informal_user) }
+
+        it "should see display_name" do
+          fill_in "user_emails", :with => informal_user.email
+          click_button "邀请"
+          page.should have_content informal_user.display_name
+          user = User.find_by_email(informal_user.email)
+          user.should be_formal_type
+          user.should_not be_active_status
+        end
       end
 
       it "invite a non-exist user, should see email_address" do
         fill_in "user_emails", :with => "test@test.com"
         click_button "邀请"
         page.should have_content "test@test.com"
-        User.find_by_email("test@test.com").active_status.should_not eq(1)
+        User.find_by_email("test@test.com").should_not be_active_status
       end
     end
 

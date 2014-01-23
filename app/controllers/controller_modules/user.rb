@@ -29,7 +29,7 @@ module ControllerModules::User
   def get_valid_emails(input_emails)
     emails = input_emails.split(/[\,\;]/).map { |email| email.strip.downcase }
     emails.each do |email|
-      raise ValidationError.new('Email 地址不合法') unless User::VALID_EMAIL_REGEX =~ email
+      raise ValidationError.new('邮件地址不合法') unless User::VALID_EMAIL_REGEX =~ email
     end
     emails.reject { |email| email == login_user.email }
   end
