@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   include ControllerModules::ExceptionHandlers
   include ControllerModules::User
   include ControllerModules::Organization
+  include ControllerModules::Topic
 
   protect_from_forgery
   before_filter :set_page_id, :set_cache_buster

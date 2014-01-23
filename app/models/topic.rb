@@ -28,6 +28,18 @@ class Topic < ActiveRecord::Base
     end
   end
 
+  def informal_participators
+    self.users.reject { |user| user.is_formal_member?(self.organization) }
+  end
+
+  def add_informal_member(emails)
+    emails.each do |email|
+      user = User.find_by(email: email)
+      self.users << user unless self.users.include?(user)
+    end
+    self.save!
+  end
+
   def add_tags(ids)
     tags = ids.map { |id| Tag.find(id) }
     tags.map { |tag| self.tags << tag }

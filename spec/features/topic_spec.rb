@@ -65,9 +65,9 @@ describe "the topics action" do
           find('#select-user-for-topic').should_not have_content(@user.display_name)
         end
 
-        it "should see the invited emails text field" do
+        it "should see the add informal members' emails text field" do
           click_button "写邮件"
-          page.should have_selector('#invited_emails', text: "")
+          page.should have_selector('#informal_user_emails', text: "")
         end
       end
 
@@ -133,7 +133,7 @@ describe "the topics action" do
         it "should be able to invite multiple users to topic" do
           click_on "写邮件"
           sleep 0.5
-          fill_in "invited_emails", with: "test@example.com; test2@example2.com,test3@example3.com"
+          fill_in "informal_user_emails", with: "test@example.com; test2@example2.com,test3@example3.com"
           click_button "添加"
           page.should have_content "test@example.com"
           page.should have_content "test2@example2.com"
@@ -255,7 +255,7 @@ describe "the topics action" do
       end
 
       it "should see the invited emails text field" do
-        page.should have_selector('#invited_emails', text: "")
+        page.should have_selector('#informal_user_emails', text: "")
       end
 
       context "select a user manully" do

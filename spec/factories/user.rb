@@ -36,6 +36,11 @@ FactoryGirl.define do
 
     factory :clean_user do
       active_status 1
+      formal_type 1
+    end
+
+    factory :informal_user do
+      formal_type 0
     end
 
     factory :non_activate_user do

@@ -52,7 +52,7 @@ describe "organization member page" do
       end
 
       it "invite using invalid email address" do
-        fill_in "user_email", :with => "test"
+        fill_in "user_emails", :with => "test"
         click_button "邀请"
         page.should_not have_content "test@test.com"
         page.should have_content "邮件地址不合法"
@@ -60,14 +60,14 @@ describe "organization member page" do
 
       # 邀请后，未激活用户仅能看到email地址，不另外测试
       it "invite an exist user, should see display_name" do
-        fill_in "user_email", :with => new_member.email
+        fill_in "user_emails", :with => new_member.email
         click_button "邀请"
         page.should have_content new_member.display_name
         User.find_by_email(new_member.email).active_status.should eq(1)
       end
 
       it "invite a non-exist user, should see email_address" do
-        fill_in "user_email", :with => "test@test.com"
+        fill_in "user_emails", :with => "test@test.com"
         click_button "邀请"
         page.should have_content "test@test.com"
         User.find_by_email("test@test.com").active_status.should_not eq(1)

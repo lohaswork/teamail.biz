@@ -28,10 +28,12 @@ module TopicsHelper
   end
 
   def show_for_checkbox(users, topic)
-    users.map { |user| {
+    users.map do |user| {
       :email => user.email,
       :display_name => user.display_name,
-      :is_in_topic => topic && topic.default_notify_members.include?(user) || false } }
+      :is_in_topic => topic && topic.default_notify_members.include?(user) || false
+    }
+    end
   end
 
   def order_by_updator(topics)

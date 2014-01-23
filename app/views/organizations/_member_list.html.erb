@@ -9,7 +9,7 @@
         <% end %>
       <% end %>
     </li>
-    <%- unless user.active_status? %>
+    <%- if !user.active_status? && login_user_admin? %>
       <li class="invite-again-container">
         <span class="invite-again-notice alert alert-info">他/她还没有激活，<%= link_to invite_member_again_path(:user => user), :method => :post, :remote => true do %>重新发送<% end %>
           邀请邮件。

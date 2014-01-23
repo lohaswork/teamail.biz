@@ -20,6 +20,7 @@ FactoryGirl.define do
           user.save
           organization.topics << topic
           organization.users << user
+          organization.membership(user).update_attribute(:formal_type, 1)
           organization.tags << tag
         end
       end

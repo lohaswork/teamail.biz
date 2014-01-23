@@ -5,15 +5,13 @@
     <%= text_field_tag :informal_user_emails, nil, :class => 'informal-emails-input', :placeholder => '输入Email' %>
     <%= submit_tag "添加临时成员", :name => "add_informal_user_button", :class => "btn btn-default", 'data-disable-with' => '提交中...' %>
   </div>
-  <div class="alert alert-warning mailling-warning temp-user-hint" data-toggle="popover" data-placement="top" data-content="该序列邮件的临时成员，不会被邀请到组织内，也无权浏览其他组织内信息；请勿添加邮件列表！" data-original-title="临时成员" title="">临时成员？</div>
+  <div class="alert alert-warning mailling-warning temp-user-hint" data-toggle="popover" data-placement="top" data-content="该序列邮件的临时成员；请勿添加邮件列表！" data-original-title="临时成员" title="">临时成员？</div>
   <div class="subgroup-select-list">
-    <%- if !get_colleagues.blank?%>
-      <%- show_for_checkbox(get_colleagues, topic).each do |user| %>
-        <label>
-          <%= check_box_tag 'selected_emails[]', user[:email], false, :class=>"item", :'data-selected'=>user[:is_in_topic], :class => 'custome-checkbox' %>
-          <%=user[:display_name]%>
-        </label>
-      <% end %>
+    <%- show_for_checkbox(participators, topic).try(:each) do |user| %>
+      <label>
+        <%= check_box_tag 'selected_emails[]', user[:email], false, :class=>"item", :'data-selected'=>user[:is_in_topic], :class => 'custome-checkbox' %>
+        <%=user[:display_name]%>
+      </label>
     <% end %>
   </div>
 </div>
