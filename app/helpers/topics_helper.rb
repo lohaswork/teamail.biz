@@ -31,6 +31,7 @@ module TopicsHelper
     users.map do |user| {
       :email => user.email,
       :display_name => user.display_name,
+      :formal? => user.formal_type?,
       :is_in_topic => topic && topic.default_notify_members.include?(user) || false
     }
     end

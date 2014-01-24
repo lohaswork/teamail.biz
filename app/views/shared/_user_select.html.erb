@@ -10,7 +10,10 @@
     <%- show_for_checkbox(participators, topic).try(:each) do |user| %>
       <label>
         <%= check_box_tag 'selected_emails[]', user[:email], false, :class=>"item", :'data-selected'=>user[:is_in_topic], :class => 'custome-checkbox' %>
-        <%=user[:display_name]%>
+        <%= user[:display_name] %>
+        <% unless user[:formal?] %>
+          [临时]
+        <% end %>
       </label>
     <% end %>
   </div>
