@@ -42,6 +42,13 @@ class Organization < ActiveRecord::Base
     self
   end
 
+  def add_informal_member(emails)
+    emails = emails.reject do |email|
+      self.has_member?(email)
+    end
+    emails.each { |email| self.add_member_by_email(email, false) } unless emails.blank?
+  end
+
   def add_member_by_email(email, formal=true)
     unless user = User.find_by_email(email)
       user = User.new(:email => email, :password => User.generate_init_password)
@@ -63,7 +70,7 @@ class Organization < ActiveRecord::Base
 
   def has_member?(email)
     user = User.find_by_email(email)
-    self.users.include? user
+    user && self.users.include?(user)
   end
 
   def setup_seed_data(user)

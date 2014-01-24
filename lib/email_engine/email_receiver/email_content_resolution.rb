@@ -31,7 +31,11 @@ module EmailEngine
         else
           @organization = @creator && @creator.default_organization
         end
-        set_notifiers
+        emails = get_recipient_emails_to_array
+        if @creator && @organization && @organization
+          @organization.add_informal_member(emails)
+        end
+        set_notifiers(emails)
       end
 
       def resolve_topic_of_email
@@ -43,17 +47,23 @@ module EmailEngine
         topic_id && Topic.find(topic_id)
       end
 
-      def set_notifiers
-        email_regex = /\b[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\b/i
+      def set_notifiers(emails)
         @notifiers = []
-        all_recipient_emails = to + "," + (self.methods.include?(:cc) ? self.cc : '')
-        all_recipient_emails.split(',').map do |address|
-          email = address.scan(email_regex)
+        emails.map do |email|
           @notifiers.concat email if @organization && @organization.has_member?(email)
         end
         @notifiers = (@topic.default_notify_members.map(&:email) + @notifiers).uniq if is_creating_discussion
         @notifiers.delete sender
         @notifiers.delete $config.default_system_email
+      end
+
+      def get_recipient_emails_to_array
+        email_regex = /\b[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\b/i
+        all_recipient_emails = to + "," + (self.methods.include?(:cc) ? self.cc : '')
+        emails = all_recipient_emails.split(',').map do |address|
+          email = address.scan(email_regex).downcase
+        end
+        emails = emails.uniq
       end
 
       private

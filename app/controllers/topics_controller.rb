@@ -12,7 +12,7 @@ class TopicsController < ApplicationController
     if params[:add_informal_user_button]
       # Validate invite emails and add member to new topic and current organization by emails
       emails = get_valid_emails(params[:informal_user_emails])
-      add_informal_member_to_organization(emails)
+      current_organization.add_informal_member(emails)
       users =  emails.map { |email| User.find_by(email: email) }.select { |user| user.is_informal_member?(current_organization) }
       participators = add_new_topic_participators(users)
 
@@ -30,7 +30,7 @@ class TopicsController < ApplicationController
       title, tags = analyzed_title email_title unless email_title.blank?
       new_topic = Topic.create_topic(title, email_title, params[:content], selected_emails, current_organization, login_user)
       add_tags_from_title(new_topic, tags)
-      refresh_new_topic_participators
+      delete_new_topic_participators
 
       if files = params[:topic_upload_files].split(',')
         discussion = new_topic.discussions.first

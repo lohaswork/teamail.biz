@@ -22,7 +22,7 @@ module ControllerModules::Topic
     participators = session[:participators].map { |id| User.find id }
   end
 
-  def refresh_new_topic_participators
+  def delete_new_topic_participators
     session[:participators] = nil
   end
 

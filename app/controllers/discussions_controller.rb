@@ -7,7 +7,7 @@ class DiscussionsController < ApplicationController
     if params[:add_informal_user_button]
       # Validate invite emails and add member to the topic and current organization by emails
       emails = get_valid_emails(params[:informal_user_emails])
-      add_informal_member_to_organization(emails)
+      current_organization.add_informal_member(emails)
       @topic.add_informal_member(emails)
       participators = get_colleagues.concat @topic.informal_participators
 

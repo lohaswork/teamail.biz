@@ -24,6 +24,7 @@ class SessionsController < ApplicationController
 
   def destroy
     cookies.delete(:login_token)
+    session[:participators] = nil
     redirect_to login_path
   end
 end

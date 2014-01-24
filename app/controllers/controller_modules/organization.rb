@@ -27,11 +27,4 @@ module ControllerModules::Organization
   def current_organization_exist?
     !!current_organization
   end
-
-  def add_informal_member_to_organization(emails)
-    emails = emails.reject do |email|
-      current_organization.users.include?(User.find_by(email: email)) if User.find_by(email: email)
-    end
-    emails.each { |email| current_organization.add_member_by_email(email, false) } unless emails.blank?
-  end
 end

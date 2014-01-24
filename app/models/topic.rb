@@ -105,5 +105,6 @@ class Topic < ActiveRecord::Base
   def default_notify_members
     members = discussions.last.notify_party.compact
     members << discussions.last.creator
+    members = members.reject { |user| user.is_informal_member?(self.organization) }
   end
 end
