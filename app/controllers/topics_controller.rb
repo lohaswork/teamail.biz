@@ -9,13 +9,15 @@ class TopicsController < ApplicationController
 
   def create
     @topic = params[:topic_id].blank? ? nil : Topic.find(params[:topic_id])
-    if params[:invitation_button]
-      # Validate invite emails and add member by emails and send invitation emails at meantime
-      add_member_from_discussion(params[:invited_emails])
+    if params[:add_informal_user_button]
+      # Validate invite emails and add member to new topic and current organization by emails
+      emails = get_valid_emails(params[:informal_user_emails])
+      current_organization.add_informal_member(emails)
+      users =  emails.map { |email| User.find_by(email: email) }.select { |user| user.is_informal_member?(current_organization) }
+      participators = add_new_topic_participators(users)
 
       respond_array = []
-      respond_array << "select-user-for-topic" << get_rendered_string('shared/user_select_for_topic', { topic: nil })
-      respond_array << "select-user-for-discussion" << get_rendered_string('shared/user_select_for_discussion', { topic: @topic })
+      respond_array << "select-user-for-topic" << get_rendered_string('shared/user_select_for_topic', { topic: nil, participators: participators })
       render :json => { update: Hash[*respond_array] }
     else
       selected_emails = params[:selected_emails] || []
@@ -28,6 +30,7 @@ class TopicsController < ApplicationController
       title, tags = analyzed_title email_title unless email_title.blank?
       new_topic = Topic.create_topic(title, email_title, params[:content], selected_emails, current_organization, login_user)
       add_tags_from_title(new_topic, tags)
+      delete_new_topic_participators
 
       if files = params[:topic_upload_files].split(',')
         discussion = new_topic.discussions.first
@@ -45,6 +48,7 @@ class TopicsController < ApplicationController
     @topic = Topic.find(params[:id])
     @topic.discussions.last.mark_as_read_by_user(login_user)
     @discussions = @topic.discussions
+    @participators = get_colleagues.concat @topic.informal_participators
   end
 
   def archive

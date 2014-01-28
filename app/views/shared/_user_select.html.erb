@@ -2,18 +2,19 @@
   <div class="subgroup-select-header">
     选择邮件通知人:
     <span class='all'>全选</span>
-    <%= text_field_tag :invited_emails, nil, :class => 'invited-emails-input', :placeholder => '输入Email添加通知人' %>
-    <%= submit_tag "添加", :name => "invitation_button", :class=>"btn btn-default", 'data-disable-with' => '提交中...' %>
+    <%= text_field_tag :informal_user_emails, nil, :class => 'informal-emails-input', :placeholder => '输入Email' %>
+    <%= submit_tag "添加临时成员", :name => "add_informal_user_button", :class => "btn btn-default", 'data-disable-with' => '提交中...' %>
   </div>
-  <div class="alert alert-warning mailling-warning">提示: 请勿添加邮件列表</div>
+  <div class="alert alert-warning mailling-warning temp-user-hint" data-toggle="popover" data-placement="top" data-content="该序列邮件的临时成员；请勿添加邮件列表！" data-original-title="临时成员" title="">临时成员？</div>
   <div class="subgroup-select-list">
-    <%- if !get_colleagues.blank?%>
-      <%- show_for_checkbox(get_colleagues, topic).each do |user| %>
-        <label>
-          <%= check_box_tag 'selected_emails[]', user[:email], false, :class=>"item", :'data-selected'=>user[:is_in_topic], :class => 'custome-checkbox' %>
-          <%=user[:display_name]%>
-        </label>
-      <% end %>
+    <%- show_for_checkbox(participators, topic).try(:each) do |user| %>
+      <label>
+        <%= check_box_tag 'selected_emails[]', user[:email], false, :class=>"item", :'data-selected'=>user[:is_in_topic], :class => 'custome-checkbox' %>
+        <%= user[:display_name] %>
+        <% unless user[:formal?] %>
+          [临时]
+        <% end %>
+      </label>
     <% end %>
   </div>
 </div>

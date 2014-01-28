@@ -8,7 +8,7 @@
         <%= render :partial => 'tags/headline_tags', :locals => {:topic => @topic} %>
       </div>
       <%= render :partial => 'discussion_list', :locals => { :discussions => @discussions } %>
-      <%= render :partial => 'new_discussion', :locals => { :topic => @topic } %>
+      <%= render :partial => 'new_discussion', :locals => { :topic => @topic, :participators => @participators } %>
     </div>
   <% end %>
 </div>

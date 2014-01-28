@@ -4,7 +4,7 @@
       <div class="input-area form-group">
         <div class="col-xs-12">
           <%= render :partial => 'shared/editor' %>
-          <%= render :partial => 'shared/user_select_for_discussion', :locals => { :topic => @topic} %>
+          <%= render :partial => 'shared/user_select_for_discussion', :locals => { :topic => @topic, :participators => participators} %>
         </div>
         <div id="discussion-file-list">
           <%= hidden_field_tag :discussion_upload_files, '', :class => 'file-id-container' %>

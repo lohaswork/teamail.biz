@@ -13,8 +13,18 @@ describe "user authentaction action" do
       end
     end
 
+    describe "informal user signup success", :js => true do
+      before {@informal_user = create(:informal_user)}
+
+      it "add one more user" do
+        sign_up_with(@informal_user.email, 'another_password', 'company')
+        page.should have_content '您已成功注册并创建了您的公司或团体'
+        @informal_user.reload.should be_formal_type
+      end
+    end
+
     describe "user signup success" do
-      it "should add one more user", :js => true do
+      it "add one more user", :js => true do
         sign_up_with('user@example.com', 'password', 'company')
         expect {
           page.should have_content '您已成功注册并创建了您的公司或团体'
@@ -126,6 +136,15 @@ describe "user authentaction action" do
           login_with(nil, "password")
           page.should have_content '没有这个用户'
         end
+      end
+    end
+
+    context "informal user login", :js => true do
+      before {@informal_user = create(:informal_user)}
+
+      it "should see error message" do
+        login_with(@informal_user.email, @informal_user.password)
+        page.should have_content '没有这个用户'
       end
     end
 

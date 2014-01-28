@@ -6,7 +6,7 @@ module ControllerModules::User
   end
 
   def get_colleagues
-    current_organization.users.reject { |user| user.email == login_user.email }
+    current_organization.formal_members.reject { |user| user.email == login_user.email }
   end
 
   def login_user=(user)
@@ -26,11 +26,12 @@ module ControllerModules::User
     login_user.is_admin?(current_organization)
   end
 
-  def get_valid_emails(emails)
+  def get_valid_emails(input_emails)
+    emails = input_emails.split(/[\,\;]/).map { |email| email.strip.downcase }
     emails.each do |email|
-      raise ValidationError.new('Email 地址不合法') unless User::VALID_EMAIL_REGEX =~ email
+      raise ValidationError.new('邮件地址不合法') unless User::VALID_EMAIL_REGEX =~ email
     end
-    emails
+    emails.reject { |email| email == login_user.email }
   end
 
 end

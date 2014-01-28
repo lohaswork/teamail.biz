@@ -14,7 +14,7 @@
         </div>
         <div class="form-group">
           <div class="col-xs-12">
-            <%= render :partial => 'shared/user_select_for_topic', :locals => {:topic => nil} %>
+            <%= render :partial => 'shared/user_select_for_topic', :locals => {:topic => nil, :participators => get_new_topic_participators} %>
           </div>
         </div>
       </div>

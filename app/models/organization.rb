@@ -11,8 +11,19 @@ class Organization < ActiveRecord::Base
 
   scope :for_user, lambda { |user| joins(:users).where("user_id = ?", user.id).readonly(false) }
 
+  def self.create_organization_during_signup(name)
+    organization = Organization.new(:name => name)
+    raise ValidationError.new(organization.errors.messages.values)if !organization.valid?
+    organization.save!
+    organization
+  end
+
   def membership(user)
     self.organization_memberships.find_by_user_id(user.id)
+  end
+
+  def formal_members
+    self.users.select { |user| user.is_formal_member?(self) }
   end
 
   def add_tag(tag_name)
@@ -31,21 +42,35 @@ class Organization < ActiveRecord::Base
     self
   end
 
-  def add_member_by_email(email)
+  def add_informal_member(emails)
+    emails = emails.reject do |email|
+      self.has_member?(email)
+    end
+    emails.each { |email| self.add_member_by_email(email, false) } unless emails.blank?
+  end
+
+  def add_member_by_email(email, formal=true)
     unless user = User.find_by_email(email)
       user = User.new(:email => email, :password => User.generate_init_password)
       raise ValidationError.new(user.errors.messages.values) if !user.valid?
       user.generate_reset_token
+      user.formal_type = false if formal == false
     end
-    user.organizations << self
-    user.default_organization_id = self.id if user.default_organization.blank?
+    user.organizations << self unless user.organizations.include?(self)
+    if formal
+      user.default_organization_id = self.id if user.default_organization.blank?
+      user.formal_type = 1 unless user.formal_type?
+      self.membership(user).update_attribute(:formal_type, true) unless user.is_formal_member?(self)
+    else
+      self.membership(user).update_attribute(:formal_type, false)
+    end
     user.save!
     self
   end
 
   def has_member?(email)
     user = User.find_by_email(email)
-    self.users.include? user
+    user && self.users.include?(user)
   end
 
   def setup_seed_data(user)

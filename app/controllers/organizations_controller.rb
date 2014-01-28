@@ -27,12 +27,19 @@ class OrganizationsController < ApplicationController
   end
 
   def add_member
-    new_member_email = params[:user_email]
-    organization = current_organization
-    unless organization.has_member?(new_member_email)
-      is_registered_user = User.already_register?(new_member_email)
-      organization.add_member_by_email(new_member_email)
-      InvitationNotifierWorker.perform_async(new_member_email, organization.name, login_user.email, is_registered_user)
+    new_member_emails = get_valid_emails params[:user_emails]
+    emails = new_member_emails.reject do |email|
+      User.find_by(email: email) && User.find_by(email: email).is_formal_member?(current_organization)
+    end
+    emails.each do |email|
+      user = User.find_by(email: email)
+      if !user || !user.formal_type?
+        is_registered_user = false
+      else
+        is_registered_user = true
+      end
+      current_organization.add_member_by_email(email)
+      InvitationNotifierWorker.perform_async(email, current_organization.name, login_user.email, is_registered_user)
     end
     colleagues = get_colleagues
 

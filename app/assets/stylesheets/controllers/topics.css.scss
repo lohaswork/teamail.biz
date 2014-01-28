@@ -247,10 +247,10 @@
       background-color: #BFC9A7;
     }
   }
-  .invited-emails-input {
+  .informal-emails-input {
     height: 34px;
     padding: 6px 9px;
-    max-width: 155px;
+    max-width: 125px;
     @include input-border(4px);
   }
   label {font-weight: normal;}
