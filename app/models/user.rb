@@ -3,6 +3,7 @@ require 'bcrypt'
 class User < ActiveRecord::Base
   attr_accessible :email, :password, :name
 
+  has_many :oauth_access_tokens, foreign_key: "resource_owner_id"
   has_many :organization_memberships
   has_many :organizations, lambda { uniq }, :through => :organization_memberships
   has_many :user_topics
