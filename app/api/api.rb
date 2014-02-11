@@ -15,9 +15,18 @@ module API
     resources :topics do
       # Todo: paginate & tag filter
       desc "Return current user personal topics."
+      params do
+        optional :tags do
+          requires :id, type: Integer
+        end
+      end
       get "/personal", jbuilder: 'topics/personal.jbuilder' do
         guard!
         @topics = current_user.topics.order_by_update
+        if params[:tags].present?
+          debugger
+          @topics = @topics.select { |topic| (topic.tags.map(&:id) <=> params[:tags]) != -1 }
+        end
       end
     end
 
