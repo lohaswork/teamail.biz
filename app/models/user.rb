@@ -129,14 +129,6 @@ class User < ActiveRecord::Base
   def default_organization
     default_organization_id && Organization.find(default_organization_id)
   end
-  private
-  def create_remember_token
-    generate_token(:remember_token)
-  end
-
-  def add_active_code
-    generate_token(:active_code)
-  end
 
   #args:
   #  user: User object
@@ -144,11 +136,20 @@ class User < ActiveRecord::Base
   #    all: all of the topics for the user
   #    inbox: all of the unarchived topics for the user
   def personal_topics(mailbox_type)
-    if type == "all"
+    if mailbox_type == "all"
       self.topics.order_by_update
-    elsif type == "inbox"
+    elsif mailbox_type == "inbox"
       Topic.get_unarchived(self).order_by_update
     end
+  end
+
+  private
+  def create_remember_token
+    generate_token(:remember_token)
+  end
+
+  def add_active_code
+    generate_token(:active_code)
   end
 
   def generate_token(column)

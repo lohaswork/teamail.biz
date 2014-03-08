@@ -44,7 +44,7 @@ gem 'rest-client'
 gem 'carrierwave-aliyun'
 gem 'multimap'
 gem 'sidekiq'
-gem 'kaminari'
+gem 'grape-kaminari'
 gem 'sanitize'
 
 # To use ActiveModel has_secure_password

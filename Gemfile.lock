@@ -137,6 +137,9 @@ GEM
       jbuilder
       tilt
       tilt-jbuilder (>= 0.4.0)
+    grape-kaminari (0.1.0)
+      grape
+      kaminari
     guard (2.1.1)
       formatador (>= 0.2.4)
       listen (~> 2.1)
@@ -396,13 +399,13 @@ DEPENDENCIES
   font-awesome-sass
   grape
   grape-jbuilder
+  grape-kaminari
   guard (~> 2.1.1)
   guard-rspec
   guard-spork
   jbuilder
   jquery-fileupload-rails
   jquery-rails
-  kaminari
   metric_fu
   multimap
   mysql2
