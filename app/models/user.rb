@@ -138,6 +138,19 @@ class User < ActiveRecord::Base
     generate_token(:active_code)
   end
 
+  #args:
+  #  user: User object
+  #  mailbox_type: all/inbox
+  #    all: all of the topics for the user
+  #    inbox: all of the unarchived topics for the user
+  def personal_topics(mailbox_type)
+    if type == "all"
+      self.topics.order_by_update
+    elsif type == "inbox"
+      Topic.get_unarchived(self).order_by_update
+    end
+  end
+
   def generate_token(column)
     begin
       self[column] = SecureRandom.urlsafe_base64
