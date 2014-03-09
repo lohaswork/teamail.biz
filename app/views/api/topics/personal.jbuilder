@@ -6,4 +6,3 @@ json.set! :topics do
     json.update_at topic.updated_at
   end
 end
-

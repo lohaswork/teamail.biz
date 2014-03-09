@@ -45,6 +45,8 @@ module API
         end
         topics = current_organization.topics.order_by_update
         if params[:tags].present?
+          # TODO: 1. paginate_array does not work here, and want to change has tag filter by sql
+          #       2. the personal.jbuilder and organization.builder are same now, we should reuse the code if they has no deference later
           @topics = Kaminari.paginate_array(topics.reject! { |topic| !topic.has_tags?(params[:tags]) }).page(params[:page])
         else
           @topics = paginate topics
