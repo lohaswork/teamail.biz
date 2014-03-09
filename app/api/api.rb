@@ -33,7 +33,9 @@ module API
         params do
           requires :mailbox_type, :type => String, :desc => "MailBox type"
         end
-        @topics = paginate current_user.personal_topics(params[:mailbox_type])
+        topics = current_user.personal_topics(params[:mailbox_type])
+        @topics = paginate topics
+        @total_count = topics.size
       end
 
       get "/organization", jbuilder: 'topics/organization.jbuilder' do
@@ -43,10 +45,11 @@ module API
         end
         topics = current_organization.topics.order_by_update
         if params[:tags].present?
-          @topics = Kaminari.paginate_array(topics.reject { |topic| !topic.has_tags?(params[:tags]) }).page(params[:page])
+          @topics = Kaminari.paginate_array(topics.reject! { |topic| !topic.has_tags?(params[:tags]) }).page(params[:page])
         else
           @topics = paginate topics
         end
+        @total_count = topics.size
       end
     end
 
