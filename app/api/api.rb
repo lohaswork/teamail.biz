@@ -2,7 +2,7 @@ module API
   class Base < Grape::API
     include APIGuard
     include Grape::Kaminari
-    version 'v1', using: :path
+    version "#{$config.api_version}", using: :path
     format :json
     formatter :json, Grape::Formatter::Jbuilder
 

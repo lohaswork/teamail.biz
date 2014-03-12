@@ -1,6 +1,6 @@
 LohasWorkCom::Application.routes.draw do
 
-  scope 'api/v1' do
+  scope "api/#{$config.api_version}" do
     use_doorkeeper do
       # default it accepts :authorizations, :tokens, :applications and :authorized_applications
       skip_controllers :applications, :authorized_applications, :authorizations
