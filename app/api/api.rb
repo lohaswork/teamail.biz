@@ -47,8 +47,8 @@ module API
         error!('bad paramaters', 400) if params[:per_page].blank? || params[:page].blank?
         topics = current_organization.topics.order_by_update
         if params[:tags].present?
-          # TODO: 1. want to change has tag filter by sql
-          #       2. the personal.jbuilder and organization.builder are same now, we should reuse the code if they has no deference later
+          # TODO: 1. want to change has_tag filter by sql
+          #       2. the personal.jbuilder and organization.builder are same now, we should reuse the code if they has no difference later
           @topics = Kaminari.paginate_array(topics.reject! { |topic| !topic.has_tags?(params[:tags]) }).page(params[:page]).per(params[:per_page])
         else
           @topics = paginate topics
