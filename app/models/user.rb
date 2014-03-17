@@ -3,6 +3,7 @@ require 'bcrypt'
 class User < ActiveRecord::Base
   attr_accessible :email, :password, :name
 
+  has_many :oauth_access_tokens, foreign_key: "resource_owner_id"
   has_many :organization_memberships
   has_many :organizations, lambda { uniq }, :through => :organization_memberships
   has_many :user_topics
@@ -128,6 +129,20 @@ class User < ActiveRecord::Base
   def default_organization
     default_organization_id && Organization.find(default_organization_id)
   end
+
+  #args:
+  #  user: User object
+  #  mailbox_type: all/inbox
+  #    all: all of the topics for the user
+  #    inbox: all of the unarchived topics for the user
+  def personal_topics(mailbox_type)
+    if mailbox_type == "all"
+      self.topics.order_by_update
+    elsif mailbox_type == "inbox"
+      Topic.get_unarchived(self).order_by_update
+    end
+  end
+
   private
   def create_remember_token
     generate_token(:remember_token)

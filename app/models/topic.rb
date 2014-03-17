@@ -107,4 +107,10 @@ class Topic < ActiveRecord::Base
     members << discussions.last.creator
     members = members.reject { |user| user.is_informal_member?(self.organization) }
   end
+
+  def has_attachments?
+    arr = self.discussions.map { |discussion| discussion.upload_files.length }
+    arr.delete 0
+    !arr.blank?
+  end
 end

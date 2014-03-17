@@ -2,7 +2,7 @@ module ControllerModules::Topic
   extend ActiveSupport::Concern
 
   included do
-    helper_method :get_new_topic_participators
+    helper_method :get_new_topic_participators, :unread_topic_number
   end
 
   def get_new_topic_participators
@@ -24,6 +24,10 @@ module ControllerModules::Topic
 
   def delete_new_topic_participators
     session[:participators] = nil
+  end
+
+  def unread_topic_number
+    num = Topic.get_unarchived(login_user).to_a.reject { |topic| topic.read_status_of_user(login_user) }.length.to_s
   end
 
 end
