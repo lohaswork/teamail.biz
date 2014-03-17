@@ -37,7 +37,7 @@ class Discussion < ActiveRecord::Base
 
   def read_status_of_user(user)
     begin
-      self.user_discussions.find_by_user_id(user.id).read_status
+      self.user_discussions.find_by_user_id(user.id).read_status == 1 ? true : false
     rescue ActiveRecord::RecordNotFound, NoMethodError
       false
     end
@@ -80,6 +80,10 @@ class Discussion < ActiveRecord::Base
       self.upload_files << file unless file.blank?
     end
     self.save!
+  end
+
+  def has_attachments?
+    !upload_files.blank?
   end
 
   private

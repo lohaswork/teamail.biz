@@ -91,8 +91,8 @@ describe "topics have new discussion", :js => true do
       visit personal_topics_path
       page.should have_content "test title"
       topic = user.topics.last
-      topic.read_status_of_user(user).should eq(1)
-      topic.read_status_of_user(another_user).should_not eq(1)
+      topic.read_status_of_user(user).should be_true
+      topic.read_status_of_user(another_user).should be_false
     end
 
     it "should change read status when add a discussion to the read topic" do
@@ -101,8 +101,8 @@ describe "topics have new discussion", :js => true do
       editor_fill_in :in => '#new-discussion-form', :with => "discussion from user himself"
       click_button "回复"
       page.should have_content "discussion from user himself"
-      topic.read_status_of_user(user).should eq(1)
-      topic.read_status_of_user(another_user).should_not eq(1)
+      topic.read_status_of_user(user).should be_true
+      topic.read_status_of_user(another_user).should be_false
     end
   end
 end

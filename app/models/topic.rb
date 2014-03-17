@@ -107,4 +107,12 @@ class Topic < ActiveRecord::Base
     members << discussions.last.creator
     members = members.reject { |user| user.is_informal_member?(self.organization) }
   end
+
+  def has_attachments?
+    has_attachments = false
+    Discussion.includes(:upload_files).where(discussable_id:id).each do |discussion|
+      has_attachments |= discussion.has_attachments?
+    end
+    has_attachments
+  end
 end
