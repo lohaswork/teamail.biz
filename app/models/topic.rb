@@ -109,8 +109,10 @@ class Topic < ActiveRecord::Base
   end
 
   def has_attachments?
-    arr = self.discussions.map { |discussion| discussion.upload_files.length }
-    arr.delete 0
-    !arr.blank?
+    has_attachments = false
+    Discussion.includes(:upload_files).where(discussable_id:id).each do |discussion|
+      has_attachments |= discussion.has_attachments?
+    end
+    has_attachments
   end
 end

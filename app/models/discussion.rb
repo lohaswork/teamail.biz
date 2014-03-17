@@ -82,6 +82,10 @@ class Discussion < ActiveRecord::Base
     self.save!
   end
 
+  def has_attachments?
+    !upload_files.blank?
+  end
+
   private
   def update_topic_member
     discussable.users << (users - discussable.users)
