@@ -21,7 +21,7 @@
             <% end %>
           </div>
           <div class='topic-update-time'>
-            <%- if has_attachments?(topic) %>
+            <%- if topic.has_attachments? %>
               <i class="fa fa-paperclip fa-lg"></i>
             <% end %>
             <time class="timeago" datetime="<%= topic.last_update_time %>"></time>
