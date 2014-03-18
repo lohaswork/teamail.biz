@@ -6,6 +6,13 @@ module API
     format :json
     formatter :json, Grape::Formatter::Jbuilder
 
+    rescue_from Grape::Exceptions::ValidationErrors do |e|
+      Rack::Response.new({
+        errors: "Bad Request",
+        error_description: e.message
+      }.to_json, 400,{"Content-Type" => "application/json"})
+    end
+
     helpers do
       def current_user
         @current_user ||= OauthAccessToken.find_by(:token, params[:access_token]).user
@@ -27,7 +34,7 @@ module API
         requires :per_page, :type => Integer, :desc => "Page size for pagination"
         requires :page, :type => Integer, :desc => "Page number for pagination"
       end
-      get "/personal", jbuilder: 'topics/personal.jbuilder' do
+      get "/personal", jbuilder: 'topics/topic_list.jbuilder' do
         guard!
         params do
           requires :mailbox_type, :type => String, :desc => "MailBox type"
@@ -38,7 +45,7 @@ module API
         @total_count = topics.size
       end
 
-      get "/organization", jbuilder: 'topics/organization.jbuilder' do
+      get "/organization", jbuilder: 'topics/topic_list.jbuilder' do
         guard!
         params do
           optional :tags, :type => Array, :desc => "Tag IDs for filter"
@@ -55,6 +62,11 @@ module API
         end
         @total_count = topics.size
       end
+    end
+
+    #Handle 404 error in scope /api/v1
+    route :any, '*path' do
+      error!("No such route", 404)
     end
 
   end
