@@ -39,7 +39,6 @@ module API
         params do
           requires :mailbox_type, :type => String, :desc => "MailBox type"
         end
-        error!('bad paramaters', 400) if params[:per_page].blank? || params[:page].blank? || params[:mailbox_type].blank?
         topics = current_user.personal_topics(params[:mailbox_type])
         @topics = paginate topics
         @total_count = topics.size
@@ -50,8 +49,6 @@ module API
         params do
           optional :tags, :type => Array, :desc => "Tag IDs for filter"
         end
-        #TODO: The way we used to validate should be changed later, should be more generalized
-        error!('bad paramaters', 400) if params[:per_page].blank? || params[:page].blank?
         topics = current_organization.topics.order_by_update
         if params[:tags].present?
           # TODO: 1. want to change has_tag filter by sql
