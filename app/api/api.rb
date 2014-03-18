@@ -10,7 +10,7 @@ module API
       Rack::Response.new({
         errors: "Bad Request",
         error_description: e.message
-      }.to_json, 400,{"Content-Type" => "application/json"})
+      }.to_json, 400, { "Content-Type" => "application/json" })
     end
 
     helpers do
