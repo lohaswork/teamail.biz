@@ -6,7 +6,7 @@ LohasWorkCom::Application.routes.draw do
       skip_controllers :applications, :authorized_applications, :authorizations
     end
   end
-  mount API::Base => '/api'
+  mount ApplicationApi => '/api'
 
   root 'home#index'
 
