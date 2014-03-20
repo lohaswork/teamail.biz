@@ -1,3 +1,4 @@
+# Exception hanlders goes here
 module ApiExceptionHandler
   extend ActiveSupport::Concern
   included do |base|

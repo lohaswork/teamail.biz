@@ -9,6 +9,7 @@ class ApplicationApi < Grape::API
   format :json
   formatter :json, Grape::Formatter::Jbuilder
 
+  #Mount the api class here
   mount TopicApi
 
   #Handle 404 error in scope /api/v1

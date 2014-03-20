@@ -1,3 +1,5 @@
+#Helper mehtod goes here
+
 module ApiHelper
   extend ActiveSupport::Concern
 
