@@ -40,8 +40,7 @@ class Topic < ActiveRecord::Base
           FROM `taggings`
           Where `taggable_id` = `topics`.`id`
           AND `taggable_type` = 'Topic'
-          AND `tag_id`
-          IN (?)
+          AND `tag_id` IN (?)
           GROUP BY taggable_id
           having count(*) = ?
           )
