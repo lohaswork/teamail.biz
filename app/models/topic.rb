@@ -16,7 +16,7 @@ class Topic < ActiveRecord::Base
 
   scope :order_by_update, lambda { order('updated_at DESC') }
   scope :get_unarchived, lambda { |user| joins(:user_topics).where("user_topics.user_id = ? AND IFNULL( user_topics.archive_status, 0 ) <> 1 ", user.id) }
-  scope :filter_by_tags, lambda { |tags| find_by_sql( self.send(:tags_filter_sql, tags) ) }
+  scope :filter_by_tags, lambda { |tags| find_by_sql(self.send(:tags_filter_sql, tags)) }
 
   class << self
     def create_topic(title, email_title=nil, content, emails, organization, user)
