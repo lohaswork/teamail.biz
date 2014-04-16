@@ -65,7 +65,7 @@ describe "Topics request" do
   end
 
   describe "organization topics" do
-    it "should get organization topics" do
+    it "should get organization topics and tags is optional" do
       get "/api/v1/topics/organization?access_token=#{access_token}&page=1&per_page=2"
       body = JSON.parse(response.body)
       body["topics"].size.should == 2
@@ -74,6 +74,18 @@ describe "Topics request" do
       %w(id creator title update_at has_attachments read_status tags).each do |key|
         topic.should have_key key
       end
+    end
+
+    it "should filter by tags" do
+      tag = create(:tag)
+      topic = user.topics.first
+      topic.tags << tag
+      topic.save
+      get "/api/v1/topics/organization?access_token=#{access_token}&page=1&per_page=2&tags=#{tag.id}"
+      body = JSON.parse(response.body)
+      body["topics"].size.should == 1
+      response_tag = body["topics"][0]["tags"][0]
+      response_tag.should have_value tag.color
     end
   end
 
