@@ -199,7 +199,6 @@ GEM
     minitest (4.7.5)
     multi_json (1.8.2)
     multi_xml (0.5.5)
-    multimap (1.1.2)
     mysql2 (0.3.13)
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
@@ -390,7 +389,6 @@ DEPENDENCIES
   jquery-rails
   kaminari
   metric_fu
-  multimap
   mysql2
   parallel_tests
   poltergeist
