@@ -22,7 +22,7 @@
 
 ### Introduction Video
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/n0IT4WEU0n0" frameborder="0" allowfullscreen></iframe>
+[![teamail.biz Introduction](https://cloud.githubusercontent.com/assets/3312817/13558387/c49fa0cc-e3b8-11e5-8c7c-6de50ed40f33.jpg)](https://www.youtube.com/embed/n0IT4WEU0n0")
 
 ### Screenshots
 
