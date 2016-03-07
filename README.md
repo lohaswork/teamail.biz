@@ -1,7 +1,7 @@
 ## teamail.biz
 
-* A Rails app combines the function of mailer and team collaboration tool to provide team members one place to share, find, and organise tasks to get work done with email.
-* Won the Finalist Award of the 2nd China Innovation & Entrepreneurship Competition (Shanghai Division).
+* An online service combines the function of mailer and team collaboration tool to provide team members one place to share, find, and organise tasks to get work done with email.
+* Won the Finalist Award for the 2nd China Innovation & Entrepreneurship Competition (Shanghai Division).
 
 ### Features
 
@@ -19,6 +19,10 @@
 * Email engine with **MailGun** and background jobs(**Sidekiq**)
 * Oauth with **Doorkeeper**
 * Image upload with **CarrierWave** on Aliyun
+
+### Introduction Video
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/n0IT4WEU0n0" frameborder="0" allowfullscreen></iframe>
 
 ### Screenshots
 
